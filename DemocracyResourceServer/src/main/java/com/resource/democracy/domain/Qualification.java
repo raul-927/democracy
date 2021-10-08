@@ -12,7 +12,6 @@ public class Qualification implements Serializable{
 	private int 			id;
 	private int 			qualificationId;
 	private Institute 		institute;
-	private Person 			person;
 	private List<Document> 	documents;
 	private boolean 		verified;
 	private boolean			approved;
@@ -35,12 +34,6 @@ public class Qualification implements Serializable{
 	}
 	public void setInstitute(Institute institute) {
 		this.institute = institute;
-	}
-	public Person getPerson() {
-		return person;
-	}
-	public void setPerson(Person person) {
-		this.person = person;
 	}
 	public List<Document> getDocuments() {
 		return documents;
