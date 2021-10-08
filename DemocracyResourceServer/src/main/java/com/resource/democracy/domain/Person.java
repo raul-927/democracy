@@ -12,20 +12,19 @@ public class Person implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int 	   		id;
-	private int 	   		personId;
-	private int 	   		cedula;
-	private int				civicCredential;
-	private String 	   		firstName;
-	private String 	   		secondName;
-	private String 	   		firstLastName;
-	private String 	   		secondLastName;
-	private List<Institute> institutes;
-	private Address    		adress;
-	private Profession 		profession;
-	private CriminalRecord  criminalRecord;
-	
-	private PersonType 		personType;
+	private int 	   			id;
+	private int 	   			personId;
+	private int 	   			cedula;
+	private int					civicCredential;
+	private String 	   			firstName;
+	private String 	   			secondName;
+	private String 	   			firstLastName;
+	private String 	   			secondLastName;
+	private List<Qualification> qualifications;
+	private Address    			adress;
+	private Profession 			profession;
+
+	private PersonType 			personType;
 
 	public int getId() {
 		return id;
@@ -83,14 +82,6 @@ public class Person implements Serializable{
 		this.secondLastName = secondLastName;
 	}
 
-	public List<Institute> getInstitutes() {
-		return institutes;
-	}
-
-	public void setInstitutes(List<Institute> institutes) {
-		this.institutes = institutes;
-	}
-
 	public Address getAdress() {
 		return adress;
 	}
@@ -115,19 +106,6 @@ public class Person implements Serializable{
 		this.personType = personType;
 	}
 
-	/**
-	 * @return the criminalRecord
-	 */
-	public CriminalRecord getCriminalRecord() {
-		return criminalRecord;
-	}
-
-	/**
-	 * @param criminalRecord the criminalRecord to set
-	 */
-	public void setCriminalRecord(CriminalRecord criminalRecord) {
-		this.criminalRecord = criminalRecord;
-	}
 
 	/**
 	 * @return the civicCredential
@@ -141,6 +119,20 @@ public class Person implements Serializable{
 	 */
 	public void setCivicCredential(int civicCredential) {
 		this.civicCredential = civicCredential;
+	}
+
+	/**
+	 * @return the qualifications
+	 */
+	public List<Qualification> getQualifications() {
+		return qualifications;
+	}
+
+	/**
+	 * @param qualifications the qualifications to set
+	 */
+	public void setQualifications(List<Qualification> qualifications) {
+		this.qualifications = qualifications;
 	}
 
 	
