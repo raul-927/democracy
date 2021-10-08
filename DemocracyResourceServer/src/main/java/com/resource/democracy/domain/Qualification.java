@@ -14,6 +14,8 @@ public class Qualification implements Serializable{
 	private Institute 		institute;
 	private Person 			person;
 	private List<Document> 	documents;
+	private boolean 		verified;
+	private boolean			approved;
 	
 	
 	public int getId() {
@@ -45,6 +47,30 @@ public class Qualification implements Serializable{
 	}
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
+	}
+	/**
+	 * @return the verified
+	 */
+	public boolean isVerified() {
+		return verified;
+	}
+	/**
+	 * @param verified the verified to set
+	 */
+	public void setVerified(boolean verified) {
+		this.verified = verified;
+	}
+	/**
+	 * @return the approved
+	 */
+	public boolean isApproved() {
+		return approved;
+	}
+	/**
+	 * @param approved the approved to set
+	 */
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 	
 	
