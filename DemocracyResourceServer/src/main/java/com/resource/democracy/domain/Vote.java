@@ -8,11 +8,11 @@ public class Vote implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int 	id;
-	private int 	voteId;
-	private Law 	law;
-	private Person 	person;
-	private boolean approved;
+	private int 	 id;
+	private int 	 voteId;
+	private Law 	 law;
+	private Envelope envelope;
+	private boolean  approved;
 	
 	
 	public int getId() {
@@ -33,17 +33,24 @@ public class Vote implements Serializable{
 	public void setLaw(Law law) {
 		this.law = law;
 	}
-	public Person getPerson() {
-		return person;
-	}
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+	
 	public boolean isApproved() {
 		return approved;
 	}
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+	/**
+	 * @return the envelope
+	 */
+	public Envelope getEnvelope() {
+		return envelope;
+	}
+	/**
+	 * @param envelope the envelope to set
+	 */
+	public void setEnvelope(Envelope envelope) {
+		this.envelope = envelope;
 	}
 	
 	
