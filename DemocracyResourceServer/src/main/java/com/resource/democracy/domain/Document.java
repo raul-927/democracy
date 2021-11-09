@@ -2,6 +2,7 @@ package com.resource.democracy.domain;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.List;
 
 public class Document implements Serializable{
 
@@ -10,13 +11,13 @@ public class Document implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int 	id;
-	private int 	documentId;
-	private String 	documentName;
-	private boolean verified;
-	private boolean	approved;
-	private String 	observation;
-	private Blob 	attached;
+	private int 		id;
+	private int 		documentId;
+	private String 		documentName;
+	private boolean 	verified;
+	private boolean		approved;
+	private String 		observation;
+	private List<Blob> 	attacheds;
 	
 	public int getId() {
 		return id;
@@ -36,12 +37,7 @@ public class Document implements Serializable{
 	public void setDocumentName(String documentName) {
 		this.documentName = documentName;
 	}
-	public Blob getAttached() {
-		return attached;
-	}
-	public void setAttached(Blob attached) {
-		this.attached = attached;
-	}
+	
 	/**
 	 * @return the approved
 	 */
@@ -77,6 +73,18 @@ public class Document implements Serializable{
 	 */
 	public void setVerified(boolean verified) {
 		this.verified = verified;
+	}
+	/**
+	 * @return the attacheds
+	 */
+	public List<Blob> getAttacheds() {
+		return attacheds;
+	}
+	/**
+	 * @param attacheds the attacheds to set
+	 */
+	public void setAttacheds(List<Blob> attacheds) {
+		this.attacheds = attacheds;
 	}
 
 }
