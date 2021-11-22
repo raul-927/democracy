@@ -8,6 +8,7 @@ class DemocracyResourceServerApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
