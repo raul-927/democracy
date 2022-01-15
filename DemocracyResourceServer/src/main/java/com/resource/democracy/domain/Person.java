@@ -3,8 +3,6 @@ package com.resource.democracy.domain;
 import java.io.Serializable;
 import java.util.List;
 
-import com.resource.democracy.enumerator.PersonType;
-
 public class Person implements Serializable{
 
 	/**
@@ -24,7 +22,7 @@ public class Person implements Serializable{
 	private Address    			adress;
 	private Profession 			profession;
 
-	private PersonType 			personType;
+	//private PersonType 			personType;
 
 	public int getId() {
 		return id;
@@ -97,15 +95,6 @@ public class Person implements Serializable{
 	public void setProfession(Profession profession) {
 		this.profession = profession;
 	}
-
-	public PersonType getPersonType() {
-		return personType;
-	}
-
-	public void setPersonType(PersonType personType) {
-		this.personType = personType;
-	}
-
 
 	/**
 	 * @return the civicCredential

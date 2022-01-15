@@ -39,5 +39,4 @@ public class Postulant implements Serializable{
 	public void setCharge(Charge charge) {
 		this.charge = charge;
 	}
-	
 }

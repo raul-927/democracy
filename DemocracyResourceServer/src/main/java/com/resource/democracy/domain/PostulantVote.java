@@ -2,17 +2,17 @@ package com.resource.democracy.domain;
 
 import java.io.Serializable;
 
-public class Vote implements Serializable{
+public class PostulantVote implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int 	 id;
-	private int 	 voteId;
-	private Law 	 law;
-	private Envelope envelope;
-	private boolean  approved;
+	private int 	  id;
+	private int 	  voteId;
+	private Postulant postulant;
+	private Envelope  envelope;
+	private boolean   approved;
 	
 	
 	public int getId() {
@@ -27,14 +27,7 @@ public class Vote implements Serializable{
 	public void setVoteId(int voteId) {
 		this.voteId = voteId;
 	}
-	public Law getLaw() {
-		return law;
-	}
-	public void setLaw(Law law) {
-		this.law = law;
-	}
-	
-	public boolean isApproved() {
+		public boolean isApproved() {
 		return approved;
 	}
 	public void setApproved(boolean approved) {
@@ -51,6 +44,12 @@ public class Vote implements Serializable{
 	 */
 	public void setEnvelope(Envelope envelope) {
 		this.envelope = envelope;
+	}
+	public Postulant getPostulant() {
+		return postulant;
+	}
+	public void setPostulant(Postulant postulant) {
+		this.postulant = postulant;
 	}
 	
 	
