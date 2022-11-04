@@ -46,9 +46,9 @@ import org.springframework.context.annotation.AdviceMode;
 public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfiguration{
 	
 	private static final String className 	="com.mysql.cj.jdbc.Driver";
-	private static final String url 		= "jdbc:mysql://localhost/mundocostenio_db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	private static final String userName 	="root";
-	private static final String passWord 	="";
+	private static final String url 		= "jdbc:mysql://localhost/democracy_rs_db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static final String userName 	="raraherher";
+	private static final String passWord 	="Trkusr1234@";
 	
 	@Autowired
     MethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler;
