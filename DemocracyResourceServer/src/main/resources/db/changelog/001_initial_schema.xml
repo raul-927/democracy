@@ -10,53 +10,51 @@
         
     <changeSet id="00000000000001" author="rhernandez">
         
-        <createTable tableName="post">
-            <column name="id" 	type="bigint">
+        <createTable tableName="accountability">
+            <column name="accountability_id" 	 >
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="content" 		type="varchar(255)"/>
-            <column name="calle_id" 	type="int"/>
+            <column name="amount" 		type="bigint"/>
         </createTable>
         
-        <createTable tableName="barrio">
-            <column name="barrio_id" 	type="bigint" autoIncrement="true">
+        <createTable tableName="street">
+            <column name="street_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="nombre_barrio" 	type="varchar(50)"/>
-            <column name="departamento_id" 	type="int"/>
+            <column name="street_name" 	type="varchar(50)"/>
+            <column name="street_type" 	type="ENUM('C','K','DG','CI','AV','V','TR','AK','AC','RU', 'CA', 'CM', 'BR', 'JR')"/>
         </createTable>
         
-        <createTable tableName="departamento">
-            <column name="departamento_id" 	type="bigint" autoIncrement="true">
+        <createTable tableName="neighborhood">
+            <column name="neighborhood_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="nombre_departamento" 	 type="varchar(255)"/>
+            <column name="neighborhood_name" 	 type="varchar(255)"/>
+            <column name="department_id" type="bigint"/>
         </createTable>
         
-        <createTable tableName="direccion">
-            <column name="direccion_id" 	type="bigint" autoIncrement="true">
+        <createTable tableName="department">
+            <column name="department_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="nro_puerta" type="int"/>
-            <column name="geo_localizacion" type="varchar(50)"/>
-            <column name="barrio_id" type="int"/>
+            <column name="department_name" type="varchar(50)"/>
         </createTable>
         
-        
-        <createTable tableName="calle">
-            <column name="calle_id" 	type="int" autoIncrement="true">
+        <createTable tableName="address">
+            <column name="address_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="tipo_calle" type="ENUM('C','K','DG','CI','AV','V','TR','AK','AC')"/>
-            <column name="nombre_calle" type="varchar(50)"/>
+            <column name="neighborhood_id" type="bigint"/>
+            <column name="geo_location" type="varchar(255)"/>
+            <column name="adress_number" type="int"/>
         </createTable>
         
-        <createTable tableName="direccion_calles">
-            <column name="dir_calles_id" 	type="bigint" autoIncrement="true">
+        <createTable tableName="address_streets">
+            <column name="addr_str_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="direccion_id"  type="int"/>
-            <column name="calle_id" type="int"/>
+            <column name="address_id"  type="int"/>
+            <column name="street_id" type="int"/>
         </createTable>
         
         <createTable tableName="fecha_vig_list_prec">
