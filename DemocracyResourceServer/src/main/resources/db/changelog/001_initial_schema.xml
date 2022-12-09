@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000001" author="rhernandez">
+        
+        <createTable tableName="accountability">
+            <column name="accountability_id" 	 >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="amount" 		type="bigint"/>
+        </createTable>
+        
+        <createTable tableName="street">
+            <column name="street_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="street_name" 	type="varchar(50)"/>
+            <column name="street_type" 	type="ENUM('C','K','DG','CI','AV','V','TR','AK','AC','RU', 'CA', 'CM', 'BR', 'JR')"/>
+        </createTable>
+        
+        <createTable tableName="neighborhood">
+            <column name="neighborhood_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="neighborhood_name" 	 type="varchar(255)"/>
+            <column name="department_id" type="bigint"/>
+        </createTable>
+        
+        <createTable tableName="department">
+            <column name="department_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="department_name" type="varchar(50)"/>
+        </createTable>
+        
+        <createTable tableName="address">
+            <column name="address_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="neighborhood_id" type="bigint"/>
+            <column name="geo_location" type="varchar(255)"/>
+            <column name="adress_number" type="int"/>
+        </createTable>
+        
+        <createTable tableName="address_streets">
+            <column name="addr_str_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="address_id"  type="int"/>
+            <column name="street_id" type="int"/>
+        </createTable>
+        
+        <createTable tableName="fecha_vig_list_prec">
+            <column name="fecha_vigencia_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="fecha_ini"	type="date"/>
+            <column name="fecha_fin"	type="date"/>
+        </createTable>
+        
+        <createTable tableName="lista_precios">
+            <column name="lista_precio_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="fecha_vig_id"  		   type="int"/>
+            <column name="descripcion_lista" 	   type="varchar(50)"/>
+        </createTable>
+        
+        <createTable tableName="list_prod_and_prec_prod">
+            <column name="id" 	type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="lis_prec_id" 	type="int"/>
+            <column name="prec_prod_id" type="int"/>
+        </createTable>
+        
+        <createTable tableName="persona">
+            <column name="persona_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="nombre" 	type="varchar(50)"/>
+            <column name="apellido" type="varchar(50)"/>
+            <column name="cedula"	type="int"/>
+            <column name="user_id"	type="int"/>
+        </createTable>
+        
+        <createTable tableName="persona_direcciones">
+            <column name="direccion_personas_id" 	type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="direccion_id" type="int"/>
+            <column name="persona_id"	type="int"/>
+        </createTable>
+        
+        <createTable tableName="precio_producto">
+            <column name="precio_prod_id" 	type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="prod_id" 	type="int"/>
+            <column name="monto"	type="int"/>
+        </createTable>
+        
+         <createTable tableName="producto">
+            <column name="prod_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="tipo_prod_id" 	type="int"/>
+            <column name="nombre"			type="varchar(50)"/>
+             <column name="impuesto_id" 	type="int"/>
+        </createTable>
+        
+        <createTable tableName="tipo_producto">
+            <column name="tip_prod_id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="desc_tipo_producto" 	type="varchar(50)"/>
+            <column name="cuenta_id" 			type="int"/>
+        </createTable>
+
+         <addForeignKeyConstraint  baseColumnNames="departamento_id"  
+            baseTableName="barrio"  
+            constraintName="fk_barrio_departamento"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="departamento_id"
+            referencedTableName="departamento"   
+            validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="barrio_id"  
+            baseTableName="direccion"  
+            constraintName="fk_direccion_barrio"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="barrio_id"   
+            referencedTableName="barrio"   
+            validate="true"/>
+            
+        <addForeignKeyConstraint  baseColumnNames="fecha_vig_id"  
+	        baseTableName="lista_precios"  
+	        constraintName="fk_lista_precios_fecha_vig"
+	        onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="fecha_vig_id"   
+	        referencedTableName="fecha_vig_list_prec"   
+	        validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="lis_prec_id"  
+            baseTableName="list_prod_and_prec_prod"  
+            constraintName="fk_lis_prod_prec_prod_lis_prec"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="lista_precio_id"   
+            referencedTableName="lista_precios"   
+            validate="true"/>
+            
+       	<addForeignKeyConstraint  baseColumnNames="prec_prod_id"  
+	    	baseTableName="list_prod_and_prec_prod"  
+	        constraintName="fk_lis_prod_prec_precio_producto"
+	       	onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="precio_prod_id"   
+	        referencedTableName="precio_producto"   
+	        validate="true"/>
+	            
+	   <addForeignKeyConstraint  baseColumnNames="calle_id"  
+	        baseTableName="direccion_calles"  
+	        constraintName="fk_direccion_calles_calle"
+	        onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="calle_id"   
+	        referencedTableName="calle"   
+	        validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="persona_id"  
+            baseTableName="persona_direcciones"  
+            constraintName="fk_persona_direcciones_persona"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="persona_id"   
+            referencedTableName="personas"   
+            validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="direccion_id"  
+            baseTableName="persona_direcciones"  
+            constraintName="fk_persona_direcciones_direccion"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="direccion_id"   
+            referencedTableName="direccion"   
+            validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="prod_id"  
+            baseTableName="precio_producto"  
+            constraintName="fk_precio_producto_producto"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="prod_id"   
+            referencedTableName="producto"   
+            validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="tipo_prod_id"  
+            baseTableName="producto"  
+            constraintName="fk_producto_tipo_producto"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="tipo_prod_id"   
+            referencedTableName="tipo_producto"   
+            validate="true"/>
+            
+      <addForeignKeyConstraint  baseColumnNames="cuenta_id"  
+            baseTableName="tipo_producto"  
+            constraintName="fk_tipo_producto_cuenta"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="cuenta_id"
+            referencedTableName="cuenta"   
+            validate="true"/>
+
+       <addUniqueConstraint 
+            columnNames="fecha_ini, fecha_fin"  
+            deferrable="true"  
+            disabled="true" 
+            initiallyDeferred="true"    
+            tableName="fecha_vig_list_prec"    
+            validate="true"/>
+    </changeSet>
+</databaseChangeLog>

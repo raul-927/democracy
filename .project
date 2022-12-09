@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>democracyPersonMS</name>
+=======
+	<name>DemocracyResourceServer</name>
+>>>>>>> aabb8ee7a2e1e486de3fd94cabd1fa606fe133ae
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
+<<<<<<< HEAD
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
@@ -47,4 +52,9 @@
 			</matcher>
 		</filter>
 	</filteredResources>
+=======
+	</buildSpec>
+	<natures>
+	</natures>
+>>>>>>> aabb8ee7a2e1e486de3fd94cabd1fa606fe133ae
 </projectDescription>
