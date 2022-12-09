@@ -7,7 +7,10 @@ public class ChallengeAttemptSqlProvider {
 
     public String insert(ChallengeAttempt challengeAttempt) {
         return new SQL() {
-            {}
+            {
+                INSERT_INTO("challenge_attemp");
+                VALUES("alias", challengeAttempt.getUser().getAlias());
+            }
         }
             .toString();
     }

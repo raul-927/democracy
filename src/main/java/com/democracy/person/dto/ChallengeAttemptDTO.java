@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 
 public class ChallengeAttemptDTO {
 
+    Long id;
+
     @Min(1)
     @Max(99)
     int factorA, factorB;
@@ -17,6 +19,14 @@ public class ChallengeAttemptDTO {
 
     @Positive(message = "How could you possibly get a negative result here? Try again.")
     int guess;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getFactorA() {
         return factorA;

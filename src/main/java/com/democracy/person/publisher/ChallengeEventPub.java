@@ -3,21 +3,18 @@ package com.democracy.person.publisher;
 import com.democracy.person.domain.ChallengeAttempt;
 import com.democracy.person.events.ChallengeSolvedEvent;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChallengeEventPub {
 
-    private final AmqpTemplate amqpTemplate;
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
-    private final String challengesTopicExchange;
-
-    public ChallengeEventPub(final AmqpTemplate amqpTemplate, @Value("${amqp.exchange.attempts}") final String challengesTopicExchange) {
-        this.amqpTemplate = amqpTemplate;
-
-        this.challengesTopicExchange = challengesTopicExchange;
-    }
+    @Value("${amqp.exchange.attempts}")
+    private String challengesTopicExchange;
 
     public void challengeSolved(final ChallengeAttempt challengeAttempt) {
         ChallengeSolvedEvent event = buildEvent(challengeAttempt);

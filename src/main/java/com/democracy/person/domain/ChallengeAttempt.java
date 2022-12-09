@@ -8,21 +8,33 @@ import javax.persistence.*;
 
 public class ChallengeAttempt {
 
-    @Id
-    @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
     private User user;
 
     private int factorA;
     private int factorB;
     private int resultAttempt;
-    private boolean correct;
+    private boolean isCorrect;
+    private int guess;
 
-    public ChallengeAttempt(Object object, User user2, int factorA2, int factorB2, int guess, boolean isCorrect) {
-        // TODO Auto-generated constructor stub
+    //private Object object;
+
+    public ChallengeAttempt(User user, int factorA, int factorB, int guess, boolean isCorrect) {
+        this.user = user;
+        this.factorA = factorA;
+        this.factorB = factorB;
+        this.isCorrect = isCorrect;
+        this.guess = guess;
+        //this.object = object;
+    }
+
+    public int getGuess() {
+        return guess;
+    }
+
+    public void setGuess(int guess) {
+        this.guess = guess;
     }
 
     public ChallengeAttempt() {}
@@ -68,10 +80,10 @@ public class ChallengeAttempt {
     }
 
     public boolean isCorrect() {
-        return correct;
+        return isCorrect;
     }
 
-    public void setCorrect(boolean correct) {
-        this.correct = correct;
+    public void setCorrect(boolean isCorrect) {
+        this.isCorrect = isCorrect;
     }
 }

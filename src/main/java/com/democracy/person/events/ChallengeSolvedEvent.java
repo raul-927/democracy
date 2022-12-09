@@ -9,8 +9,13 @@ public class ChallengeSolvedEvent {
     long userId;
     String userAlias;
 
-    public ChallengeSolvedEvent(Long id, boolean correct2, int factorA2, int factorB2, Long id2, String alias) {
-        // TODO Auto-generated constructor stub
+    public ChallengeSolvedEvent(Long iattemptId, boolean correct, int factorA, int factorB, Long userId, String alias) {
+        this.attemptId = attemptId;
+        this.correct = correct;
+        this.factorA = factorA;
+        this.factorB = factorB;
+        this.userId = userId;
+        this.userAlias = userAlias;
     }
 
     public long getAttemptId() {
