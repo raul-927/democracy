@@ -30,7 +30,7 @@ management:
         include: ['configprops', 'env', 'health', 'info', 'jhimetrics', 'logfile', 'loggers', 'prometheus', 'threaddump', 'liquibase']
   endpoint:
     health:
-      show-details: when_authorized
+      show-details: when-authorized
       roles: 'ROLE_ADMIN'
       probes:
         enabled: true
@@ -92,6 +92,8 @@ spring:
     enabled: false
   data:
     jpa:
+      hibernate:
+        ddl-auto: none
       repositories:
         bootstrap-mode: deferred
   jpa:
@@ -189,6 +191,9 @@ kafka:
   producer:
     key.serializer: org.apache.kafka.common.serialization.StringSerializer
     value.serializer: org.apache.kafka.common.serialization.StringSerializer
+amqp:
+  exchange:
+    attempts: attempts.topic
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

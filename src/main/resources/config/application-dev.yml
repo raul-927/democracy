@@ -21,6 +21,10 @@ logging:
     com.democracy.person: DEBUG
 
 spring:
+  mybatis:
+    mapperLocations: classpath*:com/democracy/person/mybatis/mappers/*.xml
+    typeAliasesPackage: com.democracy.person.mybatis.typeAlias
+    typeHandlersPackage: com.democracy.person.mybatis.mybatis.typeHandlers
   devtools:
     restart:
       enabled: true
@@ -31,10 +35,11 @@ spring:
     serialization:
       indent-output: true
   datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/democracyPersonMS?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-    username: root
-    password:
+    username: raraherher
+    password: Trkusr1234@
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -43,7 +48,6 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
-  jpa:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker

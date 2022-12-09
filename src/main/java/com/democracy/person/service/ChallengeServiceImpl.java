@@ -4,8 +4,8 @@ import com.democracy.person.domain.ChallengeAttempt;
 import com.democracy.person.domain.User;
 import com.democracy.person.dto.ChallengeAttemptDTO;
 import com.democracy.person.mybatis.mappers.ChallengeAttemptMapper;
+import com.democracy.person.mybatis.mappers.UserMapper;
 import com.democracy.person.publisher.ChallengeEventPub;
-import com.democracy.person.repository.UserRepository;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class ChallengeServiceImpl implements ChallengeService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper userMapper;
 
     @Autowired
     private ChallengeAttemptMapper challengeAttemptMapper;
@@ -27,10 +27,12 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Override
     public ChallengeAttempt verifyAttempt(ChallengeAttemptDTO attemptDTO) {
         // Check if the user already exists for that alias, otherwise create it
-        User user = userRepository
-            .findByAlias(attemptDTO.getUserAlias())
+        User userParam = new User();
+        userParam.setAlias(attemptDTO.getUserAlias());
+        User user = userMapper
+            .select(userParam)
             .orElseGet(() -> {
-                return userRepository.save(new User(attemptDTO.getUserAlias()));
+                return userMapper.insert(new User(attemptDTO.getUserAlias()));
             });
 
         // Check if the attempt is correct
