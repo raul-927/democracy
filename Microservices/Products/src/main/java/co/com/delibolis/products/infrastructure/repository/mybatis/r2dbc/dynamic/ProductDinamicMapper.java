@@ -103,7 +103,6 @@ public interface ProductDinamicMapper extends CommonSelectMapper {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, selectList, prd, completer);
     }
     default Flux<Product> selectProduct(Product product) {
-
         return select(prd ->{
             if(product.getProductId() != null ||
                     product.getProductCode() != null ||
