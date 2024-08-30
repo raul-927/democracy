@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000005" author="rhernandez">
+    
+        <createTable tableName="tarjeta">
+            <column name="tarjeta_id" 			type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" 	nullable="false"/>
+            </column>
+            <column name="nro_verif" 		 type="int"/>
+            <column name="nro_tarj" 		 type="bigint"/>
+            <column name="nombre" 			 type="varchar(50)"/>
+            <column name="fecha_vencimiento" type="date"/>
+            <column name="cuenta_id" 		 type="bigint"/>
+            <column name="persona_id" 		 type="bigint"/>
+        </createTable>
+        
+        <createTable tableName="pago">
+            <column name="pago_id" 			type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" 	nullable="false"/>
+            </column>
+            <column name="cuotas" 			type="int"/>
+            <column name="importe"			type="decimal"/>
+            <column name="descripcion"		type="varchar(50)"/>
+            <column name="tipoFormaPago" type="ENUM('EF','TC','TD','DP','CE')"/>
+            
+            <column name="cuenta_id" 		type="bigint"/>
+            <column name="tarjeta_id" 		type="bigint"/>
+            <column name="persona_id" 		type="bigint"/>
+            <column name="asiento_id" 		type="bigint"/>
+            <column name="caja_id" 			type="bigint"/>
+            <column name="producto_id" 			type="bigint"/>
+        </createTable>
+        
+         <addForeignKeyConstraint  baseColumnNames="cuenta_id"  
+            baseTableName="pago"  
+            constraintName="fk_pago_cuenta"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="cuenta_id"
+            referencedTableName="cuenta"   
+            validate="true"/>
+            
+         <addForeignKeyConstraint  baseColumnNames="tarjeta_id"  
+            baseTableName="pago"  
+            constraintName="fk_pago_tarjeta"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="tarjeta_id"
+            referencedTableName="tarjeta"   
+            validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="persona_id"  
+            baseTableName="pago"  
+            constraintName="fk_pago_persona"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="persona_id"   
+            referencedTableName="persona"   
+            validate="true"/>
+            
+        <addForeignKeyConstraint  baseColumnNames="asiento_id"  
+            baseTableName="pago"  
+            constraintName="fk_pago_asiento"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="asiento_id"   
+            referencedTableName="asiento"   
+            validate="true"/>
+            
+       <addForeignKeyConstraint  baseColumnNames="caja_id"  
+            baseTableName="pago"  
+            constraintName="fk_pago_caja"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="caja_id"   
+            referencedTableName="caja"   
+            validate="true"/>
+      
+      <addForeignKeyConstraint  baseColumnNames="producto_id"  
+            baseTableName="pago"  
+            constraintName="fk_pago_producto"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="producto_id"   
+            referencedTableName="producto"   
+            validate="true"/>
+
+    </changeSet>
+</databaseChangeLog>

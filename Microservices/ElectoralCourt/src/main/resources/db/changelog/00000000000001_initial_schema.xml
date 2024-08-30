@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000001" author="rhernandez">
+
+        <createTable tableName="ENVELOPE">
+            <column name="envelope_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true"  nullable="false"/>
+            </column>
+            <column name ="envelope_number"                  type="int">
+                <constraints unique="true"      nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="CHARGE">
+            <column name="charge_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="charge_name" 	            type="varchar(20)"/>
+            <column name="charge_type" 	            type="ENUM('PRESIDENTE','BICE_PRESIDENTE','INTENDENTE','SENADOR','DIPUTADO','ALCALDE')"/>
+        </createTable>
+
+        <createTable tableName="INVESTIGATION_RESULT">
+            <column name="investigation_result_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="investigation_information" 	            type="varchar(100)"/>
+            <column name="score" 	            type="int"/>
+            <column name="is_aprove" 	        type="boolean"/>
+        </createTable>
+        <createTable tableName="LAW">
+            <column name="law_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="law_number" 	            type="int"/>
+            <column name="law_name" 	            type="varchar(20)"/>
+            <column name="promulgation" 	        type="date"/>
+            <column name="law_description" 	        type="varchar(100)"/>
+        </createTable>
+
+        <createTable tableName="LAW_VOTE">
+            <column name="law_vote_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name ="law_id"        type ="varchar(36)">
+                <constraints unique="true"      nullable="false"/>
+            </column>
+            <column name ="envelope_id"        type ="varchar(36)">
+                <constraints unique="true"      nullable="false"/>
+            </column>
+            <column name="is_approved" 	            type="boolean"/>
+        </createTable>
+
+        <createTable tableName="POSTULANT">
+            <column name="postulant_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name ="investigation_result_id"        type ="varchar(36)">
+                <constraints unique="true"      nullable="false"/>
+            </column>
+
+            <column name ="first_name"         type ="varchar(20)"/>
+            <column name ="second_name"        type ="varchar(20)"/>
+            <column name ="first_last_name"    type ="varchar(20)"/>
+            <column name ="second_last_name"   type ="varchar(20)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

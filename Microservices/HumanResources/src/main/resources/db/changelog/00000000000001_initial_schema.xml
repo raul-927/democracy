@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000001" author="rhernandez">
+
+        <createTable tableName="PERSON">
+            <column name="person_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name ="cedula"                  type="int">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name ="civic_credential"        type ="varchar(20)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="first_name" 	            type="varchar(20)"/>
+            <column name="second_name" 	            type="varchar(20)"/>
+            <column name="first_last_name" 	        type="varchar(20)"/>
+            <column name="second_last_name" 	    type="varchar(20)"/>
+            <column name= "person_qualification_id" type ="varchar(36)"/>
+            <column name ="adress_id"               type ="varchar(36)" />
+            <column name="profession_id"            type ="varchar(36)" />
+        </createTable>
+        
+        <createTable tableName="PROFESSION">
+            <column name="profession_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="profession_name" 	            type="varchar(20)"/>
+        </createTable>
+
+        <createTable tableName="STREET">
+            <column name="street_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="street_name" 	            type="varchar(20)"/>
+            <column name="street_type" 	            type="ENUM('CL','K','DG','CI','AV','VIA','TR','AK','AC','RU','CA','CM','BR','JR')"/>
+        </createTable>
+
+        <createTable tableName="DEPARTMENT">
+            <column name="department_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="department_name" 	            type="varchar(20)"/>
+        </createTable>
+        <createTable tableName="NEIGHBORHOOD">
+            <column name="neighborhood_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="neighborhood_name" 	            type="varchar(20)"/>
+            <column name="department_id"                type="varchar(36)"/>
+        </createTable>
+
+        <createTable tableName="ADRESS">
+            <column name="adress_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="neighborhood_id" 	            type="varchar(36)"/>
+            <column name="geo_location" 	            type="varchar(36)"/>
+            <column name="adress_number" 	            type="int"/>
+            <column name="adress_street_id"             type="varchar(36)"/>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

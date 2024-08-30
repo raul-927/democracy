@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ResourceBundleManager">
+    <file url="file://$PROJECT_DIR$/Microservices/Products/src/main/resources/messages_eng.properties" />
+    <file url="file://$PROJECT_DIR$/Microservices/Products/src/main/resources/messages_spa.properties" />
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/Microservices/Products/src/main/resources/messages_eng.properties" />
+      <file value="file://$PROJECT_DIR$/Microservices/Products/src/main/resources/messages_port.properties" />
+      <file value="file://$PROJECT_DIR$/Microservices/Products/src/main/resources/messages_spa.properties" />
+      <base-name>messages</base-name>
+    </custom-resource-bundle>
+  </component>
+</project>

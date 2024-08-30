@@ -1,0 +1,53 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: ApiGateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes[0]:
+        id: products
+        uri: lb://PRODUCTS
+        predicates:
+          - Path=/products/**
+      routes[1]:
+        id: accountancy
+        uri: lb://ACCOUNTANCY
+        predicates:
+          - Path=/accountancy/**
+      routes[2]:
+        id: humanresources
+        uri: lb://HUMANRESOURCES
+        predicates:
+          - Path=/humanresources/**
+      routes[3]:
+        id: electoralcourt
+        uri: lb://ELECTORALCOURT
+        predicates:
+          - Path=/electoralcourt/**
+      default-filters: TokenRelay
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/democracy_realm
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8181/realms/democracy_realm
+        registration:
+          spring-cloud-gateway-client:
+            client-id: democracy_client
+            client-secret: 8CPWcR9M7T3xtWImmtolTpvEfFC1WOaW
+            scope: openid
+            provider: keycloak
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:4200/*
+
+

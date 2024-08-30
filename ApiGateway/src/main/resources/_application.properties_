@@ -1,0 +1,28 @@
+server.port=8082
+spring.application.name=ApiGateway
+eureka.instance.instance-id=${spring.application.name}:${random.uuid}
+
+spring.cloud.gateway.discovery.locator.enabled=true
+spring.cloud.loadbalancer.ribbon.enabled=false
+
+spring.cloud.gateway.defaultFilters=DeduceResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+spring.cloud.gateway.globalCors.corsConfigurations.'[/**]'.allowedOrigins=*
+spring.cloud.gateway.globalCors.corsConfigurations.'[/**]'.allowedMethods=*
+spring.cloud.gateway.globalCors.corsConfigurations.'[/**]'.allowedHeaders=*
+#spring.cloud.gateway.globalCors.corsConfigurations.'[/**]'.allowCredentials=true
+
+spring.cloud.gateway.routes[0].id=products
+spring.cloud.gateway.routes[0].uri=lb://PRODUCTS
+spring.cloud.gateway.routes[0].predicates[0]=Path=/app/products/**
+spring.cloud.gateway.default-filters=TokenRelay
+
+
+spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8181/realms/delibolis-microservices-realm
+spring.security.oauth2.client.provider.keycloak.issuer-uri= http://localhost:8181/realms/delibolis-microservices-realm
+spring.security.oauth2.client.registration.spring-cloud-gateway-client.client-id=delibolis-apigateway-client
+spring.security.oauth2.client.registration.spring-cloud-gateway-client.client-secret=hFRpQHotipdldqdvk053LaQeQoI94WEG
+spring.security.oauth2.client.registration.spring-cloud-gateway-client.scope=openid
+spring.security.oauth2.client.registration.spring-cloud-gateway-client.provider=keycloak
+spring.security.oauth2.client.registration.spring-cloud-gateway-client.authorization-grant-type=authorization_code
+#spring.security.oauth2.client.registration.spring-cloud-gateway-client.redirect-uri= http://localhost:4200/*
+

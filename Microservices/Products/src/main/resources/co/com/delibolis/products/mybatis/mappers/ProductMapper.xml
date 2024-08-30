@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.delibolis.products.mybatis.mappers.ProductMapper">
+	<resultMap type="co.com.delibolis.products.domain.models.Product" id="ProductResult">
+  	
+  		<id		property = "productId" 			column = "product_id"/>
+ 		<result property ="productName" 			column ="product_name"/>
+
+		<result property ="productLastName" 			column ="last_name"/>
+		<result property ="productType" 			column ="product_type"/>
+  	</resultMap>
+</mapper>
