@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode
 public class Street {
 
-    private int 		streetId;
+    private String 		streetId;
     private String 		streetName;
     private StreetType  streetType;
 }

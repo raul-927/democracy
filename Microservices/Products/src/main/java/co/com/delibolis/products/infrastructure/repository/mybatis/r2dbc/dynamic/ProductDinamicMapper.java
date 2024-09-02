@@ -1,6 +1,5 @@
 package co.com.delibolis.products.infrastructure.repository.mybatis.r2dbc.dynamic;
 
-import co.com.delibolis.products.domain.models.Product;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
@@ -15,17 +14,17 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
+import static org.mybatis.dynamic.sql.SqlBuilder.*;
+import static org.mybatis.dynamic.sql.SqlBuilder.isLikeWhenPresent;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.Collection;
 
-import static co.com.delibolis.products.infrastructure.repository.mybatis.r2dbc.support.ProductDynamicSqlSupport.*;
-import static org.mybatis.dynamic.sql.SqlBuilder.*;
-import static org.mybatis.dynamic.sql.SqlBuilder.isLikeWhenPresent;
 
+import co.com.delibolis.products.domain.models.Product;
+import static co.com.delibolis.products.infrastructure.repository.mybatis.r2dbc.support.ProductDynamicSqlSupport.*;
 public interface ProductDinamicMapper extends CommonSelectMapper {
 
     BasicColumn[] selectList = BasicColumn.columnList(productId, productCode,productName, productLastName, productType);
