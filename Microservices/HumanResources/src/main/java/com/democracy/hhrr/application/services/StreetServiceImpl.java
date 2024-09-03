@@ -52,6 +52,11 @@ public class StreetServiceImpl implements StreetService{
     }
 
     @Override
+    public Mono<Long> selectCount() {
+        return this.selectStreetIn.selectCount();
+    }
+
+    @Override
     public Mono<Street> updateStreet(Street street) {
         return this.updateStreetIn.updateStreet(street);
     }

@@ -12,21 +12,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("app/test")
+@RequestMapping("/humanresources/street")
 @RefreshScope
 public class StreetController {
 
     @Autowired
     private StreetService streetService;
-
-    @Value("${app.test}")
-    private String testProperty;
-
-    @GetMapping
-    public String getTest(){
-        return testProperty;
-    }
-
 
     @PostMapping(
             value = "/select",
