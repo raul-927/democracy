@@ -22,9 +22,6 @@ public class ProductAdapter implements ProductOut {
     @Autowired
     private ProductMapper productMapper;
 
-    @Autowired
-    private ProductEntityMapper productEntityMapper;
-
     @Override
     public Mono<Integer> createProduct(Product product) {
 

@@ -89,6 +89,12 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
         );
     }
 
+    default void deleteStreet(String id){
+        this.delete(d -> d.where(streetId, isEqualTo(id))
+
+        );
+    }
+
     default Mono<Street> selectOne(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectOne(this::selectOne, selectList, str, completer);
     }
@@ -96,7 +102,7 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     default Flux<Street> select(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, selectList, str, completer);
     }
-    default Flux<Street> selectProduct(Street street) {
+    default Flux<Street> selectStreet(Street street) {
         return select(str ->{
             if(street.getStreetId() != null ||
                     street.getStreetName() != null ||

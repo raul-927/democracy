@@ -1,30 +1,28 @@
 package com.democracy.hhrr.application.usecases;
 
 import com.democracy.hhrr.domain.models.Street;
-import com.democracy.hhrr.domain.ports.in.street.CreateStreetIn;
+import com.democracy.hhrr.domain.ports.in.street.SelectStreetIn;
 import com.democracy.hhrr.domain.ports.out.StreetOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @Component
-public class CreateStreetUseCase implements CreateStreetIn {
+public class SelectStreetUseCase implements SelectStreetIn {
 
     private final StreetOut streetOut;
 
-    public CreateStreetUseCase(StreetOut streetOut) {
+    public SelectStreetUseCase(StreetOut streetOut) {
         this.streetOut = streetOut;
     }
 
     @Override
-    public Mono<Integer> createStreet(Street street) {
-        return streetOut.createStreet(street);
+    public Flux<Street> selectStreet(Street street) {
+        return streetOut.selectStreet(street);
     }
 
     @Override
-    public Mono<Integer> createMultipleStreet(List<Street> streetFlux) {
-        return null;
+    public Mono<Long> selectCount() {
+        return streetOut.selectCount();
     }
 }

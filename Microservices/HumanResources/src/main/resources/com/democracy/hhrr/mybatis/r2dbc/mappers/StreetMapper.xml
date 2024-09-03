@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.mybatis.r2dbc.mappers.StreetMapper">
+	<resultMap type="com.democracy.hhrr.domain.models.Street" id="StreetResult">
+  	
+  		<id		property = "streetId" 			column = "street_id"/>
+		<result property ="streetName"			column="street_name"/>
+ 		<result property ="streetType" 			column ="street_type"/>
+  	</resultMap>
+</mapper>
