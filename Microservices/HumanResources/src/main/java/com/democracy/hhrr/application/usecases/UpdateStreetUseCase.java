@@ -17,7 +17,7 @@ public class UpdateStreetUseCase implements UpdateStreetIn {
     }
 
     @Override
-    public Mono<Street> updateStreet(Street street) {
+    public Mono<Integer> updateStreet(Street street) {
         return streetOut.updateStreet(street);
     }
 }

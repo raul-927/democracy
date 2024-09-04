@@ -9,9 +9,9 @@ import java.util.List;
 public interface StreetOut {
     Mono<Integer> createStreet(Street street);
     Mono<Integer> createMultipleStreet(List<Street> streetFlux);
-    void deleteStreet(String streetId);
+    Mono<Integer> deleteStreet(String streetId);
     Flux<Street> selectStreet(Street street);
     Mono<Long> selectCount();
-    Mono<Street> updateStreet(Street street);
+    Mono<Integer> updateStreet(Street street);
 }
 

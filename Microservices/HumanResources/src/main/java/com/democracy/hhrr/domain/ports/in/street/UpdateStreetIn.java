@@ -4,5 +4,5 @@ import com.democracy.hhrr.domain.models.Street;
 import reactor.core.publisher.Mono;
 
 public interface UpdateStreetIn {
-    Mono<Street> updateStreet(Street street);
+    Mono<Integer> updateStreet(Street street);
 }

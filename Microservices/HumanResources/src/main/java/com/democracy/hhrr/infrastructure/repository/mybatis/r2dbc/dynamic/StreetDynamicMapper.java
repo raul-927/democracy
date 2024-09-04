@@ -1,6 +1,7 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
 import com.democracy.hhrr.domain.models.Street;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
@@ -74,7 +75,6 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> insertMultiple(Collection<Street> records) {
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, str, c ->
                 c
-                        .map(streetId).toProperty("streetId")
                         .map(streetName).toProperty("streetName")
                         .map(streetType).toProperty("streetType")
         );
@@ -83,15 +83,15 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> insertSelective(Street record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, str, c ->
                 c
-                        .map(streetId).toPropertyWhenPresent("streetId", record::getStreetId)
                         .map(streetName).toPropertyWhenPresent("streetName", record::getStreetName)
                         .map(streetType).toPropertyWhenPresent("streetType", record::getStreetType)
         );
     }
 
-    default void deleteStreet(String id){
-        this.delete(d -> d.where(streetId, isEqualTo(id))
-
+    default Mono<Integer> deleteStreet(String id){
+        System.out.println("ID: "+id);
+        return this.delete(
+                d -> d.where(StreetDynamicSqlSupport.streetId, isEqualTo(id))
         );
     }
 

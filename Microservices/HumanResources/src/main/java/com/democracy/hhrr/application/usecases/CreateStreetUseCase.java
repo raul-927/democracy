@@ -24,7 +24,7 @@ public class CreateStreetUseCase implements CreateStreetIn {
     }
 
     @Override
-    public Mono<Integer> createMultipleStreet(List<Street> streetFlux) {
-        return null;
+    public Mono<Integer> createMultipleStreet(List<Street> streetList) {
+        return streetOut.createMultipleStreet(streetList);
     }
 }

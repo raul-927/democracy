@@ -1,6 +1,8 @@
 package com.democracy.hhrr.domain.ports.in.street;
 
+import reactor.core.publisher.Mono;
+
 public interface DeleteStreetIn {
 
-    void deleteStreet(String streetId);
+    Mono<Integer> deleteStreet(String streetId);
 }

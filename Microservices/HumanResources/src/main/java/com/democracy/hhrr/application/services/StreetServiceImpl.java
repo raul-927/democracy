@@ -42,8 +42,8 @@ public class StreetServiceImpl implements StreetService{
     }
 
     @Override
-    public void deleteStreet(String streetId) {
-        this.deleteStreetIn.deleteStreet(streetId);
+    public Mono<Integer> deleteStreet(String streetId) {
+        return this.deleteStreetIn.deleteStreet(streetId);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class StreetServiceImpl implements StreetService{
     }
 
     @Override
-    public Mono<Street> updateStreet(Street street) {
+    public Mono<Integer> updateStreet(Street street) {
         return this.updateStreetIn.updateStreet(street);
     }
 }

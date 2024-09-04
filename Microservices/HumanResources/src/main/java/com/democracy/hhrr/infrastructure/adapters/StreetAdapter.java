@@ -25,18 +25,18 @@ public class StreetAdapter implements StreetOut {
     }
 
     @Override
-    public Mono<Integer> createMultipleStreet(List<Street> streetFlux) {
-        return streetMapper.insertMultiple(streetFlux);
+    public Mono<Integer> createMultipleStreet(List<Street> streetList) {
+        return streetMapper.insertMultiple(streetList);
     }
 
     @Override
-    public void deleteStreet(String streetId) {
-        this.streetMapper.deleteStreet(streetId);
+    public Mono<Integer> deleteStreet(String streetId) {
+        return this.streetMapper.deleteStreet(streetId);
     }
 
     @Override
     public Flux<Street> selectStreet(Street street) {
-        return null;
+        return this.streetMapper.selectStreet(street);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class StreetAdapter implements StreetOut {
     }
 
     @Override
-    public Mono<Street> updateStreet(Street street) {
-        return null;
+    public Mono<Integer> updateStreet(Street street) {
+        return this.streetMapper.updateSelectiveByPrimaryKey(street);
     }
 }
