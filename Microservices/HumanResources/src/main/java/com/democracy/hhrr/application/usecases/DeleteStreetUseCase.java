@@ -20,15 +20,6 @@ public class DeleteStreetUseCase implements DeleteStreetIn {
 
     @Override
     public Mono<Integer> deleteStreet(String streetId) {
-        Street street = new Street();
-        AtomicReference<Long> res = new AtomicReference<>(Long.getLong("0"));
-        street.setStreetId(streetId);
-       this.streetOut.selectStreet(street).count().map(r ->{
-           res.set(r);
-           System.out.println("RESULT: "+res);
-           return r;
-       });
-
         return this.streetOut.deleteStreet(streetId);
     }
 }
