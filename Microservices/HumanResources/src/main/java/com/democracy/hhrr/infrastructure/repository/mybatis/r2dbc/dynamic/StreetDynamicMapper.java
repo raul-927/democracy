@@ -89,7 +89,6 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Integer> deleteStreet(String id){
-        System.out.println("ID: "+id);
         return this.delete(
                 d -> d.where(StreetDynamicSqlSupport.streetId, isEqualTo(id))
         );
