@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
 import com.democracy.hhrr.domain.models.Street;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
+
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
@@ -17,7 +17,7 @@ import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
 
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
+
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.isLikeWhenPresent;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
@@ -25,6 +25,9 @@ import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBa
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.util.Collection;
+
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 
 public interface StreetDynamicMapper extends CommonSelectMapper{
 

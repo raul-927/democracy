@@ -15,6 +15,6 @@ import lombok.experimental.Accessors;
 public class Department {
 
     private int 	id;
-    private int 	departmentId;
+    private String 	departmentId;
     private String 	departmentName;
 }

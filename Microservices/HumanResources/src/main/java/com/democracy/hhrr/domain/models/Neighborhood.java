@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 public class Neighborhood {
 
     private int 		id;
-    private int 		neighborhoodId;
+    private String 		neighborhoodId;
     private String 		neighborhoodName;
     private Department 	department;
 

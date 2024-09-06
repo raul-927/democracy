@@ -1,4 +1,4 @@
-package com.democracy.hhrr.application.usecases;
+package com.democracy.hhrr.application.usecases.street;
 
 import com.democracy.hhrr.domain.models.Street;
 import com.democracy.hhrr.domain.ports.in.street.SelectStreetIn;

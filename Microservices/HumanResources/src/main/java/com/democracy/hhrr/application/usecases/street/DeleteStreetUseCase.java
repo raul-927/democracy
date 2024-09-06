@@ -1,13 +1,10 @@
-package com.democracy.hhrr.application.usecases;
+package com.democracy.hhrr.application.usecases.street;
 
 
-import com.democracy.hhrr.domain.models.Street;
 import com.democracy.hhrr.domain.ports.in.street.DeleteStreetIn;
 import com.democracy.hhrr.domain.ports.out.StreetOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-
-import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 public class DeleteStreetUseCase implements DeleteStreetIn {
