@@ -1,9 +1,12 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
 import com.democracy.hhrr.domain.models.Neighborhood;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
+import org.mybatis.dynamic.sql.BindableColumn;
+import org.mybatis.dynamic.sql.DerivedColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
 import org.mybatis.dynamic.sql.delete.render.DeleteStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
@@ -23,12 +26,13 @@ import reactor.core.publisher.Mono;
 
 import java.util.Collection;
 
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
 
-    BasicColumn[] selectList = BasicColumn.columnList(neighborhoodId, neighborhoodName, departmentId);
+    BasicColumn[] selectList = BasicColumn.columnList(neighborhoodId, neighborhoodName, departmentId, departmentName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -66,8 +70,8 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> insert(Neighborhood record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, neigh, c ->
                 c
-                        .map(neighborhoodId).toPropertyWhenPresent("neighborhoodId", record::getNeighborhoodId)
                         .map(neighborhoodName).toProperty("neighborhoodName")
+                        .map(departmentId).toPropertyWhenPresent("department.departmentId", record.getDepartment()::getDepartmentId)
         );
     }
 
@@ -75,6 +79,7 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, neigh, c ->
                 c
                         .map(neighborhoodName).toProperty("neighborhoodName")
+                        .map(departmentId).toProperty("department.departmentId")
         );
     }
 
@@ -82,7 +87,7 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.insert(this::insert, record, neigh, c ->
                 c
                         .map(neighborhoodName).toPropertyWhenPresent("neighborhoodName", record::getNeighborhoodName)
-                        .map(departmentId).toPropertyWhenPresent("departmentId", record::getDepartment)
+                        .map(departmentId).toPropertyWhenPresent("department.departmentId", record.getDepartment()::getDepartmentId)
 
         );
     }
@@ -101,7 +106,11 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.selectList(this::selectMany, selectList, neigh, completer);
     }
     default Flux<Neighborhood> selectNeighborhood(Neighborhood neighborhood) {
+        BindableColumn<Neighborhood> joinDepartmentColumn = DerivedColumn.of("department_id", "DEPARTMENT");
+        BindableColumn<Neighborhood> joinNeighborhoodColumn = DerivedColumn.of("department_id", "NEIGHBORHOOD");
         return select(str ->{
+            str.join(DepartmentDynamicSqlSupport.dep)
+                    .on(joinNeighborhoodColumn,equalTo(joinDepartmentColumn)).build();
             if(neighborhood.getNeighborhoodId() != null ||
                     neighborhood.getNeighborhoodName() != null){
                 if(neighborhood.getNeighborhoodId()!=null && !neighborhood.getNeighborhoodId().isEmpty()){
@@ -131,6 +140,7 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
         return update(c ->
                 c
                         .set(neighborhoodName).equalToWhenPresent(record::getNeighborhoodName)
+                        .set(departmentId).equalToWhenPresent(record.getDepartment()::getDepartmentId)
 
                         .where(neighborhoodId, isEqualTo(record::getNeighborhoodId))
 
@@ -149,6 +159,7 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
         return update(c ->
                 c.
                         set(neighborhoodName).equalToWhenPresent(record::getNeighborhoodName)
+                        .set(departmentId).equalToWhenPresent(record.getDepartment()::getDepartmentId)
                         .applyWhere(whereApplier)
         );
     }
@@ -157,6 +168,7 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
         return update(c ->
                 c.
                         set(neighborhoodName).equalToWhenPresent(record::getNeighborhoodName)
+                        .set(departmentId).equalToWhenPresent(record.getDepartment()::getDepartmentId)
                         .applyWhere(whereApplier)
         );
     }

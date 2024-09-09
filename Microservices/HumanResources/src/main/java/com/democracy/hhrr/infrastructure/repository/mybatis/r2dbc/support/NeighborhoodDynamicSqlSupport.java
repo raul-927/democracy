@@ -18,6 +18,7 @@ public final class NeighborhoodDynamicSqlSupport {
         public final SqlColumn<String> neighborhoodId = column("neighborhood_id", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> neighborhoodName = column("neighborhood_name", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> departmentId = column("department_id", JDBCType.LONGNVARCHAR);
+        public final SqlColumn<String> departmentName = column("department.departmen_name", JDBCType.LONGNVARCHAR);
         public Neigh(){
             super("NEIGHBORHOOD");
         }

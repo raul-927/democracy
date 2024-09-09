@@ -7,6 +7,6 @@
   		<id		property = "neighborhoodId" 			column = "neighborhood_id"/>
 		<result property ="neighborhoodName"			column="neighborhood_name"/>
 
-		<association property="department" 				resultMap="DepartmentResult" />
+		<association property="department" 				resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DepartmentMapper.DepartmentResult" />
   	</resultMap>
 </mapper>
