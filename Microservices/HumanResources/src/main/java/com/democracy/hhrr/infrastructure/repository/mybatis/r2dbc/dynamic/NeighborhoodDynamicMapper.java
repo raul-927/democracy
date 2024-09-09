@@ -112,12 +112,16 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
             str.join(DepartmentDynamicSqlSupport.dep)
                     .on(joinNeighborhoodColumn,equalTo(joinDepartmentColumn)).build();
             if(neighborhood.getNeighborhoodId() != null ||
-                    neighborhood.getNeighborhoodName() != null){
+                    neighborhood.getNeighborhoodName() != null ||
+            neighborhood.getDepartment() != null){
                 if(neighborhood.getNeighborhoodId()!=null && !neighborhood.getNeighborhoodId().isEmpty()){
                     str.where(neighborhoodId,isEqualToWhenPresent(neighborhood.getNeighborhoodId()));
                 }else{
                     str
                             .where(neighborhoodName,isLikeWhenPresent(neighborhood::getNeighborhoodName).map(s -> "%" + s + "%"))
+                            .and(departmentName,isLikeWhenPresent(neighborhood.getDepartment()::getDepartmentName).map(s -> "%" + s + "%"))
+                            .and(departmentId, isEqualTo(neighborhood.getDepartment()::getDepartmentId))
+
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }
