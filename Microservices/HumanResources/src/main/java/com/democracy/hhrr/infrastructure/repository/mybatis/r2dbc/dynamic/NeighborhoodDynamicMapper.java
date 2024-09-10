@@ -119,9 +119,10 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
                 }else{
                     str
                             .where(neighborhoodName,isLikeWhenPresent(neighborhood::getNeighborhoodName).map(s -> "%" + s + "%"))
-                            .and(departmentName,isLikeWhenPresent(neighborhood.getDepartment()::getDepartmentName).map(s -> "%" + s + "%"))
-                            .and(departmentId, isEqualTo(neighborhood.getDepartment()::getDepartmentId))
-
+                            .and(departmentId,
+                                    isLikeWhenPresent(neighborhood.getDepartment()!=null? neighborhood.getDepartment().getDepartmentId()!=null?neighborhood.getDepartment().getDepartmentId():null:null))
+                            .and(departmentName,
+                                    isLikeWhenPresent(neighborhood.getDepartment()!=null? neighborhood.getDepartment().getDepartmentName()!=null?neighborhood.getDepartment().getDepartmentName():null:null).map(s -> "%" + s + "%"))
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }
