@@ -16,9 +16,9 @@ import java.util.List;
 @EqualsAndHashCode
 public class Address {
     private int 			id;
-    private int 			addressId;
+    private String 			addressId;
     private Neighborhood 	neighborhood;
     private String 			geoLocation;
-    private int 			addressNumber;
+    private String 		addressNumber;
     private List<Street>    streets;
 }

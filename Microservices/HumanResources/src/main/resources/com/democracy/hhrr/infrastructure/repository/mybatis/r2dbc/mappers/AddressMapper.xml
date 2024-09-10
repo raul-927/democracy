@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper">
+	<resultMap type="com.democracy.hhrr.domain.models.Address" id="AddressResult">
+  	
+  		<id		property = "addressId" 			column = "address_id"/>
+		<result property ="neighborhoodName"	column="neighborhood_name"/>
+		<result property="addressNumber" 		column="address_number"/>
+		<result property="geoLocation" 			column="geo_location"/>
+		<association property="neighborhood" 	resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.NeighborhoodMapper.NeighborhoodResult" />
+		<collection property="street" 			resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper.StreetResult"/>
+  	</resultMap>
+</mapper>
