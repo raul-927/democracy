@@ -9,6 +9,6 @@
 		<result property="addressNumber" 		column="address_number"/>
 		<result property="geoLocation" 			column="geo_location"/>
 		<association property="neighborhood" 	resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.NeighborhoodMapper.NeighborhoodResult" />
-		<collection property="street" 			resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper.StreetResult"/>
+		<collection property="streets" 			resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper.StreetResult"/>
   	</resultMap>
 </mapper>
