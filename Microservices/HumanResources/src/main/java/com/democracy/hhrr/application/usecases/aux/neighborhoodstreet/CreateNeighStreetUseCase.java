@@ -6,6 +6,8 @@ import com.democracy.hhrr.domain.ports.out.aux.neighborhoodstreet.NeighborhoodSt
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Component
 public class CreateNeighStreetUseCase implements CreateNeighStreetIn {
 
@@ -19,5 +21,10 @@ public class CreateNeighStreetUseCase implements CreateNeighStreetIn {
     @Override
     public Mono<Integer> createNeighStreet(NeighborhoodStreet neighborhoodStreet) {
         return this.neighborhoodStreetOut.createNeighStreet(neighborhoodStreet);
+    }
+
+    @Override
+    public Mono<Integer> createMultipleNeighStreet(List<NeighborhoodStreet> neighborhoodStreetList) {
+        return null;
     }
 }
