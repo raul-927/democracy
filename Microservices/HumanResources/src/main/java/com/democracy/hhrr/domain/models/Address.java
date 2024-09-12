@@ -1,6 +1,7 @@
 package com.democracy.hhrr.domain.models;
 
 
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -17,8 +18,12 @@ import java.util.List;
 public class Address {
     private int 			id;
     private String 			addressId;
-    private Neighborhood 	neighborhood;
     private String 			geoLocation;
-    private String 		addressNumber;
-    private List<Street>    streets;
+    private String 		    addressNumber;
+    private Department      department;
+    private City            city;
+    private Neighborhood    neighborhood;
+    private Street          street1;
+    private Street          street2;
+
 }

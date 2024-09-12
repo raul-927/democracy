@@ -31,7 +31,7 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 
 public interface StreetDynamicMapper extends CommonSelectMapper{
 
-    BasicColumn[] selectList = BasicColumn.columnList(streetId, streetName,streetType);
+    BasicColumn[] streetColumnList = BasicColumn.columnList(streetId, streetName,streetType);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -98,11 +98,11 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Street> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, selectList, str, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, streetColumnList, str, completer);
     }
 
     default Flux<Street> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, selectList, str, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, streetColumnList, str, completer);
     }
     default Flux<Street> selectStreet(Street street) {
         return select(str ->{
@@ -126,7 +126,7 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<Street> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, selectList, str, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, streetColumnList, str, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {

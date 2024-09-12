@@ -23,7 +23,7 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 
 public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
 
-    BasicColumn[] selectList = BasicColumn.columnList(neighborhoodId, neighborhoodName, departmentId, departmentName);
+    BasicColumn[] neighborhoodColumnList = BasicColumn.columnList(neighborhoodId, neighborhoodName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -59,16 +59,16 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Neighborhood> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, selectList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, neighborhoodColumnList, neigh, completer);
     }
 
     default Flux<Neighborhood> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, selectList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighborhoodColumnList, neigh, completer);
     }
 
 
     default Flux<Neighborhood> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, selectList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, neighborhoodColumnList, neigh, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {

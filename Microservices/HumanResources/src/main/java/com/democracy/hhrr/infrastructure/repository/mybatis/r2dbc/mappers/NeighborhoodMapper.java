@@ -4,6 +4,7 @@ import com.democracy.hhrr.domain.models.Neighborhood;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.NeighborhoodDynamicMapper;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.dynamic.sql.BindableColumn;
 import org.mybatis.dynamic.sql.DerivedColumn;
@@ -28,7 +29,8 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
         return ReactiveMyBatis3Utils.insert(this::insert, record, neigh, c ->
                 c
                         .map(neighborhoodName).toProperty("neighborhoodName")
-                        .map(departmentId).toPropertyWhenPresent("department.departmentId", record.getDepartment()::getDepartmentId)
+
+
         );
     }
 
@@ -36,7 +38,6 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, neigh, c ->
                 c
                         .map(neighborhoodName).toProperty("neighborhoodName")
-                        .map(departmentId).toProperty("department.departmentId")
         );
     }
 
@@ -44,7 +45,7 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
         return ReactiveMyBatis3Utils.insert(this::insert, record, neigh, c ->
                 c
                         .map(neighborhoodName).toPropertyWhenPresent("neighborhoodName", record::getNeighborhoodName)
-                        .map(departmentId).toPropertyWhenPresent("department.departmentId", record.getDepartment()::getDepartmentId)
+
 
         );
     }
@@ -56,23 +57,19 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
     }
 
     default Flux<Neighborhood> selectNeighborhood(Neighborhood neighborhood) {
-        BindableColumn<Neighborhood> joinDepartmentColumn = DerivedColumn.of("department_id", "DEPARTMENT");
-        BindableColumn<Neighborhood> joinNeighborhoodColumn = DerivedColumn.of("department_id", "NEIGHBORHOOD");
+        BindableColumn<Neighborhood> joinStreetColumn = DerivedColumn.of("street_id", "STREET");
+        BindableColumn<Neighborhood> joinNeighborhoodColumn = DerivedColumn.of("street1_id", "NEIGHBORHOOD");
         return select(str ->{
-            str.join(DepartmentDynamicSqlSupport.dep)
-                    .on(joinNeighborhoodColumn,equalTo(joinDepartmentColumn)).build();
+            str.join(StreetDynamicSqlSupport.str)
+                    .on(joinNeighborhoodColumn,equalTo(joinStreetColumn)).build();
             if(neighborhood.getNeighborhoodId() != null ||
-                    neighborhood.getNeighborhoodName() != null ||
-                    neighborhood.getDepartment() != null){
+                    neighborhood.getNeighborhoodName() != null){
                 if(neighborhood.getNeighborhoodId()!=null && !neighborhood.getNeighborhoodId().isEmpty()){
                     str.where(neighborhoodId,isEqualToWhenPresent(neighborhood.getNeighborhoodId()));
                 }else{
                     str
                             .where(neighborhoodName,isLikeWhenPresent(neighborhood::getNeighborhoodName).map(s -> "%" + s + "%"))
-                            .and(departmentId,
-                                    isLikeWhenPresent(neighborhood.getDepartment()!=null? neighborhood.getDepartment().getDepartmentId()!=null?neighborhood.getDepartment().getDepartmentId():null:null))
-                            .and(departmentName,
-                                    isLikeWhenPresent(neighborhood.getDepartment()!=null? neighborhood.getDepartment().getDepartmentName()!=null?neighborhood.getDepartment().getDepartmentName():null:null).map(s -> "%" + s + "%"))
+
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }
@@ -87,7 +84,7 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
         return update(c ->
                 c
                         .set(neighborhoodName).equalToWhenPresent(record::getNeighborhoodName)
-                        .set(departmentId).equalToWhenPresent(record.getDepartment()::getDepartmentId)
+
 
                         .where(neighborhoodId, isEqualTo(record::getNeighborhoodId))
 
@@ -106,7 +103,7 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
         return update(c ->
                 c.
                         set(neighborhoodName).equalToWhenPresent(record::getNeighborhoodName)
-                        .set(departmentId).equalToWhenPresent(record.getDepartment()::getDepartmentId)
+
                         .applyWhere(whereApplier)
         );
     }
@@ -115,7 +112,7 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
         return update(c ->
                 c.
                         set(neighborhoodName).equalToWhenPresent(record::getNeighborhoodName)
-                        .set(departmentId).equalToWhenPresent(record.getDepartment()::getDepartmentId)
+
                         .applyWhere(whereApplier)
         );
     }

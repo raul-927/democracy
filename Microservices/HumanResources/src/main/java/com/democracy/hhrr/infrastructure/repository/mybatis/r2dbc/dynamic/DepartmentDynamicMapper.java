@@ -28,7 +28,7 @@ import java.util.Collection;
 
 public interface DepartmentDynamicMapper extends CommonSelectMapper{
 
-    BasicColumn[] selectList = BasicColumn.columnList(departmentId, departmentName);
+    BasicColumn[] departmentColumnList = BasicColumn.columnList(departmentId, departmentName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -93,11 +93,11 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Department> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, selectList, dep, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, departmentColumnList, dep, completer);
     }
 
     default Flux<Department> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, selectList, dep, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, dep, completer);
     }
     default Flux<Department> selectDepartment(Department department) {
         return select(str ->{
@@ -119,7 +119,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<Department> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, selectList, dep, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, departmentColumnList, dep, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {

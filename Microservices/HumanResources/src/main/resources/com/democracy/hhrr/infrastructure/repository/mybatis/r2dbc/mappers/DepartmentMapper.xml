@@ -6,5 +6,7 @@
   	
   		<id		property = "departmentId" 			column = "department_id"/>
 		<result property ="departmentName"			column="department_name"/>
+
+		<collection property="cityList" 				resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.CityMapper.CityResult" />
   	</resultMap>
 </mapper>

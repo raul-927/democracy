@@ -22,7 +22,7 @@
             <column name="first_last_name" 	        type="varchar(20)"/>
             <column name="second_last_name" 	    type="varchar(20)"/>
             <column name= "person_qualification_id" type ="varchar(36)"/>
-            <column name ="adress_id"               type ="varchar(36)" />
+            <column name ="address_id"               type ="varchar(36)" />
             <column name="profession_id"            type ="varchar(36)" />
         </createTable>
         
@@ -41,28 +41,41 @@
             <column name="street_type" 	            type="ENUM('CL','K','DG','CI','AV','VIA','TR','AK','AC','RU','CA','CM','BR','JR')"/>
         </createTable>
 
+        <createTable tableName="CITY">
+            <column name="city_id"                type="varchar(36)" defaultValueComputed="${u_id}"/>
+            <column name="city_name" 	            type="varchar(20)"/>
+        </createTable>
+
         <createTable tableName="DEPARTMENT">
             <column name="department_id"                type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="department_name" 	            type="varchar(20)"/>
+            <column name="department_name" 	            type="varchar(40)"/>
         </createTable>
+
         <createTable tableName="NEIGHBORHOOD">
             <column name="neighborhood_id"                type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="neighborhood_name" 	            type="varchar(20)"/>
-            <column name="department_id"                type="varchar(36)"/>
+            <column name="neighborhood_name" 	            type="varchar(40)"/>
+
         </createTable>
 
-        <createTable tableName="ADRESS">
-            <column name="adress_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+        <createTable tableName="ADDRESS">
+            <column name="address_id"           type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="neighborhood_id" 	            type="varchar(36)"/>
-            <column name="geo_location" 	            type="varchar(36)"/>
-            <column name="adress_number" 	            type="int"/>
-            <column name="adress_street_id"             type="varchar(36)"/>
+            <column name="geo_location" 	    type="varchar(36)"/>
+            <column name="address_number" 	    type="int"/>
+            <column name="department_id" 	    type="varchar(36)"/>
+            <column name="city_id" 	            type="varchar(36)"/>
+            <column name="neighborhood_id"      type="varchar(36)"/>
+            <column name="street1_id"      type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="street2_id"      type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
         </createTable>
 
     </changeSet>

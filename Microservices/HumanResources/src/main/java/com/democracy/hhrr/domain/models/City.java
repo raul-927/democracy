@@ -1,6 +1,5 @@
 package com.democracy.hhrr.domain.models;
 
-
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -14,10 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class Department {
-
-    private int 	id;
-    private String 	departmentId;
-    private String 	departmentName;
-    private List<City> cityList;
+public class City {
+    private String cityId;
+    private String cityName;
+    private List<Neighborhood> neighborhoodList;
 }

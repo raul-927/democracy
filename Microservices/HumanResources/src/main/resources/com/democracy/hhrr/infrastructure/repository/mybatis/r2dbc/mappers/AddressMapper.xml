@@ -5,10 +5,13 @@
 	<resultMap type="com.democracy.hhrr.domain.models.Address" id="AddressResult">
   	
   		<id		property = "addressId" 			column = "address_id"/>
-		<result property ="neighborhoodName"	column="neighborhood_name"/>
 		<result property="addressNumber" 		column="address_number"/>
 		<result property="geoLocation" 			column="geo_location"/>
-		<association property="neighborhood" 	resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.NeighborhoodMapper.NeighborhoodResult" />
-		<collection property="streets" 			resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper.StreetResult"/>
+
+		<association property="department" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DepartmentMapper.DepartmentResult"/>
+		<association property="city" 		 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.CityMapper.CityResult"/>
+		<association property="neighborhood" resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.NeighborhoodMapper.NeighborhoodResult"/>
+		<association property="street1" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper.StreetResult"/>
+		<association property="street2" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper.StreetResult"/>
   	</resultMap>
 </mapper>

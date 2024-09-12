@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000001" author="rhernandez">
+
+        <createTable tableName="NEIGH_STREET">
+            <column name="neigh_street_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="neighborhood_id" 	        type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="street_id" 	            type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint  baseColumnNames="neighborhood_id"
+                                  baseTableName="NEIGH_STREET"
+                                  constraintName="neighborhood_street_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="neighborhood_id"
+                                  referencedTableName="NEIGHBORHOOD"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="street_id"
+                                  baseTableName="NEIGH_STREET"
+                                  constraintName="street_neighborhood_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="street_id"
+                                  referencedTableName="STREET"
+                                  validate="true"/>
+
+        <createTable tableName="CITY_NEIGH">
+            <column name="city_neigh_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="city_id" 	       type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="neighborhood_id" type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint  baseColumnNames="city_id"
+                                  baseTableName="CITY"
+                                  constraintName="city_neighborhood_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="city_id"
+                                  referencedTableName="CITY_NEIGH"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="neighborhood_id"
+                                  baseTableName="CITY_NEIGH"
+                                  constraintName="neighborhood_city_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="neighborhood_id"
+                                  referencedTableName="NEIGHBORHOOD"
+                                  validate="true"/>
+
+        <createTable tableName="DEPARTMENT_CITY">
+            <column name="department_city_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="department_id" type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="city_id" 	       type="varchar(36)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint  baseColumnNames="department_id"
+                                  baseTableName="DEPARTMENT"
+                                  constraintName="department_city_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="department_id"
+                                  referencedTableName="DEPARTMENT_CITY"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="city_id"
+                                  baseTableName="CITY"
+                                  constraintName="city_department_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="city_id"
+                                  referencedTableName="DEPARTMENT_CITY"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="department_id"
+                                  baseTableName="ADDRESS"
+                                  constraintName="address_department_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="department_id"
+                                  referencedTableName="DEPARTMENT"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="city_id"
+                                  baseTableName="ADDRESS"
+                                  constraintName="address_city_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="city_id"
+                                  referencedTableName="CITY"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="neighborhood_id"
+                                  baseTableName="ADDRESS"
+                                  constraintName="address_neighborhood_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="neighborhood_id"
+                                  referencedTableName="NEIGHBORHOOD"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="address_id"
+                                  baseTableName="PERSON"
+                                  constraintName="person_address_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="address_id"
+                                  referencedTableName="ADDRESS"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="profession_id"
+                                  baseTableName="PERSON"
+                                  constraintName="person_profession_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="profession_id"
+                                  referencedTableName="PROFESSION"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="street1_id"
+                                  baseTableName="ADDRESS"
+                                  constraintName="address_street1_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="street_id"
+                                  referencedTableName="STREET"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="street2_id"
+                                  baseTableName="ADDRESS"
+                                  constraintName="address_street2_pk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="street_id"
+                                  referencedTableName="STREET"
+                                  validate="true"/>
+
+    </changeSet>
+</databaseChangeLog>

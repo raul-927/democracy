@@ -4,6 +4,8 @@ package com.democracy.hhrr.domain.models;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 @ToString
 @Getter
 @Setter
@@ -17,6 +19,5 @@ public class Neighborhood {
     private int 		id;
     private String 		neighborhoodId;
     private String 		neighborhoodName;
-    private Department 	department;
-
+    private List<Street>    streets;
 }
