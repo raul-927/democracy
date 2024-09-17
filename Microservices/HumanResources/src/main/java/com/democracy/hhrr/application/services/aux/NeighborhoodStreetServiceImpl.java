@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 
 @Service
 public class NeighborhoodStreetServiceImpl implements NeighborhoodStreetService{
@@ -21,6 +23,11 @@ public class NeighborhoodStreetServiceImpl implements NeighborhoodStreetService{
     @Override
     public Mono<Integer> createNeighStreet(NeighborhoodStreet neighborhoodStreet) {
         return this.createNeighStreetIn.createNeighStreet(neighborhoodStreet);
+    }
+
+    @Override
+    public Mono<Integer> createMultipleNeighStreet(List<NeighborhoodStreet> neighborhoodStreetList) {
+        return this.createNeighStreetIn.createMultipleNeighStreet(neighborhoodStreetList);
     }
 
 }

@@ -32,12 +32,12 @@ public class StreetServiceImpl implements StreetService{
 
 
     @Override
-    public Mono<Integer> createStreet(Street street) {
-        return this.createStreetIn.createStreet(street);
+    public Mono<?> createStreet(Street street) {
+        return this.createStreetIn.createStreet(street).flatMap(result ->Mono.just(result));
     }
 
     @Override
-    public Mono<Integer> createMultipleStreet(List<Street> streetList) {
+    public Mono<?> createMultipleStreet(List<Street> streetList) {
         return this.createStreetIn.createMultipleStreet(streetList);
     }
 

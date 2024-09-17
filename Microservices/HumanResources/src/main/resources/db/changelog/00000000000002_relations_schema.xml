@@ -12,10 +12,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="neighborhood_id" 	        type="varchar(36)">
-                <constraints unique="true" nullable="false"/>
+                <constraints unique="false" nullable="false"/>
             </column>
             <column name="street_id" 	            type="varchar(36)">
-                <constraints unique="true" nullable="false"/>
+                <constraints unique="false" nullable="false"/>
             </column>
         </createTable>
 
@@ -23,8 +23,6 @@
         <addForeignKeyConstraint  baseColumnNames="neighborhood_id"
                                   baseTableName="NEIGH_STREET"
                                   constraintName="neighborhood_street_pk"
-                                  onDelete="CASCADE"
-                                  onUpdate="RESTRICT"
                                   referencedColumnNames="neighborhood_id"
                                   referencedTableName="NEIGHBORHOOD"
                                   validate="true"/>
@@ -32,8 +30,6 @@
         <addForeignKeyConstraint  baseColumnNames="street_id"
                                   baseTableName="NEIGH_STREET"
                                   constraintName="street_neighborhood_pk"
-                                  onDelete="CASCADE"
-                                  onUpdate="RESTRICT"
                                   referencedColumnNames="street_id"
                                   referencedTableName="STREET"
                                   validate="true"/>

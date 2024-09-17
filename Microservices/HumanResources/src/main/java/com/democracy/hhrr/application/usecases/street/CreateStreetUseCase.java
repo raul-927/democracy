@@ -18,12 +18,12 @@ public class CreateStreetUseCase implements CreateStreetIn {
     }
 
     @Override
-    public Mono<Integer> createStreet(Street street) {
+    public Mono<?> createStreet(Street street) {
         return streetOut.createStreet(street);
     }
 
     @Override
-    public Mono<Integer> createMultipleStreet(List<Street> streetList) {
+    public Mono<?> createMultipleStreet(List<Street> streetList) {
         return streetOut.createMultipleStreet(streetList);
     }
 }

@@ -8,4 +8,6 @@ public interface SelectNeighborhoodIn {
 
     Flux<Neighborhood>selectNeighborhood(Neighborhood neighborhood);
     Mono<Long>selectCount();
+
+    Flux<Neighborhood> selectAllNeighborhood();
 }

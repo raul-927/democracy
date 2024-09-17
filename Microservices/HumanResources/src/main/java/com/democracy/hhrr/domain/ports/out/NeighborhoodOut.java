@@ -12,6 +12,7 @@ public interface NeighborhoodOut {
     Mono<Integer>createMultipleNeighborhood(List<Neighborhood> neighborhoodList);
     Mono<Integer>deleteNeighborhood(String neighborhoodId);
     Flux<Neighborhood> selectNeighborhood(Neighborhood neighborhood);
+    Flux<Neighborhood> selectAllNeighborhood();
     Mono<Long> selectCount();
     Mono<Integer> updateNeighborhood(Neighborhood neighborhood);
 }

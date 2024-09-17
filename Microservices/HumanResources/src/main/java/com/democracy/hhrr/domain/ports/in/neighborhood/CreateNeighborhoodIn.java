@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CreateNeighborhoodIn {
 
-    Mono<Integer> createNeighborhood(Neighborhood neighborhood);
-    Mono<Integer>createMultipleNeighborhood(List<Neighborhood> neighborhoodList);
+    Mono<?> createNeighborhood(Neighborhood neighborhood);
+    Mono<?>createMultipleNeighborhood(List<Neighborhood> neighborhoodList);
 }

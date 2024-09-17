@@ -36,7 +36,7 @@ public class StreetController {
             value="/save",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<Integer> createStreet(@RequestBody Street street){
+    public Mono<?> createStreet(@RequestBody Street street){
         return this.streetService.createStreet(street);
     }
 
@@ -44,7 +44,7 @@ public class StreetController {
             value="/insert",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<Integer> insertMultiple(@RequestBody List<Street> street){
+    public Mono<?> insertMultiple(@RequestBody List<Street> street){
         return streetService.createMultipleStreet(street);
     }
 

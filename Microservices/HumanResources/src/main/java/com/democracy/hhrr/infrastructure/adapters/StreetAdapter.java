@@ -20,7 +20,7 @@ public class StreetAdapter implements StreetOut {
 
 
     @Override
-    public Mono<Integer> createStreet(Street street) {
+    public Mono<?> createStreet(Street street) {
         return streetMapper.insert(street);
     }
 

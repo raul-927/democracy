@@ -1,5 +1,6 @@
 package com.democracy.hhrr.application.usecases.neighborhood;
 
+import com.democracy.hhrr.application.services.aux.NeighborhoodStreetService;
 import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import com.democracy.hhrr.domain.models.Neighborhood;
 import com.democracy.hhrr.domain.ports.in.neighborhood.CreateNeighborhoodIn;
@@ -11,33 +12,24 @@ import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Component
 public class CreateNeighborhoodUseCase implements CreateNeighborhoodIn {
 
     private final NeighborhoodOut neighborhoodOut;
-    private final NeighborhoodStreetOut neighborhoodStreetOut;
+    private final NeighborhoodStreetService neighborhoodStreetService;
 
-    public CreateNeighborhoodUseCase(NeighborhoodOut neighborhoodOut, NeighborhoodStreetOut neighborhoodStreetOut) {
+    public CreateNeighborhoodUseCase(NeighborhoodOut neighborhoodOut, NeighborhoodStreetService neighborhoodStreetService) {
         this.neighborhoodOut = neighborhoodOut;
-        this.neighborhoodStreetOut = neighborhoodStreetOut;
+        this.neighborhoodStreetService = neighborhoodStreetService;
     }
 
     @Override
-    public Mono<Integer> createNeighborhood(Neighborhood neighborhood) {
-        Mono<Integer> results = this.neighborhoodOut.createNeighborhood(neighborhood);
-        neighborhood.getStreets().forEach( rr->{
-            NeighborhoodStreet neighborhoodStreet = new NeighborhoodStreet();
-            neighborhoodStreet.setNeighborhoodId(neighborhood.getNeighborhoodId());
-            neighborhoodStreet.setStreetId(rr.getStreetId());
-            List<NeighborhoodStreet> neighborhoodStreetList = new ArrayList<>();
-            neighborhoodStreetList.add(neighborhoodStreet);
-            this.neighborhoodStreetOut.createMultipleNeighStreet(neighborhoodStreetList);
-        });
-
-
-        return results;
+    public Mono<?> createNeighborhood(Neighborhood neighborhood) {
+        neighborhood.setNeighborhoodId(UUID.randomUUID().toString());
+        return this.neighborhoodOut.createNeighborhood(neighborhood);
     }
 
     @Override

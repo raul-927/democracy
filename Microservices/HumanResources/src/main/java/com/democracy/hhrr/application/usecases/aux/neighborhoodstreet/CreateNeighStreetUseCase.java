@@ -25,6 +25,6 @@ public class CreateNeighStreetUseCase implements CreateNeighStreetIn {
 
     @Override
     public Mono<Integer> createMultipleNeighStreet(List<NeighborhoodStreet> neighborhoodStreetList) {
-        return null;
+        return neighborhoodStreetOut.createMultipleNeighStreet(neighborhoodStreetList);
     }
 }

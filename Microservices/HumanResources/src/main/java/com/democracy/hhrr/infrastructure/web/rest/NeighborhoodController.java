@@ -35,7 +35,7 @@ public class NeighborhoodController {
             value="/save",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<Integer> createNeighborhood(@RequestBody Neighborhood neighborhood){
+    public Mono<?> createNeighborhood(@RequestBody Neighborhood neighborhood){
         return this.neighborhoodService.createNeighborhood(neighborhood);
     }
 
@@ -43,7 +43,7 @@ public class NeighborhoodController {
             value="/insert",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<Integer> insertMultiple(@RequestBody List<Neighborhood> neighborhoodList){
+    public Mono<?> insertMultiple(@RequestBody List<Neighborhood> neighborhoodList){
         return this.neighborhoodService.createMultipleNeighborhood(neighborhoodList);
     }
 
@@ -63,5 +63,10 @@ public class NeighborhoodController {
     @DeleteMapping(value="/delete/{neighborhoodId}")
     public Mono<Integer> deleteNeighborhood(@PathVariable String neighborhoodId){
         return this.neighborhoodService.deleteNeighborhood(neighborhoodId);
+    }
+
+    @GetMapping(value="/select-all", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Flux<Neighborhood> selectAll(){
+        return this.neighborhoodService.selectAllNeighborhood();
     }
 }

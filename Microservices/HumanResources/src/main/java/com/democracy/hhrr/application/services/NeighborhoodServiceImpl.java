@@ -32,12 +32,12 @@ public class NeighborhoodServiceImpl implements NeighborhoodService{
 
 
     @Override
-    public Mono<Integer> createNeighborhood(Neighborhood neighborhood) {
+    public Mono<?> createNeighborhood(Neighborhood neighborhood) {
         return this.createNeighborhoodIn.createNeighborhood(neighborhood);
     }
 
     @Override
-    public Mono<Integer> createMultipleNeighborhood(List<Neighborhood> neighborhoodList) {
+    public Mono<?> createMultipleNeighborhood(List<Neighborhood> neighborhoodList) {
         return this.createNeighborhoodIn.createMultipleNeighborhood(neighborhoodList);
     }
 
@@ -54,6 +54,11 @@ public class NeighborhoodServiceImpl implements NeighborhoodService{
     @Override
     public Mono<Long> selectCount() {
         return this.selectNeighborhoodIn.selectCount();
+    }
+
+    @Override
+    public Flux<Neighborhood> selectAllNeighborhood() {
+        return this.selectNeighborhoodIn.selectAllNeighborhood();
     }
 
     @Override

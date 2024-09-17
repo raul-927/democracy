@@ -1,11 +1,11 @@
-package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux;
+package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers;
 
 import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.aux.NeighBorhoodStreetDynamicMapper;
 
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.NeighborhoodStreetDynamicSqlSupport;
+import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.dynamic.sql.BindableColumn;
 import org.mybatis.dynamic.sql.DerivedColumn;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
@@ -20,6 +20,7 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
+@Mapper
 public interface NeighborhoodStreetMapper extends NeighBorhoodStreetDynamicMapper {
 
     default Mono<Integer> insert(NeighborhoodStreet record) {
@@ -35,6 +36,7 @@ public interface NeighborhoodStreetMapper extends NeighBorhoodStreetDynamicMappe
     default Mono<Integer> insertMultiple(Collection<NeighborhoodStreet> records) {
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, neighStreetTable, c ->
                 c
+
                         .map(neighborhoodId).toProperty("neighborhoodId")
                         .map(streetId).toProperty("streetId")
         );
@@ -43,6 +45,7 @@ public interface NeighborhoodStreetMapper extends NeighBorhoodStreetDynamicMappe
     default Mono<Integer> insertSelective(NeighborhoodStreet record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, neighStreetTable, c ->
                 c
+                        .map(neighStreetId).toPropertyWhenPresent("neighStreetId", record::getNeighStreetId)
                         .map(neighborhoodId).toPropertyWhenPresent("neighborhoodName", record::getNeighborhoodId)
                         .map(streetId).toPropertyWhenPresent("neighborhoodName", record::getStreetId)
 

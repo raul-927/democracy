@@ -18,7 +18,7 @@ public final class NeighborhoodStreetDynamicSqlSupport {
     public static final class NeighStreetTable extends SqlTable{
         public final SqlColumn<String> neighStreetId = column("neigh_street_id", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> neighborhoodId   = column("neighborhood_id",JDBCType.LONGNVARCHAR);
-        public final SqlColumn<String> streetId = column("street_id",JDBCType.INTEGER);
+        public final SqlColumn<String> streetId = column("street_id",JDBCType.LONGNVARCHAR);
 
         public NeighStreetTable(){super("NEIGH_STREET");}
 

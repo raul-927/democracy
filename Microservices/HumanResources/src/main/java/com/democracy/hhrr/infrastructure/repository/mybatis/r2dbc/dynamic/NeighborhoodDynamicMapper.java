@@ -20,9 +20,11 @@ import reactor.core.publisher.Mono;
 
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 
 public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
 
+    BasicColumn[] neighborhoodStreetColumnList = BasicColumn.columnList(neighborhoodId, neighborhoodName, streetId, streetName, streetType);
     BasicColumn[] neighborhoodColumnList = BasicColumn.columnList(neighborhoodId, neighborhoodName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
@@ -59,16 +61,20 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Neighborhood> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, neighborhoodColumnList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, neighborhoodStreetColumnList, neigh, completer);
     }
 
     default Flux<Neighborhood> select(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighborhoodStreetColumnList, neigh, completer);
+    }
+
+    default Flux<Neighborhood> selectAllNeighborhood(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, neighborhoodColumnList, neigh, completer);
     }
 
 
     default Flux<Neighborhood> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, neighborhoodColumnList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, neighborhoodStreetColumnList, neigh, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {

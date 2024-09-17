@@ -66,7 +66,7 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.deleteFrom(this::delete, str, completer);
     }
 
-    default Mono<Integer> insert(Street record) {
+    default Mono<?> insert(Street record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, str, c ->
                 c
                         .map(streetId).toPropertyWhenPresent("streetId", record::getStreetId)

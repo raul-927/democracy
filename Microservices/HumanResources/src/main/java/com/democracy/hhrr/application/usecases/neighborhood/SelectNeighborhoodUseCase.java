@@ -26,4 +26,9 @@ public class SelectNeighborhoodUseCase implements SelectNeighborhoodIn {
     public Mono<Long> selectCount() {
         return this.neighborhoodOut.selectCount();
     }
+
+    @Override
+    public Flux<Neighborhood> selectAllNeighborhood() {
+        return neighborhoodOut.selectAllNeighborhood();
+    }
 }

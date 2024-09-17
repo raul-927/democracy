@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface CreateStreetIn {
 
-    Mono<Integer> createStreet(Street street);
-    Mono<Integer>createMultipleStreet(List<Street> streetList);
+    Mono<?> createStreet(Street street);
+    Mono<?>createMultipleStreet(List<Street> streetList);
 
 
 }
