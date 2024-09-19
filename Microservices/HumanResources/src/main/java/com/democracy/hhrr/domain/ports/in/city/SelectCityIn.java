@@ -8,4 +8,5 @@ public interface SelectCityIn {
 
     Flux<City> selectCity(City city);
     Mono<Long> selectCount();
+    Flux<City> selectAllCity();
 }

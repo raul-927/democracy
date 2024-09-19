@@ -25,4 +25,9 @@ public class SelectCityUseCase implements SelectCityIn {
     public Mono<Long> selectCount() {
         return this.cityOut.selectCount();
     }
+
+    @Override
+    public Flux<City> selectAllCity() {
+        return this.cityOut.selectAllCity();
+    }
 }

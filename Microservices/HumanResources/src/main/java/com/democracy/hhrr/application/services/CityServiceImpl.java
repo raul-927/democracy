@@ -57,6 +57,11 @@ public class CityServiceImpl implements CityService{
     }
 
     @Override
+    public Flux<City> selectAllCity() {
+        return this.selectCityIn.selectAllCity();
+    }
+
+    @Override
     public Mono<Integer> updateCity(City city) {
         return this.updateCityIn.updateCity(city);
     }

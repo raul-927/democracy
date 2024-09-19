@@ -12,6 +12,7 @@ public interface CityOut {
     Mono<Integer> createMultipleCity(List<City> cityList);
     Mono<Integer> deleteCity(String id);
     Flux<City> selectCity(City city);
+    Flux<City> selectAllCity();
     Mono<Long> selectCount();
     Mono<Integer> updateCity(City city);
 }
