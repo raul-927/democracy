@@ -55,7 +55,7 @@ public interface CityDynamicMapper extends CommonSelectMapper{
     Flux<City> selectMany(SelectStatementProvider selectStatement);
 
     default Flux<City> selectAllCity(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityColumnList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityColumnList, cityTable, completer);
     }
 
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")

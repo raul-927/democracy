@@ -8,7 +8,7 @@
     <changeSet id="00000000000001" author="rhernandez">
 
         <createTable tableName="NEIGH_STREET">
-            <column name="neigh_street_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+            <column name="neigh_street_id"          type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="neighborhood_id" 	        type="varchar(36)">
@@ -35,24 +35,22 @@
                                   validate="true"/>
 
         <createTable tableName="CITY_NEIGH">
-            <column name="city_neigh_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+            <column name="city_neigh_id"   type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="city_id" 	       type="varchar(36)">
-                <constraints unique="true" nullable="false"/>
+                <constraints unique="false" nullable="false"/>
             </column>
             <column name="neighborhood_id" type="varchar(36)">
-                <constraints unique="true" nullable="false"/>
+                <constraints unique="false" nullable="false"/>
             </column>
         </createTable>
 
         <addForeignKeyConstraint  baseColumnNames="city_id"
-                                  baseTableName="CITY"
+                                  baseTableName="CITY_NEIGH"
                                   constraintName="city_neighborhood_pk"
-                                  onDelete="CASCADE"
-                                  onUpdate="RESTRICT"
                                   referencedColumnNames="city_id"
-                                  referencedTableName="CITY_NEIGH"
+                                  referencedTableName="CITY"
                                   validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="neighborhood_id"
@@ -65,7 +63,7 @@
                                   validate="true"/>
 
         <createTable tableName="DEPARTMENT_CITY">
-            <column name="department_city_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+            <column name="department_city_id"  type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="department_id" type="varchar(36)">
@@ -86,12 +84,12 @@
                                   validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="city_id"
-                                  baseTableName="CITY"
+                                  baseTableName="DEPARTMENT_CITY"
                                   constraintName="city_department_pk"
                                   onDelete="CASCADE"
                                   onUpdate="RESTRICT"
                                   referencedColumnNames="city_id"
-                                  referencedTableName="DEPARTMENT_CITY"
+                                  referencedTableName="CITY"
                                   validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="department_id"

@@ -42,8 +42,10 @@
         </createTable>
 
         <createTable tableName="CITY">
-            <column name="city_id"                type="varchar(36)" defaultValueComputed="${u_id}"/>
-            <column name="city_name" 	            type="varchar(20)"/>
+            <column name="city_id"       type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="city_name" 	 type="varchar(20)"/>
         </createTable>
 
         <createTable tableName="DEPARTMENT">
