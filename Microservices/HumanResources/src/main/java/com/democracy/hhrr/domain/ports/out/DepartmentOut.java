@@ -12,6 +12,7 @@ public interface DepartmentOut {
     Mono<Integer>createMultipleDepartment(List<Department> departmentList);
     Mono<Integer> deleteDepartment(String departmentId);
     Flux<Department> selectDepartment(Department department);
+    Flux<Department> selectAllDepartment();
     Mono<Long> selectCount();
     Mono<Integer> updateDepartment(Department department);
 }

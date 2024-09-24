@@ -24,6 +24,11 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
     }
 
     @Override
+    public Flux<Department> selectAllDepartment() {
+        return departmentOut.selectAllDepartment();
+    }
+
+    @Override
     public Mono<Long> selectCount() {
         return departmentOut.selectCount();
     }

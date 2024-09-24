@@ -17,6 +17,9 @@ import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport;
+
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.isLikeWhenPresent;
@@ -29,6 +32,7 @@ import java.util.Collection;
 public interface DepartmentDynamicMapper extends CommonSelectMapper{
 
     BasicColumn[] departmentColumnList = BasicColumn.columnList(departmentId, departmentName);
+    BasicColumn[] departmenCitytColumnList = BasicColumn.columnList(departmentId, departmentName, cityId, cityName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -99,6 +103,9 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     default Flux<Department> select(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, dep, completer);
     }
+    default Flux<Department> selectAllDepartment(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, dep, completer);
+    }
     default Flux<Department> selectDepartment(Department department) {
         return select(str ->{
             if(department.getDepartmentId() != null ||
@@ -115,6 +122,13 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
                 str.orderBy(departmentId);
             }
             return str;
+        });
+    }
+
+    default Flux<Department> selectAllDepartment(){
+        return selectAllDepartment( sel ->{
+            sel.build();
+            return sel;
         });
     }
 

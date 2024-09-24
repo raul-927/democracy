@@ -75,12 +75,12 @@
         </createTable>
 
         <addForeignKeyConstraint  baseColumnNames="department_id"
-                                  baseTableName="DEPARTMENT"
+                                  baseTableName="DEPARTMENT_CITY"
                                   constraintName="department_city_pk"
                                   onDelete="CASCADE"
                                   onUpdate="RESTRICT"
                                   referencedColumnNames="department_id"
-                                  referencedTableName="DEPARTMENT_CITY"
+                                  referencedTableName="DEPARTMENT"
                                   validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="city_id"

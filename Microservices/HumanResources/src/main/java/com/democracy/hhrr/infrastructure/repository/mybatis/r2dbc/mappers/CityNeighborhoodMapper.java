@@ -17,8 +17,8 @@ import reactor.core.publisher.Mono;
 
 import java.util.Collection;
 
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport.cityId;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport.cityNeighId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport.neighborhoodId;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.NeighborhoodStreetDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
@@ -36,7 +36,7 @@ public interface CityNeighborhoodMapper extends CityNeighDynamicMapper {
     }
 
     default Mono<Integer> insertMultiple(Collection<CityNeighborhood> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, neighStreetTable, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, cityNeighTable, c ->
                 c
 
                         .map(neighborhoodId).toProperty("neighborhoodId")

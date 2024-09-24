@@ -39,6 +39,11 @@ public class DepartmentAdapter implements DepartmentOut {
     }
 
     @Override
+    public Flux<Department> selectAllDepartment() {
+        return departmentMapper.selectAllDepartment();
+    }
+
+    @Override
     public Mono<Long> selectCount() {
         return departmentMapper.count();
     }

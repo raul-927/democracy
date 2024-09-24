@@ -2,8 +2,12 @@ package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
 import com.democracy.hhrr.domain.models.City;
 import com.democracy.hhrr.domain.models.Neighborhood;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
+import org.mybatis.dynamic.sql.BindableColumn;
+import org.mybatis.dynamic.sql.DerivedColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
 import org.mybatis.dynamic.sql.delete.render.DeleteStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
@@ -107,7 +111,15 @@ public interface CityDynamicMapper extends CommonSelectMapper{
     }
     default Flux<City> selectCity(City city) {
         return select(str ->{
-
+            BindableColumn<City> cityCityId= DerivedColumn.of("city_id", "CITY");
+            BindableColumn<City> cityNeighCityId = DerivedColumn.of("city_id", "CITY_NEIGH");
+            BindableColumn<City> neighborhoodNeighborhoodId = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
+            BindableColumn<City> cityNeighNeighborhoodId = DerivedColumn.of("neighborhood_id", "CITY_NEIGH");
+            str
+                    .join(CityNeighDynamicSqlSupport.cityNeighTable)
+                    .on(cityNeighCityId, equalTo(cityCityId))
+                    .join(neigh)
+                    .on(cityNeighNeighborhoodId,equalTo(neighborhoodNeighborhoodId)).build();
             if(city.getCityId() != null ||
                     city.getCityName() != null){
                 if(city.getCityId()!=null && !city.getCityId().isEmpty()){

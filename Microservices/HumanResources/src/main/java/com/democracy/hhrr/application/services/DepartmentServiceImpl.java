@@ -52,6 +52,11 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
+    public Flux<Department> selectAllDepartment() {
+        return this.selectDepartmentIn.selectAllDepartment();
+    }
+
+    @Override
     public Mono<Long> selectCount() {
         return this.selectDepartmentIn.selectCount();
     }

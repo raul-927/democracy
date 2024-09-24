@@ -28,6 +28,13 @@ public class DepartmentController {
         return this.departmentService.selectDepartment(department);
     }
 
+    @GetMapping(
+            value = "/select-all",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Flux<Department> selectAllDepartment(){
+        return this.departmentService.selectAllDepartment();
+    }
+
     @PostMapping(
             value="/save",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
@@ -53,7 +60,7 @@ public class DepartmentController {
     }
 
     @GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<Long> selectCount(){
+    public Mono<Long> selectCountDepartment(){
         return this.departmentService.selectCount();
     }
 
