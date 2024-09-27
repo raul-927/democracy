@@ -51,28 +51,28 @@ public interface NeighBorhoodStreetDynamicMapper {
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
     default Mono<Long> count(CountDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.countFrom(this::count, neighStreetTable, completer);
+        return ReactiveMyBatis3Utils.countFrom(this::count, NEIGH_STREET, completer);
     }
 
     default Mono<Integer> delete(DeleteDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.deleteFrom(this::delete, neighStreetTable, completer);
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, NEIGH_STREET, completer);
     }
 
     default Mono<NeighborhoodStreet> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, neighStreetCol, neighStreetTable, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, neighStreetCol, NEIGH_STREET, completer);
     }
 
     default Flux<NeighborhoodStreet> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighStreetCol, neighStreetTable, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighStreetCol, NEIGH_STREET, completer);
     }
 
 
     default Flux<NeighborhoodStreet> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, neighStreetCol, neighStreetTable, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, neighStreetCol, NEIGH_STREET, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.update(this::update, neighStreetTable, completer);
+        return ReactiveMyBatis3Utils.update(this::update, NEIGH_STREET, completer);
     }
 
 }

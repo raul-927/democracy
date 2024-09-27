@@ -26,7 +26,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
 public interface CityNeighborhoodMapper extends CityNeighDynamicMapper {
 
     default Mono<Integer> insert(CityNeighborhood record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, neighStreetTable, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, NEIGH_STREET, c ->
                 c
                         .map(neighborhoodId).toProperty("neighborhoodId")
                         .map(cityId).toProperty("cityId")
@@ -45,7 +45,7 @@ public interface CityNeighborhoodMapper extends CityNeighDynamicMapper {
     }
 
     default Mono<Integer> insertSelective(CityNeighborhood record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, neighStreetTable, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, NEIGH_STREET, c ->
                 c
                         .map(cityNeighId).toPropertyWhenPresent("cityNeighId", record::getCityNeighId)
                         .map(neighborhoodId).toPropertyWhenPresent("neighborhoodId", record::getNeighborhoodId)

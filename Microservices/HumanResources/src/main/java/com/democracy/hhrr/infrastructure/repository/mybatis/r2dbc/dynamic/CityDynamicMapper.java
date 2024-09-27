@@ -130,7 +130,7 @@ public interface CityDynamicMapper extends CommonSelectMapper{
                     .join(NEIGHBORHOOD)
                     .on(cityNeighNeighborhoodId,equalTo(neighborhoodNeighborhoodId))
 
-                    .join(NeighborhoodStreetDynamicSqlSupport.neighStreetTable)
+                    .join(NeighborhoodStreetDynamicSqlSupport.NEIGH_STREET)
                     .on(neighborhoodNeighborhoodId,equalTo(neighStreetNeighborhoodId))
 
                     .join(StreetDynamicSqlSupport.str)

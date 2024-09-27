@@ -24,7 +24,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 public interface NeighborhoodStreetMapper extends NeighBorhoodStreetDynamicMapper {
 
     default Mono<Integer> insert(NeighborhoodStreet record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, neighStreetTable, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, NEIGH_STREET, c ->
                 c
                         .map(neighborhoodId).toProperty("neighborhoodId")
                         .map(streetId).toProperty("streetId")
@@ -34,7 +34,7 @@ public interface NeighborhoodStreetMapper extends NeighBorhoodStreetDynamicMappe
     }
 
     default Mono<Integer> insertMultiple(Collection<NeighborhoodStreet> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, neighStreetTable, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, NEIGH_STREET, c ->
                 c
 
                         .map(neighborhoodId).toProperty("neighborhoodId")
@@ -43,7 +43,7 @@ public interface NeighborhoodStreetMapper extends NeighBorhoodStreetDynamicMappe
     }
 
     default Mono<Integer> insertSelective(NeighborhoodStreet record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, neighStreetTable, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, NEIGH_STREET, c ->
                 c
                         .map(neighStreetId).toPropertyWhenPresent("neighStreetId", record::getNeighStreetId)
                         .map(neighborhoodId).toPropertyWhenPresent("neighborhoodName", record::getNeighborhoodId)

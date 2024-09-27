@@ -8,11 +8,11 @@ import java.sql.JDBCType;
 
 public final class NeighborhoodStreetDynamicSqlSupport {
 
-    public static final NeighStreetTable neighStreetTable = new NeighStreetTable();
+    public static final NeighStreetTable NEIGH_STREET = new NeighStreetTable();
 
-    public static final SqlColumn<String> neighStreetId = neighStreetTable.neighStreetId;
-    public static final SqlColumn<String> neighborhoodId = neighStreetTable.neighborhoodId;
-    public static final SqlColumn<String> streetId = neighStreetTable.streetId;
+    public static final SqlColumn<String> neighStreetId = NEIGH_STREET.neighStreetId;
+    public static final SqlColumn<String> neighborhoodId = NEIGH_STREET.neighborhoodId;
+    public static final SqlColumn<String> streetId = NEIGH_STREET.streetId;
 
 
     public static final class NeighStreetTable extends SqlTable{

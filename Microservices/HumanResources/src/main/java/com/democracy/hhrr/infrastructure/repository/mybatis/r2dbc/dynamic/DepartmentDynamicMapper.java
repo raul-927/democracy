@@ -175,7 +175,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
                     .join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
                     .on(CITY_NEIGH_neigyborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
 
-                    .join(NeighborhoodStreetDynamicSqlSupport.neighStreetTable)
+                    .join(NeighborhoodStreetDynamicSqlSupport.NEIGH_STREET)
                     .on(NEIGHBORHOOD_neighborhood_id,equalTo(NEIGH_STREET_neighborhood_id))
 
                     .join(StreetDynamicSqlSupport.str)

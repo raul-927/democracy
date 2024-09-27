@@ -64,7 +64,7 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
         BindableColumn<Neighborhood> neighStreetStreetId= DerivedColumn.of("street_id", "NEIGH_STREET");
         return select(str ->{
             str
-                    .join(NeighborhoodStreetDynamicSqlSupport.neighStreetTable)
+                    .join(NeighborhoodStreetDynamicSqlSupport.NEIGH_STREET)
                     .on(neighborhoodNeighborhoodId,equalTo(neighStreetNeighborhoodId))
                     .join(StreetDynamicSqlSupport.str)
                     .on(streetStreetId, equalTo(neighStreetStreetId)).build();
