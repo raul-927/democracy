@@ -193,7 +193,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
                             .render(RenderingStrategies.MYBATIS3);
                 }
             }else{
-                str.orderBy(departmentId);
+                str.orderBy(departmentName);
             }
             return str;
         });
