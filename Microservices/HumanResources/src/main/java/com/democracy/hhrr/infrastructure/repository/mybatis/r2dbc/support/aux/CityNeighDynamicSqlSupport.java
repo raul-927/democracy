@@ -7,11 +7,11 @@ import java.sql.JDBCType;
 
 public final class CityNeighDynamicSqlSupport {
 
-    public static final CityNeighTable cityNeighTable = new CityNeighTable();
+    public static final CityNeighTable CITY_NEIGH = new CityNeighTable();
 
-    public static final SqlColumn<String> cityNeighId = cityNeighTable.cityNeighId;
-    public static final SqlColumn<String> cityId = cityNeighTable.cityId;
-    public static final SqlColumn<String> neighborhoodId = cityNeighTable.neighborhoodId;
+    public static final SqlColumn<String> cityNeighId = CITY_NEIGH.cityNeighId;
+    public static final SqlColumn<String> cityId = CITY_NEIGH.cityId;
+    public static final SqlColumn<String> neighborhoodId = CITY_NEIGH.neighborhoodId;
 
 
     public static final class CityNeighTable extends SqlTable{

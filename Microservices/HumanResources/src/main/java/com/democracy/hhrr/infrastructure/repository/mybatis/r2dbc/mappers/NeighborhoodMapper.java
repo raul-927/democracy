@@ -27,7 +27,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.isLikeWhenPresent;
 public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
 
     default Mono<Integer> insert(Neighborhood record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, neigh, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, NEIGHBORHOOD, c ->
                 c
                         .map(neighborhoodName).toProperty("neighborhoodName")
 
@@ -36,14 +36,14 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
     }
 
     default Mono<Integer> insertMultiple(Collection<Neighborhood> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, neigh, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, NEIGHBORHOOD, c ->
                 c
                         .map(neighborhoodName).toProperty("neighborhoodName")
         );
     }
 
     default Mono<Integer> insertSelective(Neighborhood record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, neigh, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, NEIGHBORHOOD, c ->
                 c
                         .map(neighborhoodName).toPropertyWhenPresent("neighborhoodName", record::getNeighborhoodName)
 

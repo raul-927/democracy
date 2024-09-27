@@ -53,31 +53,31 @@ public interface NeighborhoodDynamicMapper extends CommonSelectMapper{
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
     default Mono<Long> count(CountDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.countFrom(this::count, neigh, completer);
+        return ReactiveMyBatis3Utils.countFrom(this::count, NEIGHBORHOOD, completer);
     }
 
     default Mono<Integer> delete(DeleteDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.deleteFrom(this::delete, neigh, completer);
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, NEIGHBORHOOD, completer);
     }
 
     default Mono<Neighborhood> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, neighborhoodStreetColumnList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, neighborhoodStreetColumnList, NEIGHBORHOOD, completer);
     }
 
     default Flux<Neighborhood> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighborhoodStreetColumnList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighborhoodStreetColumnList, NEIGHBORHOOD, completer);
     }
 
     default Flux<Neighborhood> selectAllNeighborhood(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighborhoodColumnList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, neighborhoodColumnList, NEIGHBORHOOD, completer);
     }
 
 
     default Flux<Neighborhood> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, neighborhoodStreetColumnList, neigh, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, neighborhoodStreetColumnList, NEIGHBORHOOD, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.update(this::update, neigh, completer);
+        return ReactiveMyBatis3Utils.update(this::update, NEIGHBORHOOD, completer);
     }
 }

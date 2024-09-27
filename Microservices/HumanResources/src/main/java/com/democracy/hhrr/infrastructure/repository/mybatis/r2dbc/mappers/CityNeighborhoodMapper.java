@@ -36,7 +36,7 @@ public interface CityNeighborhoodMapper extends CityNeighDynamicMapper {
     }
 
     default Mono<Integer> insertMultiple(Collection<CityNeighborhood> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, cityNeighTable, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, CITY_NEIGH, c ->
                 c
 
                         .map(neighborhoodId).toProperty("neighborhoodId")

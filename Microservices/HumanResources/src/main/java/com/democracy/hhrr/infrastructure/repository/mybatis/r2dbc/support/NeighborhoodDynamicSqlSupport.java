@@ -8,10 +8,10 @@ import java.sql.JDBCType;
 
 public final class NeighborhoodDynamicSqlSupport {
 
-    public static final Neigh neigh = new Neigh();
+    public static final Neigh NEIGHBORHOOD = new Neigh();
 
-    public static final SqlColumn<String> neighborhoodId = neigh.neighborhoodId;
-    public static final SqlColumn<String> neighborhoodName = neigh.neighborhoodName;
+    public static final SqlColumn<String> neighborhoodId = NEIGHBORHOOD.neighborhoodId;
+    public static final SqlColumn<String> neighborhoodName = NEIGHBORHOOD.neighborhoodName;
 
 
     public static final class Neigh extends SqlTable {

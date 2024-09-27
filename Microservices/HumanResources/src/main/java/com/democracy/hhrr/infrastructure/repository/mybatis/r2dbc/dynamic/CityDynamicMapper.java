@@ -3,7 +3,9 @@ package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 import com.democracy.hhrr.domain.models.City;
 import com.democracy.hhrr.domain.models.Neighborhood;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.NeighborhoodStreetDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.BindableColumn;
@@ -29,11 +31,12 @@ import java.util.Collection;
 
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.*;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface CityDynamicMapper extends CommonSelectMapper{
 
-    BasicColumn[] cityAndNeighborhoodColumnList = BasicColumn.columnList(cityId, cityName,neighborhoodId, neighborhoodName);
+    BasicColumn[] cityAndNeighborhoodColumnList = BasicColumn.columnList(cityId, cityName,neighborhoodId, neighborhoodName, streetId, streetName, streetType);
     BasicColumn[] cityColumnList = BasicColumn.columnList(cityId, cityName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
@@ -59,22 +62,22 @@ public interface CityDynamicMapper extends CommonSelectMapper{
     Flux<City> selectMany(SelectStatementProvider selectStatement);
 
     default Flux<City> selectAllCity(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityColumnList, cityTable, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityColumnList, CITY, completer);
     }
 
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
     default Mono<Long> count(CountDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.countFrom(this::count, cityTable, completer);
+        return ReactiveMyBatis3Utils.countFrom(this::count, CITY, completer);
     }
 
     default Mono<Integer> delete(DeleteDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.deleteFrom(this::delete, cityTable, completer);
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, CITY, completer);
     }
 
     default Mono<Integer> insert(City record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, cityTable, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, CITY, c ->
                 c
                         .map(cityId).toPropertyWhenPresent("cityId", record::getCityId)
                         .map(cityName).toProperty("cityName")
@@ -82,7 +85,7 @@ public interface CityDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Integer> insertMultiple(Collection<City> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, cityTable, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, CITY, c ->
                 c
                         .map(cityId).toProperty("cityId")
                         .map(cityName).toProperty("cityName")
@@ -90,7 +93,7 @@ public interface CityDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Integer> insertSelective(City record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, cityTable, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, CITY, c ->
                 c
                         .map(cityName).toPropertyWhenPresent("cityName", record::getCityName)
         );
@@ -103,25 +106,37 @@ public interface CityDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<City> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, cityAndNeighborhoodColumnList, cityTable, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, cityAndNeighborhoodColumnList, CITY, completer);
     }
 
     default Flux<City> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityAndNeighborhoodColumnList, cityTable, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityAndNeighborhoodColumnList, CITY, completer);
     }
     default Flux<City> selectCity(City city) {
         return select(str ->{
             BindableColumn<City> cityCityId= DerivedColumn.of("city_id", "CITY");
             BindableColumn<City> cityNeighCityId = DerivedColumn.of("city_id", "CITY_NEIGH");
+
             BindableColumn<City> neighborhoodNeighborhoodId = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
             BindableColumn<City> cityNeighNeighborhoodId = DerivedColumn.of("neighborhood_id", "CITY_NEIGH");
+            BindableColumn<City> neighStreetNeighborhoodId = DerivedColumn.of("neighborhood_id", "NEIGH_STREET");
+
+            BindableColumn<City> streetStreetId = DerivedColumn.of("street_id", "STREET");
+            BindableColumn<City> neighStreetStreetId= DerivedColumn.of("street_id", "NEIGH_STREET");
             str
-                    .join(CityNeighDynamicSqlSupport.cityNeighTable)
+                    .join(CityNeighDynamicSqlSupport.CITY_NEIGH)
                     .on(cityNeighCityId, equalTo(cityCityId))
-                    .join(neigh)
-                    .on(cityNeighNeighborhoodId,equalTo(neighborhoodNeighborhoodId)).build();
-            if(city.getCityId() != null ||
-                    city.getCityName() != null){
+
+                    .join(NEIGHBORHOOD)
+                    .on(cityNeighNeighborhoodId,equalTo(neighborhoodNeighborhoodId))
+
+                    .join(NeighborhoodStreetDynamicSqlSupport.neighStreetTable)
+                    .on(neighborhoodNeighborhoodId,equalTo(neighStreetNeighborhoodId))
+
+                    .join(StreetDynamicSqlSupport.str)
+                    .on(streetStreetId, equalTo(neighStreetStreetId)).build();
+
+            if(city.getCityId() != null || city.getCityName() != null){
                 if(city.getCityId()!=null && !city.getCityId().isEmpty()){
                     str.where(cityId,isEqualToWhenPresent(city.getCityId()));
                 }else{
@@ -145,11 +160,11 @@ public interface CityDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<City> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, cityAndNeighborhoodColumnList, cityTable, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, cityAndNeighborhoodColumnList, CITY, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.update(this::update, cityTable, completer);
+        return ReactiveMyBatis3Utils.update(this::update, CITY, completer);
     }
 
     default Mono<Integer> updateSelectiveByPrimaryKey(City record) {

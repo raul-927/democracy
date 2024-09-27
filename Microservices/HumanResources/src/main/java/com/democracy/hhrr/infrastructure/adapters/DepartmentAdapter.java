@@ -35,7 +35,7 @@ public class DepartmentAdapter implements DepartmentOut {
 
     @Override
     public Flux<Department> selectDepartment(Department department) {
-        return departmentMapper.selectDepartment(department);
+        return departmentMapper.selectFullDepartment(department);
     }
 
     @Override

@@ -116,7 +116,7 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
         BindableColumn<Address> joinAddressNeighborhoodColumn = DerivedColumn.of("neighborhood_id", "ADDRESS");
         BindableColumn<Address> joinNeighborhoodColumn = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
         return select(str ->{
-                str.join(NeighborhoodDynamicSqlSupport.neigh)
+                str.join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
                     .on(joinAddressNeighborhoodColumn,equalTo(joinNeighborhoodColumn)).build();
             if(address.getAddressId() != null ||
                     address.getAddressNumber() != null){

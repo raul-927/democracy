@@ -1,9 +1,18 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
+import com.democracy.hhrr.domain.models.City;
 import com.democracy.hhrr.domain.models.Department;
 
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.DepartmentCityDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.NeighborhoodStreetDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
+import org.mybatis.dynamic.sql.BindableColumn;
+import org.mybatis.dynamic.sql.DerivedColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
 import org.mybatis.dynamic.sql.delete.render.DeleteStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
@@ -21,6 +30,9 @@ import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.Depart
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityId;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.neighborhoodId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.neighborhoodName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.isLikeWhenPresent;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
@@ -33,6 +45,11 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
 
     BasicColumn[] departmentColumnList = BasicColumn.columnList(departmentId, departmentName);
     BasicColumn[] departmenCitytColumnList = BasicColumn.columnList(departmentId, departmentName, cityId, cityName);
+    BasicColumn[] departmenCitytNeighborhoodStreetColumnList = BasicColumn.columnList(
+            departmentId, departmentName,
+            cityId, cityName,
+            neighborhoodId, neighborhoodName,
+            streetId, streetName, streetType);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -103,11 +120,68 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     default Flux<Department> select(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, dep, completer);
     }
+
+    default Flux<Department> selectFullColumnDepartment(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmenCitytNeighborhoodStreetColumnList, dep, completer);
+    }
     default Flux<Department> selectAllDepartment(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, dep, completer);
     }
     default Flux<Department> selectDepartment(Department department) {
         return select(str ->{
+            if(department.getDepartmentId() != null ||
+                    department.getDepartmentName() != null){
+                if(department.getDepartmentId()!=null && !department.getDepartmentId().isEmpty()){
+                    str.where(departmentId,isEqualToWhenPresent(department.getDepartmentId()));
+                }else{
+                    str
+                            .where(departmentName,isLikeWhenPresent(department::getDepartmentName).map(s -> "%" + s + "%"))
+                            .build()
+                            .render(RenderingStrategies.MYBATIS3);
+                }
+            }else{
+                str.orderBy(departmentId);
+            }
+            return str;
+        });
+    }
+    default Flux<Department> selectFullDepartment(Department department) {
+        BindableColumn<Department> DEPARTMENT_department_id= DerivedColumn.of("department_id", "DEPARTMENT");
+        BindableColumn<Department> DEPARTMENT_CITY_department_id= DerivedColumn.of("department_id", "DEPARTMENT_CITY");
+        BindableColumn<Department> DEPARTMENT_CITY_city_id= DerivedColumn.of("city_id", "DEPARTMENT_CITY");
+
+        BindableColumn<Department> CITY_city_id= DerivedColumn.of("city_id", "CITY");
+        BindableColumn<Department> CITY_NEIGH_city_id = DerivedColumn.of("city_id", "CITY_NEIGH");
+        BindableColumn<Department> CITY_NEIGH_neigyborhood_id = DerivedColumn.of("neighborhood_id", "CITY_NEIGH");
+
+        BindableColumn<Department> NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
+
+        BindableColumn<Department> NEIGH_STREET_neighborhood_id = DerivedColumn.of("neighborhood_id", "NEIGH_STREET");
+        BindableColumn<Department> NEIGH_STREET_street_id = DerivedColumn.of("street_id", "NEIGH_STREET");
+        BindableColumn<Department> STREET_street_id = DerivedColumn.of("street_id", "STREET");
+
+
+        return selectFullColumnDepartment(str ->{
+           str
+                    .join(DepartmentCityDynamicSqlSupport.DEPARTMENT_CITY)
+                    .on(DEPARTMENT_department_id, equalTo(DEPARTMENT_CITY_department_id))
+
+                    .join(CityDynamicSqlSupport.CITY)
+                    .on(DEPARTMENT_CITY_city_id,equalTo(CITY_city_id))
+
+                    .join(CityNeighDynamicSqlSupport.CITY_NEIGH)
+                    .on(CITY_city_id,equalTo(CITY_NEIGH_city_id))
+
+                    .join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
+                    .on(CITY_NEIGH_neigyborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
+
+                    .join(NeighborhoodStreetDynamicSqlSupport.neighStreetTable)
+                    .on(NEIGHBORHOOD_neighborhood_id,equalTo(NEIGH_STREET_neighborhood_id))
+
+                    .join(StreetDynamicSqlSupport.str)
+                    .on(NEIGH_STREET_street_id,equalTo(STREET_street_id)).build();
+
+
             if(department.getDepartmentId() != null ||
                     department.getDepartmentName() != null){
                 if(department.getDepartmentId()!=null && !department.getDepartmentId().isEmpty()){

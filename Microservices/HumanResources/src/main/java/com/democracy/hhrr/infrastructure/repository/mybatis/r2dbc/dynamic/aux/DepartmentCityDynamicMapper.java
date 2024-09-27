@@ -1,7 +1,6 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.aux;
 
 import com.democracy.hhrr.domain.aux.CityNeighborhood;
-import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
@@ -18,11 +17,13 @@ import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBa
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentId;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.DepartmentCityDynamicSqlSupport.departmentCityId;
 
-public interface CityNeighDynamicMapper {
+public interface DepartmentCityDynamicMapper {
 
-    BasicColumn[] cityNeighColumns = BasicColumn.columnList(cityNeighId, cityId, neighborhoodId);
+    BasicColumn[] departmentCity = BasicColumn.columnList(departmentCityId, departmentId, cityId);
 
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
@@ -59,16 +60,16 @@ public interface CityNeighDynamicMapper {
     }
 
     default Mono<CityNeighborhood> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, cityNeighColumns, CITY_NEIGH, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, departmentCity, CITY_NEIGH, completer);
     }
 
     default Flux<CityNeighborhood> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityNeighColumns, CITY_NEIGH, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentCity, CITY_NEIGH, completer);
     }
 
 
     default Flux<CityNeighborhood> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, cityNeighColumns, CITY_NEIGH, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, departmentCity, CITY_NEIGH, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
