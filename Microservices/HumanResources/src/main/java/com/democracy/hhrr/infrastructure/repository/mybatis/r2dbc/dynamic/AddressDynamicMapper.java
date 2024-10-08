@@ -2,8 +2,11 @@ package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
 import com.democracy.hhrr.domain.models.Address;
 
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.AddrerssDynamicSqlSupport;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport;
+import com.democracy.hhrr.domain.models.Department;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.*;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.DepartmentCityDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.NeighborhoodStreetDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.BindableColumn;
@@ -28,16 +31,24 @@ import reactor.core.publisher.Mono;
 import java.util.Collection;
 
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.AddrerssDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.neighborhoodId;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.neighborhoodName;
 
 
-
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface AddressDynamicMapper extends CommonSelectMapper{
 
     BasicColumn[] addressColumnList = BasicColumn.columnList(addressId, addressNumber, geoLocation);
-
+    BasicColumn[] addressFullColumnList = BasicColumn.columnList(addressId, addressNumber, geoLocation,departmentId, departmentName,
+            cityId, cityName,
+            neighborhoodId, neighborhoodName,
+            streetId, streetName, streetType );
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
 
@@ -53,48 +64,63 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
     Mono<Integer> insertMultiple(MultiRowInsertStatementProvider<Address> multipleInsertStatement);
 
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @ResultMap(value="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper.AddressResult")
+    @ResultMap(value="AddressResult")
     Mono<Address> selectOne(SelectStatementProvider selectStatement);
 
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @ResultMap(value="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper.AddressResult")
+    @ResultMap(value="AddressResult")
     Flux<Address> selectMany(SelectStatementProvider selectStatement);
 
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
     default Mono<Long> count(CountDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.countFrom(this::count, addr, completer);
+        return ReactiveMyBatis3Utils.countFrom(this::count, ADDRESS, completer);
     }
 
     default Mono<Integer> delete(DeleteDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.deleteFrom(this::delete, addr, completer);
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, ADDRESS, completer);
     }
 
     default Mono<Integer> insert(Address record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, addr, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, ADDRESS, c ->
                 c
                         .map(addressId).toPropertyWhenPresent("addressId", record::getAddressId)
-                        .map(addressNumber).toProperty("addressNumber")
                         .map(geoLocation).toProperty("geoLocation")
+                        .map(addressNumber).toProperty("addressNumber")
+                        .map(departmentId).toProperty("department.departmentId")
+                        .map(cityId).toProperty("city.cityId")
+                        .map(neighborhoodId).toProperty("neighborhood.neighborhoodId")
+                        .map(street1).toProperty("street1.streetId")
+                        .map(street2).toProperty("street2.streetId")
         );
     }
 
     default Mono<Integer> insertMultiple(Collection<Address> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, addr, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, ADDRESS, c ->
                 c
 
-                        .map(addressNumber).toProperty("addressNumber")
                         .map(geoLocation).toProperty("geoLocation")
+                        .map(addressNumber).toProperty("addressNumber")
+                        .map(departmentId).toProperty("department.departmentId")
+                        .map(cityId).toProperty("city.cityId")
+                        .map(neighborhoodId).toProperty("neighborhood.neighborhoodId")
+                        .map(street1).toProperty("street1.streetId")
+                        .map(street2).toProperty("street2.streetId")
         );
     }
 
     default Mono<Integer> insertSelective(Address record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, addr, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, ADDRESS, c ->
                 c
                         .map(addressId).toPropertyWhenPresent("addressId", record::getAddressId)
                         .map(addressNumber).toPropertyWhenPresent("addressNumber", record::getAddressNumber)
                         .map(geoLocation).toPropertyWhenPresent("geoLocation", record::getGeoLocation)
+                        .map(departmentId).toPropertyWhenPresent("department.departmentId", record.getDepartment()::getDepartmentId)
+                        .map(cityId).toPropertyWhenPresent("city.cityId", record.getCity()::getCityId)
+                        .map(neighborhoodId).toPropertyWhenPresent("neighborhood.neighborhoodId", record.getNeighborhood()::getNeighborhoodId)
+                        .map(street1).toPropertyWhenPresent("street1.streetId", record.getStreet1()::getStreetId)
+                        .map(street2).toPropertyWhenPresent("street2.streetId", record.getStreet2()::getStreetId)
 
         );
     }
@@ -106,18 +132,46 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Address> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, addressColumnList, addr, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, addressColumnList, ADDRESS, completer);
     }
 
     default Flux<Address> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, addressColumnList, addr, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, addressColumnList, ADDRESS, completer);
     }
+
+    default Flux<Address> selectFull(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, addressFullColumnList, ADDRESS, completer);
+    }
+
     default Flux<Address> selectAddress(Address address) {
-        BindableColumn<Address> joinAddressNeighborhoodColumn = DerivedColumn.of("neighborhood_id", "ADDRESS");
-        BindableColumn<Address> joinNeighborhoodColumn = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
-        return select(str ->{
-                str.join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
-                    .on(joinAddressNeighborhoodColumn,equalTo(joinNeighborhoodColumn)).build();
+        BindableColumn<Address>ADDRESS_DEPARTMENT_department_id = DerivedColumn.of("department_id", "ADDRESS");
+        BindableColumn<Address>ADDRESS_CITY_city_id = DerivedColumn.of("city_id", "ADDRESS");
+        BindableColumn<Address>ADDRESS_NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "ADDRESS");
+        BindableColumn<Address>ADDRESS_STREET_city1_id = DerivedColumn.of("street1_id", "ADDRESS");
+        BindableColumn<Address>ADDRESS_STREET_city2_id = DerivedColumn.of("street2_id", "ADDRESS");
+
+        BindableColumn<Address> DEPARTMENT_department_id= DerivedColumn.of("department_id", "DEPARTMENT");
+        BindableColumn<Address> CITY_city_id= DerivedColumn.of("city_id", "CITY");
+        BindableColumn<Address> NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
+        BindableColumn<Address> STREET_street_id = DerivedColumn.of("street_id", "STREET");
+        return selectFull(str ->{
+                str
+                        .join(DepartmentDynamicSqlSupport.DEPARTMENT)
+                        .on(DEPARTMENT_department_id, equalTo(ADDRESS_DEPARTMENT_department_id))
+
+                        .join(CityDynamicSqlSupport.CITY)
+                        .on(CITY_city_id,equalTo(ADDRESS_CITY_city_id))
+
+                        .join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
+                        .on(ADDRESS_NEIGHBORHOOD_neighborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
+
+                        .join(StreetDynamicSqlSupport.STREET)
+                        .on(ADDRESS_STREET_city1_id,equalTo(STREET_street_id))
+                        .join(StreetDynamicSqlSupport.STREET)
+
+                        .on(ADDRESS_STREET_city2_id,equalTo(STREET_street_id))
+                        .build();
+
             if(address.getAddressId() != null ||
                     address.getAddressNumber() != null){
                 if(address.getAddressId()!=null && !address.getAddressId().isEmpty()){
@@ -136,11 +190,11 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<Address> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, addressColumnList, addr, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, addressColumnList, ADDRESS, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.update(this::update, addr, completer);
+        return ReactiveMyBatis3Utils.update(this::update, ADDRESS, completer);
     }
 
     default Mono<Integer> updateSelectiveByPrimaryKey(Address record) {

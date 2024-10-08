@@ -66,7 +66,7 @@ public interface NeighborhoodMapper extends NeighborhoodDynamicMapper {
             str
                     .join(NeighborhoodStreetDynamicSqlSupport.NEIGH_STREET)
                     .on(neighborhoodNeighborhoodId,equalTo(neighStreetNeighborhoodId))
-                    .join(StreetDynamicSqlSupport.str)
+                    .join(StreetDynamicSqlSupport.STREET)
                     .on(streetStreetId, equalTo(neighStreetStreetId)).build();
             if(neighborhood.getNeighborhoodId() != null ||
                     neighborhood.getNeighborhoodName() != null){

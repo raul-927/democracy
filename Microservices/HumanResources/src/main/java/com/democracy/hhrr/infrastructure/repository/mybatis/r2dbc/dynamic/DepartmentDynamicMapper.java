@@ -44,8 +44,8 @@ import java.util.Collection;
 public interface DepartmentDynamicMapper extends CommonSelectMapper{
 
     BasicColumn[] departmentColumnList = BasicColumn.columnList(departmentId, departmentName);
-    BasicColumn[] departmenCitytColumnList = BasicColumn.columnList(departmentId, departmentName, cityId, cityName);
-    BasicColumn[] departmenCitytNeighborhoodStreetColumnList = BasicColumn.columnList(
+    BasicColumn[] departmentCityColumnList = BasicColumn.columnList(departmentId, departmentName, cityId, cityName);
+    BasicColumn[] departmentCitytNeighborhoodStreetColumnList = BasicColumn.columnList(
             departmentId, departmentName,
             cityId, cityName,
             neighborhoodId, neighborhoodName,
@@ -77,15 +77,15 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
     default Mono<Long> count(CountDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.countFrom(this::count, dep, completer);
+        return ReactiveMyBatis3Utils.countFrom(this::count, DEPARTMENT, completer);
     }
 
     default Mono<Integer> delete(DeleteDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.deleteFrom(this::delete, dep, completer);
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, DEPARTMENT, completer);
     }
 
     default Mono<Integer> insert(Department record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, dep, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, DEPARTMENT, c ->
                 c
                         .map(departmentId).toPropertyWhenPresent("departmentId", record::getDepartmentId)
                         .map(departmentName).toProperty("departmentName")
@@ -93,14 +93,14 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Integer> insertMultiple(Collection<Department> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, dep, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, DEPARTMENT, c ->
                 c
                         .map(departmentName).toProperty("departmentName")
         );
     }
 
     default Mono<Integer> insertSelective(Department record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, dep, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, DEPARTMENT, c ->
                 c
                         .map(departmentName).toPropertyWhenPresent("departmentName", record::getDepartmentName)
 
@@ -114,18 +114,18 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Department> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, departmentColumnList, dep, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, departmentColumnList, DEPARTMENT, completer);
     }
 
     default Flux<Department> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, dep, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, DEPARTMENT, completer);
     }
 
     default Flux<Department> selectFullColumnDepartment(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmenCitytNeighborhoodStreetColumnList, dep, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentCitytNeighborhoodStreetColumnList, DEPARTMENT, completer);
     }
     default Flux<Department> selectAllDepartment(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, dep, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, DEPARTMENT, completer);
     }
     default Flux<Department> selectDepartment(Department department) {
         return select(str ->{
@@ -178,7 +178,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
                     .join(NeighborhoodStreetDynamicSqlSupport.NEIGH_STREET)
                     .on(NEIGHBORHOOD_neighborhood_id,equalTo(NEIGH_STREET_neighborhood_id))
 
-                    .join(StreetDynamicSqlSupport.str)
+                    .join(StreetDynamicSqlSupport.STREET)
                     .on(NEIGH_STREET_street_id,equalTo(STREET_street_id)).build();
 
 
@@ -207,11 +207,11 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<Department> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, departmentColumnList, dep, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, departmentColumnList, DEPARTMENT, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.update(this::update, dep, completer);
+        return ReactiveMyBatis3Utils.update(this::update, DEPARTMENT, completer);
     }
 
     default Mono<Integer> updateSelectiveByPrimaryKey(Department record) {

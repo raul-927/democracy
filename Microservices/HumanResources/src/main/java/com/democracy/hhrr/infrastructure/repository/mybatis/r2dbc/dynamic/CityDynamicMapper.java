@@ -133,7 +133,7 @@ public interface CityDynamicMapper extends CommonSelectMapper{
                     .join(NeighborhoodStreetDynamicSqlSupport.NEIGH_STREET)
                     .on(neighborhoodNeighborhoodId,equalTo(neighStreetNeighborhoodId))
 
-                    .join(StreetDynamicSqlSupport.str)
+                    .join(StreetDynamicSqlSupport.STREET)
                     .on(streetStreetId, equalTo(neighStreetStreetId)).build();
 
             if(city.getCityId() != null || city.getCityName() != null){

@@ -8,10 +8,10 @@ import java.sql.JDBCType;
 
 public final class DepartmentDynamicSqlSupport {
 
-    public static final Dep dep = new Dep();
+    public static final Dep DEPARTMENT = new Dep();
 
-    public static final SqlColumn<String> departmentId = dep.departmentId;
-    public static final SqlColumn<String> departmentName = dep.departmentName;
+    public static final SqlColumn<String> departmentId = DEPARTMENT.departmentId;
+    public static final SqlColumn<String> departmentName = DEPARTMENT.departmentName;
 
     public static final class Dep extends SqlTable{
         public final SqlColumn<String> departmentId = column("department_id", JDBCType.LONGNVARCHAR);

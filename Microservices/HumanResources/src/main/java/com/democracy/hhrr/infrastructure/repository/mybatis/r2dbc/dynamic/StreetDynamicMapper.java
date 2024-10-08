@@ -59,15 +59,15 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
     default Mono<Long> count(CountDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.countFrom(this::count, str, completer);
+        return ReactiveMyBatis3Utils.countFrom(this::count, STREET, completer);
     }
 
     default Mono<Integer> delete(DeleteDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.deleteFrom(this::delete, str, completer);
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, STREET, completer);
     }
 
     default Mono<?> insert(Street record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, str, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, STREET, c ->
                 c
                         .map(streetId).toPropertyWhenPresent("streetId", record::getStreetId)
                         .map(streetName).toProperty("streetName")
@@ -76,7 +76,7 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Integer> insertMultiple(Collection<Street> records) {
-        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, str, c ->
+        return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, STREET, c ->
                 c
                         .map(streetName).toProperty("streetName")
                         .map(streetType).toProperty("streetType")
@@ -84,7 +84,7 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Integer> insertSelective(Street record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, str, c ->
+        return ReactiveMyBatis3Utils.insert(this::insert, record, STREET, c ->
                 c
                         .map(streetName).toPropertyWhenPresent("streetName", record::getStreetName)
                         .map(streetType).toPropertyWhenPresent("streetType", record::getStreetType)
@@ -98,11 +98,11 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Street> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, streetColumnList, str, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, streetColumnList, STREET, completer);
     }
 
     default Flux<Street> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, streetColumnList, str, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, streetColumnList, STREET, completer);
     }
     default Flux<Street> selectStreet(Street street) {
         return select(str ->{
@@ -126,11 +126,11 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<Street> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, streetColumnList, str, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, streetColumnList, STREET, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.update(this::update, str, completer);
+        return ReactiveMyBatis3Utils.update(this::update, STREET, completer);
     }
 
     default Mono<Integer> updateSelectiveByPrimaryKey(Street record) {
