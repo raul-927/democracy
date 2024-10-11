@@ -67,17 +67,13 @@
             <column name="address_id"           type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="geo_location" 	    type="varchar(36)"/>
-            <column name="address_number" 	    type="int"/>
-            <column name="department_id" 	    type="varchar(36)"/>
-            <column name="city_id" 	            type="varchar(36)"/>
-            <column name="neighborhood_id"      type="varchar(36)"/>
-            <column name="street1_id"      type="varchar(36)">
-                <constraints unique="true" nullable="false"/>
-            </column>
-            <column name="street2_id"      type="varchar(36)">
-                <constraints unique="true" nullable="false"/>
-            </column>
+            <column name="geo_location"    type="varchar(36)"/>
+            <column name="address_number"  type="varchar(8)"/>
+            <column name="department_id"   type="varchar(36)"/>
+            <column name="city_id" 	       type="varchar(36)"/>
+            <column name="neighborhood_id" type="varchar(36)"/>
+            <column name="street1_id"      type="varchar(36)"/>
+            <column name="street2_id"      type="varchar(36)"/>
         </createTable>
 
     </changeSet>

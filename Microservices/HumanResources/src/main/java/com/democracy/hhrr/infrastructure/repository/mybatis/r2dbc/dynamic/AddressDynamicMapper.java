@@ -48,7 +48,8 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
     BasicColumn[] addressFullColumnList = BasicColumn.columnList(addressId, addressNumber, geoLocation,departmentId, departmentName,
             cityId, cityName,
             neighborhoodId, neighborhoodName,
-            streetId, streetName, streetType );
+            streetId, streetName, streetType,
+            streetId2, streetName2, streetType2);
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
 
@@ -147,13 +148,14 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
         BindableColumn<Address>ADDRESS_DEPARTMENT_department_id = DerivedColumn.of("department_id", "ADDRESS");
         BindableColumn<Address>ADDRESS_CITY_city_id = DerivedColumn.of("city_id", "ADDRESS");
         BindableColumn<Address>ADDRESS_NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "ADDRESS");
-        BindableColumn<Address>ADDRESS_STREET_city1_id = DerivedColumn.of("street1_id", "ADDRESS");
-        BindableColumn<Address>ADDRESS_STREET_city2_id = DerivedColumn.of("street2_id", "ADDRESS");
+        BindableColumn<Address>ADDRESS_STREET_street1_id = DerivedColumn.of("street1_id", "ADDRESS");
+        BindableColumn<Address>ADDRESS_STREET_street2_id = DerivedColumn.of("street2_id", "ADDRESS");
 
         BindableColumn<Address> DEPARTMENT_department_id= DerivedColumn.of("department_id", "DEPARTMENT");
         BindableColumn<Address> CITY_city_id= DerivedColumn.of("city_id", "CITY");
         BindableColumn<Address> NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
-        BindableColumn<Address> STREET_street_id = DerivedColumn.of("street_id", "STREET");
+        BindableColumn<Address> STREET_street1_id = DerivedColumn.of("street_id", "S1");
+        BindableColumn<Address> STREET_street2_id = DerivedColumn.of("street_id", "S2");
         return selectFull(str ->{
                 str
                         .join(DepartmentDynamicSqlSupport.DEPARTMENT)
@@ -165,11 +167,11 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
                         .join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
                         .on(ADDRESS_NEIGHBORHOOD_neighborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
 
-                        .join(StreetDynamicSqlSupport.STREET)
-                        .on(ADDRESS_STREET_city1_id,equalTo(STREET_street_id))
-                        .join(StreetDynamicSqlSupport.STREET)
+                        .join(StreetDynamicSqlSupport.STREET, "S1")
+                        .on(ADDRESS_STREET_street1_id,equalTo(STREET_street1_id))
 
-                        .on(ADDRESS_STREET_city2_id,equalTo(STREET_street_id))
+                        .join(StreetDynamicSqlSupport.STREET2, "S2")
+                        .on(ADDRESS_STREET_street2_id,equalTo(STREET_street2_id))
                         .build();
 
             if(address.getAddressId() != null ||
