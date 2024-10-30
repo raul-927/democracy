@@ -44,7 +44,7 @@ spring:
         registration:
           spring-cloud-gateway-client:
             client-id: democracy_client
-            client-secret: 8CPWcR9M7T3xtWImmtolTpvEfFC1WOaW
+            client-secret: YYcdVQO1lB9F5IjxjN6ljHueBWhZz1aZ
             scope: openid
             provider: keycloak
             authorization-grant-type: authorization_code
