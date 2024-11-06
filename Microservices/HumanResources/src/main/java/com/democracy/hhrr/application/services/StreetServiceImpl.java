@@ -33,7 +33,7 @@ public class StreetServiceImpl implements StreetService{
 
     @Override
     public Mono<?> createStreet(Street street) {
-        return this.createStreetIn.createStreet(street).flatMap(result ->Mono.just(result));
+        return this.createStreetIn.createStreet(street);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreateStreetUseCase implements CreateStreetIn {
@@ -19,6 +20,7 @@ public class CreateStreetUseCase implements CreateStreetIn {
 
     @Override
     public Mono<?> createStreet(Street street) {
+        street.setStreetId(UUID.randomUUID().toString());
         return streetOut.createStreet(street);
     }
 
