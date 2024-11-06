@@ -97,8 +97,9 @@ public class StreetTest {
         given(streetService.selectStreet(street))
                 .willReturn(Flux.just(street));
         var streets = streetService.selectStreet(street);
-        assertThat(streets).isNotNull();
 
+        //THEN
+        assertThat(streets).isNotNull();
         assertThat(Objects
                 .requireNonNull(streets.count().block()).longValue())
                 .isEqualTo(
