@@ -7,15 +7,15 @@ import com.democracy.hhrr.domain.enums.StreetType;
 import com.democracy.hhrr.domain.models.Street;
 import com.democracy.hhrr.domain.ports.out.StreetOut;
 import com.democracy.hhrr.infrastructure.adapters.StreetAdapter;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.StreetDynamicMapper;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.Op;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
@@ -23,13 +23,16 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static reactor.core.publisher.Mono.when;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 public class StreetTest {
+
+    @Mock
+    private StreetDynamicMapper streetMapper;
 
     @Mock
     private SelectStreetUseCase selectStreetUseCaseMock;
@@ -41,17 +44,17 @@ public class StreetTest {
     private StreetServiceImpl streetService;
 
 
-    //@Test
-    public void saveStreet(){
+    @Test
+    @Disabled
+    public void createStreetTest(){
         //given
         Street street = new Street();
         street.setStreetName("Prueba1");
         street.setStreetType(StreetType.CA);
         street.setStreetId("cccccc");
         //When
-        Mono<Integer> returnStreet = (Mono<Integer>)streetService.createStreet(street);
-        when(returnStreet)
-                .thenReturn(Mono.just(1));
+        given(createStreetUseCaseMock.createStreet(street))
+                .willReturn(Mono.just(1));
         var streets = streetService.selectStreet(street);
         //Then
         assertThat(streets).isNotNull();
@@ -59,11 +62,13 @@ public class StreetTest {
                 .requireNonNull(streets.count().block()).longValue())
                 .isEqualTo(
                         Objects
-                                .requireNonNull(Flux.just(street).count().block()).longValue());
+                                .requireNonNull(Flux.just(street, streets.blockFirst()).count().block()).longValue());
+
+
     }
 
     @Test
-    public void selectAllStreet(){
+    public void selectAllStreetTest(){
         //given
         Street street = new Street();
         street.setStreetName("Prueba1");
@@ -89,7 +94,7 @@ public class StreetTest {
     }
 
     @Test
-    public void selectOneStreetById(){
+    public void selectOneStreetByIdTest(){
         //given
         Street street = new Street();
         street.setStreetId("aaaaaa");
@@ -108,7 +113,7 @@ public class StreetTest {
 
     }
     @Test
-    public void selectOneStreetByName(){
+    public void selectOneStreetByNameTest(){
         //given
         Street street = new Street();
         street.setStreetName("Prueba1");
@@ -126,7 +131,7 @@ public class StreetTest {
 
     }
     @Test
-    public void selectOneStreetByType(){
+    public void selectOneStreetByTypeTest(){
         //given
         Street street = new Street();
         street.setStreetType(StreetType.CA);

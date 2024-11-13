@@ -60,6 +60,7 @@ public class StreetController {
     public Mono<Long> selectCount(){
         return this.streetService.selectCount();
     }
+
     @DeleteMapping(value="/delete/{streetId}")
     public Mono<Integer> deleteStreet(@PathVariable String streetId){
         return this.streetService.deleteStreet(streetId);

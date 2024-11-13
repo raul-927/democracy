@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 public interface StreetOut {
-    Mono<?> createStreet(Street street);
+    Mono<Integer> createStreet(Street street);
     Mono<Integer> createMultipleStreet(List<Street> streetFlux);
     Mono<Integer> deleteStreet(String streetId);
     Flux<Street> selectStreet(Street street);

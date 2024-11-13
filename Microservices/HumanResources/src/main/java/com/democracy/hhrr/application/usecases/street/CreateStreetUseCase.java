@@ -19,13 +19,19 @@ public class CreateStreetUseCase implements CreateStreetIn {
     }
 
     @Override
-    public Mono<?> createStreet(Street street) {
+    public Mono<Integer> createStreet(Street street) {
         street.setStreetId(UUID.randomUUID().toString());
         return streetOut.createStreet(street);
     }
 
     @Override
-    public Mono<?> createMultipleStreet(List<Street> streetList) {
+    public Mono<Integer> createMultipleStreet(List<Street> streetList) {
+        streetList.forEach(
+                e ->{
+                    e.setStreetId(UUID.randomUUID().toString());
+                }
+        );
+
         return streetOut.createMultipleStreet(streetList);
     }
 }
