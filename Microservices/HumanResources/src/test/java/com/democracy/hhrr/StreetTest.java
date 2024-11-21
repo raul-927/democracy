@@ -21,6 +21,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.as;
@@ -33,6 +35,12 @@ public class StreetTest {
 
     @Mock
     private Street street = new Street();
+
+    @Mock
+    private Street street2 = new Street();
+
+    @Mock
+    private List<Street> streetList = new ArrayList<>();
 
     @Mock
     private  Flux<Street> streets = null;
@@ -62,6 +70,32 @@ public class StreetTest {
                 .willReturn(Mono.just(1));
         Mono<Integer> createStreetResult = createStreetUseCaseMock.createStreet(street);
 
+        //THEN
+        assertThat(createStreetResult).isNotNull();
+        assertThat(Objects
+                .requireNonNull(createStreetResult.block()).intValue())
+                .isEqualTo(
+                        Objects.requireNonNull(Objects
+                                .requireNonNull(Mono.just(createStreetResult).block()).block()).intValue());
+    }
+
+    @Test
+    public void createMultipleStreetTest(){
+        //GIVEN
+        street.setStreetName("Prueba1");
+        street.setStreetType(StreetType.CA);
+        street.setStreetId("cccccc");
+
+        street2.setStreetName("Prueba2");
+        street2.setStreetType(StreetType.K);
+        street2.setStreetId("aaaaaaaa");
+
+        streetList.add(street);
+        streetList.add(street2);
+        //WHEN
+        given(createStreetUseCaseMock.createMultipleStreet(streetList))
+                .willReturn(Mono.just(2));
+        Mono<Integer> createStreetResult = createStreetUseCaseMock.createMultipleStreet(streetList);
         //THEN
         assertThat(createStreetResult).isNotNull();
         assertThat(Objects
