@@ -92,10 +92,12 @@ public class StreetTest {
 
         streetList.add(street);
         streetList.add(street2);
+
         //WHEN
         given(createStreetUseCaseMock.createMultipleStreet(streetList))
                 .willReturn(Mono.just(2));
         Mono<Integer> createStreetResult = createStreetUseCaseMock.createMultipleStreet(streetList);
+
         //THEN
         assertThat(createStreetResult).isNotNull();
         assertThat(Objects
