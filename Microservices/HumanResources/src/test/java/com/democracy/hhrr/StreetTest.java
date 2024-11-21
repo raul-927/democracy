@@ -51,31 +51,29 @@ public class StreetTest {
 
 
     @Test
-    //@Disabled
     public void createStreetTest(){
-        //given
-       // Street street = new Street();
+        //GIVEN
         street.setStreetName("Prueba1");
         street.setStreetType(StreetType.CA);
         street.setStreetId("cccccc");
-        //When
+
+        //WHEN
         given(createStreetUseCaseMock.createStreet(street))
                 .willReturn(Mono.just(1));
         Mono<Integer> createStreetResult = createStreetUseCaseMock.createStreet(street);
-        //Then
+
+        //THEN
         assertThat(createStreetResult).isNotNull();
         assertThat(Objects
                 .requireNonNull(createStreetResult.block()).intValue())
                 .isEqualTo(
                         Objects.requireNonNull(Objects
                                 .requireNonNull(Mono.just(createStreetResult).block()).block()).intValue());
-
-
     }
 
     @Test
     public void selectAllStreetTest(){
-        //given
+        //GIVEN
         Street street = new Street();
         street.setStreetName("Prueba1");
         street.setStreetType(StreetType.CA);
@@ -86,11 +84,12 @@ public class StreetTest {
         street2.setStreetType(StreetType.K);
         street2.setStreetId("bbbbbb");
 
-        //When
+        //WHEN
         given(streetService.selectStreet(new Street()))
                 .willReturn(Flux.just(street, street2));
         var streets = streetService.selectStreet(new Street());
-        //Then
+
+        //THEN
         assertThat(streets).isNotNull();
         assertThat(Objects
                 .requireNonNull(streets.count().block()).longValue())
@@ -101,10 +100,10 @@ public class StreetTest {
 
     @Test
     public void selectOneStreetByIdTest(){
-        //given
-
+        //GIVEN
         street.setStreetId("aaaaaa");
-        //When
+
+        //WHEN
         given(streetService.selectStreet(street))
                 .willReturn(Flux.just(street));
         streets = streetService.selectStreet(street);
@@ -120,15 +119,16 @@ public class StreetTest {
     }
     @Test
     public void selectOneStreetByNameTest(){
-        //given
-
+        //GIVEN
         street.setStreetName("Prueba1");
-        //When
+
+        //WHEN
         given(streetService.selectStreet(street))
                 .willReturn(Flux.just(street));
         streets = streetService.selectStreet(street);
         assertThat(streets).isNotNull();
 
+        //THEN
         assertThat(Objects
                 .requireNonNull(streets.count().block()).longValue())
                 .isEqualTo(
@@ -138,16 +138,16 @@ public class StreetTest {
     }
     @Test
     public void selectOneStreetByTypeTest(){
-        //given
-
+        //GIVEN
         street.setStreetType(StreetType.CA);
 
-        //When
+        //WHEN
         given(streetService.selectStreet(street))
                 .willReturn(Flux.just(street));
         streets = streetService.selectStreet(street);
         assertThat(streets).isNotNull();
 
+        //THEN
         assertThat(Objects
                 .requireNonNull(streets.count().block()).longValue())
                 .isEqualTo(
