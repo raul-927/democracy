@@ -64,7 +64,7 @@ public class StreetHandler {
                     System.out.println("STREET_LIST: "+streetList);
                     return streetList;
                 }
-        ).subscribe(System.out::println);
+        ).subscribe(System.out::println).dispose();
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)

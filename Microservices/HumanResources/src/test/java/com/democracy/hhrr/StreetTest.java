@@ -32,6 +32,12 @@ import static org.mockito.BDDMockito.given;
 public class StreetTest {
 
     @Mock
+    private Street street = new Street();
+
+    @Mock
+    private  Flux<Street> streets = null;
+
+    @Mock
     private StreetDynamicMapper streetMapper;
 
     @Mock
@@ -45,24 +51,24 @@ public class StreetTest {
 
 
     @Test
-    @Disabled
+    //@Disabled
     public void createStreetTest(){
         //given
-        Street street = new Street();
+       // Street street = new Street();
         street.setStreetName("Prueba1");
         street.setStreetType(StreetType.CA);
         street.setStreetId("cccccc");
         //When
         given(createStreetUseCaseMock.createStreet(street))
                 .willReturn(Mono.just(1));
-        var streets = streetService.selectStreet(street);
+        Mono<Integer> createStreetResult = createStreetUseCaseMock.createStreet(street);
         //Then
-        assertThat(streets).isNotNull();
+        assertThat(createStreetResult).isNotNull();
         assertThat(Objects
-                .requireNonNull(streets.count().block()).longValue())
+                .requireNonNull(createStreetResult.block()).intValue())
                 .isEqualTo(
-                        Objects
-                                .requireNonNull(Flux.just(street, streets.blockFirst()).count().block()).longValue());
+                        Objects.requireNonNull(Objects
+                                .requireNonNull(Mono.just(createStreetResult).block()).block()).intValue());
 
 
     }
@@ -96,12 +102,12 @@ public class StreetTest {
     @Test
     public void selectOneStreetByIdTest(){
         //given
-        Street street = new Street();
+
         street.setStreetId("aaaaaa");
         //When
         given(streetService.selectStreet(street))
                 .willReturn(Flux.just(street));
-        var streets = streetService.selectStreet(street);
+        streets = streetService.selectStreet(street);
 
         //THEN
         assertThat(streets).isNotNull();
@@ -115,12 +121,12 @@ public class StreetTest {
     @Test
     public void selectOneStreetByNameTest(){
         //given
-        Street street = new Street();
+
         street.setStreetName("Prueba1");
         //When
         given(streetService.selectStreet(street))
                 .willReturn(Flux.just(street));
-        var streets = streetService.selectStreet(street);
+        streets = streetService.selectStreet(street);
         assertThat(streets).isNotNull();
 
         assertThat(Objects
@@ -133,13 +139,13 @@ public class StreetTest {
     @Test
     public void selectOneStreetByTypeTest(){
         //given
-        Street street = new Street();
+
         street.setStreetType(StreetType.CA);
 
         //When
         given(streetService.selectStreet(street))
                 .willReturn(Flux.just(street));
-        var streets = streetService.selectStreet(street);
+        streets = streetService.selectStreet(street);
         assertThat(streets).isNotNull();
 
         assertThat(Objects
