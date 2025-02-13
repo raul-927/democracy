@@ -12,59 +12,59 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/humanresources/department")
-@RefreshScope
+//@RestController
+//@RequestMapping("/humanresources/department")
+//@RefreshScope
 public class DepartmentController {
 
-    @Autowired
+    //@Autowired
     private DepartmentService departmentService;
 
-    @PostMapping(
+   /* @PostMapping(
             value = "/select",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})*/
     public Flux<Department> selectDepartment(@RequestBody Department department){
         return this.departmentService.selectDepartment(department);
     }
 
-    @GetMapping(
+    /*@GetMapping(
             value = "/select-all",
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})*/
     public Flux<Department> selectAllDepartment(){
         return this.departmentService.selectAllDepartment();
     }
 
-    @PostMapping(
+    /*@PostMapping(
             value="/save",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})*/
     public Mono<Integer> createDepartment(@RequestBody Department department){
         return this.departmentService.createDepartment(department);
     }
 
-    @PostMapping(
+    /*@PostMapping(
             value="/insert",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})*/
     public Mono<Integer> insertMultiple(@RequestBody List<Department> departmentList){
         return departmentService.createMultipleDepartment(departmentList);
     }
 
-    @PutMapping(
+    /*@PutMapping(
             value="/update",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})*/
     public Mono<Integer> updateDepartment(@RequestBody Department department){
         return this.departmentService.updateDepartment(department);
     }
 
-    @GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})
+   /* @GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})*/
     public Mono<Long> selectCountDepartment(){
         return this.departmentService.selectCount();
     }
 
-    @DeleteMapping(value="/delete/{departmentId}")
+    /*@DeleteMapping(value="/delete/{departmentId}")*/
     public Mono<Integer> deleteDepartment(@PathVariable String departmentId){
         return this.departmentService.deleteDepartment(departmentId);
     }

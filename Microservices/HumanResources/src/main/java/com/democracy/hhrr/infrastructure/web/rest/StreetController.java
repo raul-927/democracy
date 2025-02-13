@@ -16,52 +16,52 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/humanresources/street")
-@RefreshScope
+//@RestController
+//@RequestMapping("/humanresources/street")
+//@RefreshScope
 public class StreetController {
 
-    @Autowired
+   // @Autowired
     private StreetService streetService;
 
-    @PostMapping(
-            value = "/select",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+   // @PostMapping(
+     //       value = "/select",
+      //      consumes = {MediaType.APPLICATION_JSON_VALUE},
+      //      produces = {MediaType.APPLICATION_JSON_VALUE})
     public Flux<Street> selectStreet(@RequestBody Street street){
         return this.streetService.selectStreet(street);
     }
 
-    @PostMapping(
-            value="/save",
-            consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+    //@PostMapping(
+      //      value="/save",
+      //      consumes ={MediaType.APPLICATION_JSON_VALUE},
+      //      produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<?> createStreet(@RequestBody Street street){
         return this.streetService.createStreet(street);
     }
 
-    @PostMapping(
-            value="/insert",
-            consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+   // @PostMapping(
+     //       value="/insert",
+     //       consumes ={MediaType.APPLICATION_JSON_VALUE},
+     //       produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<?> insertMultiple(@RequestBody List<Street> street){
         return streetService.createMultipleStreet(street);
     }
 
-    @PutMapping(
-            value="/update",
-            consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+    //@PutMapping(
+     //       value="/update",
+      //      consumes ={MediaType.APPLICATION_JSON_VALUE},
+     //       produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<Integer> updateStreet(@RequestBody Street street){
         return this.streetService.updateStreet(street);
     }
 
-    @GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})
+    //@GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<Long> selectCount(){
         return this.streetService.selectCount();
     }
 
-    @DeleteMapping(value="/delete/{streetId}")
+   // @DeleteMapping(value="/delete/{streetId}")
     public Mono<Integer> deleteStreet(@PathVariable String streetId){
         return this.streetService.deleteStreet(streetId);
     }
