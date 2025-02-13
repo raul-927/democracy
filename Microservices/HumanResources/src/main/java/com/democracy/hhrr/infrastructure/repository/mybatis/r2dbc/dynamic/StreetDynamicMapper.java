@@ -29,7 +29,7 @@ import java.util.Collection;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 
-public interface StreetDynamicMapper extends CommonSelectMapper{
+public interface StreetDynamicMapper extends CommonSelectMapper {
 
     BasicColumn[] streetColumnList = BasicColumn.columnList(streetId, streetName,streetType);
 
@@ -84,7 +84,8 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Integer> insertSelective(Street record) {
-        return ReactiveMyBatis3Utils.insert(this::insert, record, STREET, c ->
+        return ReactiveMyBatis3Utils.insert(
+                this::insert, record, STREET, c ->
                 c
                         .map(streetName).toPropertyWhenPresent("streetName", record::getStreetName)
                         .map(streetType).toPropertyWhenPresent("streetType", record::getStreetType)
@@ -106,6 +107,7 @@ public interface StreetDynamicMapper extends CommonSelectMapper{
     }
     default Flux<Street> selectStreet(Street street) {
         return select(str ->{
+            
             if(street.getStreetId() != null ||
                     street.getStreetName() != null ||
                     street.getStreetType() !=null){
