@@ -1,13 +1,12 @@
 package com.democracy.hhrr.infrastructure.web.routers;
 
 import com.democracy.hhrr.infrastructure.web.handlers.DepartmentHandler;
-import com.democracy.hhrr.infrastructure.web.handlers.StreetHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.jetbrains.annotations.NotNull;
+
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
 @Configuration
@@ -23,7 +22,7 @@ public class DepartmentRouter {
 
 
     @Bean
-    RouterFunction<ServerResponse> router(DepartmentHandler handler){
+    public RouterFunction<ServerResponse> routerDepartment(DepartmentHandler handler){
         return RouterFunctions
                 .route(
                         POST(PATH_MAIN + DEPARTMENT_PATH + PATH_SELECT), handler::selectDepartment)
@@ -38,4 +37,6 @@ public class DepartmentRouter {
                 .andRoute(
                         GET(PATH_MAIN + DEPARTMENT_PATH + PATH_SELECT_ALL), handler::selectAllDepartment);
     }
+
+
 }

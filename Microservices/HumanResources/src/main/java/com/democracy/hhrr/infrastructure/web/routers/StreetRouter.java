@@ -1,6 +1,5 @@
 package com.democracy.hhrr.infrastructure.web.routers;
 
-
 import com.democracy.hhrr.infrastructure.web.handlers.StreetHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +19,11 @@ public class StreetRouter {
     private static final String PATH_UPDATE = "/update";
     private static final String PATH_COUNT="/select-count";
 
+
+
+
     @Bean
-    RouterFunction<ServerResponse> router(StreetHandler handler){
+    public RouterFunction<ServerResponse> routerStreet(StreetHandler handler){
         return RouterFunctions
                 .route(
                         POST(PATH_MAIN + STREET_PATH + PATH_SELECT), handler::selectStreet)
@@ -34,11 +36,4 @@ public class StreetRouter {
                 .andRoute(
                         GET(PATH_MAIN + STREET_PATH +  PATH_COUNT), handler::selectCount);
     }
-
-
-
-
-
-
-
 }
