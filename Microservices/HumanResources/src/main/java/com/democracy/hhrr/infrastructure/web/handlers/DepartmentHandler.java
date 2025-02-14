@@ -42,7 +42,6 @@ public class DepartmentHandler {
                 .body(departmentService.selectAllDepartment(), Department.class);
     }
 
-
     public Mono<ServerResponse> createDepartment(ServerRequest request){
         Mono<Department> department = request.bodyToMono(Department.class);
 
@@ -79,7 +78,6 @@ public class DepartmentHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(departmentService.updateDepartment(d), Department.class));
     }
-
 
     public Mono<ServerResponse> selectCount(ServerRequest request){
         Mono<Long> countResult = departmentService.selectCount();
