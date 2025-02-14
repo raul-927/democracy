@@ -21,7 +21,6 @@ public class DepartmentRouter {
     private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
     private static final String PATH_COUNT=RouterConstant.PATH_COUNT;
 
-
     @Bean
     public RouterFunction<ServerResponse> routerDepartment(DepartmentHandler handler){
         return RouterFunctions
@@ -38,6 +37,4 @@ public class DepartmentRouter {
                 .andRoute(
                         GET(PATH_MAIN + DEPARTMENT_PATH + PATH_SELECT_ALL), handler::selectAllDepartment);
     }
-
-
 }
