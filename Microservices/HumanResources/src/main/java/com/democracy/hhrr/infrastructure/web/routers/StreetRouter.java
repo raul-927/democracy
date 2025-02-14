@@ -20,7 +20,6 @@ public class StreetRouter {
     private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
     private static final String PATH_COUNT= RouterConstant.PATH_COUNT;
 
-
     @Bean
     public RouterFunction<ServerResponse> routerStreet(StreetHandler handler){
         return RouterFunctions

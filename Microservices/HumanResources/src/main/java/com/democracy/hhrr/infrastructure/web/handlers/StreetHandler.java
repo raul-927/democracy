@@ -18,8 +18,6 @@ import java.util.List;
 @Slf4j
 public class StreetHandler {
 
-    private Mono<ServerResponse> responseMono;
-
     @Autowired
     private  StreetService streetService;
 
@@ -74,7 +72,6 @@ public class StreetHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(streetService.updateStreet(s), Street.class));
     }
-
 
     public Mono<ServerResponse> selectCount(ServerRequest request){
         Mono<Long> countResult = streetService.selectCount();
