@@ -1,5 +1,6 @@
 package com.democracy.hhrr.infrastructure.web.routers;
 
+import com.democracy.hhrr.infrastructure.constants.RouterConstant;
 import com.democracy.hhrr.infrastructure.web.handlers.DepartmentHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,14 +12,14 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 
 @Configuration
 public class DepartmentRouter {
-    private static final String PATH_MAIN = "/humanresources";
-    private static final String DEPARTMENT_PATH = "/department";
-    private static final String PATH_SELECT_ALL ="/select-all";
-    private static final String PATH_SELECT = "/select";
-    private static final String PATH_SAVE = "/save";
-    private static final String PATH_INSERT = "/insert";
-    private static final String PATH_UPDATE = "/update";
-    private static final String PATH_COUNT="/select-count";
+    private static final String PATH_MAIN = RouterConstant.PATH_MAIN;
+    private static final String DEPARTMENT_PATH = RouterConstant.DEPARTMENT_PATH;
+    private static final String PATH_SELECT_ALL =RouterConstant.PATH_SELECT_ALL;
+    private static final String PATH_SELECT = RouterConstant.PATH_SELECT;
+    private static final String PATH_SAVE = RouterConstant.PATH_SAVE;
+    private static final String PATH_INSERT = RouterConstant.PATH_INSERT;
+    private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
+    private static final String PATH_COUNT=RouterConstant.PATH_COUNT;
 
 
     @Bean
