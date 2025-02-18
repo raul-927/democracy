@@ -25,7 +25,7 @@
 		<module>Products</module>
 		<module>Accountancy</module>
 		<module>ElectoralCourt</module>
-		
+		<module>StateMachine</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
