@@ -26,12 +26,12 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.2.Final/mapstruct-processor-1.5.2.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.2.Final/mapstruct-1.5.2.Final.jar" />
         </processorPath>
+        <module name="HumanResources" />
         <module name="accountancy" />
         <module name="electoral-court" />
-        <module name="StateMachine" />
         <module name="products" />
       </profile>
-      <profile name="Annotation profile for HumanResources" enabled="true">
+      <profile name="Annotation profile for StateMachine" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -41,7 +41,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.2.Final/mapstruct-processor-1.5.2.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.2.Final/mapstruct-1.5.2.Final.jar" />
         </processorPath>
-        <module name="HumanResources" />
+        <module name="StateMachine" />
       </profile>
     </annotationProcessing>
   </component>
