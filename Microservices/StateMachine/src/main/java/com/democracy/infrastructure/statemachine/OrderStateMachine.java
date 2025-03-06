@@ -4,6 +4,7 @@ package com.democracy.infrastructure.statemachine;
 import com.democracy.domain.models.Order;
 import com.democracy.infrastructure.events.OrderEvents;
 import com.democracy.infrastructure.satates.OrderStates;
+import liquibase.pro.packaged.S;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.action.Action;
@@ -62,11 +63,11 @@ public class OrderStateMachine extends EnumStateMachineConfigurerAdapter<OrderSt
         return new StateMachineListenerAdapter<OrderStates, OrderEvents>(){
             @Override
             public void transition(Transition<OrderStates, OrderEvents> transition){
+                System.out.println("LISTENER...");
                 if(transition!=null && transition.getSource()!=null && transition.getSource().getId()!=null){
                     System.out.println("Transitioning form "+ transition.getSource().getId()
                             +" to "+transition.getTarget().getId());
                 }
-
             };
         };
     }
@@ -88,7 +89,7 @@ public class OrderStateMachine extends EnumStateMachineConfigurerAdapter<OrderSt
     public Action<OrderStates, OrderEvents> validateOrderAction() {
         return context ->{
            Order order = (Order) context.getMessageHeader("order");
-            System.out.println("Validating order Action: "+order.getOrderId() + ", "+order.getOrderType() + ", "+order.getProduct().getProductName());
+            System.out.println("Validating order Action: "+order.getOrderId() + ", "+order.getOrderType() + ", "+order.getProduct().getProductId()+", "+order.getProduct().getProductName());
         };
     }
 }
