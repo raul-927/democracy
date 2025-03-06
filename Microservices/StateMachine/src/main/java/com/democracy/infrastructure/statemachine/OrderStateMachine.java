@@ -48,7 +48,6 @@ public class OrderStateMachine extends EnumStateMachineConfigurerAdapter<OrderSt
                 .and()
                 .withExternal().source(OrderStates.SHIPPED).target(OrderStates.COMPLETED).event(OrderEvents.COMPLETE)
                 .and()
-
                 .withExternal().source(OrderStates.VALIDATED).target(OrderStates.CANCELLED).event(OrderEvents.CANCEL)
                 .and()
                 .withExternal().source(OrderStates.PAID).target(OrderStates.CANCELLED).event(OrderEvents.CANCEL);
