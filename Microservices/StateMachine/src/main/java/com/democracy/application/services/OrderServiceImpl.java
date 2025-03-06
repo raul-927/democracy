@@ -1,5 +1,6 @@
 package com.democracy.application.services;
 
+import com.democracy.domain.models.Order;
 import com.democracy.infrastructure.events.OrderEvents;
 import com.democracy.infrastructure.satates.OrderStates;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,46 +18,48 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
-    public void newOrder() {
+    public Order newOrder(Order order) {
         initOrderSaga();
-        validateOrder();
+        validateOrder(order);
         payOrder();
         shipOrder();
         completeOrder();
+        return order;
     }
-
-    private void initOrderSaga(){
+    @Override
+    public void initOrderSaga(){
         System.out.println("Initializing order saga");
         stateMachine = machineFactory.getStateMachine();
         stateMachine.startReactively().subscribe();
         System.out.println("Final state initOrderSaga: "+stateMachine.getState().getId());
     }
-
-    private void validateOrder() {
+    @Override
+    public void validateOrder(Order order) {
         System.out.println("Validating order");
         stateMachine.sendEvent(Mono.just(
-                        MessageBuilder.withPayload(OrderEvents.VALIDATE).build()))
+                        MessageBuilder.withPayload(OrderEvents.VALIDATE)
+                                .setHeader("order",order).build()))
                 .subscribe(result -> System.out.println("RESULT validateOrder: "+result.getResultType()));
         System.out.println("Final state validateOrder: "+stateMachine.getState().getId());
     }
-
-    private void payOrder() {
+    @Override
+    public void payOrder() {
         System.out.println("Paying order...");
         stateMachine.sendEvent(Mono.just(
                         MessageBuilder.withPayload(OrderEvents.PAY).build()))
                 .subscribe(result -> System.out.println("RESULT payOrder: "+result.getResultType()));
         System.out.println("Final state payOrder: "+stateMachine.getState().getId());
     }
-
-    private void shipOrder() {
+    @Override
+    public void shipOrder() {
         System.out.println("Shipping order...");
         stateMachine.sendEvent(Mono.just(
                         MessageBuilder.withPayload(OrderEvents.SHIP).build()))
                 .subscribe(result -> System.out.println("RESULT shipOrder: "+result.getResultType()));
         System.out.println("Final state: shipOrder "+stateMachine.getState().getId());
     }
-
-    private void completeOrder() {
+    @Override
+    public void completeOrder() {
         System.out.println("Completing order.");
         stateMachine.sendEvent(Mono.just(
                         MessageBuilder.withPayload(OrderEvents.COMPLETE).build()))
@@ -64,8 +67,8 @@ public class OrderServiceImpl implements OrderService{
         System.out.println("Final state completeOrder: "+stateMachine.getState().getId());
         stopOrderSaga();
     }
-
-    private void stopOrderSaga(){
+    @Override
+    public void stopOrderSaga(){
         System.out.println("Stopping saga...");
         System.out.println("------------------------");
         stateMachine.stopReactively().subscribe();

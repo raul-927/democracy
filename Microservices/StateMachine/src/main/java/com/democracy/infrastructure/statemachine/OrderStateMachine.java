@@ -1,6 +1,7 @@
 package com.democracy.infrastructure.statemachine;
 
 
+import com.democracy.domain.models.Order;
 import com.democracy.infrastructure.events.OrderEvents;
 import com.democracy.infrastructure.satates.OrderStates;
 import org.springframework.context.annotation.Bean;
@@ -86,7 +87,8 @@ public class OrderStateMachine extends EnumStateMachineConfigurerAdapter<OrderSt
     @Bean
     public Action<OrderStates, OrderEvents> validateOrderAction() {
         return context ->{
-            System.out.println("Validating order Action");
+           Order order = (Order) context.getMessageHeader("order");
+            System.out.println("Validating order Action: "+order.getOrderId() + ", "+order.getOrderType() + ", "+order.getProduct().getProductName());
         };
     }
 }
