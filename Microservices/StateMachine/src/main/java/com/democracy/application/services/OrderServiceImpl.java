@@ -1,6 +1,7 @@
 package com.democracy.application.services;
 
 import com.democracy.domain.models.Department;
+import com.democracy.domain.models.KeyCloakToken;
 import com.democracy.domain.models.Order;
 import com.democracy.infrastructure.events.OrderEvents;
 import com.democracy.infrastructure.satates.OrderStates;
@@ -133,12 +134,13 @@ public class OrderServiceImpl implements OrderService{
     }
 
     private List<Department> getDepartmentbyRestTemplate(){
-        String token = obtainToken();
-        System.out.println("TOKEN: "+token);
+        KeyCloakToken token = obtainToken();
+        System.out.println("TOKEN: "+token.getAccess_token());
+        System.out.println("TYPE: "+token.getToken_type());
         ParameterizedTypeReference<List<Department>> typeRef =
                 new ParameterizedTypeReference<List<Department>>() {};
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGY3E0VHgzM0JlWmd4cVVuUWIwZmZfRm1ENWFnZzl1MmtVYWIzbzVmMUt3In0.eyJleHAiOjE3NDE4MjAyMjMsImlhdCI6MTc0MTgxOTkyMywianRpIjoiYmIxMzY5NTAtYWQ3ZS00M2Y1LWJkNWMtMWM1NDI5MGFiOGQ5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9kZW1vY3JhY3lfcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMDI0YTUyZDctNzljNy00ZTU5LWI0YjQtOWNjZDYwMzE5ZGZmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZGVtb2NyYWN5X2NsaWVudCIsInNpZCI6IjRhODY3OGJlLTdhYWQtNDY4Yi05YjFiLTYzOWRjNjEyMzRmMSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtZGVtb2NyYWN5X3JlYWxtIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiUmF1bCBoZXJuYW5kZXoiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJyYXJhaGVyaGVyOTI3NCIsImdpdmVuX25hbWUiOiJSYXVsIiwiZmFtaWx5X25hbWUiOiJoZXJuYW5kZXoiLCJlbWFpbCI6InJhcmFoZXJoZXI5Mjc0QGdtYWlsLmNvbSJ9.PNnt-OVQPqW2yxhBkk3yDvQDlmNcxaeD3ntIvxx3iW0CiYSPNBHreXTdNiHnJmqIo1okcSE6kR2hwT5HC9yh-9KMyHnDpPsT_QIXBEF5nzdJ4ydMqMSqqQ4jwKcAoXRDulx0L2hxOtD2s_NtQpc-lJ1L41uEERlbZj0qJgpaeKRhqpbSg91MA58ahbPrkWaV6Kmlj6tqRuyGlrMSdzA61uK9vByGYcBnSwdtZZewblHPSFu7jHv2aV4iuTOaNw1uk2N5hQ3VbguQUJNZPlmt63fO3LodVvFvVutnQm2UeCPS6_eYqku0U8FQiGd0BegH1WGKXMKoewtZByGZJKso6w");
+        headers.add("Authorization", token.getToken_type() + " "+token.getAccess_token());
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = "http://localhost:8082/humanresources/department/select-all";
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
@@ -146,7 +148,7 @@ public class OrderServiceImpl implements OrderService{
                 = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, typeRef);
         return response.getBody();
     }
-    private String obtainToken(){
+    private KeyCloakToken obtainToken(){
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -161,11 +163,11 @@ public class OrderServiceImpl implements OrderService{
         map.add("password","raraherher9274");
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
 
-        ResponseEntity<String> response =
+        ResponseEntity<KeyCloakToken> response =
                 restTemplate.exchange("http://localhost:8181/realms/democracy_realm/protocol/openid-connect/token",
                         HttpMethod.POST,
                         entity,
-                        String.class);
+                        KeyCloakToken.class);
         return response.getBody();
     }
 }
