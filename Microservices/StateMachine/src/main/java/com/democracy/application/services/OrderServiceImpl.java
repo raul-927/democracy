@@ -150,11 +150,8 @@ public class OrderServiceImpl implements OrderService{
     }
     private KeyCloakToken obtainToken(){
         RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        //headers.add("PRIVATE-TOKEN", "xyz");
-
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("client_id","democracy_client");
         map.add("client_secret","YYcdVQO1lB9F5IjxjN6ljHueBWhZz1aZ");
@@ -162,7 +159,6 @@ public class OrderServiceImpl implements OrderService{
         map.add("username","raraherher9274");
         map.add("password","raraherher9274");
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
-
         ResponseEntity<KeyCloakToken> response =
                 restTemplate.exchange("http://localhost:8181/realms/democracy_realm/protocol/openid-connect/token",
                         HttpMethod.POST,
