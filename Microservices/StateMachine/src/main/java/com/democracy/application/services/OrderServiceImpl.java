@@ -135,17 +135,13 @@ public class OrderServiceImpl implements OrderService{
 
     private List<Department> getDepartmentbyRestTemplate(){
         KeyCloakToken token = obtainToken();
-        System.out.println("TOKEN: "+token.getAccess_token());
-        System.out.println("TYPE: "+token.getToken_type());
-        ParameterizedTypeReference<List<Department>> typeRef =
-                new ParameterizedTypeReference<List<Department>>() {};
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", token.getToken_type() + " "+token.getAccess_token());
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = "http://localhost:8082/humanresources/department/select-all";
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         ResponseEntity<List<Department>> response
-                = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, typeRef);
+                = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, new ParameterizedTypeReference<List<Department>>() {});
         return response.getBody();
     }
     private KeyCloakToken obtainToken(){
