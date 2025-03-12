@@ -27,11 +27,11 @@ public class DepartmentController {
     public Flux<Department> selectDepartment(@RequestBody Department department){
         return this.departmentService.selectDepartment(department);
     }
-
     /*@GetMapping(
             value = "/select-all",
             produces = {MediaType.APPLICATION_JSON_VALUE})*/
     public Flux<Department> selectAllDepartment(){
+        System.out.println("LLEGA DEPARTMENT CONTROLLER");
         return this.departmentService.selectAllDepartment();
     }
 

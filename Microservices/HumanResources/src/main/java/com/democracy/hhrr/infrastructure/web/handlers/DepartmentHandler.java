@@ -36,6 +36,7 @@ public class DepartmentHandler {
     }
 
     public Mono<ServerResponse> selectAllDepartment(ServerRequest request){
+        System.out.println("LLEGO DEPSARTMENT");
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)

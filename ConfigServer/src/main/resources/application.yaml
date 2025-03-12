@@ -1,0 +1,14 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: ConfigServer
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/raul-927/service-configuration
+          password: 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
+          default-label: master
+          clone-on-start: true

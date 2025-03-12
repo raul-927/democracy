@@ -20,6 +20,31 @@
 		<spring-statemachine.version>4.0.0</spring-statemachine.version>
 	</properties>
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/com.playtika.reactivefeign/feign-reactor-core -->
+		<dependency>
+			<groupId>com.playtika.reactivefeign</groupId>
+			<artifactId>feign-reactor-core</artifactId>
+			<version>3.2.11</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.playtika.reactivefeign/feign-reactor-webclient -->
+		<dependency>
+			<groupId>com.playtika.reactivefeign</groupId>
+			<artifactId>feign-reactor-webclient</artifactId>
+			<version>3.2.11</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.playtika.reactivefeign/feign-reactor-spring-configuration -->
+		<dependency>
+			<groupId>com.playtika.reactivefeign</groupId>
+			<artifactId>feign-reactor-spring-configuration</artifactId>
+			<version>3.2.11</version>
+		</dependency>
+
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -34,14 +59,44 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
         </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>28.2-android</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.statemachine</groupId>
 				<artifactId>spring-statemachine-bom</artifactId>
-				<version>${spring-statemachine.version}</version>
+				<version>3.2.1</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

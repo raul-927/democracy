@@ -4,20 +4,22 @@ package com.democracy.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import reactor.core.publisher.Mono;
 
 @Configuration
-//@EnableReactiveMethodSecurity
+@EnableReactiveMethodSecurity
 @EnableWebFluxSecurity
 public class SecurityConfiguration {
-        //extends WebSecurityConfigurerAdapter {
-/*
-    @Bean
+
+    /*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(authorize ->authorize.anyRequest().authenticated())
@@ -25,8 +27,8 @@ public class SecurityConfiguration {
                         auth.jwt(token -> token.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
 
         return http.build();
-    }
-*/
+    }*/
+
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http.csrf().disable()
@@ -37,11 +39,9 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    //@Bean
+    @Bean
     ReactiveAuthenticationManager defaultAuthenticationManager() {
         return (authentication) -> Mono.error(new UsernameNotFoundException(authentication.getName()));
     }
-
-
 
 }

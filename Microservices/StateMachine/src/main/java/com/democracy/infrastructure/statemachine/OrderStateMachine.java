@@ -4,7 +4,6 @@ package com.democracy.infrastructure.statemachine;
 import com.democracy.domain.models.Order;
 import com.democracy.infrastructure.events.OrderEvents;
 import com.democracy.infrastructure.satates.OrderStates;
-import liquibase.pro.packaged.S;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.action.Action;
