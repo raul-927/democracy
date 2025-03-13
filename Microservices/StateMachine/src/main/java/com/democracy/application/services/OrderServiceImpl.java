@@ -63,7 +63,8 @@ public class OrderServiceImpl implements OrderService{
 
         stateMachine.sendEvent(Mono.just(
                         MessageBuilder.withPayload(OrderEvents.VALIDATE)
-                                .setHeader("order",order).build()))
+                                .setHeader("order",order)
+                                .setHeader("departmentList", departments).build()))
                 .subscribe(result -> System.out.println("RESULT validateOrder: "+result.getResultType()));
         System.out.println("Final state validateOrder: "+stateMachine.getState().getId());
     }

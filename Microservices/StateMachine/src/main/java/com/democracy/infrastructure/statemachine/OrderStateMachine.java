@@ -1,6 +1,7 @@
 package com.democracy.infrastructure.statemachine;
 
 
+import com.democracy.domain.models.Department;
 import com.democracy.domain.models.Order;
 import com.democracy.infrastructure.events.OrderEvents;
 import com.democracy.infrastructure.satates.OrderStates;
@@ -17,6 +18,7 @@ import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 import org.springframework.statemachine.transition.Transition;
 
 import java.util.EnumSet;
+import java.util.List;
 
 @Configuration
 @EnableStateMachineFactory
@@ -87,6 +89,12 @@ public class OrderStateMachine extends EnumStateMachineConfigurerAdapter<OrderSt
     public Action<OrderStates, OrderEvents> validateOrderAction() {
         return context ->{
            Order order = (Order) context.getMessageHeader("order");
+            List<Department> departments = (List<Department>) context.getMessageHeader("departmentList");
+            departments.forEach(department -> {
+                System.out.println("DEPARTMENT_id IN validateOrderAction: "+department.getDepartmentId());
+                System.out.println("DEPARTMENT_NAME IN validateOrderAction: "+department.getDepartmentName());
+            });
+
             System.out.println("Validating order Action: "+order.getOrderId() + ", "+order.getOrderType() + ", "+order.getProduct().getProductId()+", "+order.getProduct().getProductName());
         };
     }
