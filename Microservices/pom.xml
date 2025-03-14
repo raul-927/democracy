@@ -14,7 +14,7 @@
 	<name>Democracy</name>
 	<description>Proyecto raiz para los MS</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>23</java.version>
 		<mapstruct.version>1.5.2.Final</mapstruct.version>
 	</properties>
 	<packaging>pom</packaging>
@@ -26,6 +26,8 @@
 		<module>Accountancy</module>
 		<module>ElectoralCourt</module>
 		<module>StateMachine</module>
+		<module>feing-client</module>
+		<module>feing-target</module>
 
 	</modules>
 	<dependencyManagement>
@@ -33,6 +35,7 @@
 
 
 			<!-- LOCALSTACK -->
+			<!--
 			<dependency>
 				<groupId>software.amazon.awssdk</groupId>
 				<artifactId>dynamodb</artifactId>
@@ -48,8 +51,9 @@
 				<scope>test</scope>
 			</dependency>
 
-
+-->
 			<!-- AWS -->
+			<!--
 			<dependency>
 			  <groupId>software.amazon.awssdk</groupId>
 			  <artifactId>aws-sdk-java</artifactId>
@@ -57,7 +61,7 @@
 			</dependency>
 
 
-			<!--
+
 			<dependency>
 				<groupId>org.camunda.bpm</groupId>
 				<artifactId>camunda-bom</artifactId>
@@ -111,12 +115,13 @@
 -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.statemachine/spring-statemachine-core -->
+		<!--
 		<dependency>
 			<groupId>org.springframework.statemachine</groupId>
 			<artifactId>spring-statemachine-core</artifactId>
 			<version>4.0.0</version>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>

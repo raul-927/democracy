@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     private StateMachineFactory<OrderStates, OrderEvents> machineFactory;
     private StateMachine<OrderStates, OrderEvents> stateMachine;
+
+    @Autowired
+    private ReactiveAuthenticationManager authenticationManager;
 
     //@Autowired
     //DepartmentFeingClient feingClient;
@@ -102,11 +106,11 @@ public class OrderServiceImpl implements OrderService{
 
     //@GetMapping(value = "/select-count", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Department> getDepartment() {
+        KeyCloakToken token = obtainToken();
         System.out.println("ENTRA");
-        RestTemplate restTemplate = new RestTemplate();
-
         WebClient webClient = WebClient.builder()
-                .baseUrl("http://localhost:8082").build();
+                .baseUrl("http://localhost:8082")
+                .defaultHeader("Authorization", token.getToken_type() + " "+token.getAccess_token()).build();
        /* Mono<Department> entityMono = webClient.get()
                 .uri("/humanresources/department/select-all")
                 .accept(MediaType.APPLICATION_JSON)

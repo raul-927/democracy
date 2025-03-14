@@ -12,7 +12,7 @@ spring:
         locator:
           enabled: true
       routes[0]:
-        id: products
+        id: Products
         uri: lb://PRODUCTS
         predicates:
           - Path=/products/**
@@ -22,7 +22,7 @@ spring:
         predicates:
           - Path=/accountancy/**
       routes[2]:
-        id: humanresources
+        id: HumanResources
         uri: lb://HUMANRESOURCES
         predicates:
           - Path=/humanresources/**
@@ -32,10 +32,20 @@ spring:
         predicates:
           - Path=/electoralcourt/**
       routes[4]:
-        id: statemachine
+        id: SatateMachine
         uri: lb://STATEMACHINE
         predicates:
           - Path=/statemachine/**
+      routes[5]:
+        id: feing-client
+        uri: lb://FEING-CLIENT
+        predicates:
+          - Path=/client/**
+      routes[6]:
+        id: feing-target
+        uri: lb://FEING-TARGET
+        predicates:
+          - Path=/target/**
       default-filters: TokenRelay
   security:
     oauth2:
@@ -54,5 +64,7 @@ spring:
             provider: keycloak
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:4200/*
-
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
 

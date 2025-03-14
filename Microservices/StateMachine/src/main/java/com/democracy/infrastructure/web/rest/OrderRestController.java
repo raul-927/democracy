@@ -31,11 +31,11 @@ private DepartmentFeingClient feingClient;
 
     @GetMapping("/test")
     public Mono<Long> test(){
-        Mono<Long> result = feingClient.selectCount();
-        result.subscribe(r->{
+        feingClient.selectCount().subscribe(r->{
             final var r1 = r;
             System.out.println("RESULT: "+r1);
-        });
+        });;
+
         return null;
     }
 
