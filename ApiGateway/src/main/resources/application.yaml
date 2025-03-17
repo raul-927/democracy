@@ -40,12 +40,22 @@ spring:
         id: feing-client
         uri: lb://FEING-CLIENT
         predicates:
-          - Path=/client/**
+          - Path=/feingclient/**
       routes[6]:
         id: feing-target
         uri: lb://FEING-TARGET
         predicates:
-          - Path=/target/**
+          - Path=/feingtarget/**
+      routes[7]:
+        id: HelloServer
+        uri: lb://HELLOSERVER
+        predicates:
+          - Path=/server/**
+      routes[8]:
+        id: HelloClient
+        uri: lb://HELLOCLIENT
+        predicates:
+          - Path=/client/**
       default-filters: TokenRelay
   security:
     oauth2:
