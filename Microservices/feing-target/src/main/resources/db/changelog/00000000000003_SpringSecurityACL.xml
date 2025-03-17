@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000003" author="rhernandez">
+    
+        <createTable tableName="acl_sid">
+            <column name="id" 			type="bigint" autoIncrement="true">
+            
+                <constraints primaryKey="true" 	nullable="false"/>
+            </column>
+            <column name="principal" 		type="boolean"/>
+            <column name="sid" 				type="varchar(50)"/>
+        </createTable>
+        
+        <!-- <addAutoIncrement
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_sid"/> -->  
+        
+         <addUniqueConstraint 
+            columnNames="sid, principal"  
+            deferrable="true"  
+            disabled="true" 
+            initiallyDeferred="true"    
+            tableName="acl_sid"    
+            validate="true"/>
+            
+        <createTable tableName="acl_class">
+            <column name="id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="class" 	   type="varchar(100)"/>
+        </createTable>
+        
+         <!-- <addAutoIncrement 
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_class"/> -->
+        
+        <addUniqueConstraint 
+            columnNames="class"  
+            deferrable="true"  
+            disabled="true" 
+            initiallyDeferred="true"    
+            tableName="acl_class"    
+            validate="true"/>
+        
+        <createTable tableName="acl_object_identity">
+            <column name="id" 	type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="object_id_class" 	 	type="bigint"/>
+            <column name="object_id_identity" 	type="bigint"/>
+            <column name="parent_object"		type="bigint"/>
+            <column name="owner_sid"			type="bigint"/>
+            <column name="entries_inheriting"	type="boolean"/>
+        </createTable>
+        
+        <!-- <addAutoIncrement 
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_object_identity"/> -->
+            
+        <addUniqueConstraint 
+            columnNames="object_id_class, object_id_identity"  
+            deferrable="true"  
+            disabled="true" 
+            initiallyDeferred="true"    
+            tableName="acl_object_identity"    
+            validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="parent_object"
+            baseTableName="acl_object_identity"  
+            constraintName="foreign_fk_1"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="id"   
+            referencedTableName="acl_object_identity"   
+            validate="true"/>
+            
+        <addForeignKeyConstraint  baseColumnNames="object_id_class"  
+	        baseTableName="acl_object_identity"  
+	        constraintName="constraint foreign_fk_2"
+	        onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="id"   
+	        referencedTableName="acl_class"   
+	        validate="true"/>
+	        
+	   <addForeignKeyConstraint  baseColumnNames="owner_sid"  
+	        baseTableName="acl_object_identity"  
+	        constraintName="constraint foreign_fk_3"
+	        onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="id"   
+	        referencedTableName="acl_sid"   
+	        validate="true"/>
+	        
+	  <createTable tableName="acl_entry">
+      	<column name="id" 			type="bigint" autoIncrement="true">
+        	<constraints primaryKey="true" 	nullable="false"/>
+       	</column>
+        <column name="acl_object_identity"	type="bigint"/>
+        <column name="ace_order" 			type="int"/>
+        
+         <column name="sid" 			type="bigint"/>
+         <column name="mask" 			type="integer"/>
+         <column name="granting" 			type="boolean"/>
+         <column name="audit_success" 			type="boolean"/>
+         <column name="audit_failure" 			type="boolean"/>
+      </createTable>
+      
+       <!-- <addAutoIncrement 
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_entry"/> -->
+        
+    <addUniqueConstraint 
+    	columnNames="acl_object_identity,ace_order"  
+        deferrable="true"  
+        disabled="true" 
+        initiallyDeferred="true"    
+        tableName="acl_entry"    
+        validate="true"/>
+
+    <addForeignKeyConstraint  baseColumnNames="acl_object_identity"
+        baseTableName="acl_entry"  
+        constraintName="constraint foreign_fk_4"
+        onDelete="CASCADE"  
+        onUpdate="RESTRICT"  
+        referencedColumnNames="id"   
+        referencedTableName="acl_object_identity"   
+        validate="true"/>
+        
+    <addForeignKeyConstraint  baseColumnNames="sid"
+        baseTableName="acl_entry"  
+        constraintName="constraint foreign_fk_5"
+        onDelete="CASCADE"  
+        onUpdate="RESTRICT"  
+        referencedColumnNames="id"   
+        referencedTableName="acl_sid"   
+        validate="true"/>
+    </changeSet>
+</databaseChangeLog>
