@@ -56,6 +56,11 @@ spring:
         uri: lb://HELLOCLIENT
         predicates:
           - Path=/client/**
+      routes[9]:
+        id: validatedepartment
+        uri: lb://VALIDATEDEPARTMENT
+        predicates:
+          - Path=/validatedepartment/**
       default-filters: TokenRelay
   security:
     oauth2:

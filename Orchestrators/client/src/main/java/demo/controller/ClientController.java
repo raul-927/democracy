@@ -21,13 +21,13 @@ public class ClientController {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping("/goal")
+    @GetMapping("/validate")
     public String hello() {
         Order returnOrder = orderService.newOrder(new Order());
         return "OK";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/validate")
     @ResponseStatus(HttpStatus.OK)
     public Mono<Order> newOrder(@RequestBody Order order){
         return Mono.just(orderService.newOrder(order));

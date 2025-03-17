@@ -9,10 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="feign-eureka-hello-server" />
         <module name="feign-eureka-hello-client" />
+        <module name="validatedepartment" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="StateMachine" target="22" />
+      <module name="validate-department" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -20,6 +22,8 @@
       <module name="StateMachine" options="-parameters" />
       <module name="feign-eureka-hello-client" options="-parameters" />
       <module name="feign-eureka-hello-server" options="-parameters" />
+      <module name="validate-department" options="-parameters" />
+      <module name="validatedepartment" options="-parameters" />
     </option>
   </component>
 </project>
