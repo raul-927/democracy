@@ -13,6 +13,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public interface DepartmentFeingClient {
 
     //@PostMapping("/new")
-    @RequestMapping(value = "/select-all", method = GET)
-    Mono<Department> selectAllDepartment();
+    @RequestMapping(value = "/humanresources/prueba/text", method = GET)
+    String getPrueba();
 }

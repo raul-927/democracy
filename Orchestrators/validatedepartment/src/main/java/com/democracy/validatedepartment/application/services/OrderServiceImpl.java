@@ -60,6 +60,10 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("STRING_CLIENT: "+clientString);
         System.out.println("Validating order");
 
+        String stringPrueba = feingClient.getPrueba();
+        System.out.println("STRING_PRUEBA: "+stringPrueba);
+
+
        List<Department> departments = getDepartmentbyRestTemplate();
         departments.forEach(dep->{
             System.out.println("DEPARTMENT_ID: " +dep.getDepartmentId());
