@@ -98,6 +98,7 @@ public class OrderStateMachine extends EnumStateMachineConfigurerAdapter<OrderSt
             System.out.println("Shipping order Action");
         };
     }
+
     @Bean
     public Action<OrderStates, OrderEvents> payOrderAction() {
         return context ->{
