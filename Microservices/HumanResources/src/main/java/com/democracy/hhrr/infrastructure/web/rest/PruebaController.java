@@ -18,6 +18,6 @@ public class PruebaController {
     public ResponseEntity<?>getPrueba(){
 
 
-        return new ResponseEntity("ESTO ES UNA PRUEBA", null, HttpStatus.OK);
+        return new ResponseEntity("ESTO ES UNA PRUEBA DESDE HUMAN RESOURCES", null, HttpStatus.OK);
     }
 }

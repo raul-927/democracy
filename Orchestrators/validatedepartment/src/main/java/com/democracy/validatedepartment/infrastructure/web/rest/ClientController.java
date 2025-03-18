@@ -21,17 +21,22 @@ public class ClientController {
     private OrderService orderService;
 
     @PostMapping("/goal")
-    public String hello(@RequestHeader(value="Authorization") String userAgent) {
-        System.out.println("AUTHORIZATION: "+userAgent);
-        Order returnOrder = orderService.newOrder(new Order());
+    public String hello() {
+
+        //Order returnOrder = orderService.newOrder(new Order());
         return "OK";
     }
 
     @PostMapping("/new")
-    @ResponseStatus(HttpStatus.OK)
-    public Mono<Order> newOrder(@RequestBody Order order, @RequestHeader(value="Authorization") String userAgent){
-        System.out.println("AUTHORIZATION: "+userAgent);
-        return Mono.just(orderService.newOrder(order));
+    public Mono<Order> newOrder(@RequestBody Order order, @RequestHeader(name="Authorization")String token){
+
+        return Mono.just(orderService.newOrder(order, token));
+    }
+
+    @PostMapping("/all")
+    public Mono<Order> getAllDepartment(@RequestBody Order order, @RequestHeader(name="Authorization")String token){
+
+        return Mono.just(orderService.newOrder(order, token));
     }
 
 
