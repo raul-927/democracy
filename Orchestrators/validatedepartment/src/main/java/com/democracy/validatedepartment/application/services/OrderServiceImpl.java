@@ -1,21 +1,15 @@
 package com.democracy.validatedepartment.application.services;
 
-
-import com.democracy.validatedepartment.application.client.HelloClient;
 import com.democracy.validatedepartment.domain.models.Department;
 import com.democracy.validatedepartment.domain.models.Order;
 import com.democracy.validatedepartment.infrastructure.statemachine.events.OrderEvents;
 import com.democracy.validatedepartment.infrastructure.statemachine.states.OrderStates;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Mono;
-
 import java.util.List;
 
 
@@ -26,21 +20,14 @@ public class OrderServiceImpl implements OrderService {
     private StateMachine<OrderStates, OrderEvents> stateMachine;
 
     @Autowired
-    private HelloClient client;
-
-    @Autowired
     private TokenService obtainToken;
-
     @Autowired
     private DepartmentService departmentService;
 
-
-    private final String BORED_API = "http://localhost:8082/humanresources/department/select-count";
-
     @Override
-    public Order newOrder(Order order, String token) {
+    public Order newOrder(Order order) {
         initOrderSaga();
-        validateOrder(order, token);
+        validateOrder(order);
         payOrder();
         shipOrder();
         completeOrder();
@@ -54,13 +41,8 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("Final state initOrderSaga: "+stateMachine.getState().getId());
     }
     @Override
-    public void validateOrder(Order order, String token) {
-        String clientString = client.hello();
-        System.out.println("STRING_CLIENT: "+clientString);
-        System.out.println("Validating order");
-
+    public void validateOrder(Order order) {
         List<Department> departments = departmentService.selectAllDepartment();
-
         stateMachine.sendEvent(Mono.just(
                         MessageBuilder.withPayload(OrderEvents.VALIDATE)
                                 .setHeader("order",order)
@@ -98,16 +80,5 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("Stopping saga...");
         System.out.println("------------------------");
         stateMachine.stopReactively().subscribe();
-    }
-
-    private List<Department> getDepartmentByRestTemplate(){
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", obtainToken.obtainToken());
-        RestTemplate restTemplate = new RestTemplate();
-        String resourceUrl = "http://localhost:8082/humanresources/department/select-all";
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<List<Department>> response
-                = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, new ParameterizedTypeReference<List<Department>>() {});
-        return response.getBody();
     }
 }

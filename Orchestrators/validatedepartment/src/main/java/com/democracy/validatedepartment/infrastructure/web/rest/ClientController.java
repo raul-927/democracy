@@ -28,15 +28,15 @@ public class ClientController {
     }
 
     @PostMapping("/new")
-    public Mono<Order> newOrder(@RequestBody Order order, @RequestHeader(name="Authorization")String token){
+    public Mono<Order> newOrder(@RequestBody Order order){
 
-        return Mono.just(orderService.newOrder(order, token));
+        return Mono.just(orderService.newOrder(order));
     }
 
     @PostMapping("/all")
-    public Mono<Order> getAllDepartment(@RequestBody Order order, @RequestHeader(name="Authorization")String token){
+    public Mono<Order> getAllDepartment(@RequestBody Order order){
 
-        return Mono.just(orderService.newOrder(order, token));
+        return Mono.just(orderService.newOrder(order));
     }
 
 

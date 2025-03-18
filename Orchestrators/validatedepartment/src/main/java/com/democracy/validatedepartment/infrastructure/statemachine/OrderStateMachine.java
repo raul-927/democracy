@@ -40,20 +40,38 @@ public class OrderStateMachine extends EnumStateMachineConfigurerAdapter<OrderSt
     @Override
     public void configure(StateMachineTransitionConfigurer<OrderStates, OrderEvents> transitions)throws Exception{
         transitions
-                .withExternal().source(OrderStates.NEW).target(OrderStates.VALIDATED).event(OrderEvents.VALIDATE)
-                .action(validateOrderAction())
+                .withExternal()
+                    .source(OrderStates.NEW)
+                    .target(OrderStates.VALIDATED)
+                    .event(OrderEvents.VALIDATE)
+                    .action(validateOrderAction())
                 .and()
-                .withExternal().source(OrderStates.VALIDATED).target(OrderStates.PAID).event(OrderEvents.PAY)
-                .action(payOrderAction())
+                .withExternal()
+                    .source(OrderStates.VALIDATED)
+                    .target(OrderStates.PAID)
+                    .event(OrderEvents.PAY)
+                    .action(payOrderAction())
                 .and()
-                .withExternal().source(OrderStates.PAID).target(OrderStates.SHIPPED).event(OrderEvents.SHIP)
-                .action(shipOrderAction())
+                .withExternal()
+                    .source(OrderStates.PAID)
+                    .target(OrderStates.SHIPPED)
+                    .event(OrderEvents.SHIP)
+                    .action(shipOrderAction())
                 .and()
-                .withExternal().source(OrderStates.SHIPPED).target(OrderStates.COMPLETED).event(OrderEvents.COMPLETE)
+                .withExternal()
+                    .source(OrderStates.SHIPPED)
+                    .target(OrderStates.COMPLETED)
+                    .event(OrderEvents.COMPLETE)
                 .and()
-                .withExternal().source(OrderStates.VALIDATED).target(OrderStates.CANCELLED).event(OrderEvents.CANCEL)
+                .withExternal()
+                    .source(OrderStates.VALIDATED)
+                    .target(OrderStates.CANCELLED)
+                    .event(OrderEvents.CANCEL)
                 .and()
-                .withExternal().source(OrderStates.PAID).target(OrderStates.CANCELLED).event(OrderEvents.CANCEL);
+                .withExternal()
+                    .source(OrderStates.PAID)
+                    .target(OrderStates.CANCELLED)
+                    .event(OrderEvents.CANCEL);
     }
 
     @Override
