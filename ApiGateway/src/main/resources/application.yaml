@@ -61,6 +61,11 @@ spring:
         uri: lb://VALIDATE-DEPARTMENT
         predicates:
           - Path=/validatedepartment/**
+      routes[10]:
+        id:  democracy-orchestrator
+        uri: lb://DEMOCRACY-ORCHESTRATOR
+        predicates:
+          - Path=/democracyorchestrator/**
       default-filters: TokenRelay
   security:
     oauth2:
