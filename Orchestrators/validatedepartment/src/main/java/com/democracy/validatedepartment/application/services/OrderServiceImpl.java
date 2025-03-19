@@ -2,8 +2,8 @@ package com.democracy.validatedepartment.application.services;
 
 import com.democracy.validatedepartment.domain.models.Department;
 import com.democracy.validatedepartment.domain.models.Order;
-import com.democracy.validatedepartment.infrastructure.statemachine.events.OrderEvents;
-import com.democracy.validatedepartment.infrastructure.statemachine.states.OrderStates;
+import com.democracy.validatedepartment.application.statemachine.events.OrderEvents;
+import com.democracy.validatedepartment.application.statemachine.states.OrderStates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
@@ -19,8 +19,8 @@ public class OrderServiceImpl implements OrderService {
     private StateMachineFactory<OrderStates, OrderEvents> machineFactory;
     private StateMachine<OrderStates, OrderEvents> stateMachine;
 
-    @Autowired
-    private TokenService obtainToken;
+    //@Autowired
+    //private TokenService obtainToken;
     @Autowired
     private DepartmentService departmentService;
 
