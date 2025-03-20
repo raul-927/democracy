@@ -12,11 +12,11 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
-//@Slf4j
+@Component
+@Slf4j
 public class DepartmentHandler {
 
-    //@Autowired
+    @Autowired
     private DepartmentService departmentService;
 
     /*public Mono<ServerResponse> selectDepartment(ServerRequest request){
