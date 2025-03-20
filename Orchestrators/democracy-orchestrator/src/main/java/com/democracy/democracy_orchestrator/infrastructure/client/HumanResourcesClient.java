@@ -6,10 +6,7 @@ import com.democracy.democracy_orchestrator.infrastructure.web.constants.RoutesC
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @FeignClient("HumanResources")
 public interface HumanResourcesClient {
