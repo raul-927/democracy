@@ -28,8 +28,8 @@ public class DepartmentRouter {
                         POST(PATH_MAIN + DEPARTMENT_PATH + PATH_SELECT), handler::selectDepartment)
                 .andRoute(
                         POST(PATH_MAIN + DEPARTMENT_PATH +  PATH_SAVE), handler::createDepartment)
-                .andRoute(
-                        POST(PATH_MAIN + DEPARTMENT_PATH +PATH_INSERT), handler::createMultipleDepartment)
+                //.andRoute(
+                //        POST(PATH_MAIN + DEPARTMENT_PATH +PATH_INSERT), handler::createMultipleDepartment)
                 .andRoute(
                         PUT(PATH_MAIN + DEPARTMENT_PATH +  PATH_UPDATE), handler::updateDepartment)
                 .andRoute(

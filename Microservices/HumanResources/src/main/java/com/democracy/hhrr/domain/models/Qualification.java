@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 public class Qualification {
-
     private int 			id;
     private int 			qualificationId;
     private Institute 		institute;

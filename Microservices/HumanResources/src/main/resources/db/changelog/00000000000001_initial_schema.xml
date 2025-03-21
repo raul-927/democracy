@@ -70,11 +70,60 @@
             <column name="geo_location"    type="varchar(36)"/>
             <column name="address_number"  type="varchar(8)"/>
             <column name="department_id"   type="varchar(36)"/>
-            <column name="city_id" 	       type="varchar(36)"/>
-            <column name="neighborhood_id" type="varchar(36)"/>
             <column name="street1_id"      type="varchar(36)"/>
             <column name="street2_id"      type="varchar(36)"/>
         </createTable>
+        
+        <createTable tableName="PENAL">
+            <column name="penal_id"           type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name ="penal_name"  type="varchar(36)"/>
+        </createTable>
 
+        <createTable tableName="CRIMINAL_RECORD">
+            <column name="criminal_record_id"           type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name ="criminal_record_name"  type="varchar(36)"/>
+            <column name ="criminal_record_description"  type="varchar(36)"/>
+            <column name ="penal_id"  type="varchar(36)"/>
+        </createTable>
+
+        <createTable tableName="DOCUMENT">
+            <column name="document_id"           type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true"   nullable="false"/>
+            </column>
+            <column name = "document_name"   type = "varchar(36)"/>
+            <column name = "verified"        type = "boolean"/>
+            <column name = "approved"        type = "boolean"/>
+            <column name = "observation"     type = "varchar(36)"/>
+            <column name = "attachment"      type = "Blob"/>
+        </createTable>
+
+        <createTable tableName="QUALIFICATION">
+            <column name="qualification_id"           type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true"        nullable="false"/>
+            </column>
+            <column name = "institute_id"               type = "varchar(36)"/>
+            <column name = "verified"                   type = "boolean"/>
+            <column name = "approved"                   type = "varchar(36)"/>
+        </createTable>
+
+        <createTable tableName = "INVESTIGATION">
+            <column name = "investigation_id"    type="varchar(36)" defaultValueComputed = "${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name = "person_id"           type = "varchar(36)"/>
+            <column name = "observation"         type = "varchar(36)"/>
+        </createTable>
+
+        <createTable tableName = "INSTITUTE">
+            <column name = "institute_id"    type="varchar(36)" defaultValueComputed = "${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name = "institute_name"         type = "varchar(36)"/>
+            <column name = "address_id"             type = "varchar(36)"/>
+        </createTable>
     </changeSet>
 </databaseChangeLog>

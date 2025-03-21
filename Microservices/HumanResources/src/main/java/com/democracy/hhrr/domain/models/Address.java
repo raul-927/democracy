@@ -21,8 +21,6 @@ public class Address {
     private String 			geoLocation;
     private String 		    addressNumber;
     private Department      department;
-    private City            city;
-    private Neighborhood    neighborhood;
     private Street          street1;
     private Street          street2;
 

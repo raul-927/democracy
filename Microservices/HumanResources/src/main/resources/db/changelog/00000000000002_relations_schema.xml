@@ -19,6 +19,86 @@
             </column>
         </createTable>
 
+        <createTable tableName="QUALIFICATION_DOCUMENT">
+            <column name="qualification_document_id"          type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="qualification_id" 	        type="varchar(36)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="document_id" 	            type="varchar(36)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="INVESTIGATION_CRIMINAL_RECORD">
+            <column name="investigation_criminal_record_id"          type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="investigation_id" 	 type="varchar(36)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="criminal_record_id"   type="varchar(36)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="INVESTIGATION_QUALIFICATION">
+            <column name="investigation_qualification_id"          type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="investigation_id" 	 type="varchar(36)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="qualification_id"   type="varchar(36)">
+                <constraints unique="false"     nullable="false"/>
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint  baseColumnNames="qualification_id"
+                                  baseTableName="INVESTIGATION_QUALIFICATION"
+                                  constraintName="qualification_investigation_pk"
+                                  referencedColumnNames="qualification_id"
+                                  referencedTableName="QUALIFICATION"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="investigation_id"
+                                  baseTableName="INVESTIGATION_QUALIFICATION"
+                                  constraintName="investigation_qualification_pk"
+                                  referencedColumnNames="investigation_id"
+                                  referencedTableName="INVESTIGATION"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="criminal_record_id"
+                                  baseTableName="INVESTIGATION_CRIMINAL_RECORD"
+                                      constraintName="criminal_record_investigation_pk"
+                                  referencedColumnNames="criminal_record_id"
+                                  referencedTableName="CRIMINAL_RECORD"
+                                  validate="true"/>
+
+
+        <addForeignKeyConstraint  baseColumnNames="investigation_id"
+                                  baseTableName="INVESTIGATION_CRIMINAL_RECORD"
+                                  constraintName="investigation_criminal_record_pk"
+                                  referencedColumnNames="investigation_id"
+                                  referencedTableName="INVESTIGATION"
+                                  validate="true"/>
+
+
+        <addForeignKeyConstraint  baseColumnNames="document_id"
+                                  baseTableName="QUALIFICATION_DOCUMENT"
+                                  constraintName="document_qualification_pk"
+                                  referencedColumnNames="document_id"
+                                  referencedTableName="DOCUMENT"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="qualification_id"
+                                  baseTableName="QUALIFICATION_DOCUMENT"
+                                  constraintName="qualification_document_pk"
+                                  referencedColumnNames="qualification_id"
+                                  referencedTableName="QUALIFICATION"
+                                  validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="neighborhood_id"
                                   baseTableName="NEIGH_STREET"
@@ -101,6 +181,33 @@
                                   referencedTableName="DEPARTMENT"
                                   validate="true"/>
 
+        <addForeignKeyConstraint  baseColumnNames="person_id"
+                                  baseTableName="INVESTIGATION"
+                                  constraintName="investigation_person_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="person_id"
+                                  referencedTableName="PERSON"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="institute_id"
+                                  baseTableName="QUALIFICATION"
+                                  constraintName="institute_qualification_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="institute_id"
+                                  referencedTableName="INSTITUTE"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="address_id"
+                                  baseTableName="INSTITUTE"
+                                  constraintName="institute_address_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="address_id"
+                                  referencedTableName="ADDRESS"
+                                  validate="true"/>
+<!--
         <addForeignKeyConstraint  baseColumnNames="city_id"
                                   baseTableName="ADDRESS"
                                   constraintName="address_city_fk"
@@ -118,7 +225,7 @@
                                   referencedColumnNames="neighborhood_id"
                                   referencedTableName="NEIGHBORHOOD"
                                   validate="true"/>
-
+-->
         <addForeignKeyConstraint  baseColumnNames="address_id"
                                   baseTableName="PERSON"
                                   constraintName="person_address_fk"
@@ -153,6 +260,15 @@
                                   onUpdate="RESTRICT"
                                   referencedColumnNames="street_id"
                                   referencedTableName="STREET"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="penal_id"
+                                  baseTableName="CRIMINAL_RECORD"
+                                  constraintName="criminal_record_penal_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="penal_id"
+                                  referencedTableName="PENAL"
                                   validate="true"/>
 
     </changeSet>

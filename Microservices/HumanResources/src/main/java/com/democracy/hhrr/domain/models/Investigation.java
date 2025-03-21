@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 public class Investigation {
-
     private int 				  id;
     private int 				  investigationId;
     private Person 				  person;

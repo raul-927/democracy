@@ -118,8 +118,8 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
                         .map(addressNumber).toPropertyWhenPresent("addressNumber", record::getAddressNumber)
                         .map(geoLocation).toPropertyWhenPresent("geoLocation", record::getGeoLocation)
                         .map(departmentId).toPropertyWhenPresent("department.departmentId", record.getDepartment()::getDepartmentId)
-                        .map(cityId).toPropertyWhenPresent("city.cityId", record.getCity()::getCityId)
-                        .map(neighborhoodId).toPropertyWhenPresent("neighborhood.neighborhoodId", record.getNeighborhood()::getNeighborhoodId)
+                        //.map(cityId).toPropertyWhenPresent("city.cityId", record.getCity()::getCityId)
+                        //.map(neighborhoodId).toPropertyWhenPresent("neighborhood.neighborhoodId", record.getNeighborhood()::getNeighborhoodId)
                         .map(street1).toPropertyWhenPresent("street1.streetId", record.getStreet1()::getStreetId)
                         .map(street2).toPropertyWhenPresent("street2.streetId", record.getStreet2()::getStreetId)
 

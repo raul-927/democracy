@@ -12,12 +12,12 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/humanresources/department")
-//@RefreshScope
+@RestController
+@RequestMapping("/humanresources/department")
+@RefreshScope
 public class DepartmentController {
 
-    //@Autowired
+    @Autowired
     private DepartmentService departmentService;
 
    /* @PostMapping(
@@ -43,10 +43,10 @@ public class DepartmentController {
         return this.departmentService.createDepartment(department);
     }
 
-    /*@PostMapping(
+    @PostMapping(
             value="/insert",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})*/
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<Integer> insertMultiple(@RequestBody List<Department> departmentList){
         return departmentService.createMultipleDepartment(departmentList);
     }
