@@ -12,6 +12,7 @@ public class RouterConstant {
     //--------------------DOMAIN PATH---------------------------------------
     public static final String DEPARTMENT_PATH = "/department";
     public static final String STREET_PATH = "/street";
+    public static final String INVESTIGATION ="/investigation";
 
 
 }
