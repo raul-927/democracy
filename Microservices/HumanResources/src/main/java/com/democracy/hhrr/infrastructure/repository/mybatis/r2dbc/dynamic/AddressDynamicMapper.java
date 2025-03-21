@@ -90,8 +90,8 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
                         .map(geoLocation).toProperty("geoLocation")
                         .map(addressNumber).toProperty("addressNumber")
                         .map(departmentId).toProperty("department.departmentId")
-                        .map(cityId).toProperty("city.cityId")
-                        .map(neighborhoodId).toProperty("neighborhood.neighborhoodId")
+                        //.map(cityId).toProperty("city.cityId")
+                        //.map(neighborhoodId).toProperty("neighborhood.neighborhoodId")
                         .map(street1).toProperty("street1.streetId")
                         .map(street2).toProperty("street2.streetId")
         );
@@ -104,8 +104,8 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
                         .map(geoLocation).toProperty("geoLocation")
                         .map(addressNumber).toProperty("addressNumber")
                         .map(departmentId).toProperty("department.departmentId")
-                        .map(cityId).toProperty("city.cityId")
-                        .map(neighborhoodId).toProperty("neighborhood.neighborhoodId")
+                        //.map(cityId).toProperty("city.cityId")
+                        //.map(neighborhoodId).toProperty("neighborhood.neighborhoodId")
                         .map(street1).toProperty("street1.streetId")
                         .map(street2).toProperty("street2.streetId")
         );
@@ -146,8 +146,8 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
 
     default Flux<Address> selectAddress(Address address) {
         BindableColumn<Address>ADDRESS_DEPARTMENT_department_id = DerivedColumn.of("department_id", "ADDRESS");
-        BindableColumn<Address>ADDRESS_CITY_city_id = DerivedColumn.of("city_id", "ADDRESS");
-        BindableColumn<Address>ADDRESS_NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "ADDRESS");
+        //BindableColumn<Address>ADDRESS_CITY_city_id = DerivedColumn.of("city_id", "ADDRESS");
+        //BindableColumn<Address>ADDRESS_NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "ADDRESS");
         BindableColumn<Address>ADDRESS_STREET_street1_id = DerivedColumn.of("street1_id", "ADDRESS");
         BindableColumn<Address>ADDRESS_STREET_street2_id = DerivedColumn.of("street2_id", "ADDRESS");
 
@@ -161,11 +161,11 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
                         .join(DepartmentDynamicSqlSupport.DEPARTMENT)
                         .on(DEPARTMENT_department_id, equalTo(ADDRESS_DEPARTMENT_department_id))
 
-                        .join(CityDynamicSqlSupport.CITY)
-                        .on(CITY_city_id,equalTo(ADDRESS_CITY_city_id))
+                        //.join(CityDynamicSqlSupport.CITY)
+                        //.on(CITY_city_id,equalTo(ADDRESS_CITY_city_id))
 
-                        .join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
-                        .on(ADDRESS_NEIGHBORHOOD_neighborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
+                        //.join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
+                        //.on(ADDRESS_NEIGHBORHOOD_neighborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
 
                         .join(StreetDynamicSqlSupport.STREET, "S1")
                         .on(ADDRESS_STREET_street1_id,equalTo(STREET_street1_id))

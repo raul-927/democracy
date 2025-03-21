@@ -27,8 +27,8 @@ public class StreetRouter {
                         POST(PATH_MAIN + STREET_PATH + PATH_SELECT), handler::selectStreet)
                 .andRoute(
                         POST(PATH_MAIN + STREET_PATH +  PATH_SAVE), handler::createStreet)
-                .andRoute(
-                        POST(PATH_MAIN + STREET_PATH +PATH_INSERT), handler::createMultipleStreet)
+                //.andRoute(
+                 //       POST(PATH_MAIN + STREET_PATH +PATH_INSERT), handler::createMultipleStreet)
                 .andRoute(
                         PUT(PATH_MAIN + STREET_PATH +  PATH_UPDATE), handler::updateStreet)
                 .andRoute(

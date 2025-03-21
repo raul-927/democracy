@@ -16,12 +16,12 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/humanresources/street")
-//@RefreshScope
+@RestController
+@RequestMapping("/humanresources/street")
+@RefreshScope
 public class StreetController {
 
-   // @Autowired
+    @Autowired
     private StreetService streetService;
 
    // @PostMapping(
@@ -40,10 +40,10 @@ public class StreetController {
         return this.streetService.createStreet(street);
     }
 
-   // @PostMapping(
-     //       value="/insert",
-     //       consumes ={MediaType.APPLICATION_JSON_VALUE},
-     //       produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(
+            value="/insert",
+            consumes ={MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<?> insertMultiple(@RequestBody List<Street> street){
         return streetService.createMultipleStreet(street);
     }
