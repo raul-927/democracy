@@ -70,6 +70,8 @@
             <column name="geo_location"    type="varchar(36)"/>
             <column name="address_number"  type="varchar(8)"/>
             <column name="department_id"   type="varchar(36)"/>
+            <column name="city_id"         type="varchar(36)"/>
+            <column name="neighborhood_id" type="varchar(36)"/>
             <column name="street1_id"      type="varchar(36)"/>
             <column name="street2_id"      type="varchar(36)"/>
         </createTable>

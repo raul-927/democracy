@@ -86,6 +86,7 @@ public class PostulantStateMachine extends EnumStateMachineConfigurerAdapter<Pos
     public void configure(StateMachineConfigurationConfigurer<PostulationStates, PostulationEvents> config) throws Exception {
         config.withConfiguration().listener(postulantListenner());
     }
+
     @Bean
     public StateMachineListener<PostulationStates, PostulationEvents> postulantListenner() {
         return new StateMachineListenerAdapter<PostulationStates, PostulationEvents>(){

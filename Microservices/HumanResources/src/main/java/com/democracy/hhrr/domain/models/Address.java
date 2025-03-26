@@ -16,12 +16,14 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 public class Address {
-    private int 			id;
-    private String 			addressId;
-    private String 			geoLocation;
-    private String 		    addressNumber;
-    private Department      department;
-    private Street          street1;
-    private Street          street2;
+    private int 		 id;
+    private String 		 addressId;
+    private String 		 geoLocation;
+    private String 		 addressNumber;
+    private Department   department;
+    private City         city;
+    private Neighborhood neighborhood;
+    private Street       street1;
+    private Street       street2;
 
 }

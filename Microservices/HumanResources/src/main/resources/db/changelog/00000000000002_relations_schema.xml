@@ -207,7 +207,7 @@
                                   referencedColumnNames="address_id"
                                   referencedTableName="ADDRESS"
                                   validate="true"/>
-<!--
+
         <addForeignKeyConstraint  baseColumnNames="city_id"
                                   baseTableName="ADDRESS"
                                   constraintName="address_city_fk"
@@ -225,7 +225,7 @@
                                   referencedColumnNames="neighborhood_id"
                                   referencedTableName="NEIGHBORHOOD"
                                   validate="true"/>
--->
+
         <addForeignKeyConstraint  baseColumnNames="address_id"
                                   baseTableName="PERSON"
                                   constraintName="person_address_fk"
