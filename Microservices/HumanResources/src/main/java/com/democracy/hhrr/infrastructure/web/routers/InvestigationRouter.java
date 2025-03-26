@@ -21,7 +21,7 @@ public class InvestigationRouter {
     private static final String PATH_SELECT = RouterConstant.PATH_SELECT;
 
     @Bean
-    public RouterFunction<ServerResponse> routerDepartment(InvestigationHandler handler){
+    public RouterFunction<ServerResponse> routerInvestigation(InvestigationHandler handler){
         return RouterFunctions
                 .route(
                         GET(PATH_MAIN + INVESTIGATION + PATH_SELECT), handler::selectInvestigation);

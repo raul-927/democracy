@@ -17,7 +17,7 @@ public class DepartmentRouter {
     private static final String PATH_SELECT_ALL =RouterConstant.PATH_SELECT_ALL;
     private static final String PATH_SELECT = RouterConstant.PATH_SELECT;
     private static final String PATH_SAVE = RouterConstant.PATH_SAVE;
-    private static final String PATH_INSERT = RouterConstant.PATH_INSERT;
+    //private static final String PATH_INSERT = RouterConstant.PATH_INSERT;
     private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
     private static final String PATH_COUNT=RouterConstant.PATH_COUNT;
 
