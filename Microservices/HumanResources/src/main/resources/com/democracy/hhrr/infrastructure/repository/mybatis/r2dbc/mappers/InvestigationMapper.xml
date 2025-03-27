@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.CriminalRecordMapper">
+	<resultMap type="com.democracy.hhrr.domain.models.CriminalRecord" id="CriminalRecordResult">
+  		<id		property="investigationId" 			 column="investigation_id"/>
+		<result property="observation"				 column="observation"/>
+		<result property="criminalRecordDescription" column="criminal_record_description"/>
+
+		<association property="person" 			resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PersonMapper.PersonResult"/>
+		<collection property="criminalRecords" 	resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.CriminalRecordsMapper.CriminalRecordsResult"/>
+		<collection property="qualifications" 	resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.QualificationMapper.QualificationResult"/>
+  	</resultMap>
+</mapper>

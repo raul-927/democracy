@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.CriminalRecordMapper">
+	<resultMap type="com.democracy.hhrr.domain.models.CriminalRecord" id="CriminalRecordResult">
+  	
+  		<id		property = "criminalRecordId" 			column = "criminal_record_id"/>
+		<result property ="criminalRecordName"			column="criminal_record_name"/>
+		<result property ="criminalRecordDescription"	column="criminal_record_description"/>
+
+		<association property="penal" 	resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PenalMapper.PenalResult"/>
+  	</resultMap>
+</mapper>
