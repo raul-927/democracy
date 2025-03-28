@@ -22,7 +22,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Collection;
 
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DocumentDynamicSqlSupport.*;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DocumentDynamicSqlSupport.documentName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.InstituteDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
