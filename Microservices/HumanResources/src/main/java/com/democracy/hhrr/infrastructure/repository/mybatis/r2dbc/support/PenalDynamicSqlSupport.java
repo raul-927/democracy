@@ -7,7 +7,7 @@ import java.sql.JDBCType;
 
 public final class PenalDynamicSqlSupport {
 
-    public static final PenalDynamicSqlSupport.Penal PENAL = new PenalDynamicSqlSupport.Penal();
+    public static final Penal PENAL = new Penal();
     public static final SqlColumn<String> penalId = PENAL.penalId;
     public static final SqlColumn<String> penalName = PENAL.penalName;
 

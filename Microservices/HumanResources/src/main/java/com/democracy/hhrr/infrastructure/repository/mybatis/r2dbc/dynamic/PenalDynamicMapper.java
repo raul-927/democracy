@@ -51,6 +51,10 @@ public interface PenalDynamicMapper extends CommonSelectMapper {
     @ResultMap(value="PenalResult")
     Flux<Penal> selectMany(SelectStatementProvider selectStatement);
 
+    default Flux<Penal> selectAllPenal(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, penalColumnList, PENAL, completer);
+    }
+
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
@@ -85,7 +89,7 @@ public interface PenalDynamicMapper extends CommonSelectMapper {
         );
     }
 
-    default Mono<Integer> deleteStreet(String id){
+    default Mono<Integer> deletePenal(String id){
         return this.delete(
                 d -> d.where(penalId, isEqualTo(id))
         );
@@ -98,7 +102,7 @@ public interface PenalDynamicMapper extends CommonSelectMapper {
     default Flux<Penal> select(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, penalColumnList, PENAL, completer);
     }
-    default Flux<Penal> selectStreet(Penal penal) {
+    default Flux<Penal> selectPenal(Penal penal) {
         return select(str ->{
 
             if(penal.getPenalId() != null ||
@@ -115,6 +119,13 @@ public interface PenalDynamicMapper extends CommonSelectMapper {
                 str.orderBy(penalId);
             }
             return str;
+        });
+    }
+
+    default Flux<Penal> selectAllPenals(){
+        return selectAllPenal( sel ->{
+            sel.build();
+            return sel;
         });
     }
 

@@ -7,7 +7,7 @@ import java.sql.JDBCType;
 
 public final class InvestigationDynamicSqlSupport {
 
-    public static final InvestigationDynamicSqlSupport.Investigation INVESTIGATION = new InvestigationDynamicSqlSupport.Investigation();
+    public static final Investigation INVESTIGATION = new Investigation();
 
     public static final SqlColumn<String> investigationId = INVESTIGATION.investigationId;
     public static final SqlColumn<String> personId        = INVESTIGATION.personId;

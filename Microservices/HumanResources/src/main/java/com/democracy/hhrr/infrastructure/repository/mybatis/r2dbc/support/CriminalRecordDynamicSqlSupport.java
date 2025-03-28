@@ -7,7 +7,7 @@ import java.sql.JDBCType;
 
 public final class CriminalRecordDynamicSqlSupport {
 
-    public static final CriminalRecordDynamicSqlSupport.CriminalRecord CRIMINAL_RECORD = new CriminalRecordDynamicSqlSupport.CriminalRecord();
+    public static final CriminalRecord CRIMINAL_RECORD = new CriminalRecord();
     public static final SqlColumn<String> criminalRecordId = CRIMINAL_RECORD.criminalRecordId;
     public static final SqlColumn<String> criminalRecordName = CRIMINAL_RECORD.criminalRecordName;
     public static final SqlColumn<String> criminalRecordDescription = CRIMINAL_RECORD.criminalRecordDescription;
