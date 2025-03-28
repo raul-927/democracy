@@ -16,9 +16,6 @@ public class StreetAdapter implements StreetOut {
     @Autowired
     private StreetMapper streetMapper;
 
-
-
-
     @Override
     public Mono<Integer> createStreet(Street street) {
         return streetMapper.insert(street);
