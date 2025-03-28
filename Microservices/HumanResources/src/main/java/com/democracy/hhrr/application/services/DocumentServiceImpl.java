@@ -39,8 +39,8 @@ public class DocumentServiceImpl implements DocumentService{
     }
 
     @Override
-    public Flux<Document> selectAllDDocuments() {
-        return this.selectDocumentIn.selectAllDDocuments();
+    public Flux<Document> selectAllDocuments() {
+        return this.selectDocumentIn.selectAllDocuments();
     }
 
     @Override

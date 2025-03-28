@@ -7,6 +7,6 @@ import reactor.core.publisher.Mono;
 public interface SelectDocumentIn {
 
     Flux<Document> selectDocument(Document document);
-    Flux<Document> selectAllDDocuments();
+    Flux<Document> selectAllDocuments();
     Mono<Long> selectCount();
 }

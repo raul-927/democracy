@@ -21,7 +21,7 @@ public class SelectDocumentUseCase implements SelectDocumentIn {
     }
 
     @Override
-    public Flux<Document> selectAllDDocuments() {
+    public Flux<Document> selectAllDocuments() {
         return this.documentOut.selectAllDDocuments();
     }
 
