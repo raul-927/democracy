@@ -15,7 +15,7 @@ public class UpdatePenalUseCase implements UpdatePenalIn {
     }
 
     @Override
-    public Mono<Integer> updateDocument(Penal penal) {
+    public Mono<Integer> updatePenal(Penal penal) {
         return this.penalOut.updateDocument(penal);
     }
 }

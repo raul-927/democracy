@@ -5,5 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface UpdatePenalIn {
 
-    Mono<Integer> updateDocument(Penal penal);
+    Mono<Integer> updatePenal(Penal penal);
 }

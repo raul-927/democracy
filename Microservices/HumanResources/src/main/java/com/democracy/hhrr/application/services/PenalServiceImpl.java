@@ -56,7 +56,7 @@ public class PenalServiceImpl implements PenalService{
     }
 
     @Override
-    public Mono<Integer> updateDocument(Penal penal) {
-        return this.updatePenalIn.updateDocument(penal);
+    public Mono<Integer> updatePenal(Penal penal) {
+        return this.updatePenalIn.updatePenal(penal);
     }
 }
