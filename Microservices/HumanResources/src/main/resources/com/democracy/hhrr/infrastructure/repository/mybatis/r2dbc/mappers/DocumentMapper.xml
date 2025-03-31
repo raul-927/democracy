@@ -4,11 +4,11 @@
 	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DocumentMapper">
 	<resultMap type="com.democracy.hhrr.domain.models.Document" id="DocumentResult">
   	
-  		<id		property = "documentId"  column = "document_id"/>
-		<result property ="documentName" column="document_name"/>
-		<result property ="verified"	 column="verified"/>
-		<result property ="approved"	 column="approved"/>
-		<result property ="observation"	 column="observation"/>
-		<result property ="attachment"	 column="attachment"/>
+  		<id		property = "documentId"  		column = "document_id"/>
+		<result property ="documentName" 		column="document_name"/>
+		<result property ="documentVerified"	column="verified"/>
+		<result property ="documentApproved"	column="approved"/>
+		<result property ="documentObservation"	column="observation"/>
+		<result property ="documentAttachment"	column="attachment"/>
   	</resultMap>
 </mapper>

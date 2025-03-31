@@ -19,8 +19,8 @@ public class Document {
     private int 		id;
     private String 		documentId;
     private String 		documentName;
-    private boolean 	verified;
-    private boolean		approved;
-    private String 		observation;
-    private byte[]        attachment;
+    private boolean 	documentVerified;
+    private boolean		documentApproved;
+    private String 		documentObservation;
+    private byte[]        documentAttachment;
 }

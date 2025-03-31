@@ -62,7 +62,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     Mono<Integer> insert(InsertStatementProvider<Department> insertStatement);
 
     @InsertProvider(type=SqlProviderAdapter.class, method="insertMultiple")
-    @Options(keyProperty = "record.department",keyColumn = "department_id")
+    @Options(keyProperty = "record.departmentId",keyColumn = "department_id")
     Mono<Integer> insertMultiple(MultiRowInsertStatementProvider<Department> multipleInsertStatement);
 
     @SelectProvider(type=SqlProviderAdapter.class, method="select")

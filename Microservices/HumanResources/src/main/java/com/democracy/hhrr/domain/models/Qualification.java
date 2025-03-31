@@ -16,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class Qualification {
     private int 			id;
-    private int 			qualificationId;
+    private String 			qualificationId;
     private Institute 		institute;
     private List<Document> documents;
     private boolean 		verified;

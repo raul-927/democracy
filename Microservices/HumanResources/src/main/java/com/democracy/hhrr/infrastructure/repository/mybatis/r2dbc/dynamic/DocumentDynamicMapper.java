@@ -28,7 +28,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface DocumentDynamicMapper extends CommonSelectMapper{
 
-    BasicColumn[] documentColumnList = BasicColumn.columnList(documentId, documentName, verified, approved, observation, attachment);
+    BasicColumn[] documentColumnList = BasicColumn.columnList(documentId, documentName, documentVerified, documentApproved, documentObservation, documentAttachment);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -72,10 +72,10 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
                 c
                         .map(documentId).toPropertyWhenPresent("documentId", record::getDocumentId)
                         .map(documentName).toProperty("documentName")
-                        .map(verified).toProperty("verified")
-                        .map(approved).toProperty("approved")
-                        .map(observation).toProperty("observation")
-                        .map(attachment).toProperty("attachment")
+                        .map(documentVerified).toProperty("documentVerified")
+                        .map(documentApproved).toProperty("documentApproved")
+                        .map(documentObservation).toProperty("documentObservation")
+                        .map(documentAttachment).toProperty("documentAttachment")
         );
     }
 
@@ -84,10 +84,10 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
                 c
                         .map(documentId).toProperty("documentId")
                         .map(documentName).toProperty("documentName")
-                        .map(verified).toProperty("verified")
-                        .map(approved).toProperty("approved")
-                        .map(observation).toProperty("observation")
-                        .map(attachment).toProperty("attachment")
+                        .map(documentVerified).toProperty("documentVerified")
+                        .map(documentApproved).toProperty("documentApproved")
+                        .map(documentObservation).toProperty("documentObservation")
+                        .map(documentAttachment).toProperty("documentAttachment")
         );
     }
 
@@ -95,10 +95,10 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.insert(this::insert, record, DOCUMENT, c ->
                 c
                         .map(documentName).toPropertyWhenPresent("documentName", record::getDocumentName)
-                        .map(verified).toPropertyWhenPresent("verified", record::isVerified)
-                        .map(approved).toPropertyWhenPresent("approved", record::isApproved)
-                        .map(observation).toPropertyWhenPresent("observation", record::getObservation)
-                        .map(attachment).toPropertyWhenPresent("attachment", record::getAttachment)
+                        .map(documentVerified).toPropertyWhenPresent("verified", record::isDocumentVerified)
+                        .map(documentApproved).toPropertyWhenPresent("approved", record::isDocumentApproved)
+                        .map(documentObservation).toPropertyWhenPresent("observation", record::getDocumentObservation)
+                        .map(documentAttachment).toPropertyWhenPresent("attachment", record::getDocumentAttachment)
         );
     }
 

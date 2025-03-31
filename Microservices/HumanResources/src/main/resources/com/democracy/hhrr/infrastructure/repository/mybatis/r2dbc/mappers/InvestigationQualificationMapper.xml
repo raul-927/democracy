@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.InvestigationQualificationMapper">
+	<resultMap type="com.democracy.hhrr.domain.aux.InvestigationQualification" id="InvestigationQualificationResult">
+  	
+  		<id		property = "investigationQualificationId" 	column= "investigation_qualification_id"/>
+		<result property = "investigationId"				column= "investigation_id"/>
+		<result property = "qualificationId"				column= "qualification_id"/>
+  	</resultMap>
+</mapper>
