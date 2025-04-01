@@ -124,7 +124,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     default Flux<Qualification> selectAllQualifications(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
     }
-    default Flux<Qualification> selectDepartment(Qualification record) {
+    default Flux<Qualification> selectQualification(Qualification record) {
         return select(str ->{
             if(record.getQualificationId() != null){
                 if(!record.getQualificationId().isEmpty()){
