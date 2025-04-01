@@ -1,14 +1,9 @@
-package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers;
+package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux;
 
 import com.democracy.hhrr.domain.aux.CityNeighborhood;
-import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.aux.CityNeighDynamicMapper;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.aux.NeighBorhoodStreetDynamicMapper;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.NeighborhoodStreetDynamicSqlSupport;
 import org.apache.ibatis.annotations.Mapper;
-import org.mybatis.dynamic.sql.BindableColumn;
-import org.mybatis.dynamic.sql.DerivedColumn;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.where.WhereApplier;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;

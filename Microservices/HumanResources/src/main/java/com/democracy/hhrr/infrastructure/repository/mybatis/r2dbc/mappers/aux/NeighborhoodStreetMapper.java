@@ -1,4 +1,4 @@
-package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers;
+package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux;
 
 import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 

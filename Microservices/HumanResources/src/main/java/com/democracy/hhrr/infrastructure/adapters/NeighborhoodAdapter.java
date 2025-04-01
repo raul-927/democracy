@@ -1,16 +1,14 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
-import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import com.democracy.hhrr.domain.models.Neighborhood;
 import com.democracy.hhrr.domain.ports.out.NeighborhoodOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.NeighborhoodMapper;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.NeighborhoodStreetMapper;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux.NeighborhoodStreetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

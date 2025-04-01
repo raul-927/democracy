@@ -10,7 +10,7 @@ public final class DepartmentCityDynamicSqlSupport {
     public static final DepartmentCityTable DEPARTMENT_CITY = new DepartmentCityTable();
 
     public static final SqlColumn<String> departmentCityId = DEPARTMENT_CITY.departmentCityId;
-    public static final SqlColumn<String> neighborhoodId = DEPARTMENT_CITY.departmentId;
+    public static final SqlColumn<String> departmentId = DEPARTMENT_CITY.departmentId;
     public static final SqlColumn<String> cityId = DEPARTMENT_CITY.cityId;
 
 
