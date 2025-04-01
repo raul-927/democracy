@@ -27,7 +27,6 @@ public class NeighborhoodAdapter implements NeighborhoodOut {
 
     @Override
     public Mono<Integer> createNeighborhood(Neighborhood neighborhood) {
-        List<NeighborhoodStreet>neighborhoodStreetList = new ArrayList<>();
         return neighborhoodMapper.insert(neighborhood);
     }
 
