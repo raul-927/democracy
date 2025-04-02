@@ -1,16 +1,12 @@
 package com.democracy.hhrr.application.usecases.neighborhood;
 
 import com.democracy.hhrr.application.services.aux.NeighborhoodStreetService;
-import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import com.democracy.hhrr.domain.models.Neighborhood;
 import com.democracy.hhrr.domain.ports.in.neighborhood.CreateNeighborhoodIn;
 import com.democracy.hhrr.domain.ports.out.NeighborhoodOut;
-import com.democracy.hhrr.domain.ports.out.aux.neighborhoodstreet.NeighborhoodStreetOut;
-import org.springframework.boot.web.embedded.netty.NettyWebServer;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

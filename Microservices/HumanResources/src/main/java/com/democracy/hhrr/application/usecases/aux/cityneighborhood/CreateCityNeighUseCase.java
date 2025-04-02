@@ -1,10 +1,8 @@
 package com.democracy.hhrr.application.usecases.aux.cityneighborhood;
 
 import com.democracy.hhrr.domain.aux.CityNeighborhood;
-import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import com.democracy.hhrr.domain.ports.in.aux.cityneighborhood.CreateCityNeighborhoodIn;
-import com.democracy.hhrr.domain.ports.in.aux.neighborhoodstreet.CreateNeighStreetIn;
-import com.democracy.hhrr.domain.ports.out.aux.cityneighborhood.CityNeighborhoodOut;
+import com.democracy.hhrr.domain.ports.out.aux.CityNeighborhoodOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

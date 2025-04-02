@@ -1,4 +1,4 @@
-package com.democracy.hhrr.domain.ports.out.aux.cityneighborhood;
+package com.democracy.hhrr.domain.ports.out.aux;
 
 import com.democracy.hhrr.domain.aux.CityNeighborhood;
 import reactor.core.publisher.Mono;

@@ -1,4 +1,4 @@
-package com.democracy.hhrr.domain.ports.out.aux.neighborhoodstreet;
+package com.democracy.hhrr.domain.ports.out.aux;
 
 import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import reactor.core.publisher.Flux;

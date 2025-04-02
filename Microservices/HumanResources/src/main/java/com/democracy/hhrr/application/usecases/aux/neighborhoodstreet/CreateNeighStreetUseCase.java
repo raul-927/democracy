@@ -2,7 +2,7 @@ package com.democracy.hhrr.application.usecases.aux.neighborhoodstreet;
 
 import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import com.democracy.hhrr.domain.ports.in.aux.neighborhoodstreet.CreateNeighStreetIn;
-import com.democracy.hhrr.domain.ports.out.aux.neighborhoodstreet.NeighborhoodStreetOut;
+import com.democracy.hhrr.domain.ports.out.aux.NeighborhoodStreetOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
