@@ -1,8 +1,8 @@
 package com.democracy.hhrr.infrastructure.web.rest;
 
 
-import com.democracy.hhrr.application.services.DepartmentService;
-import com.democracy.hhrr.domain.models.Department;
+import com.democracy.hhrr.application.services.aux.DepartmentCityService;
+import com.democracy.hhrr.domain.aux.DepartmentCity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
@@ -18,54 +18,42 @@ import java.util.List;
 public class DepartmentCityController {
 
     @Autowired
-    private DepartmentService departmentService;
+    private DepartmentCityService departmentCityService;
 
-   /* @PostMapping(
+   @PostMapping(
             value = "/select",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})*/
-    public Flux<Department> selectDepartment(@RequestBody Department department){
-        return this.departmentService.selectDepartment(department);
-    }
-    /*@GetMapping(
-            value = "/select-all",
-            produces = {MediaType.APPLICATION_JSON_VALUE})*/
-    public Flux<Department> selectAllDepartment(){
-        System.out.println("LLEGA DEPARTMENT CONTROLLER");
-        return this.departmentService.selectAllDepartment();
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Flux<DepartmentCity> selectDepartmentCity(@RequestBody DepartmentCity departmentCity){
+        return this.departmentCityService.selectDepartmentCity(departmentCity);
     }
 
-    /*@PostMapping(
+    @PostMapping(
             value="/save",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})*/
-    public Mono<Integer> createDepartment(@RequestBody Department department){
-        return this.departmentService.createDepartment(department);
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Mono<Integer> createDepartmentCity(@RequestBody DepartmentCity departmentCity){
+        return this.departmentCityService.createDepartmentCity(departmentCity);
     }
 
     @PostMapping(
             value="/insert",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Mono<Integer> insertMultiple(@RequestBody List<Department> departmentList){
-        return departmentService.createMultipleDepartment(departmentList);
+    public Mono<Integer> insertMultiple(@RequestBody List<DepartmentCity> departmentCities){
+        return departmentCityService.createMultipleDepartmentCity(departmentCities);
     }
 
-    /*@PutMapping(
+    @PutMapping(
             value="/update",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})*/
-    public Mono<Integer> updateDepartment(@RequestBody Department department){
-        return this.departmentService.updateDepartment(department);
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Mono<Integer> updateDepartmentCity(@RequestBody DepartmentCity departmentCity){
+        return this.departmentCityService.updateDepartmentCity(departmentCity);
     }
 
-   /* @GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})*/
-    public Mono<Long> selectCountDepartment(){
-        return this.departmentService.selectCount();
-    }
-
-    /*@DeleteMapping(value="/delete/{departmentId}")*/
-    public Mono<Integer> deleteDepartment(@PathVariable String departmentId){
-        return this.departmentService.deleteDepartment(departmentId);
+    @DeleteMapping(value="/delete/{departmentId}")
+    public Mono<Integer> deleteDepartmentCity(@PathVariable String departmentCityId){
+        return this.departmentCityService.deleteDepartmentCity(departmentCityId);
     }
 }

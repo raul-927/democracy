@@ -22,7 +22,7 @@ public interface DepartmentCityMapper extends DepartmentCityDynamicMapper {
     default Mono<Integer> insert(DepartmentCity record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, DEPARTMENT_CITY, c ->
                 c
-                        .map(departmentCityId).toProperty("departmentCityId")
+
                         .map(departmentId).toProperty("departmentId")
                         .map(cityId).toProperty("cityId")
 
@@ -33,7 +33,7 @@ public interface DepartmentCityMapper extends DepartmentCityDynamicMapper {
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, DEPARTMENT_CITY, c ->
                 c
 
-                        .map(departmentCityId).toProperty("departmentCityId")
+
                         .map(departmentId).toProperty("departmentId")
                         .map(cityId).toProperty("cityId")
         );
