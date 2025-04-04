@@ -146,6 +146,8 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
 
 
         //--------------------------------------------------------------------------------------------
+        System.out.println("BACMPRESSURE:---");
+
         Flux<Integer> numbers15 = Flux.range(1, 100);
         numbers15
                 .doOnRequest(requested -> System.out.println("Requested: " + requested))
@@ -166,8 +168,68 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+//---------------------------------------------------------------------------------------------------
+
+        System.out.println("BACMPRESSURE_WITH_INTERVALS:---");
+        Flux<Long> intervalNumbers = Flux.interval(Duration.ofSeconds(1))
+                .take(20);
+        intervalNumbers
+                .doOnRequest(requested -> System.out.println("Requested with intervals: " + requested))
+                .subscribe(
+                        value -> {
+                            System.out.println("Received with intervals: " + value);
+                            try {
+                                Thread.sleep(2000); // Simulate slower processing
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                        },
+                        error -> System.err.println("Error: " + error.getMessage())
+                );
+
+// Sleep to observe backpressure in action
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //-------------------------------------------------------------------------------------------------
+        System.out.println("BACMPRESSURE_WITH_SLOW_CONSUMER:---");
+        Flux<Integer> numbers14 = Flux.range(1, 100);
+        numbers14
+                .doOnRequest(requested -> System.out.println("Requested with slow consumer: " + requested))
+                .subscribe(
+                        value -> {
+                            System.out.println("Received with slow consumer: " + value);
+                            try {
+                                Thread.sleep(500); // Simulate slower processing
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        error -> System.err.println("Error: " + error.getMessage()),
+                        () -> System.out.println("Completed")
+                );
+
+// Sleep to observe backpressure in action
+
+        try {
+
+            Thread.sleep(30000); // Consumer requests slowly over 30 seconds
+
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+
+        }
 
 
+        Flux.interval(Duration.ofSeconds(1))
+                .map(index -> "Event " + index)
+                .take(10)
+                .subscribe(value -> System.out.println("VALUE: "+value)); // L
         return departmentOut.selectDepartment(department);
     }
 

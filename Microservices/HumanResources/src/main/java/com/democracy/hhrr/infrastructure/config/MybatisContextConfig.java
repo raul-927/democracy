@@ -16,6 +16,7 @@ import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer;
 import org.springframework.transaction.ReactiveTransactionManager;
 
 import javax.naming.NamingException;
+import java.util.Objects;
 
 @Configuration
 public class MybatisContextConfig {
@@ -75,7 +76,7 @@ public class MybatisContextConfig {
 	@Bean
 	public ConnectionFactoryInitializer initializer(ConnectionFactory connectionFactory){
 		ConnectionFactoryInitializer initi = new ConnectionFactoryInitializer();
-		initi.setConnectionFactory(connectionFactoryTransactionManager(connectionFactory).getConnectionFactory());
+		initi.setConnectionFactory(Objects.requireNonNull(connectionFactoryTransactionManager(connectionFactory).getConnectionFactory()));
 
 		return initi;
 	}

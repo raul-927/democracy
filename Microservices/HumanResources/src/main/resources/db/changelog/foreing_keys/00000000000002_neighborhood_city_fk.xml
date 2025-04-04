@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000001" author="rhernandez">
+
+        <addForeignKeyConstraint  baseColumnNames="neighborhood_id"
+                                  baseTableName="CITY_NEIGH"
+                                  constraintName="neighborhood_city_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="neighborhood_id"
+                                  referencedTableName="NEIGHBORHOOD"
+                                  validate="true"/>
+    </changeSet>
+</databaseChangeLog>

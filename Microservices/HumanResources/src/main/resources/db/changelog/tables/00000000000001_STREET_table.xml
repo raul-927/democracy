@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000001" author="rhernandez">
+
+        <createTable tableName="STREET">
+            <column name="street_id"                type="varchar(36)" defaultValueComputed="${u_id}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="street_name" 	            type="varchar(20)"/>
+            <column name="street_type" 	            type="ENUM('CL','K','DG','CI','AV','VIA','TR','AK','AC','RU','CA','CM','BR','JR')"/>
+        </createTable>
+
+
+    </changeSet>
+</databaseChangeLog>

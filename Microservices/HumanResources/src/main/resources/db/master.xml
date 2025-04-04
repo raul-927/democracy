@@ -15,8 +15,51 @@
     <property name="u_id" value="(UUID())" dbms="mysql"/>
 
 
-   	<include file="db/changelog/00000000000001_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="db/changelog/00000000000002_relations_schema.xml" relativeToChangelogFile="false"/>
+    <!--  TABLES -->
+   	<include file="db/changelog/tables/00000000000001_ADDRESS_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_CITY_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_CRIMINAL_RECORD.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_DEPARTMENT_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_DOCUMENT_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_INSTITUTE_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_INVESTIGATION_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_NEIGHBORHOOD_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_PENAL_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_PERSON_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_PROFESSION_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_QUALIFICATION_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_STREET_table.xml" relativeToChangelogFile="false"/>
+    <!-- RELATIONALS TABLES -->
+    <include file="db/changelog/relationals_tables/00000000000002_CITY_NEIGH.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/relationals_tables/00000000000002_DEPARTMENT_CITY_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/relationals_tables/00000000000002_INVESTIGATION_CRIMINAL_RECORD_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/relationals_tables/00000000000002_INVESTIGATION_QUALIFICATION_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/relationals_tables/00000000000002_NEIGH_STREET_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/relationals_tables/00000000000002_QUALIFICATION_DOCUMENT_table.xml" relativeToChangelogFile="false"/>
 
+    <!-- FOREING KEYS -->
+    <include file="db/changelog/foreing_keys/00000000000002_address_city_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_address_department_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_address_neighborhood_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_address_street1_pk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_address_street2_pk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_city_department_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_city_neighborhood_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_criminal_record_investigation_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_criminal_record_penal_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_department_city_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_document_qualification_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_institute_address_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_institute_qualification_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_investigation_criminal_record_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_investigation_person_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_investigation_qualification_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_neighborhood_city_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_neighborhood_street_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_person_address_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_person_profession_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_qualification_document_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_qualification_investigation_fk.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/foreing_keys/00000000000002_street_neighborhood_fk.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
