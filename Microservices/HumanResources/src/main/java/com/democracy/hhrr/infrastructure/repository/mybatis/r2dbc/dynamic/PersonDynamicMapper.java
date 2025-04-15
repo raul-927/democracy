@@ -1,8 +1,13 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
+import com.democracy.hhrr.domain.models.City;
 import com.democracy.hhrr.domain.models.Person;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.ProfessionDynamicSqlSupport;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
+import org.mybatis.dynamic.sql.BindableColumn;
+import org.mybatis.dynamic.sql.DerivedColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
 import org.mybatis.dynamic.sql.delete.render.DeleteStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
@@ -23,10 +28,12 @@ import reactor.core.publisher.Mono;
 import java.util.Collection;
 
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.ProfessionDynamicSqlSupport.professionName;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface PersonDynamicMapper extends CommonSelectMapper {
     BasicColumn[] personColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName, addressId, professionId);
+    BasicColumn[] fullPersonColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName, addressId, professionId, professionName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -120,11 +127,15 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
     }
 
     default Flux<Person> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, personColumnList, PERSON, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, fullPersonColumnList, PERSON, completer);
     }
     default Flux<Person> selectPerson(Person person) {
         return select(str ->{
-
+            BindableColumn<Person> personProfessionId= DerivedColumn.of("profession_id", "PERSON");
+            BindableColumn<Person> professionProfessionId= DerivedColumn.of("profession_id", "PROFESSION");
+            str
+                    .join(ProfessionDynamicSqlSupport.PROFESSION)
+                    .on(personProfessionId, equalTo(professionProfessionId)).build();
             if(person.getPersonId() != null ||
                     person.getFirstName() != null){
                 if(person.getPersonId()!=null && !person.getPersonId().isEmpty()){
