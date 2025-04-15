@@ -15,6 +15,8 @@ public class RouterConstant {
     public static final String STREET_PATH = "/street";
     public static final String INVESTIGATION ="/investigation";
     public static final String  PENAL = "/penal";
+    public static final String PROFESSION = "/profession";
+    public static final String PERSON ="/person";
 
 
 }

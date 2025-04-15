@@ -9,8 +9,6 @@
         <addForeignKeyConstraint  baseColumnNames="address_id"
                                   baseTableName="PERSON"
                                   constraintName="person_address_fk"
-                                  onDelete="CASCADE"
-                                  onUpdate="RESTRICT"
                                   referencedColumnNames="address_id"
                                   referencedTableName="ADDRESS"
                                   validate="true"/>
