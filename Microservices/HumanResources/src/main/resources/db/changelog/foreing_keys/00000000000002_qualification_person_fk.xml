@@ -6,11 +6,12 @@
         <property name="autoIncrement" value="true"/>
         
     <changeSet id="00000000000001" author="rhernandez">
-        <addForeignKeyConstraint  baseColumnNames="document_id"
+
+        <addForeignKeyConstraint  baseColumnNames="person_id"
                                   baseTableName="QUALIFICATION"
-                                  constraintName="document_qualification_fk"
-                                  referencedColumnNames="document_id"
-                                  referencedTableName="DOCUMENT"
+                                  constraintName="qualification_person_fk"
+                                  referencedColumnNames="person_id"
+                                  referencedTableName="PERSON"
                                   validate="true"/>
     </changeSet>
 </databaseChangeLog>

@@ -17,6 +17,9 @@ public class RouterConstant {
     public static final String  PENAL = "/penal";
     public static final String PROFESSION = "/profession";
     public static final String PERSON ="/person";
+    public static final String CRIMINAL_RECORD ="/criminalrecord";
+    public static final String QUALIFICATION = "/qualification";
+    public static final String DOCUMENT = "/document";
 
 
 }

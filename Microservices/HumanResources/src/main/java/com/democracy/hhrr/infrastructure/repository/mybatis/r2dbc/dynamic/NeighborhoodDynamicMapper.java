@@ -18,7 +18,6 @@ import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBa
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.*;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 

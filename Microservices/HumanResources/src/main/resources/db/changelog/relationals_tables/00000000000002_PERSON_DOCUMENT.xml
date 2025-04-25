@@ -6,14 +6,18 @@
         <property name="autoIncrement" value="true"/>
         
     <changeSet id="00000000000001" author="rhernandez">
-        <createTable tableName="CRIMINAL_RECORD">
-            <column name="criminal_record_id"           type="varchar(36)" defaultValueComputed="${u_id}">
+
+
+        <createTable tableName="PERSON_DOCUMENT">
+            <column name="person_document_id"   type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name ="criminal_record_name"  type="varchar(36)"/>
-            <column name ="criminal_record_description"  type="varchar(36)"/>
-            <column name ="penal_id"  type="varchar(36)"/>
-            <column name ="person_id"  type="varchar(36)"/>
+            <column name="person_id"   type="varchar(36)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="document_id" type="varchar(36)">
+                <constraints unique="false" nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

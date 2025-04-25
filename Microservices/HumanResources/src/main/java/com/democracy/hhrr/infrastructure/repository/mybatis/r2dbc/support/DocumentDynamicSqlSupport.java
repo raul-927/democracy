@@ -3,6 +3,7 @@ package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support;
 
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
+import org.springframework.http.codec.multipart.FilePart;
 
 import java.sql.Blob;
 import java.sql.JDBCType;
@@ -15,7 +16,7 @@ public final class DocumentDynamicSqlSupport {
     public static final SqlColumn<Boolean> documentVerified      = DOCUMENT.documentVerified;
     public static final SqlColumn<Boolean> documentApproved      = DOCUMENT.documentApproved;
     public static final SqlColumn<String> documentObservation   = DOCUMENT.documentObservation;
-    public static final SqlColumn<Blob> documentAttachment    = DOCUMENT.documentAttachment;
+    public static final SqlColumn<FilePart> documentAttachment    = DOCUMENT.documentAttachment;
 
     public static final class DocumentTable extends SqlTable {
         public final SqlColumn<String> documentId   = column("document_id", JDBCType.LONGNVARCHAR);
@@ -23,7 +24,7 @@ public final class DocumentDynamicSqlSupport {
         public final SqlColumn<Boolean> documentVerified     = column("verified", JDBCType.BINARY);
         public final SqlColumn<Boolean> documentApproved     = column("approved", JDBCType.BINARY);
         public final SqlColumn<String> documentObservation  = column("observation", JDBCType.LONGNVARCHAR);
-        public final SqlColumn<Blob> documentAttachment   = column("attachment", JDBCType.BLOB);
+        public final SqlColumn<FilePart> documentAttachment   = column("attachment", JDBCType.BLOB);
 
         public DocumentTable(){
             super("DOCUMENT");

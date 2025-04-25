@@ -1,6 +1,5 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
-import com.democracy.hhrr.domain.models.City;
 import com.democracy.hhrr.domain.models.Department;
 
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport;

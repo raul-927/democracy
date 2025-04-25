@@ -27,6 +27,7 @@ import java.util.Collection;
 
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CriminalRecordDynamicSqlSupport.*;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PenalDynamicSqlSupport.penalName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
@@ -36,8 +37,9 @@ public interface CriminalRecordDynamicMapper {
             criminalRecordId, criminalRecordName, criminalRecordDescription, penalId);
 
     BasicColumn[] criminalRecordColumns = BasicColumn.columnList(
-            criminalRecordId, criminalRecordName, criminalRecordDescription, penalId,
-            penalName
+            criminalRecordId, criminalRecordName, criminalRecordDescription, penalId,criminalRecordPersonId,
+            penalName,
+            firstName, secondName, firstLastName, secondLastName,cedula, civicCredential, addressId, professionId
     );
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
@@ -80,6 +82,7 @@ public interface CriminalRecordDynamicMapper {
                         .map(criminalRecordName).toProperty("criminalRecordName")
                         .map(criminalRecordDescription).toProperty("criminalRecordDescription")
                         .map(penalId).toProperty("penalId")
+                        .map(criminalRecordPersonId).toProperty("person.personId")
         );
     }
 
@@ -89,6 +92,7 @@ public interface CriminalRecordDynamicMapper {
                         .map(criminalRecordName).toProperty("criminalRecordName")
                         .map(criminalRecordDescription).toProperty("criminalRecordDescription")
                         .map(penalId).toProperty("penalId")
+                        .map(criminalRecordPersonId).toProperty("person.personId")
         );
     }
 
@@ -98,7 +102,8 @@ public interface CriminalRecordDynamicMapper {
                         c
                                 .map(criminalRecordName).toPropertyWhenPresent("criminalRecordName", record::getCriminalRecordName)
                                 .map(criminalRecordDescription).toPropertyWhenPresent("criminalRecordDescription", record::getCriminalRecordDescription)
-                                .map(penalId).toPropertyWhenPresent("penalId", record.getPenal()::getPenalId)
+                                .map(penalId).toPropertyWhenPresent("penal.penalId", record.getPenal()::getPenalId)
+                                .map(criminalRecordPersonId).toPropertyWhenPresent("person.personId", record.getPerson()::getPersonId)
         );
     }
 
@@ -123,9 +128,16 @@ public interface CriminalRecordDynamicMapper {
         BindableColumn<CriminalRecord> CRIMINAL_RECORD_penal_id= DerivedColumn.of("penal_id", "CRIMINAL_RECORD");
         BindableColumn<CriminalRecord> PENAL_penal_id= DerivedColumn.of("penal_id", "PENAL");
 
+        BindableColumn<CriminalRecord> CRIMINAL_RECORD_person_id = DerivedColumn.of("person_id", "CRIMINAL_RECORD");
+        BindableColumn<CriminalRecord> PERSON_person_id = DerivedColumn.of("person_id", "PERSON");
+
         return selectFullCriminalRecord(crm ->{
-                crm.join(PenalDynamicSqlSupport.PENAL)
-                    .on(CRIMINAL_RECORD_penal_id, equalTo(PENAL_penal_id));
+                crm
+                        .join(PenalDynamicSqlSupport.PENAL)
+                        .on(CRIMINAL_RECORD_penal_id, equalTo(PENAL_penal_id))
+
+                        .join(PERSON)
+                        .on(CRIMINAL_RECORD_person_id,equalTo(PERSON_person_id));
 
             if(criminalRecord.getCriminalRecordId() != null ||
                     criminalRecord.getCriminalRecordDescription() != null ||
@@ -136,6 +148,8 @@ public interface CriminalRecordDynamicMapper {
                     crm
                             .where(criminalRecordName,isLikeWhenPresent(criminalRecord::getCriminalRecordName).map(s -> "%" + s + "%"))
                             .and(criminalRecordDescription,isLikeWhenPresent(criminalRecord::getCriminalRecordDescription))
+                            .and(criminalRecordPersonId, isLikeWhenPresent(criminalRecord.getPerson()::getPersonId))
+                            .and(cedula, isLikeWhenPresent(criminalRecord.getPerson()::getCedula))
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }
@@ -160,6 +174,7 @@ public interface CriminalRecordDynamicMapper {
                         .set(criminalRecordName).equalToWhenPresent(record::getCriminalRecordName)
                         .set(criminalRecordDescription).equalToWhenPresent(record::getCriminalRecordDescription)
                         .set(penalId).equalToWhenPresent(record.getPenal()::getPenalId)
+                        .set(criminalRecordPersonId).equalToWhenPresent(record.getPerson()::getPersonId)
                         .where(criminalRecordId, isEqualTo(record::getCriminalRecordId))
 
         );
@@ -171,6 +186,7 @@ public interface CriminalRecordDynamicMapper {
                         .set(criminalRecordName).equalToWhenPresent(record::getCriminalRecordName)
                         .set(criminalRecordDescription).equalTo(record::getCriminalRecordDescription)
                         .set(penalId).equalTo(record.getPenal()::getPenalId)
+                        .set(criminalRecordPersonId).equalToWhenPresent(record.getPerson()::getPersonId)
                         .where(criminalRecordId, isEqualTo(record::getCriminalRecordId))
         );
     }
@@ -181,6 +197,7 @@ public interface CriminalRecordDynamicMapper {
                         set(criminalRecordName).equalToWhenPresent(record::getCriminalRecordName)
                         .set(criminalRecordDescription).equalTo(record::getCriminalRecordDescription)
                         .set(penalId).equalTo(record.getPenal()::getPenalId)
+                        .set(criminalRecordPersonId).equalTo(record.getPerson()::getPersonId)
                         .applyWhere(whereApplier)
         );
     }
@@ -191,6 +208,7 @@ public interface CriminalRecordDynamicMapper {
                         set(criminalRecordName).equalToWhenPresent(record::getCriminalRecordName)
                         .set(criminalRecordDescription).equalToWhenPresent(record::getCriminalRecordDescription)
                         .set(penalId).equalToWhenPresent(record.getPenal()::getPenalId)
+                        .set(criminalRecordPersonId).equalToWhenPresent(record.getPerson()::getPersonId)
                         .applyWhere(whereApplier)
         );
     }

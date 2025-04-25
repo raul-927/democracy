@@ -17,8 +17,9 @@ import java.util.List;
 public class Qualification {
     private int 			id;
     private String 			qualificationId;
+    private Person          person;
     private Institute 		institute;
-    private List<Document> documents;
+    private Document        document;
     private boolean 		verified;
     private boolean			approved;
 }

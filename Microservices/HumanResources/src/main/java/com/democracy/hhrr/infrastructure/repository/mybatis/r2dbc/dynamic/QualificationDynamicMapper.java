@@ -1,8 +1,8 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
+import com.democracy.hhrr.domain.models.CriminalRecord;
 import com.democracy.hhrr.domain.models.Qualification;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.*;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.QualificationDocumentSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.BindableColumn;
@@ -27,20 +27,30 @@ import reactor.core.publisher.Mono;
 import java.util.Collection;
 
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DocumentDynamicSqlSupport.*;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.InstituteDynamicSqlSupport.instituteId;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.InstituteDynamicSqlSupport.instituteName;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.InstituteDynamicSqlSupport.addressId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.InstituteDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.PERSON;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.firstLastName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.firstName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.personId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.secondLastName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.secondName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.QualificationDynamicSqlSupport.*;
+
 
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface QualificationDynamicMapper extends CommonSelectMapper{
 
-    BasicColumn[] qualificationInstituteDocumentColumnList = BasicColumn.columnList(
-            qualificationId, verified, approved,qualificationInstituteId,
+    BasicColumn[] qualificationPersonInstituteDocumentColumnList = BasicColumn.columnList(
+            qualificationId, qualificationPersonId, qualificationInstituteId, documentQualificationId, verified, approved,
+            personId, firstName,secondName, firstLastName, secondLastName,
             instituteId,instituteName, addressId,
-            documentId, documentName, documentVerified, documentApproved,documentObservation
+            documentId, documentName, documentVerified, documentApproved,documentObservation, documentAttachment
             );
+
+    BasicColumn[] qualificationColumn = BasicColumn.columnList(
+            qualificationId, qualificationPersonId, qualificationInstituteId, documentQualificationId, verified, approved
+    );
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -79,27 +89,34 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.insert(this::insert, record, QUALIFICATION_TABLE, c ->
                 c
                         .map(qualificationId).toPropertyWhenPresent("qualificationId", record::getQualificationId)
+                        .map(personId).toProperty("personId")
+                        .map(qualificationInstituteId).toProperty("institute.instituteId")
+                        .map(documentQualificationId).toProperty("document.documentId")
                         .map(verified).toProperty("verified")
                         .map(approved).toProperty("approved")
-                        .map(instituteId).toProperty("institute.instituteId")
         );
     }
 
     default Mono<Integer> insertMultiple(Collection<Qualification> records) {
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, QUALIFICATION_TABLE, c ->
                 c
+                        .map(personId).toProperty("personId")
+                        .map(qualificationInstituteId).toProperty("institute.instituteId")
+                        .map(documentQualificationId).toProperty("document.documentId")
                         .map(verified).toProperty("verified")
                         .map(approved).toProperty("approved")
-                        .map(instituteId).toProperty("institute.instituteId")
         );
     }
 
     default Mono<Integer> insertSelective(Qualification record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, QUALIFICATION_TABLE, c ->
                 c
+                        .map(personId).toPropertyWhenPresent("personId", record.getPerson()::getPersonId)
+                        .map(qualificationInstituteId).toPropertyWhenPresent("institute.instituteId", record.getInstitute()::getInstituteId)
+                        .map(documentQualificationId).toPropertyWhenPresent("document.documentId", record.getDocument()::getDocumentId)
                         .map(verified).toPropertyWhenPresent("verified", record::isVerified)
                         .map(approved).toPropertyWhenPresent("verified", record::isApproved)
-                        .map(instituteId).toPropertyWhenPresent("verified", record.getInstitute()::getInstituteId)
+
 
         );
     }
@@ -111,21 +128,38 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     }
 
     default Mono<Qualification> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, qualificationInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, qualificationPersonInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
     }
 
     default Flux<Qualification> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationPersonInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
     }
 
     default Flux<Qualification> selectFullColumnQualification(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationPersonInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
     }
     default Flux<Qualification> selectAllQualifications(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationColumn, QUALIFICATION_TABLE, completer);
     }
     default Flux<Qualification> selectQualification(Qualification record) {
+        BindableColumn<Qualification> QUALIFICATION_person_id= DerivedColumn.of("person_id", "QUALIFICATION");
+        BindableColumn<Qualification> QUALIFICATION_institute_id= DerivedColumn.of("institute_id", "QUALIFICATION");
+        BindableColumn<Qualification> QUALIFICATION_document_id= DerivedColumn.of("document_id", "QUALIFICATION");
+
+        BindableColumn<Qualification> PERSON_person_id= DerivedColumn.of("person_id", "PERSON");
+        BindableColumn<Qualification> INSTITUTE_institute_id= DerivedColumn.of("institute_id", "INSTITUTE");
+        BindableColumn<Qualification> DOCUMENT_document_id= DerivedColumn.of("document_id", "DOCUMENT");
         return select(str ->{
+            str
+                    .join(PERSON)
+                    .on(QUALIFICATION_person_id, equalTo(PERSON_person_id))
+
+                    .join(INSTITUTE_TABLE)
+                    .on(QUALIFICATION_institute_id, equalTo(INSTITUTE_institute_id))
+
+                    .join(DOCUMENT)
+                    .on(QUALIFICATION_document_id, equalTo(DOCUMENT_document_id));
+
             if(record.getQualificationId() != null){
                 if(!record.getQualificationId().isEmpty()){
                     str.where(qualificationId,isEqualToWhenPresent(record.getQualificationId()));
@@ -143,22 +177,22 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
         });
     }
     default Flux<Qualification> selectFullQualification(Qualification record) {
-        BindableColumn<Qualification> QUALIFICATION_qualification_id= DerivedColumn.of("qualification_id", "QUALIFICATION");
+        BindableColumn<Qualification> QUALIFICATION_person_id= DerivedColumn.of("person_id", "QUALIFICATION");
         BindableColumn<Qualification> QUALIFICATION_institute_id= DerivedColumn.of("institute_id", "QUALIFICATION");
+        BindableColumn<Qualification> QUALIFICATION_document_id= DerivedColumn.of("document_id", "QUALIFICATION");
 
-        BindableColumn<Qualification> QUALIFICATION_DOCUMENT_qualification_id = DerivedColumn.of("qualification_id", "QUALIFICATION_DOCUMENT");
-        BindableColumn<Qualification> QUALIFICATION_DOCUMENT_document_id = DerivedColumn.of("document_id", "QUALIFICATION_DOCUMENT");
 
         BindableColumn<Qualification> INSTITUTE_institute_id= DerivedColumn.of("institute_id", "INSTITUTE");
         BindableColumn<Qualification> DOCUMENT_document_id= DerivedColumn.of("document_id", "DOCUMENT");
+        BindableColumn<Qualification> PERSON_person_id= DerivedColumn.of("person_id", "PERSON");
 
         return selectFullColumnQualification(str ->{
            str
-                    .join(QualificationDocumentSqlSupport.QUALIFICATION_DOCUMENT_TABLE)
-                    .on(QUALIFICATION_qualification_id, equalTo(QUALIFICATION_DOCUMENT_qualification_id))
+                   .join((PersonDynamicSqlSupport.PERSON))
+                   .on(QUALIFICATION_person_id,equalTo(PERSON_person_id))
 
                     .join(DOCUMENT)
-                    .on(QUALIFICATION_DOCUMENT_document_id,equalTo(DOCUMENT_document_id))
+                    .on(QUALIFICATION_document_id,equalTo(DOCUMENT_document_id))
 
                     .join(InstituteDynamicSqlSupport.INSTITUTE_TABLE)
                     .on(QUALIFICATION_institute_id,equalTo(INSTITUTE_institute_id))
@@ -189,7 +223,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<Qualification> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, qualificationInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, qualificationPersonInstituteDocumentColumnList, QUALIFICATION_TABLE, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {

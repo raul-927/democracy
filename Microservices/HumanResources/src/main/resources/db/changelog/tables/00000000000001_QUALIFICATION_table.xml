@@ -10,7 +10,9 @@
             <column name="qualification_id"           type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true"        nullable="false"/>
             </column>
+            <column name = "person_id"               type = "varchar(36)"/>
             <column name = "institute_id"               type = "varchar(36)"/>
+            <column name = "document_id"               type = "varchar(36)"/>
             <column name = "verified"                   type = "boolean"/>
             <column name = "approved"                   type = "varchar(36)"/>
         </createTable>

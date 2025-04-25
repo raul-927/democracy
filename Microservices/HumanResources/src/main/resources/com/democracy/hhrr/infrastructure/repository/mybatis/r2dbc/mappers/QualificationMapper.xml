@@ -7,8 +7,8 @@
   		<id		property = "qualificationId" 	column = "qualification_id"/>
 		<result property = "verified" 			column = "verified"/>
 		<result property = "approved" 			column = "approved"/>
-
+		<association property="person" resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PersonMapper.PersonResult"/>
 		<association property="institute" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.InstituteMapper.InstituteResult"/>
-		<collection property="documents" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DocumentMapper.DocumentResult"/>
+		<association property="document" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DocumentMapper.DocumentResult"/>
   	</resultMap>
 </mapper>

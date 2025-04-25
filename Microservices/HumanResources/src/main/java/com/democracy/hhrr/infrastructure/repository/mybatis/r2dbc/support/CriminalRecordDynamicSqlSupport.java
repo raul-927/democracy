@@ -12,12 +12,14 @@ public final class CriminalRecordDynamicSqlSupport {
     public static final SqlColumn<String> criminalRecordName = CRIMINAL_RECORD.criminalRecordName;
     public static final SqlColumn<String> criminalRecordDescription = CRIMINAL_RECORD.criminalRecordDescription;
     public static final SqlColumn<String> penalId = CRIMINAL_RECORD.penalId;
+    public static final SqlColumn<String> criminalRecordPersonId = CRIMINAL_RECORD.criminalRecordPersonId;
 
     public static final class CriminalRecord extends SqlTable {
         public final SqlColumn<String> criminalRecordId = column("criminal_record_id", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> criminalRecordName = column("criminal_record_name", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> criminalRecordDescription = column("criminal_record_description", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> penalId = column("penal_id", JDBCType.LONGNVARCHAR);
+        public final SqlColumn<String> criminalRecordPersonId = column("person_id", JDBCType.LONGNVARCHAR);
 
 
         public CriminalRecord(){

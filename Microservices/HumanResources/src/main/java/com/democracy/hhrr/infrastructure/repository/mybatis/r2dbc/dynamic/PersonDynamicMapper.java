@@ -1,9 +1,7 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
-import com.democracy.hhrr.domain.models.City;
 import com.democracy.hhrr.domain.models.Person;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.ProfessionDynamicSqlSupport;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.BindableColumn;

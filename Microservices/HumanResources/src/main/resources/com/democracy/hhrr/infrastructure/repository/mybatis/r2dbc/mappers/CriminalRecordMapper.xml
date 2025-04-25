@@ -7,7 +7,7 @@
   		<id		property = "criminalRecordId" 			column = "criminal_record_id"/>
 		<result property ="criminalRecordName"			column="criminal_record_name"/>
 		<result property ="criminalRecordDescription"	column="criminal_record_description"/>
-
+		<association property="person" resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PersonMapper.PersonResult"/>
 		<association property="penal" 	resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PenalMapper.PenalResult"/>
   	</resultMap>
 </mapper>
