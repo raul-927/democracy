@@ -18,6 +18,7 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
+import org.springframework.security.core.parameters.P;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
@@ -25,13 +26,29 @@ import reactor.core.publisher.Mono;
 
 import java.util.Collection;
 
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.AddrerssDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.AddrerssDynamicSqlSupport.addressId;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.CITY;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.DEPARTMENT;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.NEIGHBORHOOD;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.neighborhoodName;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.*;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.ProfessionDynamicSqlSupport.professionName;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface PersonDynamicMapper extends CommonSelectMapper {
     BasicColumn[] personColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName, addressId, professionId);
-    BasicColumn[] fullPersonColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName, addressId, professionId, professionName);
+    BasicColumn[] fullPersonColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName,
+            addressId, geoLocation, addressNumber, street1, street2,
+            departmentId, departmentName,
+            cityId,cityName,
+            neighborhoodId, neighborhoodName,
+            streetId, streetName, streetType,
+            streetId2, streetName2, streetType2,
+            professionId, professionName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> count(SelectStatementProvider selectStatement);
@@ -128,12 +145,51 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, fullPersonColumnList, PERSON, completer);
     }
     default Flux<Person> selectPerson(Person person) {
+
+        BindableColumn<Person> personAddressId= DerivedColumn.of("address_id", "PERSON");
+        BindableColumn<Person> personProfessionId= DerivedColumn.of("profession_id", "PERSON");
+
+        BindableColumn<Person> addressAddressId= DerivedColumn.of("address_id", "ADDRESS");
+        BindableColumn<Person> addressDepartmentId= DerivedColumn.of("department_id", "ADDRESS");
+        BindableColumn<Person> addressCityId= DerivedColumn.of("city_id", "ADDRESS");
+        BindableColumn<Person> addressNeighborhoodId= DerivedColumn.of("neighborhood_id", "ADDRESS");
+        BindableColumn<Person> addressStreet1Id= DerivedColumn.of("street1_id", "ADDRESS");
+        BindableColumn<Person> addressStreet2Id= DerivedColumn.of("street2_id", "ADDRESS");
+
+        BindableColumn<Person> professionProfessionId= DerivedColumn.of("profession_id", "PROFESSION");
+        BindableColumn<Person> departmentDepartmentId= DerivedColumn.of("department_id", "DEPARTMENT");
+        BindableColumn<Person> cityCityId= DerivedColumn.of("city_id", "CITY");
+        BindableColumn<Person> neighborhoodNeighborhoodId= DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
+        BindableColumn<Person> streetStreet1Id= DerivedColumn.of("street_id", "STREET");
+        BindableColumn<Person> streetStreet2Id= DerivedColumn.of("street_id", "STREET");
+
+
         return select(str ->{
-            BindableColumn<Person> personProfessionId= DerivedColumn.of("profession_id", "PERSON");
-            BindableColumn<Person> professionProfessionId= DerivedColumn.of("profession_id", "PROFESSION");
+
             str
+                    .join(ADDRESS)
+                    .on(personAddressId, equalTo(addressAddressId))
+
+                    .join(DEPARTMENT)
+                    .on(addressDepartmentId, equalTo(departmentDepartmentId))
+
+                    .join(CITY)
+                    .on(addressCityId, equalTo(cityCityId))
+
+                    .join(NEIGHBORHOOD)
+                    .on(addressNeighborhoodId, equalTo(neighborhoodNeighborhoodId))
+
+                    .join(STREET)
+                    .on(addressStreet1Id, equalTo(streetStreet1Id))
+
+                    .join(STREET2)
+                    .on(addressStreet2Id, equalTo(streetStreet2Id))
+
+
                     .join(ProfessionDynamicSqlSupport.PROFESSION)
                     .on(personProfessionId, equalTo(professionProfessionId)).build();
+
+
             if(person.getPersonId() != null ||
                     person.getFirstName() != null){
                 if(person.getPersonId()!=null && !person.getPersonId().isEmpty()){
