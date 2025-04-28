@@ -182,10 +182,6 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                     .join(STREET)
                     .on(addressStreet1Id, equalTo(streetStreet1Id))
 
-                    .join(STREET2)
-                    .on(addressStreet2Id, equalTo(streetStreet2Id))
-
-
                     .join(ProfessionDynamicSqlSupport.PROFESSION)
                     .on(personProfessionId, equalTo(professionProfessionId)).build();
 

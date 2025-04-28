@@ -81,7 +81,7 @@ public interface CriminalRecordDynamicMapper {
                         .map(criminalRecordId).toPropertyWhenPresent("criminalRecordIdd", record::getCriminalRecordId)
                         .map(criminalRecordName).toProperty("criminalRecordName")
                         .map(criminalRecordDescription).toProperty("criminalRecordDescription")
-                        .map(penalId).toProperty("penalId")
+                        .map(penalId).toProperty("penal.penalId")
                         .map(criminalRecordPersonId).toProperty("person.personId")
         );
     }
