@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.InstituteMapper">
+	<resultMap type="com.democracy.hhrr.domain.models.Institute" id="InstituteResult">
+  	
+  		<id		property = "instituteId" 			column = "institute_id"/>
+		<result property ="instituteName"			column="institute_name"/>
+		<association property="address" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper.AddressResult"/>
+  	</resultMap>
+</mapper>

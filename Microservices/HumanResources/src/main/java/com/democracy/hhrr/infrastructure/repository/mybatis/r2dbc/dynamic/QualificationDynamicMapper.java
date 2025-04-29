@@ -89,7 +89,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.insert(this::insert, record, QUALIFICATION_TABLE, c ->
                 c
                         .map(qualificationId).toPropertyWhenPresent("qualificationId", record::getQualificationId)
-                        .map(personId).toProperty("personId")
+                        .map(personId).toProperty("person.personId")
                         .map(qualificationInstituteId).toProperty("institute.instituteId")
                         .map(documentQualificationId).toProperty("document.documentId")
                         .map(verified).toProperty("verified")
@@ -100,7 +100,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> insertMultiple(Collection<Qualification> records) {
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, QUALIFICATION_TABLE, c ->
                 c
-                        .map(personId).toProperty("personId")
+                        .map(personId).toProperty("person.personId")
                         .map(qualificationInstituteId).toProperty("institute.instituteId")
                         .map(documentQualificationId).toProperty("document.documentId")
                         .map(verified).toProperty("verified")
@@ -111,7 +111,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> insertSelective(Qualification record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, QUALIFICATION_TABLE, c ->
                 c
-                        .map(personId).toPropertyWhenPresent("personId", record.getPerson()::getPersonId)
+                        .map(personId).toPropertyWhenPresent("person.personId", record.getPerson()::getPersonId)
                         .map(qualificationInstituteId).toPropertyWhenPresent("institute.instituteId", record.getInstitute()::getInstituteId)
                         .map(documentQualificationId).toPropertyWhenPresent("document.documentId", record.getDocument()::getDocumentId)
                         .map(verified).toPropertyWhenPresent("verified", record::isVerified)

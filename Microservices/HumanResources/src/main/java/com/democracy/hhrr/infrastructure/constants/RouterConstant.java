@@ -1,5 +1,7 @@
 package com.democracy.hhrr.infrastructure.constants;
 
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
+
 public class RouterConstant {
     //--------------------GENERIC PATH---------------------------------
     public static final String PATH_MAIN = "/humanresources";
@@ -20,6 +22,7 @@ public class RouterConstant {
     public static final String CRIMINAL_RECORD ="/criminalrecord";
     public static final String QUALIFICATION = "/qualification";
     public static final String DOCUMENT = "/document";
+    public static final String INSTITUTE = "/institute";
 
 
 }

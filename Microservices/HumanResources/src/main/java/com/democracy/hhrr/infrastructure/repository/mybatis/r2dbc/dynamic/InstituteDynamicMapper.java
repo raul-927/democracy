@@ -75,7 +75,7 @@ public interface InstituteDynamicMapper extends CommonSelectMapper {
                 c
                         .map(instituteId).toPropertyWhenPresent("instituteId", record::getInstituteId)
                         .map(instituteName).toProperty("instituteName")
-                        .map(addressId).toProperty("address.addressId")
+                        .map(addressId).toPropertyWhenPresent("address.addressId", record.getAddress()::getAddressId)
         );
     }
 

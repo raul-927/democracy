@@ -2,6 +2,7 @@ package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Institute;
 import com.democracy.hhrr.domain.ports.out.InstituteOut;
+import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.InstituteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -10,33 +11,36 @@ import reactor.core.publisher.Mono;
 @Component
 public class InsituteAdapter implements InstituteOut {
 
+    @Autowired
+    private InstituteMapper instituteMapper;
+
     @Override
     public Mono<Integer> createInstitute(Institute institute) {
-        return null;
+        return instituteMapper.insert(institute);
     }
 
     @Override
-    public Mono<Integer> deleteInstitute(String documentId) {
-        return null;
+    public Mono<Integer> deleteInstitute(String instituteId) {
+        return instituteMapper.deleteInstitute(instituteId);
     }
 
     @Override
     public Flux<Institute> selectInstitute(Institute institute) {
-        return null;
+        return instituteMapper.selectInstitute(institute);
     }
 
     @Override
     public Flux<Institute> selectAllInstitutes() {
-        return null;
+        return instituteMapper.selectAllInstitutes();
     }
 
     @Override
     public Mono<Long> selectCount() {
-        return null;
+        return instituteMapper.count();
     }
 
     @Override
     public Mono<Integer> updateInstitute(Institute institute) {
-        return null;
+        return instituteMapper.updateAllByPrimaryKey(institute);
     }
 }
