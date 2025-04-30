@@ -146,10 +146,12 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     }
     default Flux<Department> selectFullDepartment(Department department) {
         BindableColumn<Department> DEPARTMENT_department_id= DerivedColumn.of("department_id", "DEPARTMENT");
+
         BindableColumn<Department> DEPARTMENT_CITY_department_id= DerivedColumn.of("department_id", "DEPARTMENT_CITY");
         BindableColumn<Department> DEPARTMENT_CITY_city_id= DerivedColumn.of("city_id", "DEPARTMENT_CITY");
 
         BindableColumn<Department> CITY_city_id= DerivedColumn.of("city_id", "CITY");
+
         BindableColumn<Department> CITY_NEIGH_city_id = DerivedColumn.of("city_id", "CITY_NEIGH");
         BindableColumn<Department> CITY_NEIGH_neigyborhood_id = DerivedColumn.of("neighborhood_id", "CITY_NEIGH");
 
@@ -157,6 +159,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
 
         BindableColumn<Department> NEIGH_STREET_neighborhood_id = DerivedColumn.of("neighborhood_id", "NEIGH_STREET");
         BindableColumn<Department> NEIGH_STREET_street_id = DerivedColumn.of("street_id", "NEIGH_STREET");
+
         BindableColumn<Department> STREET_street_id = DerivedColumn.of("street_id", "STREET");
 
 
