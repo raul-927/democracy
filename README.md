@@ -10,6 +10,8 @@ vault kv put secret/human-resources @HumanResources-dev.json
 
 vault kv put secret/products @Products-dev.json
 
+vault kv put secret/democracy-orchestrator @democracy-orchestrator.json
+
 <p><h3>INICIAR KEYCLOAK</h3></p>
 Ir al directorio donde se encuentran los archivos keycloak, abrir una terminal,
 y ejecutar el siguiente comando:
