@@ -153,7 +153,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
         BindableColumn<Department> CITY_city_id= DerivedColumn.of("city_id", "CITY");
 
         BindableColumn<Department> CITY_NEIGH_city_id = DerivedColumn.of("city_id", "CITY_NEIGH");
-        BindableColumn<Department> CITY_NEIGH_neigyborhood_id = DerivedColumn.of("neighborhood_id", "CITY_NEIGH");
+        BindableColumn<Department> CITY_NEIGH_neighborhood_id = DerivedColumn.of("neighborhood_id", "CITY_NEIGH");
 
         BindableColumn<Department> NEIGHBORHOOD_neighborhood_id = DerivedColumn.of("neighborhood_id", "NEIGHBORHOOD");
 
@@ -175,7 +175,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
                     .on(CITY_city_id,equalTo(CITY_NEIGH_city_id))
 
                     .join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
-                    .on(CITY_NEIGH_neigyborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
+                    .on(CITY_NEIGH_neighborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
 
                     .join(NeighborhoodStreetDynamicSqlSupport.NEIGH_STREET)
                     .on(NEIGHBORHOOD_neighborhood_id,equalTo(NEIGH_STREET_neighborhood_id))
