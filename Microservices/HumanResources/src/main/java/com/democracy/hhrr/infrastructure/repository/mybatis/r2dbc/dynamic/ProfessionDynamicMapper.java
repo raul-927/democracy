@@ -103,17 +103,15 @@ public interface ProfessionDynamicMapper extends CommonSelectMapper {
     }
     default Flux<Profession> selectProfession(Profession profession) {
         return select(str ->{
-
+            System.out.println("PROFESSION IN SELECT_PROFESSION: "+profession.getProfessionId());
             if(profession.getProfessionId() != null ||
                     profession.getProfessionName() != null){
-                if(profession.getProfessionId()!=null && !profession.getProfessionId().isEmpty()){
-                    str.where(professionId,isEqualToWhenPresent(profession.getProfessionId()));
-                }else{
                     str
-                            .where(professionName,isLikeWhenPresent(profession::getProfessionName).map(s -> "%" + s + "%"))
+                            .where(professionId,isEqualToWhenPresent(profession.getProfessionId()))
+                            .and(professionName,isLikeWhenPresent(profession::getProfessionName).map(s -> "%" + s + "%"))
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
-                }
+
             }else{
                 str.orderBy(professionId);
             }

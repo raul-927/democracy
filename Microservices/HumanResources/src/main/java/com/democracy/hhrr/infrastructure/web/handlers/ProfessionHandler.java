@@ -3,6 +3,7 @@ package com.democracy.hhrr.infrastructure.web.handlers;
 import com.democracy.hhrr.application.services.ProfessionService;
 import com.democracy.hhrr.domain.models.Penal;
 import com.democracy.hhrr.domain.models.Profession;
+import liquibase.pro.packaged.S;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,12 +12,12 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class ProfessionHandler {
 
 
-    @Autowired
+    //@Autowired
     private ProfessionService professionService;
 
     public Mono<ServerResponse> selectProfession(ServerRequest request){
@@ -25,7 +26,7 @@ public class ProfessionHandler {
         obtainProfession.map( prf ->{
             sendProfession.setProfessionId(prf.getProfessionId());
             sendProfession.setProfessionName(prf.getProfessionName());
-
+            System.out.println("SEND_PROFESSION: "+sendProfession);
             return sendProfession;
         });
         return ServerResponse

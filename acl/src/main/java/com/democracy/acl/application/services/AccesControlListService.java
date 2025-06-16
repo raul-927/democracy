@@ -23,7 +23,7 @@ public class AccesControlListService<T> {
 	private static final String DOMAIN ="com.democracy.domain.model.";
 	
 	public int insert(T object) {
-		Integer id = Math.abs(object.hashCode());
+		int id = Math.abs(object.hashCode());
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
 		ObjectIdentity objectIdentity  = null;
 		MutableAcl mutableAcl = null;

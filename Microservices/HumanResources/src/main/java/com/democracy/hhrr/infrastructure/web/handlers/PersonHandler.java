@@ -12,12 +12,13 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class PersonHandler {
 
-    @Autowired
+    //@Autowired
     private PersonService personService;
+
 
     public Mono<ServerResponse> selectPerson(ServerRequest request){
         var obtainPerson = request.bodyToMono(Person.class);

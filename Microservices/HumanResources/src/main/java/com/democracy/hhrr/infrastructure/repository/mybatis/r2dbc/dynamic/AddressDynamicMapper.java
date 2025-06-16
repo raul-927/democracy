@@ -41,7 +41,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
 public interface AddressDynamicMapper extends CommonSelectMapper{
 
     BasicColumn[] addressColumnList = BasicColumn.columnList(addressId, addressNumber, geoLocation);
-    BasicColumn[] addressFullColumnList = BasicColumn.columnList(addressId, addressNumber, geoLocation,departmentId, departmentName,
+    BasicColumn[] addressFullColumnList = BasicColumn.columnList(addressId, addressNumber, geoLocation,departmentId, departmentName,street1,street2,
             cityId, cityName,
             neighborhoodId, neighborhoodName,
             streetId, streetName, streetType,
@@ -163,7 +163,7 @@ public interface AddressDynamicMapper extends CommonSelectMapper{
                         .join(NeighborhoodDynamicSqlSupport.NEIGHBORHOOD)
                         .on(ADDRESS_NEIGHBORHOOD_neighborhood_id,equalTo(NEIGHBORHOOD_neighborhood_id))
 
-                        .join(StreetDynamicSqlSupport.STREET, "S1")
+                        .join(StreetDynamicSqlSupport.STREET,"S1")
                         .on(ADDRESS_STREET_street1_id,equalTo(STREET_street1_id))
 
                         .join(StreetDynamicSqlSupport.STREET2, "S2")

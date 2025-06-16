@@ -187,12 +187,17 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
 
 
             if(person.getPersonId() != null ||
-                    person.getFirstName() != null){
+                    person.getFirstName() != null || person.getCedula()!= 0){
                 if(person.getPersonId()!=null && !person.getPersonId().isEmpty()){
-                    str.where(personId,isEqualToWhenPresent(person.getPersonId()));
+                    str.where(personId,isEqualToWhenPresent(person.getPersonId()))
+                            .build()
+                            .render(RenderingStrategies.MYBATIS3);
                 }else{
                     str
-                            .where(firstName,isLikeWhenPresent(person::getFirstName).map(s -> "%" + s + "%"))
+                            .where(cedula,isEqualToWhenPresent(person::getCedula))
+                            .and(firstName,isLikeWhenPresent(person::getFirstName).map(s -> "%" + s + "%"))
+                            .and(secondName,isLikeWhenPresent(person::getSecondName).map(s ->"%"+s+"%"))
+                            .and(firstLastName,isLikeWhenPresent(person::getFirstLastName).map(s ->"%"+s+"%"))
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }
