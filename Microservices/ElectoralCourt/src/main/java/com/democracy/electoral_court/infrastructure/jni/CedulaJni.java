@@ -3,7 +3,7 @@ package com.democracy.electoral_court.infrastructure.jni;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class CedulaJni {
 
     static {
