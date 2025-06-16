@@ -103,7 +103,6 @@ public interface ProfessionDynamicMapper extends CommonSelectMapper {
     }
     default Flux<Profession> selectProfession(Profession profession) {
         return select(str ->{
-            System.out.println("PROFESSION IN SELECT_PROFESSION: "+profession.getProfessionId());
             if(profession.getProfessionId() != null ||
                     profession.getProfessionName() != null){
                     str
