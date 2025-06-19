@@ -5,7 +5,6 @@ import com.democracy.hhrr.domain.ports.in.street.CreateStreetIn;
 import com.democracy.hhrr.domain.ports.in.street.DeleteStreetIn;
 import com.democracy.hhrr.domain.ports.in.street.SelectStreetIn;
 import com.democracy.hhrr.domain.ports.in.street.UpdateStreetIn;
-import com.rabbitmq.client.AMQP;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
