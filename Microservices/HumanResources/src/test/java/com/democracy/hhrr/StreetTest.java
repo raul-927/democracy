@@ -5,18 +5,12 @@ import com.democracy.hhrr.application.usecases.street.CreateStreetUseCase;
 import com.democracy.hhrr.application.usecases.street.SelectStreetUseCase;
 import com.democracy.hhrr.domain.enums.StreetType;
 import com.democracy.hhrr.domain.models.Street;
-import com.democracy.hhrr.domain.ports.out.StreetOut;
-import com.democracy.hhrr.infrastructure.adapters.StreetAdapter;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.StreetDynamicMapper;
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.zookeeper.Op;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
