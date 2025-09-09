@@ -1,0 +1,2210 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Democracy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/neightborhoodMS/neighborhoods": {
+      "post": {
+        "summary": "http://localhost:8088/neightborhoodMS/neightborhoods",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "neighborhoodName": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "object",
+                    "properties": {
+                      "cityId": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "cityId"
+                    ]
+                  }
+                },
+                "required": [
+                  "neighborhoodName",
+                  "city"
+                ]
+              },
+              "example": {
+                "neighborhoodName": "EL BOSQUE",
+                "city": {
+                  "cityId": 1
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/address/save": {
+      "post": {
+        "summary": "createAddress",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "geoLocation": {
+                    "type": "string"
+                  },
+                  "addressNumber": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "object",
+                    "properties": {
+                      "departmentId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "departmentId"
+                    ]
+                  },
+                  "city": {
+                    "type": "object",
+                    "properties": {
+                      "cityId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "cityId"
+                    ]
+                  },
+                  "neighborhood": {
+                    "type": "object",
+                    "properties": {
+                      "neighborhoodId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "neighborhoodId"
+                    ]
+                  },
+                  "street1": {
+                    "type": "object",
+                    "properties": {
+                      "streetId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "streetId"
+                    ]
+                  },
+                  "street2": {
+                    "type": "object",
+                    "properties": {
+                      "streetId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "streetId"
+                    ]
+                  }
+                },
+                "required": [
+                  "geoLocation",
+                  "addressNumber",
+                  "department",
+                  "city",
+                  "neighborhood",
+                  "street1",
+                  "street2"
+                ]
+              },
+              "example": {
+                "geoLocation": "192.5478.365.878",
+                "addressNumber": "55-05",
+                "department": {
+                  "departmentId": "330f7355-7ac5-11ef-b941-fc349767c6fb"
+                },
+                "city": {
+                  "cityId": "48706d9f-7a81-11ef-b941-fc349767c6fb"
+                },
+                "neighborhood": {
+                  "neighborhoodId": "3f21e9d7-7a81-11ef-b941-fc349767c6fb"
+                },
+                "street1": {
+                  "streetId": "8fafd59c-7a81-11ef-b941-fc349767c6fb"
+                },
+                "street2": {
+                  "streetId": "399989c4-7a81-11ef-b941-fc349767c6fb"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/address/select": {
+      "post": {
+        "summary": "selectAddress",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/street/select-count": {
+      "get": {
+        "summary": "selectCount",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/street/save": {
+      "post": {
+        "summary": "createStreet",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "streetName": {
+                    "type": "string"
+                  },
+                  "streetType": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "streetName",
+                  "streetType"
+                ]
+              },
+              "example": {
+                "streetName": "Carrera 51",
+                "streetType": "K"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/street/select": {
+      "post": {
+        "summary": "selectStreet",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/street/insert": {
+      "post": {
+        "summary": "insertMultipleStreets",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "streetName": {
+                      "type": "string"
+                    },
+                    "streetType": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "streetName",
+                    "streetType"
+                  ]
+                }
+              },
+              "example": [
+                {
+                  "streetName": "Carrera 30",
+                  "streetType": "K"
+                },
+                {
+                  "streetName": "Carrera 33",
+                  "streetType": "K"
+                },
+                {
+                  "streetName": "Calle 10",
+                  "streetType": "CL"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/street/delete/74d0b216-6add-11ef-9556-fc349767c6fb": {
+      "delete": {
+        "summary": "deleteStreet",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/street/update": {
+      "put": {
+        "summary": "updateStreet",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "streetId": {
+                    "type": "string"
+                  },
+                  "streetName": {
+                    "type": "string"
+                  },
+                  "streetType": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "streetId",
+                  "streetName",
+                  "streetType"
+                ]
+              },
+              "example": {
+                "streetId": "216308bd-6ae0-11ef-9556-fc349767c6fb",
+                "streetName": "Carrera 55",
+                "streetType": "K"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/department/select-count": {
+      "get": {
+        "summary": "selectCountDepartment",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/department/save": {
+      "post": {
+        "summary": "createDepartment",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "departmentName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "departmentName"
+                ]
+              },
+              "example": {
+                "departmentName": "Antioca"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/department/select": {
+      "post": {
+        "summary": "selectDepartment",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/department/insert": {
+      "post": {
+        "summary": "insertMultipleDepartment",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "departmentName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "departmentName"
+                  ]
+                }
+              },
+              "example": [
+                {
+                  "departmentName": "Atlántico"
+                },
+                {
+                  "departmentName": "Bolívar"
+                },
+                {
+                  "departmentName": "Guainía"
+                },
+                {
+                  "departmentName": "La Guajira"
+                },
+                {
+                  "departmentName": "Antioca"
+                },
+                {
+                  "departmentName": "Magdalena"
+                },
+                {
+                  "departmentName": "Amazonas"
+                },
+                {
+                  "departmentName": "Arauca"
+                },
+                {
+                  "departmentName": "Bolivar"
+                },
+                {
+                  "departmentName": "Boyacá"
+                },
+                {
+                  "departmentName": "Caldas"
+                },
+                {
+                  "departmentName": "Caquetá"
+                },
+                {
+                  "departmentName": "Casanare"
+                },
+                {
+                  "departmentName": "Cauca"
+                },
+                {
+                  "departmentName": "Cesar"
+                },
+                {
+                  "departmentName": "Chocó"
+                },
+                {
+                  "departmentName": "Córdoba"
+                },
+                {
+                  "departmentName": "Cundinamarca"
+                },
+                {
+                  "departmentName": "Guaviare"
+                },
+                {
+                  "departmentName": "Meta"
+                },
+                {
+                  "departmentName": "Nariño"
+                },
+                {
+                  "departmentName": "Norte de Santander"
+                },
+                {
+                  "departmentName": "Putumayo"
+                },
+                {
+                  "departmentName": "Quindío"
+                },
+                {
+                  "departmentName": "Risaralda"
+                },
+                {
+                  "departmentName": "San Andrés y Providencia"
+                },
+                {
+                  "departmentName": "Santander"
+                },
+                {
+                  "departmentName": "Sucre"
+                },
+                {
+                  "departmentName": "Tolima"
+                },
+                {
+                  "departmentName": "Valle del Cauca"
+                },
+                {
+                  "departmentName": "Vaupés"
+                },
+                {
+                  "departmentName": "Vichada"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/department/delete/c6f7f3ec-6c93-11ef-a55f-fc349767c6fb": {
+      "delete": {
+        "summary": "deleteDepartment",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/department/update": {
+      "put": {
+        "summary": "updateDepartment",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "departmentId": {
+                    "type": "string"
+                  },
+                  "departmentName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "departmentId",
+                  "departmentName"
+                ]
+              },
+              "example": {
+                "departmentId": "a6641a44-6c89-11ef-af6d-fc349767c6fb",
+                "departmentName": "La Guajira"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/department/select-all": {
+      "get": {
+        "summary": "selectAllDepartment",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/document/select": {
+      "post": {
+        "summary": "selectDocument",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/document/save": {
+      "post": {
+        "summary": "createDocument",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/document/update": {
+      "put": {
+        "summary": "updateDocument",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/document/select-all": {
+      "get": {
+        "summary": "selectAllDocuments",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/depcity": {
+      "post": {
+        "summary": "createDepartmentCity",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/neighborhood/select-count": {
+      "get": {
+        "summary": "selectCountNeighborhood",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/neighborhood/save": {
+      "post": {
+        "summary": "createNeighborhood",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "neighborhoodName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "neighborhoodName"
+                ]
+              },
+              "example": {
+                "neighborhoodName": "Villa Olimpica"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/neighborhood/delete/675c9752-6efb-11ef-a3d4-fc349767c6fb": {
+      "delete": {
+        "summary": "deleteNeighborhood",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/neighborhood/select": {
+      "post": {
+        "summary": "selectNeighborhood",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/neighborhood/select-all": {
+      "get": {
+        "summary": "selectAllNeighborhood",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/neighstreet/insert": {
+      "post": {
+        "summary": "insertMultipleNeighStreet",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "neighborhoodId": {
+                      "type": "string"
+                    },
+                    "streetId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "neighborhoodId",
+                    "streetId"
+                  ]
+                }
+              },
+              "example": [
+                {
+                  "neighborhoodId": "b62eafa4-8826-11ef-9f65-fc349767c6fb",
+                  "streetId": "a3dccdf1-8826-11ef-9f65-fc349767c6fb"
+                },
+                {
+                  "neighborhoodId": "b62eafa4-8826-11ef-9f65-fc349767c6fb",
+                  "streetId": "a3dcd027-8826-11ef-9f65-fc349767c6fb"
+                },
+                {
+                  "neighborhoodId": "b62eafa4-8826-11ef-9f65-fc349767c6fb",
+                  "streetId": "a3dcd074-8826-11ef-9f65-fc349767c6fb"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/cityneigh/insert": {
+      "post": {
+        "summary": "insertMultipleCityNeigh",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "cityId": {
+                      "type": "string"
+                    },
+                    "neighborhoodId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": [
+                {
+                  "cityId": "9e4ff197-8827-11ef-9f65-fc349767c6fb",
+                  "neighborhoodId": "b62eafa4-8826-11ef-9f65-fc349767c6fb"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/city/select-count": {
+      "get": {
+        "summary": "selectCountCity",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/city/select-all": {
+      "get": {
+        "summary": "selectAllCity",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/city/save": {
+      "post": {
+        "summary": "createCity",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cityName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "cityName"
+                ]
+              },
+              "example": {
+                "cityName": "Galapa"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/city/select": {
+      "post": {
+        "summary": "selectCity",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/penal/save": {
+      "post": {
+        "summary": "createPenal",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/person/save": {
+      "post": {
+        "summary": "createPerson",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/person/select": {
+      "post": {
+        "summary": "selectCriminalRecord",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/qualification/select-all": {
+      "get": {
+        "summary": "selectAllQualifications",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/qualification/select": {
+      "post": {
+        "summary": "selectQualification",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/qualification/save": {
+      "post": {
+        "summary": "createQualification",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/profession/save": {
+      "post": {
+        "summary": "createProfession",
+        "deprecated": false,
+        "description": "createProfession",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/profession/select": {
+      "post": {
+        "summary": "selectProfession",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/criminalrecord/save": {
+      "post": {
+        "summary": "createCriminalRecord",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/institute/select": {
+      "post": {
+        "summary": "createInstitute",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/humanresources/investigation/insert": {
+      "post": {
+        "summary": "createInvestigationResult",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/realms/democracy_realm/protocol/openid-connect/token": {
+      "post": {
+        "summary": "democracy-keycloak-token",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "client_id": {
+                    "example": "democracy_client",
+                    "type": "string"
+                  },
+                  "client_secret": {
+                    "example": "YYcdVQO1lB9F5IjxjN6ljHueBWhZz1aZ",
+                    "type": "string"
+                  },
+                  "grant_type": {
+                    "example": "password",
+                    "type": "string"
+                  },
+                  "username": {
+                    "example": "raraherher9274",
+                    "type": "string"
+                  },
+                  "password": {
+                    "example": "raraherher9274",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "client_id",
+                  "client_secret",
+                  "grant_type",
+                  "username",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/local/step": {
+      "post": {
+        "summary": "http://96f81bbd.execute-api.localhost.localstack.cloud:4566/local/step",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "integer"
+                  },
+                  "productName": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "productId",
+                  "productName",
+                  "price"
+                ]
+              },
+              "example": {
+                "productId": 890,
+                "productName": "Memoria RAM 64GB",
+                "price": 1750000
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post": {
+      "post": {
+        "summary": "https://httpbin.localhost.localstack.cloud:4566/post",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "integer"
+                  },
+                  "productName": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "productId",
+                  "productName",
+                  "price"
+                ]
+              },
+              "example": {
+                "productId": 11,
+                "productName": "Prueba11",
+                "price": 1945554912315
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/statemachine/order/new": {
+      "post": {
+        "summary": "new",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/statemachine/order/test": {
+      "get": {
+        "summary": "Untitled Endpoint",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/democracyorchestrator/department/select-all": {
+      "post": {
+        "summary": "getInvestigation",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/democracyorchestrator/investigation/validateProfession": {
+      "post": {
+        "summary": "Untitled Endpoint",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "required": [
+          "name",
+          "photoUrls",
+          "id",
+          "category",
+          "tags",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Pet ID"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category",
+            "description": "group"
+          },
+          "name": {
+            "type": "string",
+            "description": "name",
+            "example": "doggie"
+          },
+          "photoUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "image URL"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "description": "tag"
+          },
+          "status": {
+            "type": "string",
+            "description": "Pet Sales Status",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ]
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Category ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Category Name"
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Tag ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Tag Name"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://dev.your-api-server.com",
+      "description": "Develop Env"
+    }
+  ],
+  "security": []
+}
