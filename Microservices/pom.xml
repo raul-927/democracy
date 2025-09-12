@@ -23,12 +23,7 @@
 	<modules>
 		<module>HumanResources</module>
 		<module>Products</module>
-		<module>Accountancy</module>
 		<module>ElectoralCourt</module>
-		<module>StateMachine</module>
-		<module>feing-client</module>
-		<module>feing-target</module>
-
 	</modules>
 	<dependencyManagement>
 		<dependencies>
