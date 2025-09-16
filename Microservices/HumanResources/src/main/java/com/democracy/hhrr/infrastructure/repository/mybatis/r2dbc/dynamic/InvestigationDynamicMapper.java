@@ -77,7 +77,7 @@ public interface InvestigationDynamicMapper extends CommonSelectMapper {
         return ReactiveMyBatis3Utils.insert(this::insert, record, INVESTIGATION, c ->
                 c
                         .map(investigationId).toPropertyWhenPresent("investigationId", record::getInvestigationId)
-                        .map(personId).toProperty("personId")
+                        .map(personId).toProperty("person.personId")
                         .map(observation).toProperty("observation")
         );
     }

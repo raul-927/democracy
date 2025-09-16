@@ -1,8 +1,9 @@
 package com.democracy.hhrr.domain.ports.in.investigation;
 
 import com.democracy.hhrr.domain.models.Investigation;
+import reactor.core.publisher.Flux;
 
 public interface SelectInvestigationIn {
 
-    Investigation selectInvestigation(Investigation investigation);
+    Flux<Investigation> selectInvestigation(Investigation investigation);
 }

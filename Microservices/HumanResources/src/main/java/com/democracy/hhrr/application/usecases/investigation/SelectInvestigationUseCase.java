@@ -4,6 +4,7 @@ import com.democracy.hhrr.domain.models.Investigation;
 import com.democracy.hhrr.domain.ports.in.investigation.SelectInvestigationIn;
 import com.democracy.hhrr.domain.ports.out.InvestigationOut;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 @Component
 public class SelectInvestigationUseCase implements SelectInvestigationIn {
@@ -15,7 +16,7 @@ public class SelectInvestigationUseCase implements SelectInvestigationIn {
     }
 
     @Override
-    public Investigation selectInvestigation(Investigation investigation) {
+    public Flux<Investigation> selectInvestigation(Investigation investigation) {
         return this.investigationOut.selectInvestigation(investigation);
     }
 }

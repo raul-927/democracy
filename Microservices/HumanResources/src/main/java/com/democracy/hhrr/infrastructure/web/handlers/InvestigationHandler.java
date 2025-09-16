@@ -2,6 +2,7 @@ package com.democracy.hhrr.infrastructure.web.handlers;
 
 import com.democracy.hhrr.application.services.InvestigationService;
 import com.democracy.hhrr.domain.models.Department;
+import com.democracy.hhrr.domain.models.Institute;
 import com.democracy.hhrr.domain.models.Investigation;
 import liquibase.pro.packaged.A;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,16 @@ public class InvestigationHandler {
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(investigationService.selectInvestigation(sendInvestigation), Investigation.class);
+    }
+
+    public Mono<ServerResponse> createInvestigation(ServerRequest request){
+        Mono<Investigation> investigationMono = request.bodyToMono(Investigation.class);
+
+        return investigationMono.flatMap(
+                i ->ServerResponse
+                        .ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(investigationService.createInvestigation(i), Investigation.class));
     }
 
 }
