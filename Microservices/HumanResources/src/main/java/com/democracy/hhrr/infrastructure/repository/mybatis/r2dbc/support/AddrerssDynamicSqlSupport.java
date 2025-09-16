@@ -1,6 +1,5 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support;
 
-import liquibase.pro.packaged.S;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 

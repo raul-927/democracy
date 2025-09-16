@@ -1,10 +1,7 @@
 package com.democracy.hhrr.infrastructure.web.handlers;
 
 import com.democracy.hhrr.application.services.InvestigationService;
-import com.democracy.hhrr.domain.models.Department;
-import com.democracy.hhrr.domain.models.Institute;
 import com.democracy.hhrr.domain.models.Investigation;
-import liquibase.pro.packaged.A;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

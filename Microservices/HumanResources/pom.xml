@@ -12,9 +12,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>HumanResources</name>
 	<description>Proyecto MS Recursos humanos para democracy</description>
-	<properties>
-		<java.version>22</java.version>
-	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
