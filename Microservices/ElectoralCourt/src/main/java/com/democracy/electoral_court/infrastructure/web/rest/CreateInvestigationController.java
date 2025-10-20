@@ -22,7 +22,7 @@ public class CreateInvestigationController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
 
-    public Investigation insertInvestigation(/*@RequestBody*/ Investigation investigation){
+    public Investigation insertInvestigation(@RequestBody Investigation investigation){
         System.out.println("INVESTIGATION: "+investigation);
         return investigation;
     }
