@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-//@RestController
-//@RequestMapping("/electoralcourt/investigation")
-//@RefreshScope
+@RestController
+@RequestMapping("/electoralcourt/investigation")
+@RefreshScope
 public class CreateInvestigationController {
 
-    /*@PostMapping(
+    @PostMapping(
             value = "/insert",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-     */
+
     public Investigation insertInvestigation(/*@RequestBody*/ Investigation investigation){
         System.out.println("INVESTIGATION: "+investigation);
         return investigation;

@@ -9,14 +9,15 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class InvestigationHandler {
 
     public Mono<ServerResponse> selectInvestigation(ServerRequest request){
         var obtainInvestigation = request.bodyToMono(Investigation.class);
+        var returnInvestigation = request.bodyToFlux(Investigation.class);
         Investigation sendInvestigation  = new Investigation();
-        obtainInvestigation.map( inv ->{
+        returnInvestigation.map( inv ->{
             sendInvestigation.setInvestigationId(inv.getInvestigationId());
             sendInvestigation.setPerson(inv.getPerson());
             sendInvestigation.setObservation(inv.getObservation());
@@ -29,7 +30,7 @@ public class InvestigationHandler {
         Mono<ServerResponse> responseServerMono = ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(sendInvestigation, Investigation.class);
+                .body(returnInvestigation, Investigation.class);
         responseServerMono.subscribe(rep->{
             System.out.println("RESPONSE: "+rep);
         });
