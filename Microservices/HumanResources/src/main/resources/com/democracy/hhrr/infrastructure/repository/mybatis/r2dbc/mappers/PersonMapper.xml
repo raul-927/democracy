@@ -9,7 +9,7 @@
 		<result property ="civicCredential"			column="civic_credential"/>
 		<result property ="firstName"			column="first_name"/>
 		<result property ="secondName"			column="second_name"/>
-		<result property ="firstLastName"			column="firstr_last_name"/>
+		<result property ="firstLastName"			column="first_last_name"/>
 		<result property ="secondLastName"			column="second_last_name"/>
 		<association property="address" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper.AddressResult"/>
 		<association property="profession" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.ProfessionMapper.ProfessionResult"/>

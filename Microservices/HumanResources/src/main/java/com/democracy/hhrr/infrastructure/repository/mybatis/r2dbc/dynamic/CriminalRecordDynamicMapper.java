@@ -162,7 +162,7 @@ public interface CriminalRecordDynamicMapper {
             }else{
                 crm.orderBy(criminalRecordId);
             }
-            return crm;
+        return crm;
         });
     }
 

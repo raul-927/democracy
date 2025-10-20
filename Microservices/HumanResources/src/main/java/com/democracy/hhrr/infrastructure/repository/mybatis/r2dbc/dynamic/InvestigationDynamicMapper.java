@@ -2,6 +2,7 @@ package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
 
 import com.democracy.hhrr.domain.models.Investigation;
+import io.r2dbc.spi.R2dbcBadGrammarException;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
 import org.mybatis.dynamic.sql.insert.render.MultiRowInsertStatementProvider;
 import org.mybatis.dynamic.sql.select.CountDSLCompleter;
@@ -22,12 +23,7 @@ import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBa
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.AddrerssDynamicSqlSupport.*;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.AddrerssDynamicSqlSupport.street2;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.CityDynamicSqlSupport.cityId;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DepartmentDynamicSqlSupport.departmentId;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.InvestigationDynamicSqlSupport.*;
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.NeighborhoodDynamicSqlSupport.neighborhoodId;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PenalDynamicSqlSupport.penalId;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PenalDynamicSqlSupport.penalName;
 
@@ -79,6 +75,13 @@ public interface InvestigationDynamicMapper extends CommonSelectMapper {
                         .map(investigationId).toPropertyWhenPresent("investigationId", record::getInvestigationId)
                         .map(personId).toProperty("person.personId")
                         .map(observation).toProperty("observation")
-        );
+        ).doOnError( err ->{
+            try{
+                System.out.println("LLEGO AQUI: ");
+                throw new RuntimeException("SE ENVIA ERROR RuntimeException");
+            }catch (R2dbcBadGrammarException s){
+                throw new R2dbcBadGrammarException("SE ENVIA ERROR R2dbcBadGrammarException");
+            }
+        });
     }
 }

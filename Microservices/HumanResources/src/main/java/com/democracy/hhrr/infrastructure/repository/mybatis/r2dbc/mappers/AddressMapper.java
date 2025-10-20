@@ -7,6 +7,8 @@ import reactor.core.publisher.Mono;
 
 @Mapper
 public interface AddressMapper extends AddressDynamicMapper {
+
+
     default Mono<Long> count(){
         return count(dsl -> dsl);
     }
