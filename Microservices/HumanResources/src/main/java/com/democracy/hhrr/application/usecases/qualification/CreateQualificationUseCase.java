@@ -7,22 +7,28 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreateQualificationUseCase implements CreateQualificationIn {
     private final QualificationOut qualificationOut;
 
     public CreateQualificationUseCase(QualificationOut qualificationOut) {
+
         this.qualificationOut = qualificationOut;
     }
 
     @Override
     public Mono<?> createQualification(Qualification qualification) {
+        qualification.setQualificationId(UUID.randomUUID().toString());
         return qualificationOut.createQualification(qualification);
     }
 
     @Override
     public Mono<?> createMultipleQualifications(List<Qualification> qualificationList) {
+        qualificationList.forEach(qu->{
+            qu.setQualificationId(UUID.randomUUID().toString());
+        });
         return qualificationOut.createMultipleQualifications(qualificationList);
     }
 }

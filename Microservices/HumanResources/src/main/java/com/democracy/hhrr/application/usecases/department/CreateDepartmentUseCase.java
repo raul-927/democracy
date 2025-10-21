@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreateDepartmentUseCase implements CreateDepartmentIn {
@@ -19,11 +20,15 @@ public class CreateDepartmentUseCase implements CreateDepartmentIn {
 
     @Override
     public Mono<Integer> createDepartment(Department department) {
+        department.setDepartmentId(UUID.randomUUID().toString());
         return departmentOut.createDepartment(department);
     }
 
     @Override
     public Mono<Integer> createMultipleDepartment(List<Department> departmentList) {
+        departmentList.forEach(dep ->{
+            dep.setDepartmentId(UUID.randomUUID().toString());
+        });
         return departmentOut.createMultipleDepartment(departmentList);
     }
 }

@@ -6,6 +6,8 @@ import com.democracy.hhrr.domain.ports.out.InvestigationOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Component
 public class CreateInvestigationUseCase implements CreateInvestigationIn {
 
@@ -17,6 +19,7 @@ public class CreateInvestigationUseCase implements CreateInvestigationIn {
 
     @Override
     public Mono<Integer> createInvestigation(Investigation investigation) {
+        investigation.setInvestigationId(UUID.randomUUID().toString());
         return this.investigationOut.createInvestigation(investigation);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreateProfessionUseCase implements CreateProfessionIn {
@@ -18,11 +19,15 @@ public class CreateProfessionUseCase implements CreateProfessionIn {
 
     @Override
     public Mono<?> createProfession(Profession profession) {
+        profession.setProfessionId(UUID.randomUUID().toString());
         return this.professionOut.createProfession(profession);
     }
 
     @Override
     public Mono<?> createMultipleProfessions(List<Profession> professionList) {
+        professionList.forEach(prof->{
+            prof.setProfessionId(UUID.randomUUID().toString());
+        });
         return this.professionOut.createMultipleProfessions(professionList);
     }
 }

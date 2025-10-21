@@ -6,6 +6,8 @@ import com.democracy.hhrr.domain.ports.out.CriminalRecordOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Component
 public class CreateCriminalRecordUseCase implements CreateCriminalRecordIn {
     private final CriminalRecordOut criminalRecordOut;
@@ -16,6 +18,7 @@ public class CreateCriminalRecordUseCase implements CreateCriminalRecordIn {
 
     @Override
     public Mono<Integer> createCriminalRecord(CriminalRecord criminalRecord) {
+        criminalRecord.setCriminalRecordId(UUID.randomUUID().toString());
         return this.criminalRecordOut.createCriminalRecord(criminalRecord);
     }
 }

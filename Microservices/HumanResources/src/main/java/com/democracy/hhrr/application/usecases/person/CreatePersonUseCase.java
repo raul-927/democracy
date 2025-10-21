@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
+
 @Component
 public class CreatePersonUseCase implements CreatePersonIn {
     private final PersonOut personOut;
@@ -18,11 +20,15 @@ public class CreatePersonUseCase implements CreatePersonIn {
 
     @Override
     public Mono<?> createPerson(Person person) {
+        person.setPersonId(UUID.randomUUID().toString());
         return this.personOut.createPerson(person);
     }
 
     @Override
     public Mono<?> createMultiplePersons(List<Person> personList) {
+        personList.forEach(per->{
+            per.setPersonId(UUID.randomUUID().toString());
+        });
         return this.personOut.createMultiplePersons(personList);
     }
 }

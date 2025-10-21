@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreateCityUseCase implements CreateCityIn {
@@ -19,11 +20,15 @@ public class CreateCityUseCase implements CreateCityIn {
 
     @Override
     public Mono<Integer> createCity(City city) {
+        city.setCityId(UUID.randomUUID().toString());
         return this.cityOut.createCity(city);
     }
 
     @Override
     public Mono<Integer> createMultipleCity(List<City> cityList) {
+        cityList.forEach(city->{
+            city.setCityId(UUID.randomUUID().toString());
+        });
         return this.cityOut.createMultipleCity(cityList);
     }
 }

@@ -6,6 +6,8 @@ import com.democracy.hhrr.domain.ports.out.DocumentOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Component
 public class CreateDocumentUseCase implements CreateDocumentIn {
     private final DocumentOut documentOut;
@@ -16,6 +18,7 @@ public class CreateDocumentUseCase implements CreateDocumentIn {
 
     @Override
     public Mono<Integer> createDocument(Document document) {
+        document.setDocumentId(UUID.randomUUID().toString());
         return this.documentOut.createDocument(document);
     }
 }

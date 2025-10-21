@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreatePenalUseCase implements CreatePenalIn {
@@ -18,11 +19,15 @@ public class CreatePenalUseCase implements CreatePenalIn {
 
     @Override
     public Mono<?> createPenal(Penal penal) {
+        penal.setPenalId(UUID.randomUUID().toString());
         return this.penalOut.createPenal(penal);
     }
 
     @Override
     public Mono<?> createMultiplePenals(List<Penal> penalList) {
+        penalList.forEach(penal -> {
+            penal.setPenalId(UUID.randomUUID().toString());
+        });
         return this.penalOut.createMultiplePenals(penalList);
     }
 }

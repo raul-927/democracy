@@ -30,6 +30,9 @@ public class CreateNeighborhoodUseCase implements CreateNeighborhoodIn {
 
     @Override
     public Mono<Integer> createMultipleNeighborhood(List<Neighborhood> neighborhoodList) {
-        return null;
+        neighborhoodList.forEach(neigh ->{
+            neigh.setNeighborhoodId(UUID.randomUUID().toString());
+        });
+        return this.neighborhoodOut.createMultipleNeighborhood(neighborhoodList);
     }
 }

@@ -8,6 +8,8 @@ import com.democracy.hhrr.domain.ports.out.InstituteOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Component
 public class CreateInstituteUseCase implements CreateInstituteIn {
     private final InstituteOut instituteOut;
@@ -18,6 +20,7 @@ public class CreateInstituteUseCase implements CreateInstituteIn {
 
     @Override
     public Mono<Integer> createInstitute(Institute institute) {
+        institute.setInstituteId(UUID.randomUUID().toString());
         return this.instituteOut.createInstitute(institute);
     }
 }

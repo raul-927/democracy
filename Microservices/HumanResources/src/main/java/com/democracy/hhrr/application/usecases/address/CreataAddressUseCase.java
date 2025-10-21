@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreataAddressUseCase implements CreateAddressIn {
@@ -19,11 +20,17 @@ public class CreataAddressUseCase implements CreateAddressIn {
 
     @Override
     public Mono<Integer> createAddress(Address address) {
+        address.setAddressId(UUID.randomUUID().toString());
         return this.addressOut.createAddress(address);
     }
 
     @Override
     public Mono<Integer> createMultipleAddress(List<Address> addressList) {
+        addressList.forEach(
+                a ->{
+                    a.setAddressId(UUID.randomUUID().toString());
+                }
+        );
         return this.addressOut.createMultipleAddress(addressList);
     }
 }
