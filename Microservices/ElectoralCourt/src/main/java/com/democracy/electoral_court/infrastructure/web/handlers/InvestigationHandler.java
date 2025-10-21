@@ -15,9 +15,9 @@ public class InvestigationHandler {
 
     public Mono<ServerResponse> selectInvestigation(ServerRequest request){
         var obtainInvestigation = request.bodyToMono(Investigation.class);
-        var returnInvestigation = request.bodyToFlux(Investigation.class);
+        //var returnInvestigation = request.bodyToFlux(Investigation.class);
         Investigation sendInvestigation  = new Investigation();
-        returnInvestigation.map( inv ->{
+        obtainInvestigation.map( inv ->{
             sendInvestigation.setInvestigationId(inv.getInvestigationId());
             sendInvestigation.setPerson(inv.getPerson());
             sendInvestigation.setObservation(inv.getObservation());
@@ -30,7 +30,7 @@ public class InvestigationHandler {
         Mono<ServerResponse> responseServerMono = ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(returnInvestigation, Investigation.class);
+                .body(obtainInvestigation, Investigation.class);
         responseServerMono.subscribe(rep->{
             System.out.println("RESPONSE: "+rep);
         });

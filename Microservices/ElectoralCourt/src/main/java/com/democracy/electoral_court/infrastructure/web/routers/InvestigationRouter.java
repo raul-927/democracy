@@ -2,8 +2,6 @@ package com.democracy.electoral_court.infrastructure.web.routers;
 
 import com.democracy.electoral_court.infrastructure.constants.RouterConstant;
 import com.democracy.electoral_court.infrastructure.web.handlers.InvestigationHandler;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
