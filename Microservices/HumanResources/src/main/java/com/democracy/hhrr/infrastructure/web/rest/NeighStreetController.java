@@ -1,6 +1,5 @@
 package com.democracy.hhrr.infrastructure.web.rest;
 
-
 import com.democracy.hhrr.application.services.aux.NeighborhoodStreetService;
 import com.democracy.hhrr.domain.aux.NeighborhoodStreet;
 import org.springframework.beans.factory.annotation.Autowired;
