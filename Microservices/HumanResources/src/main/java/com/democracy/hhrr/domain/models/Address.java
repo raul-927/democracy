@@ -1,11 +1,8 @@
 package com.democracy.hhrr.domain.models;
 
 
-import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.StreetDynamicSqlSupport;
 import lombok.*;
 import lombok.experimental.Accessors;
-
-import java.util.List;
 
 @ToString
 @Getter

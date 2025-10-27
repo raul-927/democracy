@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode
 public class InvestigationResult {
     private String investigationResultId;
-    private String investigationObservation;
+    private String investigationInformation;
     private Integer score;
     private Boolean isApprove;
 }

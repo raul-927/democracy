@@ -4,8 +4,6 @@ package com.democracy.hhrr.domain.models;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 @ToString
 @Getter
 @Setter
