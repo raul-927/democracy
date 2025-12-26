@@ -16,6 +16,8 @@ public class Qualification {
     private int 			id;
     private String 			qualificationId;
     private Person          person;
+    private Institute 		institute;
+    private Document        document;
     private boolean 		verified;
     private boolean			approved;
 }

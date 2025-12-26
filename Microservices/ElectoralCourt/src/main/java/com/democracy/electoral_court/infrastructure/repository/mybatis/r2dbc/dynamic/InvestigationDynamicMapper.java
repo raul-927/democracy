@@ -1,0 +1,82 @@
+package com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.dynamic;
+
+
+
+import io.r2dbc.spi.R2dbcBadGrammarException;
+import org.apache.ibatis.annotations.*;
+import org.mybatis.dynamic.sql.BasicColumn;
+import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
+import org.mybatis.dynamic.sql.delete.render.DeleteStatementProvider;
+import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
+import org.mybatis.dynamic.sql.insert.render.MultiRowInsertStatementProvider;
+import org.mybatis.dynamic.sql.select.CountDSLCompleter;
+import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
+import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
+import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
+import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
+import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import com.democracy.electoral_court.domain.models.Investigation;
+import static com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.support.InvestigationDynamicSqlSupport.*;
+import static com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.support.PenalDynamicSqlSupport.penalId;
+import static com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.support.PenalDynamicSqlSupport.penalName;
+
+
+public interface InvestigationDynamicMapper extends CommonSelectMapper {
+
+    BasicColumn[] investigationColumnList = BasicColumn.columnList(investigationId, personId, observation);
+    BasicColumn[] investigationColumns = BasicColumn.columnList(
+            investigationId, personId, observation ,/*
+            criminalRecordId, criminalRecordName, criminalRecordDescription,*/
+            penalId, penalName);
+
+    @SelectProvider(type= SqlProviderAdapter.class, method="select")
+    Mono<Long> count(SelectStatementProvider selectStatement);
+
+    @DeleteProvider(type=SqlProviderAdapter.class, method="delete")
+    Mono<Integer> delete(DeleteStatementProvider deleteStatement);
+
+    @InsertProvider(type=SqlProviderAdapter.class, method="insert")
+    @Options(keyProperty = "record.investigationId",keyColumn = "investigation_id")
+    Mono<Integer> insert(InsertStatementProvider<Investigation> insertStatement);
+
+    @InsertProvider(type=SqlProviderAdapter.class, method="insertMultiple")
+    @Options(keyProperty = "record.investigationId",keyColumn = "investigation_id")
+    Mono<Integer> insertMultiple(MultiRowInsertStatementProvider<Investigation> multipleInsertStatement);
+
+    @SelectProvider(type=SqlProviderAdapter.class, method="select")
+    @ResultMap(value="InvestigationResult")
+    Mono<Investigation> selectOne(SelectStatementProvider selectStatement);
+
+    @SelectProvider(type=SqlProviderAdapter.class, method="select")
+    @ResultMap(value="InvestigationResult")
+    Flux<Investigation> selectMany(SelectStatementProvider selectStatement);
+
+    @UpdateProvider(type=SqlProviderAdapter.class, method="update")
+    Mono<Integer> update(UpdateStatementProvider updateStatement);
+
+    default Mono<Long> count(CountDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.countFrom(this::count, INVESTIGATION, completer);
+    }
+
+    default Mono<Integer> delete(DeleteDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, INVESTIGATION, completer);
+    }
+
+    default Mono<Integer> insert(Investigation record) {
+        return ReactiveMyBatis3Utils.insert(this::insert, record, INVESTIGATION, c ->
+                c
+                        .map(investigationId).toPropertyWhenPresent("investigationId", record::getInvestigationId)
+                        .map(personId).toProperty("person.personId")
+                        .map(observation).toProperty("observation")
+        ).doOnError( err ->{
+            try{
+                System.out.println("LLEGO AQUI: ");
+                throw new RuntimeException("SE ENVIA ERROR RuntimeException");
+            }catch (R2dbcBadGrammarException s){
+                throw new R2dbcBadGrammarException("SE ENVIA ERROR R2dbcBadGrammarException");
+            }
+        });
+    }
+}

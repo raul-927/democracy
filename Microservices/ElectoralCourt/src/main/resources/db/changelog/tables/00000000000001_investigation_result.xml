@@ -12,9 +12,12 @@
             <column name="investigation_result_id"                type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="investigation_information" 	            type="varchar(100)"/>
+            <column name="investigation_id"     type="varchar(100)"/>
+            <column name ="cedula"              type="int"/>
+            <column name="person_id"            type="varchar(100)"/>
+            <column name="observation" 	        type="varchar(100)"/>
             <column name="score" 	            type="int"/>
-            <column name="is_aprove" 	        type="boolean"/>
+            <column name="is_approve" 	        type="boolean"/>
         </createTable>
 
     </changeSet>

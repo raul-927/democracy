@@ -12,37 +12,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/electoralcourt/investigation")
+@RequestMapping("/electoralcourt/investigationresult")
 @RefreshScope
-public class CreateInvestigationController {
+public class CreateInvestigationResultController {
 
     @Autowired
     private InvestigationResultService investigationResultService;
 
-
     @PostMapping(
             value = "/insert",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-
-    public Flux<Investigation> insertInvestigation(@RequestBody Investigation investigation){
-        Flux<Investigation> investigationFlux = Flux.just(investigation);
-
+            consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public Mono<Integer> insertInvestigation(@RequestBody InvestigationResult investigation){
+        Flux<InvestigationResult> investigationFlux = Flux.just(investigation);
         investigationFlux.subscribe( ret ->{
-            InvestigationResult investResult = new InvestigationResult();
-            investResult.setInvestigationId(ret.getInvestigationId());
-            investResult.setInvestigationResultId(UUID.randomUUID().toString());
-            investResult.setCedula(ret.getPerson().getCedula());
-
-            investigationResultService.createInvestigationResult(investResult);
-            System.out.println("INVESTIGATION: "+ret);
+            System.out.println("INVESTIGATION_RESULT: "+ret);
         });
-        return investigationFlux;
+        return  investigationResultService.createInvestigationResult(investigation);
     }
-
 
 }

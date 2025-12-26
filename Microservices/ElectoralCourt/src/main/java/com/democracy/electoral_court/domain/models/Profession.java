@@ -12,12 +12,9 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class Postulant {
-    private InvestigationResult investigationResult;
-    private int cedula;
-    private String firstName;
-    private String secondName;
-    private String firstLastName;
-    private String secondLastName;
+public class Profession {
 
+    private int 	id;
+    private String 	professionId;
+    private String 	professionName;
 }

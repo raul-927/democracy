@@ -1,6 +1,8 @@
 package com.democracy.electoral_court.domain.models;
 
 
+
+import com.democracy.electoral_court.domain.enums.StreetType;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -12,12 +14,9 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class Postulant {
-    private InvestigationResult investigationResult;
-    private int cedula;
-    private String firstName;
-    private String secondName;
-    private String firstLastName;
-    private String secondLastName;
+public class Street {
 
+    private String 		streetId;
+    private String 		streetName;
+    private StreetType streetType;
 }

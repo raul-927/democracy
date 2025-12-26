@@ -14,6 +14,7 @@
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
     <property name="u_id" value="(UUID())" dbms="mysql"/>
    	<include file="db/changelog/tables/00000000000001_investigation_result.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/tables/00000000000001_INVESTIGATION_table.xml" relativeToChangelogFile="false"/>
     <!--
    	<include file="db/changelog/00000000000002_Impuesto_cuenta_grupo_cuenta.xml" relativeToChangelogFile="false"/>
    	<include file="db/changelog/00000000000003_SpringSecurityACL.xml" relativeToChangelogFile="false"/>
