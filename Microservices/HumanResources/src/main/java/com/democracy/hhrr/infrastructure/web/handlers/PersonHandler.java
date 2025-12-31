@@ -20,8 +20,8 @@ public class PersonHandler {
     private PersonService personService;
 
 
-    public Mono<ServerResponse> selectPerson(ServerRequest request){
-        var obtainPerson = request.bodyToMono(Person.class);
+    /*public Mono<ServerResponse> selectPerson(ServerRequest request){
+        var obtainPerson = request.bodyToFlux(Person.class);
         Person sendPerson  = new Person();
         obtainPerson.map( pers ->{
             sendPerson.setPersonId(pers.getPersonId());
@@ -39,7 +39,7 @@ public class PersonHandler {
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(personService.selectPerson(sendPerson), Person.class);
-    }
+    }*/
 
     public Mono<ServerResponse> createPerson(ServerRequest request){
         Mono<Person> person = request.bodyToMono(Person.class);

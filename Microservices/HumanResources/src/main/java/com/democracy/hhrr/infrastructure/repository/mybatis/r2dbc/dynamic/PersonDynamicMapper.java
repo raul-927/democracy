@@ -150,7 +150,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, fullPersonColumnList, PERSON, completer);
     }
     default Flux<Person> selectPerson(Person person) {
-
+        System.out.println("PERSON_CEDULA: "+person.getCedula());
         BindableColumn<Person> personAddressId= DerivedColumn.of("address_id", "PERSON");
         BindableColumn<Person> personProfessionId= DerivedColumn.of("profession_id", "PERSON");
 
@@ -188,17 +188,21 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                     .on(addressStreet1Id, equalTo(streetStreet1Id))
 
                     .join(ProfessionDynamicSqlSupport.PROFESSION)
-                    .on(personProfessionId, equalTo(professionProfessionId)).build();
+                    .on(personProfessionId, equalTo(professionProfessionId)).build().render(RenderingStrategies.MYBATIS3);
 
 
             if(person.getPersonId() != null ||
                     person.getFirstName() != null || person.getCedula()!= 0){
                 if(person.getPersonId()!=null && !person.getPersonId().isEmpty()){
+                    System.out.println("ENTRA EL QUERY POR ACA1");
                     str.where(personId,isEqualToWhenPresent(person.getPersonId()))
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }else{
+                    System.out.println("ENTRA EL QUERY POR ACA2");
+                    System.out.println("CEDULA QUERY: "+person.getCedula());
                     str
+
                             .where(cedula,isEqualToWhenPresent(person::getCedula))
                             .and(firstName,isLikeWhenPresent(person::getFirstName).map(s -> "%" + s + "%"))
                             .and(secondName,isLikeWhenPresent(person::getSecondName).map(s ->"%"+s+"%"))
@@ -209,6 +213,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
             }else{
                 str.orderBy(firstLastName);
             }
+            System.out.println("QUERY: "+str.toString());
             return str;
         });
     }

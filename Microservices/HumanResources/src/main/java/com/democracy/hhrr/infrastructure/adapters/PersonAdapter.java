@@ -33,6 +33,7 @@ public class PersonAdapter implements PersonOut {
 
     @Override
     public Flux<Person> selectPerson(Person person) {
+        System.out.println("PERSON_MAPPER_CEDULA: "+person.getCedula());
         return personMapper.selectPerson(person);
     }
 

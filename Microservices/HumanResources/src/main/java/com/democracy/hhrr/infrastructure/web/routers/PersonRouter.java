@@ -26,8 +26,7 @@ public class PersonRouter {
     public RouterFunction<ServerResponse> routerPerson(PersonHandler handler){
         return RouterFunctions
                 .route(
-                        POST(PATH_MAIN + PERSON + PATH_SELECT), handler::selectPerson)
-                .andRoute(
                         POST(PATH_MAIN + PERSON +  PATH_SAVE), handler::createPerson);
+
     }
 }
