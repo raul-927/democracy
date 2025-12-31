@@ -15,11 +15,11 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 public class InvestigationResult {
-    private String investigationResultId;
-    private String investigationId;
-    private int cedula;
-    private String personId;
-    private String observation;
+    private String  investigationResultId;
+    private String  investigationId;
+    private int     cedula;
+    private String  personId;
+    private String  observation;
     private Integer score;
     private Boolean isApprove;
 }

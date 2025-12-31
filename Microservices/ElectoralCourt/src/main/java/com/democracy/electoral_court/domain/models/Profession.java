@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 @Builder
 @EqualsAndHashCode
 public class Profession {
-
     private int 	id;
     private String 	professionId;
     private String 	professionName;

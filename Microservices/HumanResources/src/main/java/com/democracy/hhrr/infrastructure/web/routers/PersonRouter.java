@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 
-//@Configuration
+@Configuration
 public class PersonRouter {
 
     private static final String PATH_MAIN = RouterConstant.PATH_MAIN;
@@ -22,7 +22,7 @@ public class PersonRouter {
     private static final String DELETE= RouterConstant.DELETE;
 
 
-   // @Bean
+   @Bean
     public RouterFunction<ServerResponse> routerPerson(PersonHandler handler){
         return RouterFunctions
                 .route(
