@@ -23,7 +23,6 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
-import org.springframework.security.core.parameters.P;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;

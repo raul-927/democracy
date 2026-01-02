@@ -35,4 +35,14 @@ public class CreateInvestigationResultController {
         return  investigationResultService.createInvestigationResult(investigation);
     }
 
+
+    @PostMapping(
+            value = "/select",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces ={MediaType.APPLICATION_JSON_VALUE})
+    public  Flux<InvestigationResult> selectInvestigation(@RequestBody InvestigationResult investigation){
+
+        return  investigationResultService.obtainInvestigationResult(investigation.getCedula());
+    }
+
 }

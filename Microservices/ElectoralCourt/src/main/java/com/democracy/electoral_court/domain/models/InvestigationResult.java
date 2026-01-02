@@ -21,5 +21,5 @@ public class InvestigationResult {
     private String  personId;
     private String  observation;
     private Integer score;
-    private Boolean isApprove;
+    private Integer isApprove;
 }
