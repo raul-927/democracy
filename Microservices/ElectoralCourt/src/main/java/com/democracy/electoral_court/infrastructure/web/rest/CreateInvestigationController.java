@@ -28,7 +28,6 @@ public class CreateInvestigationController {
             value = "/insert",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-
     public Flux<Investigation> insertInvestigation(@RequestBody Investigation investigation){
         Flux<Investigation> investigationFlux = Flux.just(investigation);
 
@@ -43,6 +42,4 @@ public class CreateInvestigationController {
         });
         return investigationFlux;
     }
-
-
 }
