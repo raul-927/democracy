@@ -20,6 +20,8 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.codec.multipart.Part;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
@@ -30,6 +32,8 @@ import java.util.Collection;
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DocumentDynamicSqlSupport.*;
 
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
+
+import org.springframework.http.codec.multipart.FilePart;
 
 public interface DocumentDynamicMapper extends CommonSelectMapper{
 
@@ -157,9 +161,12 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> updateSelectiveByPrimaryKey(Document record) {
         return update(c ->
                 c
-                        .set(documentName).equalToWhenPresent(record::getDocumentName)
+                        .set(documentName).equalTo(record::getDocumentName)
+                        .set(documentAttachment).equalTo(record::getDocumentAttachment)
+                        .set(documentObservation).equalTo(record::getDocumentObservation)
+                        .set(documentVerified).equalTo(record::isDocumentVerified)
+                        .set(documentApproved).equalTo(record::isDocumentApproved)
                         .where(documentName, isEqualTo(record::getDocumentName))
-
         );
     }
 
