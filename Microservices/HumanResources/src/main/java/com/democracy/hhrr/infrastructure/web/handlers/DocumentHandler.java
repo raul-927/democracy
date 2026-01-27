@@ -70,7 +70,7 @@ public class DocumentHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(criminalRecordService.createMultiple(criminalRecordList), CriminalRecord.class);
     }*/
-
+/*
     public Mono<ServerResponse> updateDocument(ServerRequest request){
         Mono<Document> documentMono = request.bodyToMono(Document.class);
         return documentMono.flatMap(
@@ -79,7 +79,7 @@ public class DocumentHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(documentService.updateDocument(d), Document.class));
     }
-
+*/
     public Mono<ServerResponse> selectCount(ServerRequest request){
         Mono<Long> countResult = documentService.selectCount();
         return ServerResponse

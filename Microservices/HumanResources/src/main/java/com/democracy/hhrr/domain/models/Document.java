@@ -22,5 +22,5 @@ public class Document {
     private boolean 	documentVerified;
     private boolean		documentApproved;
     private String 		documentObservation;
-    private byte[]        documentAttachment;
+    private byte[]      documentAttachment;
 }

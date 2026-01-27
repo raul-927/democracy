@@ -50,7 +50,7 @@ public class DocumentServiceImpl implements DocumentService{
     }
 
     @Override
-    public Mono<Integer> updateDocument(Document document) {
-        return this.updateDocumentIn.updateDocument(document);
+    public Mono<Document> updateDocument(FilePart filePart, Document document) {
+        return this.updateDocumentIn.updateDocument(filePart,document);
     }
 }

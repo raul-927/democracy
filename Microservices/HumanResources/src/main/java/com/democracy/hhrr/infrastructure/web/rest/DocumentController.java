@@ -29,8 +29,14 @@ public class DocumentController {
 
     @PostMapping(value = "/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Document> uploadPdf(@RequestPart("filePart") FilePart filePart, @RequestPart("data") Document data) {
+    public Mono<Document> createDocument(@RequestPart("filePart") FilePart filePart, @RequestPart("data") Document data) {
         return documentService.createDocument(filePart, data);
+    }
+
+    @PostMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<Document> updateDocument(@RequestPart("filePart") FilePart filePart, @RequestPart("data") Document data) {
+        return documentService.updateDocument(filePart, data);
     }
 
 }
