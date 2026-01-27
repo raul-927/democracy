@@ -5,6 +5,7 @@ import com.democracy.hhrr.domain.ports.in.document.CreateDocumentIn;
 import com.democracy.hhrr.domain.ports.in.document.DeleteDocumentIn;
 import com.democracy.hhrr.domain.ports.in.document.SelectDocumentIn;
 import com.democracy.hhrr.domain.ports.in.document.UpdateDocumentIn;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -24,8 +25,8 @@ public class DocumentServiceImpl implements DocumentService{
     }
 
     @Override
-    public Mono<Integer> createDocument(Document document) {
-        return this.createDocumentIn.createDocument(document);
+    public Mono<Document> createDocument(FilePart filePart, Document document) {
+        return this.createDocumentIn.createDocument(filePart, document);
     }
 
     @Override

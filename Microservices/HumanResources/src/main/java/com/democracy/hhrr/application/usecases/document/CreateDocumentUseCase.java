@@ -3,9 +3,13 @@ package com.democracy.hhrr.application.usecases.document;
 import com.democracy.hhrr.domain.models.Document;
 import com.democracy.hhrr.domain.ports.in.document.CreateDocumentIn;
 import com.democracy.hhrr.domain.ports.out.DocumentOut;
+import org.springframework.core.io.buffer.DataBufferUtils;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.UUID;
 
 @Component
@@ -17,8 +21,30 @@ public class CreateDocumentUseCase implements CreateDocumentIn {
     }
 
     @Override
-    public Mono<Integer> createDocument(Document document) {
-        document.setDocumentId(UUID.randomUUID().toString());
-        return this.documentOut.createDocument(document);
+    public Mono<Document> createDocument(FilePart filePart, Document document) {
+        return filePart.content()
+                .map(dataBuffer -> {
+                    byte[] bytes = new byte[dataBuffer.readableByteCount()];
+                    dataBuffer.read(bytes);
+                    DataBufferUtils.release(dataBuffer);
+                    return bytes;
+                })
+                .collectList()
+                .map(list -> {
+                    // Unir los fragmentos de bytes
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    list.forEach(bytes -> {
+                        try { outputStream.write(bytes); } catch (IOException e) {}
+                    });
+                    return outputStream.toByteArray();
+                })
+                .flatMap(fileContent -> {
+
+                    document.setDocumentId(UUID.randomUUID().toString());
+                    document.setDocumentName(filePart.filename());
+                    document.setDocumentAttachment(fileContent);
+                    return this.documentOut.createDocument(document);
+                })
+                .thenReturn(document);
     }
 }

@@ -2,17 +2,20 @@ package com.democracy.hhrr.infrastructure.web.handlers;
 
 import com.democracy.hhrr.application.services.ProfessionService;
 import com.democracy.hhrr.domain.models.Profession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-//@Component
-//@Slf4j
+@Component
+@Slf4j
 public class ProfessionHandler {
 
 
-    //@Autowired
+    @Autowired
     private ProfessionService professionService;
 
     public Mono<ServerResponse> selectProfession(ServerRequest request){

@@ -12,11 +12,11 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class DocumentHandler {
 
-    @Autowired
+    //@Autowired
     private DocumentService documentService;
 
     public Mono<ServerResponse> selectDocument(ServerRequest request){
@@ -43,17 +43,16 @@ public class DocumentHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(documentService.selectAllDocuments(), Document.class);
     }
-
+/*
     public Mono<ServerResponse> createDocument(ServerRequest request){
         Mono<Document> documentMono = request.bodyToMono(Document.class);
 
         return documentMono.flatMap(
                 doc ->ServerResponse
                         .ok()
-                        .contentType(MediaType.APPLICATION_JSON)
                         .body(documentService.createDocument(doc), Document.class));
     }
-
+*/
     /*public Mono<ServerResponse> createMultipleCriminalRecords(ServerRequest request){
         List<CriminalRecord>criminalRecordList = new ArrayList<>();
 
@@ -88,4 +87,9 @@ public class DocumentHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(countResult, Document.class);
     }
+/*
+    public Mono<ServerResponse> createDocument(ServerRequest serverRequest) {
+    }
+
+ */
 }

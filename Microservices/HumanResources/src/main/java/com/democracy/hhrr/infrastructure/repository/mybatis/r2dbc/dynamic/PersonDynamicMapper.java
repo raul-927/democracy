@@ -149,7 +149,6 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, fullPersonColumnList, PERSON, completer);
     }
     default Flux<Person> selectPerson(Person person) {
-        System.out.println("PERSON_CEDULA: "+person.getCedula());
         BindableColumn<Person> personAddressId= DerivedColumn.of("address_id", "PERSON");
         BindableColumn<Person> personProfessionId= DerivedColumn.of("profession_id", "PERSON");
 
@@ -198,8 +197,6 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }else{
-                    System.out.println("ENTRA EL QUERY POR ACA2");
-                    System.out.println("CEDULA QUERY: "+person.getCedula());
                     str
 
                             .where(cedula,isEqualToWhenPresent(person::getCedula))
@@ -212,7 +209,6 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
             }else{
                 str.orderBy(firstLastName);
             }
-            System.out.println("QUERY: "+str.toString());
             return str;
         });
     }

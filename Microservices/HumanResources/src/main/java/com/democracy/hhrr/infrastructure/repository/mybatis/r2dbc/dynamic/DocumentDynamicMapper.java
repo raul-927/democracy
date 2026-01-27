@@ -76,11 +76,11 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.insert(this::insert, record, DOCUMENT, c ->
                 c
                         .map(documentId).toPropertyWhenPresent("documentId", record::getDocumentId)
-                        .map(documentName).toProperty("documentName")
-                        .map(documentVerified).toProperty("documentVerified")
-                        .map(documentApproved).toProperty("documentApproved")
-                        .map(documentObservation).toProperty("documentObservation")
-                        .map(documentAttachment).toProperty("documentAttachment")
+                        .map(documentName).toPropertyWhenPresent("documentName", record::getDocumentName)
+                        .map(documentVerified).toPropertyWhenPresent("documentVerified", record::isDocumentVerified)
+                        .map(documentApproved).toPropertyWhenPresent("documentApproved", record::isDocumentApproved)
+                        .map(documentObservation).toPropertyWhenPresent("documentObservation",record::getDocumentObservation)
+                        .map(documentAttachment).toPropertyWhenPresent("documentAttachment",record::getDocumentAttachment)
         );
     }
 
