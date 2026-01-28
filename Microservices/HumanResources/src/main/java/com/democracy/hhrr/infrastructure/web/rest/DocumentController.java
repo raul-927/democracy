@@ -13,6 +13,7 @@ import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.ByteArrayOutputStream;
@@ -37,6 +38,12 @@ public class DocumentController {
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Document> updateDocument(@RequestPart("filePart") FilePart filePart, @RequestPart("data") Document data) {
         return documentService.updateDocument(filePart, data);
+    }
+
+
+    @PostMapping(value = "/select")
+    public Flux<Document> selectDocument(@RequestBody Document document) {
+        return documentService.selectDocument(document);
     }
 
 }
