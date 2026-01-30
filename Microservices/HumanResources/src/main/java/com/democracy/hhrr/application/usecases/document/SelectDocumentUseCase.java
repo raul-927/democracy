@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+
 @Component
 public class SelectDocumentUseCase implements SelectDocumentIn {
     private final DocumentOut documentOut;
@@ -17,12 +19,12 @@ public class SelectDocumentUseCase implements SelectDocumentIn {
 
     @Override
     public Flux<Document> selectDocument(Document document) {
-        return this.documentOut.selectDocument(document);
+        return this.documentOut.selectDocument(document).delayElements(Duration.ofSeconds(5));
     }
 
     @Override
     public Flux<Document> selectAllDocuments() {
-        return this.documentOut.selectAllDDocuments();
+        return this.documentOut.selectAllDDocuments().delayElements(Duration.ofSeconds(5));
     }
 
     @Override

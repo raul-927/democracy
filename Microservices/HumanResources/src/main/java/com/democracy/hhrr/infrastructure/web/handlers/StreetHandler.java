@@ -14,11 +14,11 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class StreetHandler {
 
-    @Autowired
+    //@Autowired
     private  StreetService streetService;
 
     public Mono<ServerResponse> selectStreet(ServerRequest request){

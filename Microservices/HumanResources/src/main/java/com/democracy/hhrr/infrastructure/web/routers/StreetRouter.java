@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
-@Configuration
+//@Configuration
 public class StreetRouter {
     private static final String PATH_MAIN = RouterConstant.PATH_MAIN;
     private static final String STREET_PATH = RouterConstant.STREET_PATH;
@@ -20,7 +20,7 @@ public class StreetRouter {
     private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
     private static final String PATH_COUNT= RouterConstant.PATH_COUNT;
 
-    @Bean
+    //@Bean
     public RouterFunction<ServerResponse> routerStreet(StreetHandler handler){
         return RouterFunctions
                 .route(
