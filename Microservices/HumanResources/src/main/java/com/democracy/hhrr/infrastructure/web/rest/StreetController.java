@@ -21,13 +21,13 @@ public class StreetController {
     @Autowired
     private StreetService streetService;
 
-    @PostMapping(
+    @GetMapping(
             value = "/select",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Flux<Street> selectStreet(@RequestBody Street street){
+            produces = {MediaType.TEXT_EVENT_STREAM_VALUE})
+    public Flux<Street> selectStreet(){
 
-        return this.streetService.selectStreet(street)
+        return this.streetService.selectStreet(new Street())
+                .delayElements(Duration.ofSeconds(1))
                 .map(m -> new Street(m.getStreetId(), m.getStreetName(), m.getStreetType()))
                 .doOnNext(d->{
                     System.out.println("STREET: "+d);
@@ -36,10 +36,11 @@ public class StreetController {
 
 
     @GetMapping(
-            value = "/selectp")
+            value = "/selectp", produces = {MediaType.TEXT_EVENT_STREAM_VALUE})
     public Flux<String> selectStreetp(){
         return Flux.interval(Duration.ofSeconds(1))
-                .map(index -> "Event " + index+", ")
+                .doOnNext(index ->System.out.println("Event " + (index + 1) +", "))
+                .map(index -> "Event " + (index + 1) +", ")
                 .take(10);
     }
 

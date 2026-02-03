@@ -22,7 +22,8 @@ public class SecurityConfiguration {
                         .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2
-                        .jwt(Customizer.withDefaults()));
+                        .jwt(Customizer.withDefaults()))
+                .cors(corsSpec -> ServerHttpSecurity.http().cors(ServerHttpSecurity.CorsSpec::disable));
         return http.build();
     }
 }
