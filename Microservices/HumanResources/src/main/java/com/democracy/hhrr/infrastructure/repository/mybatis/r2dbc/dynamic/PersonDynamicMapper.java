@@ -191,28 +191,32 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                     .join(ProfessionDynamicSqlSupport.PROFESSION)
                     .on(personProfessionId, equalTo(professionProfessionId)).build().render(RenderingStrategies.MYBATIS3);
 
-
-            if(person.getPersonId() != null ||
+            if (person.getPersonId() == null             && person.getIsProcessed()==null
+                    && person.getAddress() ==null        && person.getProfession() ==null
+                    && person.getCedula() ==0            && person.getFirstName() ==null
+                    && person.getFirstLastName() == null && person.getSecondName() == null
+                    && person.getSecondLastName() ==null) {
+                str.orderBy(firstLastName);
+            }else if(person.getPersonId() != null ||
                     person.getFirstName() != null || person.getCedula()!= 0){
-                if(person.getPersonId()!=null && !person.getPersonId().isEmpty()){
-                    str.where(personId,isEqualToWhenPresent(person::getPersonId))
-                            .build()
-                            .render(RenderingStrategies.MYBATIS3);
-                } else {
-                    str
-                            .where(cedula,isEqualToWhenPresent(person::getCedula))
-                            .build()
-                            .render(RenderingStrategies.MYBATIS3);
-                }
-            }else{
-                str
-                        .where(isProcessed,isEqualToWhenPresent(person::getIsProcessed))
-                        .and(firstName,isLikeWhenPresent(person::getFirstName).map(s -> "%" + s + "%"))
-                        .and(secondName,isLikeWhenPresent(person::getSecondName).map(s ->"%"+s+"%"))
-                        .and(firstLastName,isLikeWhenPresent(person::getFirstLastName).map(s ->"%"+s+"%"))
-                        .orderBy(firstLastName)
-                        .build()
-                        .render(RenderingStrategies.MYBATIS3);
+                        if(person.getPersonId()!=null && !person.getPersonId().isEmpty()){
+                            str.where(personId,isEqualToWhenPresent(person::getPersonId))
+                                    .build()
+                                    .render(RenderingStrategies.MYBATIS3);
+                        } else {
+                                    str
+                                            .where(cedula,isEqualToWhenPresent(person::getCedula))
+                                            .build()
+                                            .render(RenderingStrategies.MYBATIS3);
+                        }
+                    }else{
+                            str
+                                    .where(isProcessed,isEqualToWhenPresent(person::getIsProcessed))
+                                    .and(firstName,isLikeWhenPresent(person::getFirstName).map(s -> "%" + s + "%"))
+                                    .and(secondName,isLikeWhenPresent(person::getSecondName).map(s ->"%"+s+"%"))
+                                    .and(firstLastName,isLikeWhenPresent(person::getFirstLastName).map(s ->"%"+s+"%"))
+                                    .build()
+                                    .render(RenderingStrategies.MYBATIS3);
             }
             return str;
         });

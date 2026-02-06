@@ -15,10 +15,9 @@ public final class PersonDynamicSqlSupport {
     public static final SqlColumn<String> secondName =PERSON.secondName;
     public static final SqlColumn<String> firstLastName = PERSON.firstLastName;
     public static final SqlColumn<String> secondLastName =PERSON.secondLastName;
+    public static final SqlColumn<Boolean> isProcessed = PERSON.isProcessed;
     public static final SqlColumn<String> addressId =PERSON.addressId;
     public static final SqlColumn<String> professionId =PERSON.professionId;
-    public static final SqlColumn<Boolean> isProcessed = PERSON.isProcessed;
-
 
     public static final class Person extends SqlTable {
         public final SqlColumn<String> personId = column("person_id", JDBCType.LONGNVARCHAR);
@@ -28,9 +27,10 @@ public final class PersonDynamicSqlSupport {
         public final SqlColumn<String> secondName = column("second_name", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> firstLastName = column("first_last_name", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> secondLastName = column("second_last_name", JDBCType.LONGNVARCHAR);
+        public final SqlColumn<Boolean>isProcessed = column("is_processed", JDBCType.BOOLEAN);
         public final SqlColumn<String> addressId = column("address_id", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> professionId = column("profession_id", JDBCType.LONGNVARCHAR);
-        public final SqlColumn<Boolean>isProcessed = column("is_processed", JDBCType.BOOLEAN);
+
         public Person(){
             super("PERSON");
         }

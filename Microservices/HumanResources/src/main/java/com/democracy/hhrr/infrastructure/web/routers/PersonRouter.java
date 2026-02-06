@@ -8,8 +8,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
-import static org.springframework.web.reactive.function.server.RequestPredicates.PUT;
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
 @Configuration
 public class PersonRouter {
@@ -21,6 +20,7 @@ public class PersonRouter {
     private static final String PATH_INSERT = RouterConstant.PATH_INSERT;
     private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
     private static final String DELETE= RouterConstant.DELETE;
+    private static final String COUNT = RouterConstant.COUNT;
 
 
    @Bean
@@ -29,7 +29,9 @@ public class PersonRouter {
                 .route(
                         POST(PATH_MAIN + PERSON +  PATH_SAVE), handler::createPerson)
                 .andRoute(
-                         PUT(PATH_MAIN + PERSON + PATH_UPDATE), handler::updatePerson);
+                         PUT(PATH_MAIN + PERSON + PATH_UPDATE), handler::updatePerson)
+                .andRoute(
+                        GET(PATH_MAIN + PERSON + COUNT), handler::selectCount);
 
     }
 }
