@@ -11,6 +11,7 @@
 		<result property ="secondName"			column="second_name"/>
 		<result property ="firstLastName"			column="first_last_name"/>
 		<result property ="secondLastName"			column="second_last_name"/>
+		<result property ="isProcessed"				column="is_processed"/>
 		<association property="address" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper.AddressResult"/>
 		<association property="profession" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.ProfessionMapper.ProfessionResult"/>
   	</resultMap>

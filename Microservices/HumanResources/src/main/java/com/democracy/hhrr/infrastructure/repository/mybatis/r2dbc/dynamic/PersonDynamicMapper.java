@@ -44,8 +44,8 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface PersonDynamicMapper extends CommonSelectMapper {
-    BasicColumn[] personColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName, addressId, professionId);
-    BasicColumn[] fullPersonColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName,
+    BasicColumn[] personColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName, isProcessed, addressId, professionId);
+    BasicColumn[] fullPersonColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName,isProcessed,
             addressId, geoLocation, addressNumber, street1, street2,
             departmentId, departmentName,
             cityId,cityName,
@@ -101,6 +101,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                         .map(secondName).toProperty("secondName")
                         .map(firstLastName).toProperty("firstLastName")
                         .map(secondLastName).toProperty("secondLastName")
+                        .map(isProcessed).toProperty("isProcessed")
                         .map(addressId).toPropertyWhenPresent("address.addressId", record.getAddress()::getAddressId)
                         .map(professionId).toPropertyWhenPresent("profession.professionId", record.getProfession()::getProfessionId)
         );
@@ -115,6 +116,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                         .map(secondName).toProperty("secondName")
                         .map(firstLastName).toProperty("firstLastName")
                         .map(secondLastName).toProperty("secondLastName")
+                        .map(isProcessed).toProperty("isProcessed")
                         .map(addressId).toProperty("addressId")
                         .map(professionId).toProperty("professionId")
         );
@@ -130,6 +132,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                                 .map(secondName).toPropertyWhenPresent("secondName", record::getSecondName)
                                 .map(firstLastName).toPropertyWhenPresent("firstLastName", record::getFirstLastName)
                                 .map(secondLastName).toPropertyWhenPresent("secondLastName", record::getSecondLastName)
+                                .map(isProcessed).toPropertyWhenPresent("isProcessed", record::getIsProcessed)
                                 .map(addressId).toPropertyWhenPresent("addressId", record.getAddress()::getAddressId)
                                 .map(professionId).toPropertyWhenPresent("professionId", record.getProfession()::getProfessionId)
         );
@@ -192,22 +195,24 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
             if(person.getPersonId() != null ||
                     person.getFirstName() != null || person.getCedula()!= 0){
                 if(person.getPersonId()!=null && !person.getPersonId().isEmpty()){
-                    System.out.println("ENTRA EL QUERY POR ACA1");
-                    str.where(personId,isEqualToWhenPresent(person.getPersonId()))
+                    str.where(personId,isEqualToWhenPresent(person::getPersonId))
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
-                }else{
+                } else {
                     str
-
                             .where(cedula,isEqualToWhenPresent(person::getCedula))
-                            .and(firstName,isLikeWhenPresent(person::getFirstName).map(s -> "%" + s + "%"))
-                            .and(secondName,isLikeWhenPresent(person::getSecondName).map(s ->"%"+s+"%"))
-                            .and(firstLastName,isLikeWhenPresent(person::getFirstLastName).map(s ->"%"+s+"%"))
                             .build()
                             .render(RenderingStrategies.MYBATIS3);
                 }
             }else{
-                str.orderBy(firstLastName);
+                str
+                        .where(isProcessed,isEqualToWhenPresent(person::getIsProcessed))
+                        .and(firstName,isLikeWhenPresent(person::getFirstName).map(s -> "%" + s + "%"))
+                        .and(secondName,isLikeWhenPresent(person::getSecondName).map(s ->"%"+s+"%"))
+                        .and(firstLastName,isLikeWhenPresent(person::getFirstLastName).map(s ->"%"+s+"%"))
+                        .orderBy(firstLastName)
+                        .build()
+                        .render(RenderingStrategies.MYBATIS3);
             }
             return str;
         });
@@ -237,6 +242,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                         .set(secondName).equalToWhenPresent(record::getSecondName)
                         .set(firstLastName).equalToWhenPresent(record::getFirstLastName)
                         .set(secondLastName).equalToWhenPresent(record::getSecondLastName)
+                        .set(isProcessed).equalToWhenPresent(record::getIsProcessed)
                         .set(addressId).equalToWhenPresent(record.getAddress()::getAddressId)
                         .set(professionId).equalToWhenPresent(record.getProfession()::getProfessionId)
 
@@ -254,6 +260,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                         .set(secondName).equalToWhenPresent(record::getSecondName)
                         .set(firstLastName).equalToWhenPresent(record::getFirstLastName)
                         .set(secondLastName).equalToWhenPresent(record::getSecondLastName)
+                        .set(isProcessed).equalToWhenPresent(record::getIsProcessed)
                         .set(addressId).equalToWhenPresent(record.getAddress()::getAddressId)
                         .set(professionId).equalToWhenPresent(record.getProfession()::getProfessionId)
 
@@ -264,14 +271,15 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
     default Mono<Integer> updateAll(Person record, WhereApplier whereApplier) {
         return update(c ->
                 c
-                .set(cedula).equalToWhenPresent(record::getCedula)
-                .set(civicCredential).equalToWhenPresent(record::getCivicCredential)
-                .set(firstName).equalToWhenPresent(record::getFirstName)
-                .set(secondName).equalToWhenPresent(record::getSecondName)
-                .set(firstLastName).equalToWhenPresent(record::getFirstLastName)
-                .set(secondLastName).equalToWhenPresent(record::getSecondLastName)
-                .set(addressId).equalToWhenPresent(record.getAddress()::getAddressId)
-                .set(professionId).equalToWhenPresent(record.getProfession()::getProfessionId)
+                        .set(cedula).equalToWhenPresent(record::getCedula)
+                        .set(civicCredential).equalToWhenPresent(record::getCivicCredential)
+                        .set(firstName).equalToWhenPresent(record::getFirstName)
+                        .set(secondName).equalToWhenPresent(record::getSecondName)
+                        .set(firstLastName).equalToWhenPresent(record::getFirstLastName)
+                        .set(secondLastName).equalToWhenPresent(record::getSecondLastName)
+                        .set(isProcessed).equalToWhenPresent(record::getIsProcessed)
+                        .set(addressId).equalToWhenPresent(record.getAddress()::getAddressId)
+                        .set(professionId).equalToWhenPresent(record.getProfession()::getProfessionId)
                         .applyWhere(whereApplier)
         );
     }
@@ -285,6 +293,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                         .set(secondName).equalToWhenPresent(record::getSecondName)
                         .set(firstLastName).equalToWhenPresent(record::getFirstLastName)
                         .set(secondLastName).equalToWhenPresent(record::getSecondLastName)
+                        .set(isProcessed).equalToWhenPresent(record::getIsProcessed)
                         .set(addressId).equalToWhenPresent(record.getAddress()::getAddressId)
                         .set(professionId).equalToWhenPresent(record.getProfession()::getProfessionId)
                         .applyWhere(whereApplier)
