@@ -11,6 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -27,11 +28,12 @@ public class StreetController {
     public Flux<Street> selectStreet(){
 
         return this.streetService.selectStreet(new Street())
-                .delayElements(Duration.ofSeconds(1))
                 .map(m -> new Street(m.getStreetId(), m.getStreetName(), m.getStreetType()))
+                .sort(Comparator.comparing(Street::getStreetName))
                 .doOnNext(d->{
                     System.out.println("STREET: "+d);
-        });
+        })
+                .delayElements(Duration.ofSeconds(1));
     }
 
 

@@ -2,7 +2,6 @@ package com.democracy.hhrr.infrastructure.web.routers;
 
 import com.democracy.hhrr.infrastructure.constants.RouterConstant;
 import com.democracy.hhrr.infrastructure.web.handlers.InstituteHandler;
-import com.democracy.hhrr.infrastructure.web.handlers.StreetHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -28,8 +27,6 @@ public class InstituteRouter {
                         POST(PATH_MAIN + INSTITUTE + PATH_SELECT), handler::selectInstitute)
                 .andRoute(
                         POST(PATH_MAIN + INSTITUTE +  PATH_SAVE), handler::createInstitute)
-                //.andRoute(
-                 //       POST(PATH_MAIN + STREET_PATH +PATH_INSERT), handler::createMultipleStreet)
                 .andRoute(
                         PUT(PATH_MAIN + INSTITUTE +  PATH_UPDATE), handler::updateInstitute)
                 .andRoute(

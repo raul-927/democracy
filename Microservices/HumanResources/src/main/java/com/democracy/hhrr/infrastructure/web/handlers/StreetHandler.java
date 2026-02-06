@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class StreetHandler {
         });
         return ServerResponse
                 .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(streetService.selectStreet(sendStreet), Street.class);
+                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .body(streetService.selectStreet(sendStreet), Street.class).delayElement(Duration.ofSeconds(1));
     }
 
     public Mono<ServerResponse> createStreet(ServerRequest request){

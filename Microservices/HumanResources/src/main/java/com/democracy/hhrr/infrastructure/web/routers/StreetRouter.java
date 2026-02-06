@@ -4,6 +4,7 @@ import com.democracy.hhrr.infrastructure.constants.RouterConstant;
 import com.democracy.hhrr.infrastructure.web.handlers.StreetHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -20,18 +21,10 @@ public class StreetRouter {
     private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
     private static final String PATH_COUNT= RouterConstant.PATH_COUNT;
 
-    //@Bean
+   // @Bean
     public RouterFunction<ServerResponse> routerStreet(StreetHandler handler){
-        return RouterFunctions
-                .route(
-                        POST(PATH_MAIN + STREET_PATH + PATH_SELECT), handler::selectStreet)
-                .andRoute(
-                        POST(PATH_MAIN + STREET_PATH +  PATH_SAVE), handler::createStreet)
-                //.andRoute(
-                 //       POST(PATH_MAIN + STREET_PATH +PATH_INSERT), handler::createMultipleStreet)
-                .andRoute(
-                        PUT(PATH_MAIN + STREET_PATH +  PATH_UPDATE), handler::updateStreet)
-                .andRoute(
-                        GET(PATH_MAIN + STREET_PATH +  PATH_COUNT), handler::selectCount);
+        return RouterFunctions.route()
+                .GET(PATH_MAIN + STREET_PATH + PATH_SELECT, contentType(MediaType.APPLICATION_JSON), handler::selectStreet)
+                .build();
     }
 }

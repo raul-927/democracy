@@ -35,7 +35,7 @@ public class CriminalRecordHandler {
         });
         return ServerResponse
                 .ok()
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.TEXT_EVENT_STREAM)
                 .body(criminalRecordService.selectCriminalRecord(sendCriminalRecord), CriminalRecord.class);
     }
 
