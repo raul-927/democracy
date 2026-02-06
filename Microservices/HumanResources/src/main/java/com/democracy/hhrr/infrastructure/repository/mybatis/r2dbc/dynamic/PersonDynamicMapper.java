@@ -252,19 +252,21 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
     }
 
     default Mono<Integer> updateAllByPrimaryKey(Person record) {
+        String stringAddressId = record.getAddress()!=null? record.getAddress().getAddressId():null;
+        String stringProfessionId = record.getProfession()!=null? record.getProfession().getProfessionId():null;
         return update(c ->
                 c
-                        .set(cedula).equalToWhenPresent(record::getCedula)
                         .set(civicCredential).equalToWhenPresent(record::getCivicCredential)
                         .set(firstName).equalToWhenPresent(record::getFirstName)
                         .set(secondName).equalToWhenPresent(record::getSecondName)
                         .set(firstLastName).equalToWhenPresent(record::getFirstLastName)
                         .set(secondLastName).equalToWhenPresent(record::getSecondLastName)
                         .set(isProcessed).equalToWhenPresent(record::getIsProcessed)
-                        .set(addressId).equalToWhenPresent(record.getAddress()::getAddressId)
-                        .set(professionId).equalToWhenPresent(record.getProfession()::getProfessionId)
+                        .set(addressId).equalToWhenPresent(stringAddressId)
+                        .set(professionId).equalToWhenPresent(stringProfessionId)
 
-                        .where(personId, isEqualTo(record::getPersonId))
+                        .where(personId, isEqualToWhenPresent(record::getPersonId))
+                        .and(cedula, isEqualToWhenPresent(record::getCedula))
         );
     }
 
