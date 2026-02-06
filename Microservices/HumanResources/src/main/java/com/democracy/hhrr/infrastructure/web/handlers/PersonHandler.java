@@ -50,4 +50,14 @@ public class PersonHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(personService.createPerson(s), Person.class));
     }
+
+    public Mono<ServerResponse> updatePerson(ServerRequest request){
+        Mono<Person> person = request.bodyToMono(Person.class);
+
+        return person.flatMap(
+                s ->ServerResponse
+                        .ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(personService.updatePerson(s), Person.class));
+    }
 }

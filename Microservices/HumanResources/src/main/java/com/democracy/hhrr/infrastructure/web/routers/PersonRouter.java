@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.PUT;
 
 @Configuration
 public class PersonRouter {
@@ -26,7 +27,9 @@ public class PersonRouter {
     public RouterFunction<ServerResponse> routerPerson(PersonHandler handler){
         return RouterFunctions
                 .route(
-                        POST(PATH_MAIN + PERSON +  PATH_SAVE), handler::createPerson);
+                        POST(PATH_MAIN + PERSON +  PATH_SAVE), handler::createPerson)
+                .andRoute(
+                         PUT(PATH_MAIN + PERSON + PATH_UPDATE), handler::updatePerson);
 
     }
 }
