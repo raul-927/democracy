@@ -51,9 +51,7 @@ public class PenalHandler {
         var obtainListStreets = request.bodyToFlux(Penal.class);
         obtainListStreets.collectList().map(
                 strc ->{
-                    System.out.println("STRC: "+strc);
                     penalList.addAll(strc);
-                    System.out.println("STREET_LIST: "+penalList);
                     return penalList;
                 }
         ).subscribe(System.out::println).dispose();

@@ -2,6 +2,7 @@ package com.democracy.electoral_court.infrastructure.adapters;
 
 import com.democracy.electoral_court.domain.models.InvestigationResult;
 import com.democracy.electoral_court.domain.ports.out.InvestigationResultOut;
+import com.democracy.electoral_court.infrastructure.publisher.EventPublisher;
 import com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.mappers.InvestigationResultMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,10 +13,14 @@ import reactor.core.publisher.Mono;
 public class InvestigationResultAdapter implements InvestigationResultOut {
 
     @Autowired
+    private EventPublisher eventPublisher;
+
+    @Autowired
     private InvestigationResultMapper investigationResultMapper;
 
     @Override
     public Mono<Integer> createInvestigationResult(InvestigationResult investigationResult) {
+        eventPublisher.init(investigationResult);
         return investigationResultMapper.insertInvestigationResult(investigationResult);
     }
 

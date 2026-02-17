@@ -53,9 +53,7 @@ public class StreetHandler {
         var obtainListStreets = request.bodyToFlux(Street.class);
         obtainListStreets.collectList().map(
                 strc ->{
-                    System.out.println("STRC: "+strc);
                     streetList.addAll(strc);
-                    System.out.println("STREET_LIST: "+streetList);
                     return streetList;
                 }
         ).subscribe(System.out::println).dispose();

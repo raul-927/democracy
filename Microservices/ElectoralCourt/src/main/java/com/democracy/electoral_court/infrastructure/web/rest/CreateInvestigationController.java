@@ -38,7 +38,6 @@ public class CreateInvestigationController {
             investResult.setCedula(ret.getPerson().getCedula());
 
             investigationResultService.createInvestigationResult(investResult);
-            System.out.println("INVESTIGATION: "+ret);
         });
         return investigationFlux;
     }

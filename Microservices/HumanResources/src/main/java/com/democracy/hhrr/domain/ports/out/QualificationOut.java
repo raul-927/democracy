@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface QualificationOut {
 
-    Mono<?> createQualification(Qualification qualification);
-    Mono<?>createMultipleQualifications(List<Qualification> qualificationList);
+    Mono<Integer> createQualification(Qualification qualification);
+    Mono<Integer>createMultipleQualifications(List<Qualification> qualificationList);
     Mono<Integer> deleteQualification(String qualificationId);
     Flux<Qualification> selectQualification(Qualification qualification);
     Flux<Qualification> selectAllQualifications();

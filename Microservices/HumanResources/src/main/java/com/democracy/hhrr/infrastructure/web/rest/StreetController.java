@@ -22,17 +22,15 @@ public class StreetController {
     @Autowired
     private StreetService streetService;
 
-    @GetMapping(
+    @PostMapping(
             value = "/select",
-            produces = {MediaType.TEXT_EVENT_STREAM_VALUE})
+            produces = {MediaType.TEXT_EVENT_STREAM_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public Flux<Street> selectStreet(){
-
         return this.streetService.selectStreet(new Street())
                 .map(m -> new Street(m.getStreetId(), m.getStreetName(), m.getStreetType()))
                 .sort(Comparator.comparing(Street::getStreetName))
                 .doOnNext(d->{
-                    System.out.println("STREET: "+d);
-        })
+                })
                 .delayElements(Duration.ofSeconds(1));
     }
 

@@ -16,6 +16,8 @@ public class UpdatePersonUseCase implements UpdatePersonIn {
 
     @Override
     public Mono<Integer> updatePerson(Person person) {
-        return this.personOut.updatePerson(person);
+        return this.personOut.updatePerson(person)
+                .doOnNext(per->{
+                });
     }
 }

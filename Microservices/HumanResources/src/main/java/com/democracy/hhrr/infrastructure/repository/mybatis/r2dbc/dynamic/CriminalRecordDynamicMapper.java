@@ -84,7 +84,7 @@ public interface CriminalRecordDynamicMapper {
     default Mono<Integer> insert(CriminalRecord record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, CRIMINAL_RECORD, c ->
                 c
-                        .map(criminalRecordId).toPropertyWhenPresent("criminalRecordIdd", record::getCriminalRecordId)
+                        .map(criminalRecordId).toPropertyWhenPresent("criminalRecordId", record::getCriminalRecordId)
                         .map(criminalRecordName).toProperty("criminalRecordName")
                         .map(criminalRecordDescription).toProperty("criminalRecordDescription")
                         .map(penalId).toProperty("penal.penalId")
@@ -160,6 +160,13 @@ public interface CriminalRecordDynamicMapper {
                             .render(RenderingStrategies.MYBATIS3);
                 }
             }else{
+                crm
+                        .where(criminalRecordName,isLikeWhenPresent(criminalRecord::getCriminalRecordName).map(s -> "%" + s + "%"))
+                        .and(criminalRecordDescription,isLikeWhenPresent(criminalRecord::getCriminalRecordDescription))
+                        .and(criminalRecordPersonId, isLikeWhenPresent(criminalRecord.getPerson()::getPersonId))
+                        .and(cedula, isLikeWhenPresent(criminalRecord.getPerson()::getCedula))
+                        .build()
+                        .render(RenderingStrategies.MYBATIS3);
                 crm.orderBy(criminalRecordId);
             }
         return crm;

@@ -118,8 +118,8 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
                         .map(personId).toPropertyWhenPresent("person.personId", record.getPerson()::getPersonId)
                         .map(qualificationInstituteId).toPropertyWhenPresent("institute.instituteId", record.getInstitute()::getInstituteId)
                         .map(documentQualificationId).toPropertyWhenPresent("document.documentId", record.getDocument()::getDocumentId)
-                        .map(verified).toPropertyWhenPresent("verified", record::isVerified)
-                        .map(approved).toPropertyWhenPresent("verified", record::isApproved)
+                        .map(verified).toPropertyWhenPresent("verified", record::getVerified)
+                        .map(approved).toPropertyWhenPresent("verified", record::getApproved)
 
 
         );
@@ -164,17 +164,17 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
                     .join(DOCUMENT)
                     .on(QUALIFICATION_document_id, equalTo(DOCUMENT_document_id));
 
-            if(record.getQualificationId() != null){
-                if(!record.getQualificationId().isEmpty()){
-                    str.where(qualificationId,isEqualToWhenPresent(record.getQualificationId()));
-                }else{
-                    str
-                            .where(verified,isEqualToWhenPresent(record::isVerified))
-                            .and(approved, isEqualToWhenPresent(record::isApproved))
-                            .build()
-                            .render(RenderingStrategies.MYBATIS3);
-                }
+            if(record.getQualificationId() != null && !record.getQualificationId().isEmpty()){
+                str.where(qualificationId,isEqualToWhenPresent(record.getQualificationId()));
+            }else if(record.getPerson()!=null && record.getPerson().getPersonId()!=null && !record.getPerson().getPersonId().isEmpty()){
+                str
+                        .where(qualificationPersonId, isEqualToWhenPresent(record.getPerson()::getPersonId));
             }else{
+                str
+                        .where(verified,isEqualToWhenPresent(record::getVerified))
+                        .and(approved, isEqualToWhenPresent(record::getApproved))
+                        .build()
+                        .render(RenderingStrategies.MYBATIS3);
                 str.orderBy(qualificationId);
             }
             return str;
@@ -237,8 +237,8 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> updateSelectiveByPrimaryKey(Qualification record) {
         return update(c ->
                 c
-                        .set(verified).equalToWhenPresent(record::isVerified)
-                        .set(approved).equalToWhenPresent(record::isApproved)
+                        .set(verified).equalToWhenPresent(record::getVerified)
+                        .set(approved).equalToWhenPresent(record::getApproved)
                         .set(qualificationInstituteId).equalToWhenPresent(record.getInstitute()::getInstituteId)
                         .where(qualificationId, isEqualTo(record::getQualificationId))
 
@@ -248,8 +248,8 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> updateAllByPrimaryKey(Qualification record) {
         return update(c ->
                 c
-                        .set(approved).equalToWhenPresent(record::isApproved)
-                        .set(verified).equalToWhenPresent(record::isVerified)
+                        .set(approved).equalToWhenPresent(record::getApproved)
+                        .set(verified).equalToWhenPresent(record::getVerified)
                         .set(qualificationInstituteId).equalToWhenPresent(record.getInstitute()::getInstituteId)
                         .where(qualificationId, isEqualTo(record::getQualificationId))
         );
@@ -258,8 +258,8 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> updateAll(Qualification record, WhereApplier whereApplier) {
         return update(c ->
                 c.
-                        set(approved).equalToWhenPresent(record::isApproved)
-                        .set(verified).equalToWhenPresent(record::isVerified)
+                        set(approved).equalToWhenPresent(record::getApproved)
+                        .set(verified).equalToWhenPresent(record::getVerified)
                         .set(qualificationInstituteId).equalToWhenPresent(record.getInstitute()::getInstituteId)
                         .applyWhere(whereApplier)
         );
@@ -268,8 +268,8 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
     default Mono<Integer> updateSelective(Qualification record, WhereApplier whereApplier) {
         return update(c ->
                 c.
-                        set(verified).equalToWhenPresent(record::isVerified)
-                        .set(approved).equalToWhenPresent(record::isApproved)
+                        set(verified).equalToWhenPresent(record::getVerified)
+                        .set(approved).equalToWhenPresent(record::getApproved)
                         .set(qualificationInstituteId).equalToWhenPresent(record.getInstitute()::getInstituteId)
                         .applyWhere(whereApplier)
         );

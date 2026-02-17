@@ -10,21 +10,21 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class ProfessionHandler {
 
 
-    @Autowired
+    //@Autowired
     private ProfessionService professionService;
 
     public Mono<ServerResponse> selectProfession(ServerRequest request){
+
         var obtainProfession = request.bodyToMono(Profession.class);
         Profession sendProfession  = new Profession();
         obtainProfession.map( prf ->{
             sendProfession.setProfessionId(prf.getProfessionId());
             sendProfession.setProfessionName(prf.getProfessionName());
-            System.out.println("SEND_PROFESSION: "+sendProfession);
             return sendProfession;
         });
         return ServerResponse

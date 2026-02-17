@@ -17,12 +17,12 @@ public class QualificationAdapter implements QualificationOut {
     private QualificationMapper qualificationMapper;
 
     @Override
-    public Mono<?> createQualification(Qualification qualification) {
+    public Mono<Integer> createQualification(Qualification qualification) {
         return qualificationMapper.insert(qualification);
     }
 
     @Override
-    public Mono<?> createMultipleQualifications(List<Qualification> qualificationList) {
+    public Mono<Integer> createMultipleQualifications(List<Qualification> qualificationList) {
         return qualificationMapper.insertMultiple(qualificationList);
     }
 

@@ -90,7 +90,6 @@ public interface InvestigationResultDynamicMapper extends CommonSelectMapper {
 
         ).doOnError( err ->{
             try{
-                System.out.println("LLEGO AQUI: ");
                 throw new RuntimeException("SE ENVIA ERROR RuntimeException");
             }catch (R2dbcBadGrammarException s){
                 throw new R2dbcBadGrammarException("SE ENVIA ERROR R2dbcBadGrammarException");
@@ -110,10 +109,15 @@ public interface InvestigationResultDynamicMapper extends CommonSelectMapper {
         BindableColumn<InvestigationResult> isApprove= DerivedColumn.of("is_approve", "INVESTIGATION_RESULT");
         */
         return select(str ->{
-            str
-                    .where(cedula,isEqualToWhenPresent(investigationResult::getCedula))
-                    .build()
-                    .render(RenderingStrategies.MYBATIS3);
+
+                    if(investigationResult!=null && investigationResult.getCedula()!=0){
+                        str .where(cedula,isEqualToWhenPresent(investigationResult::getCedula))
+                                .build()
+                                .render(RenderingStrategies.MYBATIS3);
+                    }
+                    else {
+                        str.orderBy(cedula);
+                    }
             return str;
         });
     }

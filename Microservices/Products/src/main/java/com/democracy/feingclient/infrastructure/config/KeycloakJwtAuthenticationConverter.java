@@ -37,8 +37,6 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
 
         var roles = eternal.get("roles");
         var realAccess = jwt.getClaim("realm_access");
-        System.out.println("REALM_ACCES: "+realAccess);
-        System.out.println("PREFERRED_USERNAME: "+jwt.getClaim("preferred_username"));
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.replace("-", "_")))
                 .collect(toSet());

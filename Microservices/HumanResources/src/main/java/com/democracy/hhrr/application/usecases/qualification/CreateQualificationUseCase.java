@@ -3,6 +3,7 @@ package com.democracy.hhrr.application.usecases.qualification;
 import com.democracy.hhrr.domain.models.Qualification;
 import com.democracy.hhrr.domain.ports.in.qualification.CreateQualificationIn;
 import com.democracy.hhrr.domain.ports.out.QualificationOut;
+import io.r2dbc.spi.Parameter;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
@@ -19,13 +20,13 @@ public class CreateQualificationUseCase implements CreateQualificationIn {
     }
 
     @Override
-    public Mono<?> createQualification(Qualification qualification) {
+    public Mono<Integer> createQualification(Qualification qualification) {
         qualification.setQualificationId(UUID.randomUUID().toString());
         return qualificationOut.createQualification(qualification);
     }
 
     @Override
-    public Mono<?> createMultipleQualifications(List<Qualification> qualificationList) {
+    public Mono<Integer> createMultipleQualifications(List<Qualification> qualificationList) {
         qualificationList.forEach(qu->{
             qu.setQualificationId(UUID.randomUUID().toString());
         });

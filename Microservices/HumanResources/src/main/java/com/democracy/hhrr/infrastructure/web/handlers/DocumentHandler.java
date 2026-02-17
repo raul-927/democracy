@@ -59,9 +59,7 @@ public class DocumentHandler {
         var obtainListCriminalRecords = request.bodyToFlux(CriminalRecord.class);
         obtainListCriminalRecords.collectList().map(
                 crim ->{
-                    System.out.println("CRIM: "+crim);
                     criminalRecordList.addAll(crim);
-                    System.out.println("CRIMINAL_RECORD_LIST: "+criminalRecordList);
                     return criminalRecordList;
                 }
         ).subscribe(System.out::println).dispose();

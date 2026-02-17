@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
-@Configuration
+//@Configuration
 public class ProfessionRouter {
 
     private static final String PATH_MAIN = RouterConstant.PATH_MAIN;
@@ -23,7 +23,7 @@ public class ProfessionRouter {
     private static final String DELETE= RouterConstant.DELETE;
 
 
-    @Bean
+    //@Bean
     public RouterFunction<ServerResponse> routerProfession(ProfessionHandler handler){
         return RouterFunctions
                 .route(

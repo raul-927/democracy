@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CreateQualificationIn {
 
-    Mono<?> createQualification(Qualification qualification);
-    Mono<?>createMultipleQualifications(List<Qualification> qualificationList);
+    Mono<Integer> createQualification(Qualification qualification);
+    Mono<Integer>createMultipleQualifications(List<Qualification> qualificationList);
 }

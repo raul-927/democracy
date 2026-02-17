@@ -36,7 +36,6 @@ public class DepartmentHandler {
     }
 
     public Mono<ServerResponse> selectAllDepartment(ServerRequest request){
-        System.out.println("LLEGO DEPSARTMENT");
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -59,9 +58,7 @@ public class DepartmentHandler {
         var obtainListDepartments = request.bodyToFlux(Department.class);
         obtainListDepartments.collectList().map(
                 dprt ->{
-                    System.out.println("DPRT: "+dprt);
                     departmentList.addAll(dprt);
-                    System.out.println("DEPARTMENT_LIST: "+departmentList);
                     return departmentList;
                 }
         ).subscribe(System.out::println).dispose();

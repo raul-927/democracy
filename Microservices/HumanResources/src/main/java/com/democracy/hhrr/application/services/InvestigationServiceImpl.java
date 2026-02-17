@@ -25,7 +25,6 @@ public class InvestigationServiceImpl implements InvestigationService{
 
     @Override
     public Mono<Integer> createInvestigation(Investigation investigation) {
-        System.out.println("Arrive createInvestigation");
         return this.createInvestigationIn.createInvestigation(investigation);
     }
 }

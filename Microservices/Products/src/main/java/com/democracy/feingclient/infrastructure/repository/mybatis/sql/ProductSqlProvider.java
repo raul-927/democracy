@@ -18,8 +18,6 @@ public class ProductSqlProvider {
             }
             VALUES("product_type", "'".concat(product.getProductType().name()).concat("'"));
         }};
-
-        System.out.println("INSERT RESULT: "+sql.toString());
         return sql.toString();
     }
 
@@ -42,7 +40,6 @@ public class ProductSqlProvider {
                 }
             }
         }};
-        System.out.println("SELECT RESULT: "+sql.toString());
         return sql.toString();
     }
     public String selectCount(){

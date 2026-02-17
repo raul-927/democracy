@@ -15,11 +15,11 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class CriminalRecordHandler {
 
-    @Autowired
+    //@Autowired
     private CriminalRecordService criminalRecordService;
 
     public Mono<ServerResponse> selectCriminalRecord(ServerRequest request){
@@ -35,12 +35,11 @@ public class CriminalRecordHandler {
         });
         return ServerResponse
                 .ok()
-                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(criminalRecordService.selectCriminalRecord(sendCriminalRecord), CriminalRecord.class);
     }
 
     public Mono<ServerResponse> selectAllCriminalRecords(ServerRequest request){
-        System.out.println("LLEGO DEPSARTMENT");
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -63,9 +62,7 @@ public class CriminalRecordHandler {
         var obtainListCriminalRecords = request.bodyToFlux(CriminalRecord.class);
         obtainListCriminalRecords.collectList().map(
                 crim ->{
-                    System.out.println("CRIM: "+crim);
                     criminalRecordList.addAll(crim);
-                    System.out.println("CRIMINAL_RECORD_LIST: "+criminalRecordList);
                     return criminalRecordList;
                 }
         ).subscribe(System.out::println).dispose();

@@ -26,12 +26,12 @@ public class QualificationServiceImpl implements QualificationService{
     }
 
     @Override
-    public Mono<?> createQualification(Qualification qualification) {
+    public Mono<Integer> createQualification(Qualification qualification) {
         return this.createQualificationIn.createQualification(qualification);
     }
 
     @Override
-    public Mono<?> createMultipleQualifications(List<Qualification> qualificationList) {
+    public Mono<Integer> createMultipleQualifications(List<Qualification> qualificationList) {
         return this.createQualificationIn.createMultipleQualifications(qualificationList);
     }
 

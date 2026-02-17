@@ -26,18 +26,13 @@ public class AccesControlListService<T> {
 	public int insert(T object) {
 		Integer id = Math.abs(object.hashCode());
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("USER: "+user.getName()+", AUTHORITIES: "+user.getAuthorities());
-
 		ObjectIdentity objectIdentity  = null;
 		MutableAcl mutableAcl = null;
 		String getDomain = object.getClass().getName();
-		System.out.println("CLASE: "+getDomain);
+
 		switch (getDomain) {
 			case DOMAIN+"Product":
-				System.out.println("ENTRO1");
-				System.out.println("PRODUCT: "+((Product)object).getProductId());
 				objectIdentity = new ObjectIdentityImpl(Product.class, ((Product)object).getProductId());
-				System.out.println("LLEGO2");
 				mutableAcl  = mutableAclService.createAcl(objectIdentity);
 				mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
 				mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
@@ -155,7 +150,6 @@ public class AccesControlListService<T> {
 
 			 */
 			default:
-				System.out.println("NO LLEGO A NINGUN LADO");
 				break;
 		}
 		mutableAclService.updateAcl(mutableAcl);

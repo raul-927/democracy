@@ -30,7 +30,6 @@ public class CreateInvestigationResultController {
     public Mono<Integer> insertInvestigation(@RequestBody InvestigationResult investigation){
         Flux<InvestigationResult> investigationFlux = Flux.just(investigation);
         investigationFlux.subscribe( ret ->{
-            System.out.println("INVESTIGATION_RESULT: "+ret);
         });
         return  investigationResultService.createInvestigationResult(investigation);
     }
@@ -38,11 +37,9 @@ public class CreateInvestigationResultController {
 
     @PostMapping(
             value = "/select",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces ={MediaType.APPLICATION_JSON_VALUE})
-    public  Flux<InvestigationResult> selectInvestigation(@RequestBody InvestigationResult investigation){
-
-        return  investigationResultService.obtainInvestigationResult(investigation.getCedula());
+    public  Flux<InvestigationResult> selectInvestigation(){
+        return  investigationResultService.obtainInvestigationResult(new InvestigationResult().getCedula());
     }
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
-@Configuration
+//@Configuration
 public class QualificationRouter {
     private static final String PATH_MAIN = RouterConstant.PATH_MAIN;
     private static final String QUALIFICATION = RouterConstant.QUALIFICATION;
@@ -22,7 +22,7 @@ public class QualificationRouter {
     private static final String PATH_UPDATE = RouterConstant.PATH_UPDATE;
     private static final String PATH_COUNT=RouterConstant.PATH_COUNT;
 
-    @Bean
+    //@Bean
     public RouterFunction<ServerResponse> routerQualification(QualificationHandler handler){
         return RouterFunctions
                 .route(

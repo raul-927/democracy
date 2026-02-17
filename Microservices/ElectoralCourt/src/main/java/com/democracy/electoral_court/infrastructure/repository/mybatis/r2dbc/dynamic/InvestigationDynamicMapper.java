@@ -72,7 +72,6 @@ public interface InvestigationDynamicMapper extends CommonSelectMapper {
                         .map(observation).toProperty("observation")
         ).doOnError( err ->{
             try{
-                System.out.println("LLEGO AQUI: ");
                 throw new RuntimeException("SE ENVIA ERROR RuntimeException");
             }catch (R2dbcBadGrammarException s){
                 throw new R2dbcBadGrammarException("SE ENVIA ERROR R2dbcBadGrammarException");

@@ -12,11 +12,11 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-@Component
-@Slf4j
+//@Component
+//@Slf4j
 public class QualificationHandler {
 
-    @Autowired
+    //@Autowired
     private QualificationService qualificationService;
 
     public Mono<ServerResponse> selectQualification(ServerRequest request){
@@ -28,8 +28,8 @@ public class QualificationHandler {
             sendQualification.setInstitute(qual.getInstitute());
             sendQualification.setDocument(qual.getDocument());
             sendQualification.setPerson(qual.getPerson());
-            sendQualification.setApproved(qual.isApproved());
-            sendQualification.setVerified(qual.isVerified());
+            sendQualification.setApproved(qual.getApproved());
+            sendQualification.setVerified(qual.getVerified());
             return sendQualification;
         });
         return ServerResponse
@@ -61,9 +61,7 @@ public class QualificationHandler {
         var obtainListCriminalRecords = request.bodyToFlux(CriminalRecord.class);
         obtainListCriminalRecords.collectList().map(
                 crim ->{
-                    System.out.println("CRIM: "+crim);
                     criminalRecordList.addAll(crim);
-                    System.out.println("CRIMINAL_RECORD_LIST: "+criminalRecordList);
                     return criminalRecordList;
                 }
         ).subscribe(System.out::println).dispose();

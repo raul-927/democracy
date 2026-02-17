@@ -55,7 +55,6 @@ public class ProductController {
 
     @GetMapping(value="/select-count")
     public Mono<Long> selectCount(){
-        System.out.println("LLEGA");
         return  this.productService.selectCount();
     }
 

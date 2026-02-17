@@ -19,12 +19,12 @@ public class SelectDocumentUseCase implements SelectDocumentIn {
 
     @Override
     public Flux<Document> selectDocument(Document document) {
-        return this.documentOut.selectDocument(document).delayElements(Duration.ofSeconds(5));
+        return this.documentOut.selectDocument(document);
     }
 
     @Override
     public Flux<Document> selectAllDocuments() {
-        return this.documentOut.selectAllDDocuments().delayElements(Duration.ofSeconds(5));
+        return this.documentOut.selectAllDDocuments();
     }
 
     @Override
