@@ -1,4 +1,6 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.democracy.hhrr.domain.models.Qualification;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.*;
@@ -44,7 +46,7 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface QualificationDynamicMapper extends CommonSelectMapper{
-
+    Logger LOGGER = LoggerFactory.getLogger(QualificationDynamicMapper.class);
     BasicColumn[] qualificationPersonInstituteDocumentColumnList = BasicColumn.columnList(
             qualificationId, qualificationPersonId, qualificationInstituteId, documentQualificationId, verified, approved,
             personId, firstName,secondName, firstLastName, secondLastName,
@@ -146,6 +148,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
         return ReactiveMyBatis3Utils.selectList(this::selectMany, qualificationColumn, QUALIFICATION_TABLE, completer);
     }
     default Flux<Qualification> selectQualification(Qualification record) {
+        LOGGER.info("Initialize selectQualification...");
         BindableColumn<Qualification> QUALIFICATION_person_id= DerivedColumn.of("person_id", "QUALIFICATION");
         BindableColumn<Qualification> QUALIFICATION_institute_id= DerivedColumn.of("institute_id", "QUALIFICATION");
         BindableColumn<Qualification> QUALIFICATION_document_id= DerivedColumn.of("document_id", "QUALIFICATION");
@@ -154,6 +157,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
         BindableColumn<Qualification> INSTITUTE_institute_id= DerivedColumn.of("institute_id", "INSTITUTE");
         BindableColumn<Qualification> DOCUMENT_document_id= DerivedColumn.of("document_id", "DOCUMENT");
         return select(str ->{
+
             str
                     .join(PERSON)
                     .on(QUALIFICATION_person_id, equalTo(PERSON_person_id))
@@ -177,20 +181,22 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
                         .render(RenderingStrategies.MYBATIS3);
                 str.orderBy(qualificationId);
             }
+            LOGGER.info("QUERY selectQualification: {}", str.build());
             return str;
         });
     }
     default Flux<Qualification> selectFullQualification(Qualification record) {
+        LOGGER.info("Initialize selectFullQualification...");
         BindableColumn<Qualification> QUALIFICATION_person_id= DerivedColumn.of("person_id", "QUALIFICATION");
         BindableColumn<Qualification> QUALIFICATION_institute_id= DerivedColumn.of("institute_id", "QUALIFICATION");
         BindableColumn<Qualification> QUALIFICATION_document_id= DerivedColumn.of("document_id", "QUALIFICATION");
-
 
         BindableColumn<Qualification> INSTITUTE_institute_id= DerivedColumn.of("institute_id", "INSTITUTE");
         BindableColumn<Qualification> DOCUMENT_document_id= DerivedColumn.of("document_id", "DOCUMENT");
         BindableColumn<Qualification> PERSON_person_id= DerivedColumn.of("person_id", "PERSON");
 
         return selectFullColumnQualification(str ->{
+            LOGGER.info("Initialize selectFullColumnQualification...");
            str
                    .join((PersonDynamicSqlSupport.PERSON))
                    .on(QUALIFICATION_person_id,equalTo(PERSON_person_id))
@@ -215,6 +221,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
             }else{
                 str.orderBy(qualificationId);
             }
+            LOGGER.info("QUERY selectFullQualification: {}", str.toString());
             return str;
         });
     }
