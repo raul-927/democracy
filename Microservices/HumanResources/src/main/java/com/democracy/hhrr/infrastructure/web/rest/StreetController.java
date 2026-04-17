@@ -44,36 +44,36 @@ public class StreetController {
                 .take(10);
     }
 
-    //@PostMapping(
-      //      value="/save",
-      //      consumes ={MediaType.APPLICATION_JSON_VALUE},
-      //      produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(
+            value="/save",
+            consumes ={MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<?> createStreet(@RequestBody Street street){
         return this.streetService.createStreet(street);
     }
 
-    /*@PostMapping(
+    @PostMapping(
             value="/insert",
             consumes ={MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})*/
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<?> insertMultiple(@RequestBody List<Street> street){
         return streetService.createMultipleStreet(street);
     }
 
-    //@PutMapping(
-     //       value="/update",
-      //      consumes ={MediaType.APPLICATION_JSON_VALUE},
-     //       produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(
+            value="/update",
+            consumes ={MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<Integer> updateStreet(@RequestBody Street street){
         return this.streetService.updateStreet(street);
     }
 
-    //@GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value="/select-count", produces = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<Long> selectCount(){
         return this.streetService.selectCount();
     }
 
-   // @DeleteMapping(value="/delete/{streetId}")
+    @DeleteMapping(value="/delete/{streetId}")
     public Mono<Integer> deleteStreet(@PathVariable String streetId){
         return this.streetService.deleteStreet(streetId);
     }

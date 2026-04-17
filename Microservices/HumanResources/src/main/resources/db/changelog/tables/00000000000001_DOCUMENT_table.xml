@@ -10,11 +10,11 @@
             <column name="document_id"           type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true"   nullable="false"/>
             </column>
-            <column name = "document_name"   type = "varchar(36)"/>
+            <column name = "document_name"   type = "varchar(100)"/>
             <column name = "verified"        type = "boolean"/>
             <column name = "approved"        type = "boolean"/>
-            <column name = "observation"     type = "varchar(36)"/>
-            <column name = "attachment"      type = "Blob"/>
+            <column name = "observation"     type = "varchar(100)"/>
+            <column name = "attachment"      type = "LONGBLOB"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

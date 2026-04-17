@@ -21,8 +21,9 @@
             <column name="first_last_name" 	        type="varchar(20)"/>
             <column name="second_last_name" 	    type="varchar(20)"/>
             <column name= "person_qualification_id" type ="varchar(36)"/>
-            <column name ="address_id"               type ="varchar(36)" />
+            <column name ="address_id"              type ="varchar(36)" />
             <column name="profession_id"            type ="varchar(36)" />
+            <column name="is_processed"             type="boolean" />
         </createTable>
     </changeSet>
 </databaseChangeLog>
