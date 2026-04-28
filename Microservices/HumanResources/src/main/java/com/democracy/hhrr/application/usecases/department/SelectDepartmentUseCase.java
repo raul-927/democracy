@@ -100,8 +100,6 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
         numbers12.subscribe(System.out::println);
         numbers12.subscribe(System.out::println);
 
-
-
         LOGGER.info("GROUP_BY:---");
         Flux<Integer> numbers13 = Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Flux<GroupedFlux<String, Integer>> groupedByEvenOdd = numbers13.groupBy(n -> n % 2 == 0 ? "Even" : "Odd");
@@ -125,7 +123,6 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
                 error -> LOGGER.error("Error: {}",error.getMessage())
         );
 
-
         LOGGER.info("RETRY_WHEN:---");
         int maxRetries2 = 3;
         Mono<Integer> result2 = Mono.fromCallable(() -> {
@@ -140,17 +137,13 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
                 error -> LOGGER.error("Error: {}",error.getMessage())
         );
 
-
         LOGGER.info("FLATMAP_ITERABLE:---");
         Flux<String> words = Flux.just("Hello", "Reactor", "World");
         Flux<char[]> letters = words.flatMapIterable(word -> List.of(word.toCharArray()));
         letters.subscribe(System.out::println);
 
-
-
         //--------------------------------------------------------------------------------------------
         LOGGER.info("BACMPRESSURE:---");
-
         Flux<Integer> numbers15 = Flux.range(1, 100);
         numbers15
                 .doOnRequest(requested -> LOGGER.info("Requested: " + requested))
@@ -173,7 +166,7 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
         }
 //---------------------------------------------------------------------------------------------------
 
-        LOGGER.info("BACMPRESSURE_WITH_INTERVALS:---");
+        LOGGER.info("BACK_PRESSURE_WITH_INTERVALS:---");
         Flux<Long> intervalNumbers = Flux.interval(Duration.ofSeconds(1))
                 .take(20);
         intervalNumbers
@@ -186,7 +179,6 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-
                         },
                         error -> LOGGER.error("Error: {}" ,error.getMessage())
                 );
@@ -220,15 +212,10 @@ public class SelectDepartmentUseCase implements SelectDepartmentIn {
 // Sleep to observe backpressure in action
 
         try {
-
             Thread.sleep(30000); // Consumer requests slowly over 30 seconds
-
         } catch (InterruptedException e) {
-
             e.printStackTrace();
-
         }
-
 
         Flux.interval(Duration.ofSeconds(1))
                 .map(index -> "Event " + index)
