@@ -1,6 +1,6 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic.aux;
 
-import com.democracy.hhrr.domain.aux.CityNeighborhood;
+import com.democracy.hhrr.domain.aux.PersonDocument;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
@@ -17,12 +17,11 @@ import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBa
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.CityNeighDynamicSqlSupport.*;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.PersonDocumentDynamicSqlSupport.*;
 
-public interface CityNeighDynamicMapper {
+public interface PersonDocumentDynamicMapper {
 
-    BasicColumn[] cityNeighColumns = BasicColumn.columnList(cityNeighId, cityId, neighborhoodId);
-
+    BasicColumn[] personDocumentColumns = BasicColumn.columnList(personDocumentId, personId, documentId);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
     Mono<Long> counter(SelectStatementProvider selectStatement);
@@ -31,47 +30,46 @@ public interface CityNeighDynamicMapper {
     Mono<Integer> delete(DeleteStatementProvider deleteStatement);
 
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
-    @Options(keyProperty = "record.cityNeighId",keyColumn = "city_neigh_id")
-    Mono<Integer> insert(InsertStatementProvider<CityNeighborhood> insertStatement);
+    @Options(keyProperty = "record.personDocumentId",keyColumn = "person_document_id")
+    Mono<Integer> insert(InsertStatementProvider<PersonDocument> insertStatement);
 
     @InsertProvider(type=SqlProviderAdapter.class, method="insertMultiple")
-    @Options(keyProperty = "record.cityNeighId",keyColumn = "city_neigh_id")
-    Mono<Integer>  insertMultiple(MultiRowInsertStatementProvider<CityNeighborhood> multipleInsertStatement);
+    @Options(keyProperty = "record.personDocumentId",keyColumn = "person_document_id")
+    Mono<Integer>  insertMultiple(MultiRowInsertStatementProvider<PersonDocument> multipleInsertStatement);
 
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @ResultMap(value="CityNeighborhoodResult")
-    Mono<CityNeighborhood> selectOne(SelectStatementProvider selectStatement);
+    @ResultMap(value="PersonDocumentResult")
+    Mono<PersonDocument> selectOne(SelectStatementProvider selectStatement);
 
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @ResultMap(value="CityNeighborhoodResult")
-    Flux<CityNeighborhood> selectMany(SelectStatementProvider selectStatement);
+    @ResultMap(value="PersonDocumentResult")
+    Flux<PersonDocument> selectMany(SelectStatementProvider selectStatement);
 
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
     Mono<Integer> update(UpdateStatementProvider updateStatement);
 
     default Mono<Long> count(CountDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.countFrom(this::counter, CITY_NEIGH, completer);
+        return ReactiveMyBatis3Utils.countFrom(this::counter, PERSON_DOCUMENT, completer);
     }
 
     default Mono<Integer> delete(DeleteDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.deleteFrom(this::delete, CITY_NEIGH, completer);
+        return ReactiveMyBatis3Utils.deleteFrom(this::delete, PERSON_DOCUMENT, completer);
     }
 
-    default Mono<CityNeighborhood> selectOne(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectOne(this::selectOne, cityNeighColumns, CITY_NEIGH, completer);
+    default Mono<PersonDocument> selectOne(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectOne(this::selectOne, personDocumentColumns, PERSON_DOCUMENT, completer);
     }
 
-    default Flux<CityNeighborhood> select(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, cityNeighColumns, CITY_NEIGH, completer);
+    default Flux<PersonDocument> select(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, personDocumentColumns, PERSON_DOCUMENT, completer);
     }
 
 
-    default Flux<CityNeighborhood> selectDistinct(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, cityNeighColumns, CITY_NEIGH, completer);
+    default Flux<PersonDocument> selectDistinct(SelectDSLCompleter completer) {
+        return ReactiveMyBatis3Utils.selectDistinct(this::selectMany, personDocumentColumns, PERSON_DOCUMENT, completer);
     }
 
     default Mono<Integer> update(UpdateDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.update(this::update, CITY_NEIGH, completer);
+        return ReactiveMyBatis3Utils.update(this::update, PERSON_DOCUMENT, completer);
     }
-
 }
