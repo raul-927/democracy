@@ -26,19 +26,14 @@ public interface PersonDocumentMapper extends PersonDocumentDynamicMapper {
     default Mono<Integer> insert(PersonDocument record) {
         return ReactiveMyBatis3Utils.insert(this::insert, record, PERSON_DOCUMENT, c ->
                 c
-                        .map(personDocumentId).toProperty("personDocumentId")
                         .map(personId).toProperty("personId")
                         .map(documentId).toProperty("documentId")
-
-
         );
     }
 
     default Mono<Integer> insertMultiple(Collection<PersonDocument> records) {
         return ReactiveMyBatis3Utils.insertMultiple(this::insertMultiple, records, PERSON_DOCUMENT, c ->
                 c
-
-                        .map(personDocumentId).toProperty("personDocumentId")
                         .map(personId).toProperty("personId")
                         .map(documentId).toProperty("documentId")
         );

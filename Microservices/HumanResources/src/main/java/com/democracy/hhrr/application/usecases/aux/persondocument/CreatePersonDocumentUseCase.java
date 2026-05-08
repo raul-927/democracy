@@ -20,7 +20,7 @@ public class CreatePersonDocumentUseCase implements CreatePersonDocumentIn {
 
 
     @Override
-    public Mono<?> createPersonDocument(PersonDocument personDocument) {
+    public Mono<Integer> createPersonDocument(PersonDocument personDocument) {
         return personDocumentOut.createPersonDocument(personDocument);
     }
 

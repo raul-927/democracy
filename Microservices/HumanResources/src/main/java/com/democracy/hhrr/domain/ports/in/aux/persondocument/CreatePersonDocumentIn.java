@@ -6,6 +6,6 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 public interface CreatePersonDocumentIn {
-    Mono<?> createPersonDocument(PersonDocument personDocument);
+    Mono<Integer> createPersonDocument(PersonDocument personDocument);
     Mono<?>createMultiplePersonDocuments(List<PersonDocument> personDocuments);
 }

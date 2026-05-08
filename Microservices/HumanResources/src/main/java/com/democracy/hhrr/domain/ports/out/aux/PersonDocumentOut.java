@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 public interface PersonDocumentOut {
-    Mono<?> createPersonDocument(PersonDocument personDocument);
+    Mono<Integer> createPersonDocument(PersonDocument personDocument);
     Mono<?>createMultiplePersonDocuments(List<PersonDocument> personDocuments);
     Flux<PersonDocument> selectPersonDocument(PersonDocument personDocument);
     Flux<PersonDocument> selectAllPersonDocuments();

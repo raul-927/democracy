@@ -21,7 +21,7 @@ public class PersonDocumentServiceImpl implements PersonDocumentService{
     }
 
     @Override
-    public Mono<?> createPersonDocument(PersonDocument personDocument) {
+    public Mono<Integer> createPersonDocument(PersonDocument personDocument) {
         return createPersonDocumentIn.createPersonDocument(personDocument);
     }
 

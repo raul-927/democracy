@@ -1,6 +1,5 @@
 package com.democracy.hhrr.infrastructure.adapters.aux;
 
-
 import com.democracy.hhrr.domain.aux.PersonDocument;
 import com.democracy.hhrr.domain.ports.out.aux.PersonDocumentOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux.PersonDocumentMapper;
@@ -19,7 +18,7 @@ public class PersonDocumentAdapter implements PersonDocumentOut {
 
 
     @Override
-    public Mono<?> createPersonDocument(PersonDocument personDocument) {
+    public Mono<Integer> createPersonDocument(PersonDocument personDocument) {
         return mapper.insert(personDocument);
     }
 
