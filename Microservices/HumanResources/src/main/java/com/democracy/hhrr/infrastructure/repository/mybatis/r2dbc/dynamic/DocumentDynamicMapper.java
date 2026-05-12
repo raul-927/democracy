@@ -1,6 +1,7 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.dynamic;
 
 import com.democracy.hhrr.domain.models.Document;
+import com.democracy.hhrr.domain.models.Person;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -8,6 +9,8 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.ResultMap;
 import org.mybatis.dynamic.sql.BasicColumn;
+import org.mybatis.dynamic.sql.BindableColumn;
+import org.mybatis.dynamic.sql.DerivedColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
 import org.mybatis.dynamic.sql.delete.render.DeleteStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
@@ -20,8 +23,6 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
-import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.http.codec.multipart.Part;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
@@ -31,9 +32,10 @@ import java.util.Collection;
 
 import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.DocumentDynamicSqlSupport.*;
 
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.PersonDynamicSqlSupport.PERSON;
+import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support.aux.PersonDocumentDynamicSqlSupport.PERSON_DOCUMENT;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-import org.springframework.http.codec.multipart.FilePart;
 
 public interface DocumentDynamicMapper extends CommonSelectMapper{
 
@@ -124,6 +126,26 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
     default Flux<Document> select(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, documentColumnList, DOCUMENT, completer);
     }
+
+    default Flux<Document>selectDocumentByCedula(Person person){
+        BindableColumn<String> personPersonId = DerivedColumn.of("person_id", "PERSON");
+        BindableColumn<Integer> personCedula = DerivedColumn.of("cedula", "PERSON");
+        BindableColumn<String> documentDocumentId = DerivedColumn.of("document_id", "DOCUMENT");
+        BindableColumn<String> personDocumentPersonId= DerivedColumn.of("person_id", "PERSON_DOCUMENT");
+        BindableColumn<String> personDocumentDocumentId= DerivedColumn.of("document_id", "PERSON_DOCUMENT");
+        return select(str ->{
+            str.join(PERSON_DOCUMENT)
+                    .on(documentDocumentId,equalTo(personDocumentDocumentId))
+                    .join(PERSON)
+                    .on(personPersonId, equalTo(personDocumentPersonId)).build();
+            if(person.getCedula()!=0){
+                str.where(personCedula,isEqualToWhenPresent(person::getCedula))
+                        .build()
+                        .render(RenderingStrategies.MYBATIS3);
+            }
+            return str;
+        });
+    }
     default Flux<Document> selectDocument(Document document) {
         return select(str ->{
 
@@ -131,10 +153,7 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
                 if(document.getDocumentId()!=null && !document.getDocumentId().isEmpty()){
                     str.where(documentId,isEqualToWhenPresent(document.getDocumentId()));
                 }else{
-                    str
-                            .where(documentName,isLikeWhenPresent(document::getDocumentName).map(s -> "%" + s + "%"))
-                            .build()
-                            .render(RenderingStrategies.MYBATIS3);
+                    str.where(documentName,isLikeWhenPresent(document::getDocumentName).map(s -> "%" + s + "%"));
                 }
             }else{
                 str.orderBy(documentName);
@@ -145,7 +164,6 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
 
     default Flux<Document> selectAllDocuments(){
         return selectAllDocuments( sel ->{
-            sel.build();
             return sel;
         });
     }

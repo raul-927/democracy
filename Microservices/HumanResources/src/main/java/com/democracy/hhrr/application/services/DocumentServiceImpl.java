@@ -1,6 +1,7 @@
 package com.democracy.hhrr.application.services;
 
 import com.democracy.hhrr.domain.models.Document;
+import com.democracy.hhrr.domain.models.Person;
 import com.democracy.hhrr.domain.ports.in.document.CreateDocumentIn;
 import com.democracy.hhrr.domain.ports.in.document.DeleteDocumentIn;
 import com.democracy.hhrr.domain.ports.in.document.SelectDocumentIn;
@@ -47,6 +48,11 @@ public class DocumentServiceImpl implements DocumentService{
     @Override
     public Mono<Long> selectCount() {
         return this.selectDocumentIn.selectCount();
+    }
+
+    @Override
+    public Flux<Document> selectDocumentByCedula(Person person) {
+        return this.selectDocumentIn.selectDocumentByCedula(person);
     }
 
     @Override

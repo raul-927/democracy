@@ -1,6 +1,7 @@
 package com.democracy.hhrr.application.usecases.document;
 
 import com.democracy.hhrr.domain.models.Document;
+import com.democracy.hhrr.domain.models.Person;
 import com.democracy.hhrr.domain.ports.in.document.SelectDocumentIn;
 import com.democracy.hhrr.domain.ports.out.DocumentOut;
 import org.springframework.stereotype.Component;
@@ -30,5 +31,10 @@ public class SelectDocumentUseCase implements SelectDocumentIn {
     @Override
     public Mono<Long> selectCount() {
         return this.documentOut.selectCount();
+    }
+
+    @Override
+    public Flux<Document> selectDocumentByCedula(Person person) {
+        return documentOut.selectDocumentByCedula(person);
     }
 }

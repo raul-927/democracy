@@ -2,6 +2,7 @@ package com.democracy.hhrr.infrastructure.adapters;
 
 
 import com.democracy.hhrr.domain.models.Document;
+import com.democracy.hhrr.domain.models.Person;
 import com.democracy.hhrr.domain.ports.out.DocumentOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class DocumentAdapter implements DocumentOut {
     @Override
     public Mono<Integer> updateDocument(Document document) {
         return this.documentMapper.updateSelectiveByPrimaryKey(document);
+    }
+
+    @Override
+    public Flux<Document> selectDocumentByCedula(Person person) {
+        return documentMapper.selectDocumentByCedula(person);
     }
 }

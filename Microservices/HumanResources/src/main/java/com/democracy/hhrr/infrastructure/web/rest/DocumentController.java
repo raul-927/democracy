@@ -4,6 +4,7 @@ import com.democracy.hhrr.application.services.DocumentService;
 import com.democracy.hhrr.domain.models.Document;
 
 
+import com.democracy.hhrr.domain.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -44,6 +45,11 @@ public class DocumentController {
     @PostMapping(value = "/select")
     public Flux<Document> selectDocument(@RequestBody Document document) {
         return documentService.selectDocument(document);
+    }
+
+    @PostMapping(value = "/select-by-cedula")
+    public Flux<Document> selectDocumentByCedula(@RequestBody Person person) {
+        return documentService.selectDocumentByCedula(person);
     }
 
 }
