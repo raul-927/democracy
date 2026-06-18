@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-//@RestController
-//@RequestMapping("/humanresources/profession")
-//@RefreshScope
+@RestController
+@RequestMapping("/humanresources/profession")
+@RefreshScope
 public class ProfessionController {
 
-    //@Autowired
+    @Autowired
     private ProfessionService professionService;
 
-    /*@PostMapping(
+    @PostMapping(
            value = "/select",
           consumes = {MediaType.APPLICATION_JSON_VALUE},
-          produces = {MediaType.APPLICATION_JSON_VALUE})*/
-    public Flux<Profession> selectPerson(@RequestBody Profession profession){
+          produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Flux<Profession> selectProfession(@RequestBody Profession profession){
         return this.professionService.selectProfession(profession);
     }
 }

@@ -5,11 +5,9 @@ import com.democracy.hhrr.domain.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/humanresources/person")
@@ -25,5 +23,12 @@ public class PersonController {
           produces = {MediaType.APPLICATION_JSON_VALUE})
     public Flux<Person> selectPerson(@RequestBody Person person){
         return this.personService.selectPerson(person);
+    }
+
+    @GetMapping(
+            value = "/count",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Mono<Long> selectCountPersonIsNotProcessed(){
+        return this.personService.selectCountPersonIsNotProcessed();
     }
 }

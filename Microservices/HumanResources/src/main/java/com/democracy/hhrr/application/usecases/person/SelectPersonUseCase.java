@@ -26,7 +26,7 @@ public class SelectPersonUseCase implements SelectPersonIn {
     }
 
     @Override
-    public Mono<Long> selectCount() {
-        return this.personOut.selectCount();
+    public Mono<Long> selectCountPersonIsNotProcessed() {
+        return this.personOut.selectCountPersonIsNotProcessed();
     }
 }

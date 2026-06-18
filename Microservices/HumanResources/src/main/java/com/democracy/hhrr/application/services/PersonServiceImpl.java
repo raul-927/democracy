@@ -51,8 +51,8 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public Mono<Long> selectCount() {
-        return this.selectPersonIn.selectCount();
+    public Mono<Long> selectCountPersonIsNotProcessed() {
+        return this.selectPersonIn.selectCountPersonIsNotProcessed();
     }
 
     @Override

@@ -42,8 +42,8 @@ public class PersonAdapter implements PersonOut {
     }
 
     @Override
-    public Mono<Long> selectCount() {
-        return personMapper.count();
+    public Mono<Long> selectCountPersonIsNotProcessed() {
+        return personMapper.selectCountPersonIsNotProcessed();
     }
 
     @Override

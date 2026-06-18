@@ -181,7 +181,7 @@ public interface QualificationDynamicMapper extends CommonSelectMapper{
                         .render(RenderingStrategies.MYBATIS3);
                 str.orderBy(qualificationId);
             }
-            LOGGER.info("QUERY selectQualification: {}", str.build());
+            LOGGER.info("QUERY selectQualification: {}", record.getPerson().getCedula());
             return str;
         });
     }

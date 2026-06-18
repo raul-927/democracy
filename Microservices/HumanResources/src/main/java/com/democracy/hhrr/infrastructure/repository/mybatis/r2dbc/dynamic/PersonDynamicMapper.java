@@ -16,6 +16,7 @@ import org.mybatis.dynamic.sql.delete.render.DeleteStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.MultiRowInsertStatementProvider;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
+import org.mybatis.dynamic.sql.select.CountDSL;
 import org.mybatis.dynamic.sql.select.CountDSLCompleter;
 import org.mybatis.dynamic.sql.select.SelectDSLCompleter;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
@@ -23,6 +24,8 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
@@ -44,6 +47,7 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface PersonDynamicMapper extends CommonSelectMapper {
+    Logger LOGGER = LoggerFactory.getLogger(PersonDynamicMapper.class);
     BasicColumn[] personColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName, isProcessed, addressId, professionId);
     BasicColumn[] fullPersonColumnList = BasicColumn.columnList(personId, cedula, civicCredential, firstName, secondName, firstLastName, secondLastName,isProcessed,
             addressId, geoLocation, addressNumber, street1, street2,
@@ -144,6 +148,10 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
         );
     }
 
+    default Mono<Long> selectCountPersonIsNotProcessed(){
+        return this.count( c -> c.where(isProcessed, isFalse()));
+    }
+
     default Mono<Person> selectOne(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectOne(this::selectOne, personColumnList, PERSON, completer);
     }
@@ -218,6 +226,7 @@ public interface PersonDynamicMapper extends CommonSelectMapper {
                                     .build()
                                     .render(RenderingStrategies.MYBATIS3);
             }
+            LOGGER.info("QUERY selectPerson: {}", person.getCedula());
             return str;
         });
     }

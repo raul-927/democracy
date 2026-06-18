@@ -12,6 +12,6 @@ public interface PersonOut {
     Mono<Integer> deletePerson(String personId);
     Flux<Person> selectPerson(Person person);
     Flux<Person> selectAllPersons();
-    Mono<Long> selectCount();
+    Mono<Long> selectCountPersonIsNotProcessed();
     Mono<Integer> updatePerson(Person person);
 }

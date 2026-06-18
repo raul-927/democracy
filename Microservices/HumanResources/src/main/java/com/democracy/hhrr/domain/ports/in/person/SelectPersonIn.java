@@ -8,5 +8,5 @@ public interface SelectPersonIn {
 
     Flux<Person> selectPerson(Person person);
     Flux<Person> selectAllPersons();
-    Mono<Long> selectCount();
+    Mono<Long> selectCountPersonIsNotProcessed();
 }

@@ -20,6 +20,8 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
@@ -31,6 +33,7 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 public interface ProfessionDynamicMapper extends CommonSelectMapper {
+    Logger LOGGER = LoggerFactory.getLogger(ProfessionDynamicMapper.class);
     BasicColumn[] professionColumnList = BasicColumn.columnList(professionId, professionName);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
@@ -108,6 +111,7 @@ public interface ProfessionDynamicMapper extends CommonSelectMapper {
     }
     default Flux<Profession> selectProfession(Profession profession) {
         return select(str ->{
+            LOGGER.info("PROFESSION: {}", profession);
             if(profession.getProfessionId() != null ||
                     profession.getProfessionName() != null){
                     str
@@ -119,6 +123,7 @@ public interface ProfessionDynamicMapper extends CommonSelectMapper {
             }else{
                 str.orderBy(professionId);
             }
+            LOGGER.info("QUERY selectProfession: {}", profession.getProfessionName());
             return str;
         });
     }

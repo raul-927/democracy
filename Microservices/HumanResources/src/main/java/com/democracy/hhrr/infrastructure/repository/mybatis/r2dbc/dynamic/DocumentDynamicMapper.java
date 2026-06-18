@@ -23,6 +23,8 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
@@ -38,7 +40,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 
 public interface DocumentDynamicMapper extends CommonSelectMapper{
-
+    Logger LOGGER = LoggerFactory.getLogger(DocumentDynamicMapper.class);
     BasicColumn[] documentColumnList = BasicColumn.columnList(documentId, documentName, documentVerified, documentApproved, documentObservation, documentAttachment);
 
     @SelectProvider(type= SqlProviderAdapter.class, method="select")
@@ -143,6 +145,7 @@ public interface DocumentDynamicMapper extends CommonSelectMapper{
                         .build()
                         .render(RenderingStrategies.MYBATIS3);
             }
+            LOGGER.info("QUERY selectDocumentByCedula: {}", person.getCedula());
             return str;
         });
     }

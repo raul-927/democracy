@@ -24,6 +24,9 @@ import org.mybatis.dynamic.sql.update.UpdateDSLCompleter;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.where.WhereApplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.CommonSelectMapper;
 import pro.chenggang.project.reactive.mybatis.support.r2dbc.dynamic.ReactiveMyBatis3Utils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -37,8 +40,8 @@ import static com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.support
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
-public interface CriminalRecordDynamicMapper {
-
+public interface CriminalRecordDynamicMapper extends CommonSelectMapper {
+    Logger LOGGER = LoggerFactory.getLogger(CriminalRecordDynamicMapper.class);
     BasicColumn[] criminalRecordColumnList = BasicColumn.columnList(
             criminalRecordId, criminalRecordName, criminalRecordDescription, penalId);
 
@@ -169,6 +172,7 @@ public interface CriminalRecordDynamicMapper {
                         .render(RenderingStrategies.MYBATIS3);
                 crm.orderBy(criminalRecordId);
             }
+            LOGGER.info("QUERY selectFullCriminalRecord: {}", criminalRecord.getPerson().getCedula());
         return crm;
         });
     }

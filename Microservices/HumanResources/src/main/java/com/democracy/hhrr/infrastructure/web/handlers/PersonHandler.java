@@ -65,7 +65,7 @@ public class PersonHandler {
     }
 
     public Mono<ServerResponse> selectCount(ServerRequest request){
-        Mono<Long> countResult = personService.selectCount();
+        Mono<Long> countResult = personService.selectCountPersonIsNotProcessed();
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
