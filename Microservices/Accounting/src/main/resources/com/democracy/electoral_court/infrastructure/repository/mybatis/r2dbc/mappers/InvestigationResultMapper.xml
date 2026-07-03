@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.mappers.InvestigationResultMapper">
+	<resultMap type="com.democracy.electoral_court.domain.models.InvestigationResult" id="InvestigationResultResult">
+  		<id		property="investigationResultId" 			 column="investigation_result_id"/>
+		<result property="investigationId"				 column="investigation_id"/>
+		<result property="personId"				 column="person_id"/>
+		<result property="observation"				 column="observation"/>
+		<result property="score"				 column="score"/>
+		<result property="isApprove"				 column="is_approve"/>
+  	</resultMap>
+</mapper>
