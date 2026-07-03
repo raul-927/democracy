@@ -1,6 +1,7 @@
 package com.democracy.feingclient.infrastructure.adapters;
 
 import com.democracy.feingclient.domain.models.Product;
+import com.democracy.feingclient.domain.ports.out.IrpfOut;
 import com.democracy.feingclient.domain.ports.out.ProductOut;
 import com.democracy.feingclient.infrastructure.repository.mybatis.r2dbc.mappers.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,12 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
 @Component
-public class ProductAdapter implements ProductOut {
+public class ProductAdapter implements ProductOut{
 
     @Autowired
     private ProductMapper productMapper;
@@ -38,4 +40,5 @@ public class ProductAdapter implements ProductOut {
     public Mono<Long> selectCount() {
         return this.productMapper.count();
     }
+
 }

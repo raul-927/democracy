@@ -1,7 +1,6 @@
 package com.democracy.electoral_court.infrastructure.web.rest;
 
 
-
 import com.democracy.electoral_court.infrastructure.publisher.EventPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

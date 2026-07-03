@@ -24,6 +24,7 @@
 		<module>HumanResources</module>
 		<module>Products</module>
 		<module>ElectoralCourt</module>
+		<module>Accounting</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
