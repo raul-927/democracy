@@ -17,10 +17,10 @@ spring:
         predicates:
           - Path=/products/**
       routes[1]:
-        id: accountancy
-        uri: lb://ACCOUNTANCY
+        id: accounting
+        uri: lb://ACCOUNTING
         predicates:
-          - Path=/accountancy/**
+          - Path=/accounting/**
       routes[2]:
         id: HumanResources
         uri: lb://HUMANRESOURCES
