@@ -45,7 +45,7 @@ public class PayrollCalculationUseCase implements PayrollCalculationIn {
                     var baseUvt = baseGravablePesos.divide(VALOR_UVT_2026, 4, RoundingMode.HALF_UP);
 
                     // 4. Aplicación de tabla de retención usando Pattern Matching en Switch (Java 22)
-                    var impuestoUvt = calcularImpuestoUvt(baseUvt);
+                    var impuestoUvt = calculateTaxUvt(baseUvt);
                     var retencionFuentePesos = impuestoUvt.multiply(VALOR_UVT_2026).setScale(0, RoundingMode.HALF_UP);
 
                     // 5. Cálculo del Neto Final
@@ -65,7 +65,7 @@ public class PayrollCalculationUseCase implements PayrollCalculationIn {
     /**
      * Evalúa los límites del Artículo 383 usando Pattern Matching y cláusulas 'when' en Java 22.
      */
-    private BigDecimal calcularImpuestoUvt(BigDecimal baseUvt) {
+    private BigDecimal calculateTaxUvt(BigDecimal baseUvt) {
         return switch (baseUvt) {
             // Rango 1: 0 a 95 UVT (Tarifa 0%)
             case BigDecimal b when b.compareTo(new BigDecimal("95")) <= 0 ->
