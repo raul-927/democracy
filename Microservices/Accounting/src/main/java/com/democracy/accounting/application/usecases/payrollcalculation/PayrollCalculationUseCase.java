@@ -81,7 +81,7 @@ public class PayrollCalculationUseCase implements PayrollCalculationIn {
 
             // Cualquier otro caso (Rangos superiores)
             default ->
-                    throw new IllegalArgumentException("Rango tributario superior no configurado en este demo");
+                    throw new IllegalArgumentException("Rango tributario superior no configurado");
         };
     }
 }
