@@ -18,8 +18,8 @@ public class PayrollCalculationServiceImpl implements PayrollCalculationService{
     }
 
     @Override
-    public Mono<PayrollResponse> calcularNominaReactiva(PayrollRequest request) {
-        return this.payrollCalculationIn.calcularNominaReactiva(request);
+    public Mono<PayrollResponse> calculatePayroll(PayrollRequest request) {
+        return this.payrollCalculationIn.calculatePayroll(request);
     }
 
 }

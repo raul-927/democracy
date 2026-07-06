@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 
 public interface PayrollCalculationOut {
-    Mono<PayrollResponse> calcularNominaReactiva(Mono<PayrollResponse> response);
+    Mono<PayrollResponse> calculatePayroll(Mono<PayrollResponse> response);
 }

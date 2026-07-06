@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class PayrollCalculateAdapter implements PayrollCalculationOut {
     @Override
-    public Mono<PayrollResponse> calcularNominaReactiva(Mono<PayrollResponse> response) {
+    public Mono<PayrollResponse> calculatePayroll(Mono<PayrollResponse> response) {
         return response;
     }
 }

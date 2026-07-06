@@ -5,5 +5,5 @@ import com.democracy.accounting.domain.records.PayrollResponse;
 import reactor.core.publisher.Mono;
 
 public interface PayrollCalculationIn {
-    Mono<PayrollResponse> calcularNominaReactiva(PayrollRequest request);
+    Mono<PayrollResponse> calculatePayroll(PayrollRequest request);
 }

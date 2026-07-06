@@ -23,8 +23,8 @@ public class PayrollCalculationUseCase implements PayrollCalculationIn {
     }
 
     @Override
-    public Mono<PayrollResponse> calcularNominaReactiva(PayrollRequest request) {
-        return this.payrollCalculationOut.calcularNominaReactiva(Mono.just(request.salarioBruto())
+    public Mono<PayrollResponse> calculatePayroll(PayrollRequest request) {
+        return this.payrollCalculationOut.calculatePayroll(Mono.just(request.salarioBruto())
                 .map(salarioBruto -> {
                     // 1. Cálculos de Seguridad Social usando var
                     var salud = salarioBruto.multiply(new BigDecimal("0.04")).setScale(0, RoundingMode.HALF_UP);

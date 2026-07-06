@@ -23,6 +23,6 @@ public class PayrollRestController {
 
     @PostMapping("/calcular")
     public Mono<PayrollResponse> payrollCalculate(@RequestBody PayrollRequest request) {
-        return payrollCalculationService.calcularNominaReactiva(request);
+        return payrollCalculationService.calculatePayroll(request);
     }
 }
