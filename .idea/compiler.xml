@@ -43,18 +43,10 @@
         <module name="accounting" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="accountancy" target="11" />
-      <module name="feing-client" target="11" />
-      <module name="feing-target" target="11" />
-      <module name="StateMachine" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="HumanResources" options="-parameters" />
-      <module name="StateMachine" options="-parameters" />
-      <module name="accountancy" options="-parameters" />
       <module name="accounting" options="-parameters" />
       <module name="acl" options="-parameters" />
       <module name="apigateway" options="-parameters" />
@@ -62,8 +54,6 @@
       <module name="democracy" options="-parameters" />
       <module name="discoveryserver" options="-parameters" />
       <module name="electoral-court" options="-parameters" />
-      <module name="feing-client" options="-parameters" />
-      <module name="feing-target" options="-parameters" />
       <module name="products" options="-parameters" />
     </option>
   </component>
