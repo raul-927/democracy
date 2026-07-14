@@ -15,6 +15,8 @@ public class PayrollCalculationUseCase implements PayrollCalculationIn {
     // Constantes fiscales Colombia 2026
     private static final BigDecimal VALOR_UVT_2026 = new BigDecimal("52374");
     private static final BigDecimal CUATRO_SMMLV = new BigDecimal("5200000"); // Umbral aproximado Fondo Solidaridad
+    private static final String SALUD = "0.04";
+    private static final String PENSION = "0.04";
 
     private final PayrollCalculationOut payrollCalculationOut;
 
@@ -27,8 +29,8 @@ public class PayrollCalculationUseCase implements PayrollCalculationIn {
         return this.payrollCalculationOut.calculatePayroll(Mono.just(request.salarioBruto())
                 .map(salarioBruto -> {
                     // 1. Cálculos de Seguridad Social usando var
-                    var salud = salarioBruto.multiply(new BigDecimal("0.04")).setScale(0, RoundingMode.HALF_UP);
-                    var pension = salarioBruto.multiply(new BigDecimal("0.04")).setScale(0, RoundingMode.HALF_UP);
+                    var salud = salarioBruto.multiply(new BigDecimal(SALUD)).setScale(0, RoundingMode.HALF_UP);
+                    var pension = salarioBruto.multiply(new BigDecimal(PENSION)).setScale(0, RoundingMode.HALF_UP);
 
                     var fondoSolidaridad = (salarioBruto.compareTo(CUATRO_SMMLV) >= 0)
                             ? salarioBruto.multiply(new BigDecimal("0.01")).setScale(0, RoundingMode.HALF_UP)
