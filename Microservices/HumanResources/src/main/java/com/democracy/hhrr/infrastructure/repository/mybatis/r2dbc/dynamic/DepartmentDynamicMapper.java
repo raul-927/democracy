@@ -49,7 +49,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
 
     BasicColumn[] departmentColumnList = BasicColumn.columnList(departmentId, departmentName);
     BasicColumn[] departmentCityColumnList = BasicColumn.columnList(departmentId, departmentName, cityId, cityName);
-    BasicColumn[] departmentCitytNeighborhoodStreetColumnList = BasicColumn.columnList(
+    BasicColumn[] departmentCityNeighborhoodStreetColumnList = BasicColumn.columnList(
             departmentId, departmentName,
             cityId, cityName,
             neighborhoodId, neighborhoodName,
@@ -126,7 +126,7 @@ public interface DepartmentDynamicMapper extends CommonSelectMapper{
     }
 
     default Flux<Department> selectFullColumnDepartment(SelectDSLCompleter completer) {
-        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentCitytNeighborhoodStreetColumnList, DEPARTMENT, completer);
+        return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentCityNeighborhoodStreetColumnList, DEPARTMENT, completer);
     }
     default Flux<Department> selectAllDepartment(SelectDSLCompleter completer) {
         return ReactiveMyBatis3Utils.selectList(this::selectMany, departmentColumnList, DEPARTMENT, completer);
