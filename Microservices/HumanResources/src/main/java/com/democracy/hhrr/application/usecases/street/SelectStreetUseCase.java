@@ -1,13 +1,11 @@
 package com.democracy.hhrr.application.usecases.street;
 
 import com.democracy.hhrr.domain.models.Street;
-import com.democracy.hhrr.domain.ports.in.street.SelectStreetIn;
-import com.democracy.hhrr.domain.ports.out.StreetOut;
+import com.democracy.hhrr.domain.ports.reactive.in.street.SelectStreetIn;
+import com.democracy.hhrr.domain.ports.reactive.out.StreetOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.time.Duration;
 
 @Component
 public class SelectStreetUseCase implements SelectStreetIn {

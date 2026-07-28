@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.aux.departmentcity;
 
 import com.democracy.hhrr.domain.aux.DepartmentCity;
-import com.democracy.hhrr.domain.ports.in.aux.departmentcity.CreateDepartmentCityIn;
-import com.democracy.hhrr.domain.ports.out.aux.DepartmentCityOut;
+import com.democracy.hhrr.domain.ports.reactive.in.aux.departmentcity.CreateDepartmentCityIn;
+import com.democracy.hhrr.domain.ports.reactive.out.aux.DepartmentCityOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

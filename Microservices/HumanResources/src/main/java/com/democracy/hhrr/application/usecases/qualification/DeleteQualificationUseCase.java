@@ -1,7 +1,7 @@
 package com.democracy.hhrr.application.usecases.qualification;
 
-import com.democracy.hhrr.domain.ports.in.qualification.DeleteQualificationIn;
-import com.democracy.hhrr.domain.ports.out.QualificationOut;
+import com.democracy.hhrr.domain.ports.reactive.in.qualification.DeleteQualificationIn;
+import com.democracy.hhrr.domain.ports.reactive.out.QualificationOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

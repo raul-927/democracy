@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.criminalrecord;
 
 import com.democracy.hhrr.domain.models.CriminalRecord;
-import com.democracy.hhrr.domain.ports.in.criminalrecord.CreateCriminalRecordIn;
-import com.democracy.hhrr.domain.ports.out.CriminalRecordOut;
+import com.democracy.hhrr.domain.ports.reactive.in.criminalrecord.CreateCriminalRecordIn;
+import com.democracy.hhrr.domain.ports.reactive.out.CriminalRecordOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

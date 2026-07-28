@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.profession;
 
 import com.democracy.hhrr.domain.models.Profession;
-import com.democracy.hhrr.domain.ports.in.profession.SelectProfessionIn;
-import com.democracy.hhrr.domain.ports.out.ProfessionOut;
+import com.democracy.hhrr.domain.ports.reactive.in.profession.SelectProfessionIn;
+import com.democracy.hhrr.domain.ports.reactive.out.ProfessionOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

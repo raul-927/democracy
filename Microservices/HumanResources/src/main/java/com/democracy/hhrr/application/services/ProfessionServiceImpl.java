@@ -1,10 +1,10 @@
 package com.democracy.hhrr.application.services;
 
 import com.democracy.hhrr.domain.models.Profession;
-import com.democracy.hhrr.domain.ports.in.profession.CreateProfessionIn;
-import com.democracy.hhrr.domain.ports.in.profession.DeleteProfessionIn;
-import com.democracy.hhrr.domain.ports.in.profession.SelectProfessionIn;
-import com.democracy.hhrr.domain.ports.in.profession.UpdateProfessionIn;
+import com.democracy.hhrr.domain.ports.reactive.in.profession.CreateProfessionIn;
+import com.democracy.hhrr.domain.ports.reactive.in.profession.DeleteProfessionIn;
+import com.democracy.hhrr.domain.ports.reactive.in.profession.SelectProfessionIn;
+import com.democracy.hhrr.domain.ports.reactive.in.profession.UpdateProfessionIn;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

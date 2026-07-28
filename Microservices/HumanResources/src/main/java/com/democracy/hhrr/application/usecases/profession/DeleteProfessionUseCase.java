@@ -1,7 +1,7 @@
 package com.democracy.hhrr.application.usecases.profession;
 
-import com.democracy.hhrr.domain.ports.in.profession.DeleteProfessionIn;
-import com.democracy.hhrr.domain.ports.out.ProfessionOut;
+import com.democracy.hhrr.domain.ports.reactive.in.profession.DeleteProfessionIn;
+import com.democracy.hhrr.domain.ports.reactive.out.ProfessionOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

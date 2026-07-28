@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.department;
 
 import com.democracy.hhrr.domain.models.Department;
-import com.democracy.hhrr.domain.ports.in.department.CreateDepartmentIn;
-import com.democracy.hhrr.domain.ports.out.DepartmentOut;
+import com.democracy.hhrr.domain.ports.reactive.in.department.CreateDepartmentIn;
+import com.democracy.hhrr.domain.ports.reactive.out.DepartmentOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

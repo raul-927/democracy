@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Person;
-import com.democracy.hhrr.domain.ports.out.PersonOut;
+import com.democracy.hhrr.domain.ports.reactive.out.PersonOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.democracy.hhrr.application.usecases.document;
 
-import com.democracy.hhrr.domain.ports.in.document.DeleteDocumentIn;
-import com.democracy.hhrr.domain.ports.out.DocumentOut;
+import com.democracy.hhrr.domain.ports.reactive.in.document.DeleteDocumentIn;
+import com.democracy.hhrr.domain.ports.reactive.out.DocumentOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

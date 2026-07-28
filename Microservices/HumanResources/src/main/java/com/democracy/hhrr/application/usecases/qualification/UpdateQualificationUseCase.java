@@ -1,10 +1,8 @@
 package com.democracy.hhrr.application.usecases.qualification;
 
-import com.democracy.hhrr.domain.models.Profession;
 import com.democracy.hhrr.domain.models.Qualification;
-import com.democracy.hhrr.domain.ports.in.qualification.UpdateQualificationIn;
-import com.democracy.hhrr.domain.ports.out.ProfessionOut;
-import com.democracy.hhrr.domain.ports.out.QualificationOut;
+import com.democracy.hhrr.domain.ports.reactive.in.qualification.UpdateQualificationIn;
+import com.democracy.hhrr.domain.ports.reactive.out.QualificationOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

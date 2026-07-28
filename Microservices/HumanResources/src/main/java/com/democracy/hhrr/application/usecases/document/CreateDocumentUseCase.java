@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.document;
 
 import com.democracy.hhrr.domain.models.Document;
-import com.democracy.hhrr.domain.ports.in.document.CreateDocumentIn;
-import com.democracy.hhrr.domain.ports.out.DocumentOut;
+import com.democracy.hhrr.domain.ports.reactive.in.document.CreateDocumentIn;
+import com.democracy.hhrr.domain.ports.reactive.out.DocumentOut;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Component;

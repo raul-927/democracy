@@ -2,8 +2,8 @@ package com.democracy.hhrr.application.usecases.neighborhood;
 
 import com.democracy.hhrr.application.services.aux.NeighborhoodStreetService;
 import com.democracy.hhrr.domain.models.Neighborhood;
-import com.democracy.hhrr.domain.ports.in.neighborhood.CreateNeighborhoodIn;
-import com.democracy.hhrr.domain.ports.out.NeighborhoodOut;
+import com.democracy.hhrr.domain.ports.reactive.in.neighborhood.CreateNeighborhoodIn;
+import com.democracy.hhrr.domain.ports.reactive.out.NeighborhoodOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

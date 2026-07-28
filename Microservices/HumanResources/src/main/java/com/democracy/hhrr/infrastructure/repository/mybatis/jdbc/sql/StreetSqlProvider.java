@@ -7,9 +7,9 @@ public class StreetSqlProvider {
 
     public String selectStreet(Street street){
         return new SQL(){{
-            SELECT();
-            FROM();
-            WHERE();
+            SELECT("*");
+            FROM("STREET");
+            WHERE("");
         }}.toString();
     }
 

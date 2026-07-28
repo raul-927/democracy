@@ -1,7 +1,7 @@
 package com.democracy.hhrr.application.usecases.penal;
 
-import com.democracy.hhrr.domain.ports.in.penal.DeletePenalIn;
-import com.democracy.hhrr.domain.ports.out.PenalOut;
+import com.democracy.hhrr.domain.ports.reactive.in.penal.DeletePenalIn;
+import com.democracy.hhrr.domain.ports.reactive.out.PenalOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

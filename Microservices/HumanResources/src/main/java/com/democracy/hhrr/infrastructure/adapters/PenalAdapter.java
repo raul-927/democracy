@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Penal;
-import com.democracy.hhrr.domain.ports.out.PenalOut;
+import com.democracy.hhrr.domain.ports.reactive.out.PenalOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PenalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

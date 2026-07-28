@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.address;
 
 import com.democracy.hhrr.domain.models.Address;
-import com.democracy.hhrr.domain.ports.in.address.SelectAddressIn;
-import com.democracy.hhrr.domain.ports.out.AddressOut;
+import com.democracy.hhrr.domain.ports.reactive.in.address.SelectAddressIn;
+import com.democracy.hhrr.domain.ports.reactive.out.AddressOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

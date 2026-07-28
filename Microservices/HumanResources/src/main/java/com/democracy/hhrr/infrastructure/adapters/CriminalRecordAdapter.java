@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.CriminalRecord;
-import com.democracy.hhrr.domain.ports.out.CriminalRecordOut;
+import com.democracy.hhrr.domain.ports.reactive.out.CriminalRecordOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.CriminalRecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

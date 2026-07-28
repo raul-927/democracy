@@ -1,10 +1,10 @@
 package com.democracy.hhrr.application.services;
 
 import com.democracy.hhrr.domain.models.Neighborhood;
-import com.democracy.hhrr.domain.ports.in.neighborhood.CreateNeighborhoodIn;
-import com.democracy.hhrr.domain.ports.in.neighborhood.DeleteNeighborhoodIn;
-import com.democracy.hhrr.domain.ports.in.neighborhood.SelectNeighborhoodIn;
-import com.democracy.hhrr.domain.ports.in.neighborhood.UpdateNeighborhoodIn;
+import com.democracy.hhrr.domain.ports.reactive.in.neighborhood.CreateNeighborhoodIn;
+import com.democracy.hhrr.domain.ports.reactive.in.neighborhood.DeleteNeighborhoodIn;
+import com.democracy.hhrr.domain.ports.reactive.in.neighborhood.SelectNeighborhoodIn;
+import com.democracy.hhrr.domain.ports.reactive.in.neighborhood.UpdateNeighborhoodIn;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

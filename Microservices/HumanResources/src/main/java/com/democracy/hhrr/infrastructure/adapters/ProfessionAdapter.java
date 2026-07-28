@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Profession;
-import com.democracy.hhrr.domain.ports.out.ProfessionOut;
+import com.democracy.hhrr.domain.ports.reactive.out.ProfessionOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.ProfessionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
