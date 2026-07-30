@@ -1,7 +1,7 @@
 package com.democracy.hhrr.application.usecases.department;
 
-import com.democracy.hhrr.domain.ports.reactive.in.department.DeleteDepartmentIn;
-import com.democracy.hhrr.domain.ports.reactive.out.DepartmentOut;
+import com.democracy.hhrr.domain.ports.in.department.DeleteDepartmentIn;
+import com.democracy.hhrr.domain.ports.out.DepartmentOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

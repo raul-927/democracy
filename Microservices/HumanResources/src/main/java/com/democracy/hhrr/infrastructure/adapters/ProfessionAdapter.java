@@ -1,7 +1,8 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Profession;
-import com.democracy.hhrr.domain.ports.reactive.out.ProfessionOut;
+import com.democracy.hhrr.domain.ports.out.ProfessionOut;
+import com.democracy.hhrr.infrastructure.repository.mybatis.jdbc.mappers.ProfessionMapperSecuencial;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.ProfessionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,9 @@ public class ProfessionAdapter implements ProfessionOut {
 
     @Autowired
     private ProfessionMapper professionMapper;
+
+    //@Autowired
+    private ProfessionMapperSecuencial professionMapperSecuencial;
 
     @Override
     public Mono<?> createProfession(Profession profession) {
@@ -49,5 +53,10 @@ public class ProfessionAdapter implements ProfessionOut {
     @Override
     public Mono<Integer> updateProfession(Profession profession) {
         return professionMapper.updateAllByPrimaryKey(profession);
+    }
+
+    @Override
+    public List<Profession> selectProfessionSecuencial(Profession profession) {
+        return professionMapperSecuencial.selectProfession(profession);
     }
 }

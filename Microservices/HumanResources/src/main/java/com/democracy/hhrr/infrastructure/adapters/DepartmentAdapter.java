@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Department;
-import com.democracy.hhrr.domain.ports.reactive.out.DepartmentOut;
+import com.democracy.hhrr.domain.ports.out.DepartmentOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DepartmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

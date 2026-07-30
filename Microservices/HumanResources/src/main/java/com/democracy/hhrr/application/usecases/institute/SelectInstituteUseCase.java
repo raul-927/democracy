@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.institute;
 
 import com.democracy.hhrr.domain.models.Institute;
-import com.democracy.hhrr.domain.ports.reactive.in.institute.SelectInstituteIn;
-import com.democracy.hhrr.domain.ports.reactive.out.InstituteOut;
+import com.democracy.hhrr.domain.ports.in.institute.SelectInstituteIn;
+import com.democracy.hhrr.domain.ports.out.InstituteOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -1,10 +1,10 @@
 package com.democracy.hhrr.application.services.aux;
 
 import com.democracy.hhrr.domain.aux.DepartmentCity;
-import com.democracy.hhrr.domain.ports.reactive.in.aux.departmentcity.CreateDepartmentCityIn;
-import com.democracy.hhrr.domain.ports.reactive.in.aux.departmentcity.DeleteDepartmentCityIn;
-import com.democracy.hhrr.domain.ports.reactive.in.aux.departmentcity.SelectDepartmentCityIn;
-import com.democracy.hhrr.domain.ports.reactive.in.aux.departmentcity.UpdateDepartmentCityIn;
+import com.democracy.hhrr.domain.ports.in.aux.departmentcity.CreateDepartmentCityIn;
+import com.democracy.hhrr.domain.ports.in.aux.departmentcity.DeleteDepartmentCityIn;
+import com.democracy.hhrr.domain.ports.in.aux.departmentcity.SelectDepartmentCityIn;
+import com.democracy.hhrr.domain.ports.in.aux.departmentcity.UpdateDepartmentCityIn;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

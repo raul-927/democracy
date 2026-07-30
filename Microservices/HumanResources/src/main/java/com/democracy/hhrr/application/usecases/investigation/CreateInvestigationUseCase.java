@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.investigation;
 
 import com.democracy.hhrr.domain.models.Investigation;
-import com.democracy.hhrr.domain.ports.reactive.in.investigation.CreateInvestigationIn;
-import com.democracy.hhrr.domain.ports.reactive.out.InvestigationOut;
+import com.democracy.hhrr.domain.ports.in.investigation.CreateInvestigationIn;
+import com.democracy.hhrr.domain.ports.out.InvestigationOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

@@ -1,10 +1,10 @@
 package com.democracy.hhrr.application.services;
 
 import com.democracy.hhrr.domain.models.Address;
-import com.democracy.hhrr.domain.ports.reactive.in.address.CreateAddressIn;
-import com.democracy.hhrr.domain.ports.reactive.in.address.DeleteAddressIn;
-import com.democracy.hhrr.domain.ports.reactive.in.address.SelectAddressIn;
-import com.democracy.hhrr.domain.ports.reactive.in.address.UpdateAddressIn;
+import com.democracy.hhrr.domain.ports.in.address.CreateAddressIn;
+import com.democracy.hhrr.domain.ports.in.address.DeleteAddressIn;
+import com.democracy.hhrr.domain.ports.in.address.SelectAddressIn;
+import com.democracy.hhrr.domain.ports.in.address.UpdateAddressIn;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.qualification;
 
 import com.democracy.hhrr.domain.models.Qualification;
-import com.democracy.hhrr.domain.ports.reactive.in.qualification.SelectQualificationIn;
-import com.democracy.hhrr.domain.ports.reactive.out.QualificationOut;
+import com.democracy.hhrr.domain.ports.in.qualification.SelectQualificationIn;
+import com.democracy.hhrr.domain.ports.out.QualificationOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

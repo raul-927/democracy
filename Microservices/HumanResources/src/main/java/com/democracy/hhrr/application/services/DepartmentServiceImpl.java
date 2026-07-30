@@ -1,10 +1,10 @@
 package com.democracy.hhrr.application.services;
 
 import com.democracy.hhrr.domain.models.Department;
-import com.democracy.hhrr.domain.ports.reactive.in.department.CreateDepartmentIn;
-import com.democracy.hhrr.domain.ports.reactive.in.department.DeleteDepartmentIn;
-import com.democracy.hhrr.domain.ports.reactive.in.department.SelectDepartmentIn;
-import com.democracy.hhrr.domain.ports.reactive.in.department.UpdateDepartmentIn;
+import com.democracy.hhrr.domain.ports.in.department.CreateDepartmentIn;
+import com.democracy.hhrr.domain.ports.in.department.DeleteDepartmentIn;
+import com.democracy.hhrr.domain.ports.in.department.SelectDepartmentIn;
+import com.democracy.hhrr.domain.ports.in.department.UpdateDepartmentIn;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

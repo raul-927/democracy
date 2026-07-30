@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.penal;
 
 import com.democracy.hhrr.domain.models.Penal;
-import com.democracy.hhrr.domain.ports.reactive.in.penal.SelectPenalIn;
-import com.democracy.hhrr.domain.ports.reactive.out.PenalOut;
+import com.democracy.hhrr.domain.ports.in.penal.SelectPenalIn;
+import com.democracy.hhrr.domain.ports.out.PenalOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

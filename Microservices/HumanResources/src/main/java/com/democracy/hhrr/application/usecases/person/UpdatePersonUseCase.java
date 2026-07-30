@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.person;
 
 import com.democracy.hhrr.domain.models.Person;
-import com.democracy.hhrr.domain.ports.reactive.in.person.UpdatePersonIn;
-import com.democracy.hhrr.domain.ports.reactive.out.PersonOut;
+import com.democracy.hhrr.domain.ports.in.person.UpdatePersonIn;
+import com.democracy.hhrr.domain.ports.out.PersonOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

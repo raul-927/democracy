@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Neighborhood;
-import com.democracy.hhrr.domain.ports.reactive.out.NeighborhoodOut;
+import com.democracy.hhrr.domain.ports.out.NeighborhoodOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.NeighborhoodMapper;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux.NeighborhoodStreetMapper;
 import org.springframework.beans.factory.annotation.Autowired;

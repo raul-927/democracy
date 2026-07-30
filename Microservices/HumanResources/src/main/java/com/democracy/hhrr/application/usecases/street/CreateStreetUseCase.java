@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.usecases.street;
 
 import com.democracy.hhrr.domain.models.Street;
-import com.democracy.hhrr.domain.ports.reactive.in.street.CreateStreetIn;
-import com.democracy.hhrr.domain.ports.reactive.out.StreetOut;
+import com.democracy.hhrr.domain.ports.in.street.CreateStreetIn;
+import com.democracy.hhrr.domain.ports.out.StreetOut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

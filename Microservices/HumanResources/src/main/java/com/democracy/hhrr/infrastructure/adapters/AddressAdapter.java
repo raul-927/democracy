@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Address;
-import com.democracy.hhrr.domain.ports.reactive.out.AddressOut;
+import com.democracy.hhrr.domain.ports.out.AddressOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

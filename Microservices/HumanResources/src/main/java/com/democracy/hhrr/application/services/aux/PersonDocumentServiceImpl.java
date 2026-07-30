@@ -1,8 +1,8 @@
 package com.democracy.hhrr.application.services.aux;
 
 import com.democracy.hhrr.domain.aux.PersonDocument;
-import com.democracy.hhrr.domain.ports.reactive.in.aux.persondocument.CreatePersonDocumentIn;
-import com.democracy.hhrr.domain.ports.reactive.in.aux.persondocument.SelectPersonDocumentIn;
+import com.democracy.hhrr.domain.ports.in.aux.persondocument.CreatePersonDocumentIn;
+import com.democracy.hhrr.domain.ports.in.aux.persondocument.SelectPersonDocumentIn;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

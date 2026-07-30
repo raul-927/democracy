@@ -1,10 +1,10 @@
 package com.democracy.hhrr.application.services.aux;
 
 import com.democracy.hhrr.domain.models.Institute;
-import com.democracy.hhrr.domain.ports.reactive.in.institute.CreateInstituteIn;
-import com.democracy.hhrr.domain.ports.reactive.in.institute.DeleteInstituteIn;
-import com.democracy.hhrr.domain.ports.reactive.in.institute.SelectInstituteIn;
-import com.democracy.hhrr.domain.ports.reactive.in.institute.UpdateInstituteIn;
+import com.democracy.hhrr.domain.ports.in.institute.CreateInstituteIn;
+import com.democracy.hhrr.domain.ports.in.institute.DeleteInstituteIn;
+import com.democracy.hhrr.domain.ports.in.institute.SelectInstituteIn;
+import com.democracy.hhrr.domain.ports.in.institute.UpdateInstituteIn;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

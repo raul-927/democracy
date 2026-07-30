@@ -1,7 +1,7 @@
 package com.democracy.hhrr.infrastructure.adapters.aux;
 
 import com.democracy.hhrr.domain.aux.DepartmentCity;
-import com.democracy.hhrr.domain.ports.reactive.out.aux.DepartmentCityOut;
+import com.democracy.hhrr.domain.ports.out.aux.DepartmentCityOut;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux.DepartmentCityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
