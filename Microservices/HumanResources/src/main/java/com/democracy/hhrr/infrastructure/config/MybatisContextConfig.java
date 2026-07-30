@@ -68,8 +68,7 @@ public class MybatisContextConfig {
 
 	@Bean
 	public SqlSessionTemplate sqlSession() throws Exception {
-		SqlSessionTemplate sqlSessionTemplate= new SqlSessionTemplate(sqlSessionFactory());
-		return sqlSessionTemplate;
+        return new SqlSessionTemplate(sqlSessionFactory());
 	}
 
 
