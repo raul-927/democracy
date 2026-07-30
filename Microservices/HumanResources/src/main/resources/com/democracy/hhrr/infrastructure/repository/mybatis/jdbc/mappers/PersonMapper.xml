@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PersonMapper">
+	<resultMap type="com.democracy.hhrr.domain.models.Person" id="PersonResult">
+  	
+  		<id		property = "personId" 			column = "person_id"/>
+		<result property ="cedula"			column="cedula"/>
+		<result property ="civicCredential"			column="civic_credential"/>
+		<result property ="firstName"			column="first_name"/>
+		<result property ="secondName"			column="second_name"/>
+		<result property ="firstLastName"			column="first_last_name"/>
+		<result property ="secondLastName"			column="second_last_name"/>
+		<result property ="isProcessed"				column="is_processed"/>
+		<association property="address" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.AddressMapper.AddressResult"/>
+		<association property="profession" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.ProfessionMapper.ProfessionResult"/>
+  	</resultMap>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.aux.PersonDocumentMapper">
+	<resultMap type="com.democracy.hhrr.domain.aux.PersonDocument" id="PersonDocumentResult">
+  	
+  		<id		property = "personDocumentId" 	column= "person_document_id"/>
+		<result property = "personId"			column= "person_id"/>
+		<result property = "documentId"			column= "document_id"/>
+  	</resultMap>
+</mapper>

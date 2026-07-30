@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.QualificationMapper">
+	<resultMap type="com.democracy.hhrr.domain.models.Qualification" id="QualificationResult">
+  	
+  		<id		property = "qualificationId" 	column = "qualification_id"/>
+		<result property = "verified" 			column = "verified"/>
+		<result property = "approved" 			column = "approved"/>
+		<association property="person" resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.PersonMapper.PersonResult"/>
+		<association property="institute" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.InstituteMapper.InstituteResult"/>
+		<association property="document" 	 resultMap="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.DocumentMapper.DocumentResult"/>
+  	</resultMap>
+</mapper>
