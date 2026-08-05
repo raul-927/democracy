@@ -12,7 +12,7 @@ public class ProfessionSqlProvider {
             SELECT("profession_id, profession_name");
             FROM("PROFESSION");
             if(profession.getProfessionName()!=null && !profession.getProfessionName().isEmpty()){
-                WHERE("profession_name = "+profession.getProfessionName());
+                WHERE("profession_name = "+"'".concat(profession.getProfessionName()).concat("'"));
             }
         }}.toString();
     }

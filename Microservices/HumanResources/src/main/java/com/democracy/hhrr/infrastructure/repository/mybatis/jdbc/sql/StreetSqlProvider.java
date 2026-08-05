@@ -19,9 +19,10 @@ public class StreetSqlProvider {
                     WHERE("street_name = "+"'".concat(street.getStreetName()).concat("'"));
                 }
                 if(street.getStreetType()!=null && street.getStreetType().getDescription()!=null && !street.getStreetType().getDescription().isEmpty()){
-                    WHERE("street_type = "+"'".concat(street.getStreetType().getDescription()).concat("'"));
+                    WHERE("street_type = "+"'".concat(street.getStreetType().name()).concat("'"));
                 }
             }
+            ORDER_BY("street_name ASC");
         }}.toString();
     }
 
