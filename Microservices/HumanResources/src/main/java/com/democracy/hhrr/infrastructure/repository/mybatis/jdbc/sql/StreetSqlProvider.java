@@ -12,13 +12,16 @@ public class StreetSqlProvider {
         return new SQL(){{
             SELECT("street_id, street_name,street_type");
             FROM("STREET");
-            if(street.getStreetName()!=null && !street.getStreetName().isEmpty()){
-                WHERE("street_name = "+street.getStreetName());
+            if(street.getStreetId()!=null && !street.getStreetId().isEmpty()){
+                WHERE("street_id = "+"'".concat(street.getStreetId()).concat("'"));
+            }else{
+                if(street.getStreetName()!=null && !street.getStreetName().isEmpty()){
+                    WHERE("street_name = "+"'".concat(street.getStreetName()).concat("'"));
+                }
+                if(street.getStreetType()!=null && street.getStreetType().getDescription()!=null && !street.getStreetType().getDescription().isEmpty()){
+                    WHERE("street_type = "+"'".concat(street.getStreetType().getDescription()).concat("'"));
+                }
             }
-            if(street.getStreetType()!=null && street.getStreetType().getDescription()!=null && !street.getStreetType().getDescription().isEmpty()){
-                WHERE("street_type = "+street.getStreetType().getDescription());
-            }
-
         }}.toString();
     }
 
