@@ -2,6 +2,7 @@ package com.democracy.hhrr.infrastructure.adapters;
 
 import com.democracy.hhrr.domain.models.Street;
 import com.democracy.hhrr.domain.ports.out.StreetOut;
+import com.democracy.hhrr.infrastructure.repository.mybatis.jdbc.mappers.StreetMapperSecuencial;
 import com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.StreetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,9 @@ public class StreetAdapter implements StreetOut {
 
     @Autowired
     private StreetMapper streetMapper;
+
+    @Autowired
+    private StreetMapperSecuencial streetMapperSecuencial;
 
 
 
@@ -47,5 +51,10 @@ public class StreetAdapter implements StreetOut {
     @Override
     public Mono<Integer> updateStreet(Street street) {
         return this.streetMapper.updateSelectiveByPrimaryKey(street);
+    }
+
+    @Override
+    public List<Street> selectStreetSecuencia(Street street) {
+        return streetMapperSecuencial.selectStreet(street);
     }
 }

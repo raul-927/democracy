@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Component
 public class SelectStreetUseCase implements SelectStreetIn {
 
@@ -24,5 +26,10 @@ public class SelectStreetUseCase implements SelectStreetIn {
     @Override
     public Mono<Long> selectCount() {
         return streetOut.selectCount();
+    }
+
+    @Override
+    public List<Street> selectStreetSecuencia(Street street) {
+        return streetOut.selectStreetSecuencia(street);
     }
 }

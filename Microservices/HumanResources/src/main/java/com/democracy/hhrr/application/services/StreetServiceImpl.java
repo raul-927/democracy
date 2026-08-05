@@ -56,6 +56,11 @@ public class StreetServiceImpl implements StreetService{
     }
 
     @Override
+    public List<Street> selectStreetSecuencia(Street street) {
+        return this.selectStreetIn.selectStreetSecuencia(street);
+    }
+
+    @Override
     public Mono<Integer> updateStreet(Street street) {
         return this.updateStreetIn.updateStreet(street);
     }

@@ -13,5 +13,6 @@ public interface StreetOut {
     Flux<Street> selectStreet(Street street);
     Mono<Long> selectCount();
     Mono<Integer> updateStreet(Street street);
+    List<Street> selectStreetSecuencia(Street street);
 }
 

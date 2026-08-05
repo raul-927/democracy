@@ -14,11 +14,15 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.r2dbc.connection.R2dbcTransactionManager;
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer;
 import org.springframework.transaction.ReactiveTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.mybatis.spring.annotation.MapperScan;
 
 import javax.naming.NamingException;
 import java.util.Objects;
 
 @Configuration
+@EnableTransactionManagement
+@MapperScan(value="com.democracy.hhrr.infrastructure.repository.mybatis.jdbc.mappers")
 public class MybatisContextConfig {
 
 	@Value("${spring.datasource.driver-class-name}")
@@ -55,7 +59,6 @@ public class MybatisContextConfig {
 
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
-
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		Resource[] mapperLocations = resolver.getResources(this.relativePath);
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
@@ -79,8 +82,6 @@ public class MybatisContextConfig {
 
 		return initi;
 	}
-
-
 
 	@Bean
 	@ConditionalOnMissingBean(ReactiveTransactionManager.class)

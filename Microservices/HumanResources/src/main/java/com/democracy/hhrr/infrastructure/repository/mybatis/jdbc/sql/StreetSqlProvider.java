@@ -1,20 +1,21 @@
 package com.democracy.hhrr.infrastructure.repository.mybatis.jdbc.sql;
 
 import com.democracy.hhrr.domain.models.Street;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
 
 public class StreetSqlProvider {
 
-    public String selectStreet(Street street){
+    public String selectStreet(@Param("street") Street street){
         return new SQL(){{
             SELECT("street_id, street_name,street_type");
             FROM("STREET");
             if(street.getStreetName()!=null && !street.getStreetName().isEmpty()){
                 WHERE("street_name = "+street.getStreetName());
             }
-            if(street.getStreetType().getDescription()!=null && !street.getStreetType().getDescription().isEmpty()){
+            if(street.getStreetType()!=null && street.getStreetType().getDescription()!=null && !street.getStreetType().getDescription().isEmpty()){
                 WHERE("street_type = "+street.getStreetType().getDescription());
             }
 

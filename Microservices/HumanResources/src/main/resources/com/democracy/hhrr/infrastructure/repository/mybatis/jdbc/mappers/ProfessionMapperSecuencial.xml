@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
-	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.r2dbc.mappers.ProfessionMapper">
+	namespace="com.democracy.hhrr.infrastructure.repository.mybatis.jdbc.mappers.ProfessionMapperSecuencial">
 	<resultMap type="com.democracy.hhrr.domain.models.Profession" id="ProfessionResult">
   	
   		<id		property = "professionId" 			column = "profession_id"/>

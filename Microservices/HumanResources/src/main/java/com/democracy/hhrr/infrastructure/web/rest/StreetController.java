@@ -5,7 +5,10 @@ import com.democracy.hhrr.application.services.StreetService;
 import com.democracy.hhrr.domain.models.Street;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -76,5 +79,16 @@ public class StreetController {
     @DeleteMapping(value="/delete/{streetId}")
     public Mono<Integer> deleteStreet(@PathVariable String streetId){
         return this.streetService.deleteStreet(streetId);
+    }
+
+    @PostMapping(
+            value = "/selectsecuencial",
+            consumes ={MediaType.APPLICATION_JSON_VALUE},
+            produces ={MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<?> getStreetSecuencial(@RequestBody Street street){
+        HttpHeaders headers = new HttpHeaders();
+        List<Street> streetListResponse = this.streetService.selectStreetSecuencia(street);
+        return new ResponseEntity<>(streetListResponse, headers, HttpStatus.OK);
     }
 }
