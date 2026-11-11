@@ -66,6 +66,11 @@ spring:
         uri: lb://DEMOCRACY-ORCHESTRATOR
         predicates:
           - Path=/democracyorchestrator/**
+      routes[11]:
+        id: countability-orchestrator
+        uri: lb://COUNTABILITY-ORCHESTRATOR
+        predicates:
+          - Path=/countabilityorchestrator/**
       default-filters: TokenRelay
   security:
     oauth2:
