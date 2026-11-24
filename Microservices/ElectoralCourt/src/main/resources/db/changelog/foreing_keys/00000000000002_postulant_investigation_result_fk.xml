@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+        <property name="autoIncrement" value="true"/>
+    <changeSet id="00000000000001" author="rhernandez">
+        <addForeignKeyConstraint  baseColumnNames="investigation_result_id"
+                                  baseTableName="POSTULANT"
+                                  constraintName="investigation_result_postulant_fk"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="investigation_result_id"
+                                  referencedTableName="INVESTIGATION_RESULT"
+                                  validate="true"/>
+    </changeSet>
+</databaseChangeLog>

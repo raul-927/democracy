@@ -13,8 +13,18 @@
     <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
     <property name="u_id" value="(UUID())" dbms="mysql"/>
-   	<include file="db/changelog/tables/00000000000001_investigation_result.xml" relativeToChangelogFile="false"/>
+
+    <!-- TABLES -->
+
+    <include file="db/changelog/tables/00000000000001_initial_schema.xml" relativeToChangelogFile="false"/>
+   	<!--<include file="db/changelog/tables/00000000000001_investigation_result.xml" relativeToChangelogFile="false"/>-->
     <include file="db/changelog/tables/00000000000001_INVESTIGATION_table.xml" relativeToChangelogFile="false"/>
+    <!--<include file="db/changelog/tables/00000000000003_postulant.xml" relativeToChangelogFile="false"/>-->
+
+    <!-- RELATIONALS TABLES -->
+
+    <!-- FOREING KEYS -->
+    <include file="db/changelog/foreing_keys/00000000000002_postulant_investigation_result_fk.xml" relativeToChangelogFile="false"/>
     <!--
    	<include file="db/changelog/00000000000002_Impuesto_cuenta_grupo_cuenta.xml" relativeToChangelogFile="false"/>
    	<include file="db/changelog/00000000000003_SpringSecurityACL.xml" relativeToChangelogFile="false"/>

@@ -4,6 +4,8 @@ package com.democracy.electoral_court.domain.models;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.util.UUID;
+
 @ToString
 @Getter
 @Setter
@@ -13,6 +15,7 @@ import lombok.experimental.Accessors;
 @Builder
 @EqualsAndHashCode
 public class Postulant {
+    private String postulantId;
     private InvestigationResult investigationResult;
     private int cedula;
     private String firstName;

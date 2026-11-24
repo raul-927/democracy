@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9558d572-adcb-48bc-8491-a6e088eff4a7" name="Changes" comment="Se restablece ide">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/java/com/democracy/electoral_court/infrastructure/repository/mybatis/r2dbc/dynamic/PostulantDynamicMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/java/com/democracy/electoral_court/infrastructure/repository/mybatis/r2dbc/support/PostulantDynamicSqlSupport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/foreing_keys/00000000000002_postulant_investigation_result_fk.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables/00000000000003_postulant.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/java/com/democracy/electoral_court/domain/models/Postulant.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/java/com/democracy/electoral_court/domain/models/Postulant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/00000000000001_initial_schema.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables/00000000000001_initial_schema.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/master.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,26 +33,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.AccountingApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DiscoveryServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ElectoralCourtApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HumanResourcesApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/media/raul/000DE75E000B6C56/DESARROLLO/visualvm_2110/bin/visualvm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AccountingApplication.executor": "Run",
+    "Application.ApiGatewayApplication.executor": "Run",
+    "Application.ConfigServerApplication.executor": "Run",
+    "Application.DiscoveryServerApplication.executor": "Run",
+    "Application.ElectoralCourtApplication.executor": "Run",
+    "Application.HumanResourcesApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/media/raul/000DE75E000B6C56/DESARROLLO/repository/java/democracy/Microservices/ElectoralCourt/src/main/resources/db/changelog/foreing_keys",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
-}</component>
-  <component name="RunManager" selected="Application.HumanResourcesApplication">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/foreing_keys" />
+      <recent name="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.dynamic" />
+      <recent name="com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.support" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ElectoralCourtApplication">
     <configuration name="AccountingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.democracy.accounting.AccountingApplication" />
       <module name="accounting" />
@@ -116,8 +133,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HumanResourcesApplication" />
         <item itemvalue="Application.ElectoralCourtApplication" />
+        <item itemvalue="Application.HumanResourcesApplication" />
         <item itemvalue="Application.AccountingApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.DiscoveryServerApplication" />
@@ -141,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787230463702</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Se restablece ide">
+      <option name="closed" value="true" />
+      <created>1794409293098</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1794409293098</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="UnknownFeatures">

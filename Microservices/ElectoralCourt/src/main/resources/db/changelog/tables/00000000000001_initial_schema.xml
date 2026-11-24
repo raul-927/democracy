@@ -21,17 +21,21 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="charge_name" 	            type="varchar(20)"/>
-            <column name="charge_type" 	            type="ENUM('PRESIDENTE','BICE_PRESIDENTE','INTENDENTE','SENADOR','DIPUTADO','ALCALDE')"/>
+            <column name="charge_type" 	            type="ENUM('PRESIDENT','VICE_PRESIDENT','INTENDANT','SENATOR','DEPUTY','MAYOR')"/>
         </createTable>
 
         <createTable tableName="INVESTIGATION_RESULT">
             <column name="investigation_result_id"                type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="investigation_information" 	            type="varchar(100)"/>
+            <column name="investigation_id"     type="varchar(100)"/>
+            <column name ="cedula"              type="int"/>
+            <column name="person_id"            type="varchar(100)"/>
+            <column name="observation" 	        type="varchar(100)"/>
             <column name="score" 	            type="int"/>
-            <column name="is_aprove" 	        type="boolean"/>
+            <column name="is_approve" 	        type="boolean"/>
         </createTable>
+
         <createTable tableName="LAW">
             <column name="law_id"                type="varchar(36)" defaultValueComputed="${u_id}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -64,10 +68,10 @@
                 <constraints unique="true"      nullable="false"/>
             </column>
 
-            <column name ="first_name"         type ="varchar(20)"/>
-            <column name ="second_name"        type ="varchar(20)"/>
-            <column name ="first_last_name"    type ="varchar(20)"/>
-            <column name ="second_last_name"   type ="varchar(20)"/>
+            <column name ="cedula"           type="int"/>
+            <column name="first_name"        type="varchar(50)"/>
+            <column name="second_name" 	     type="varchar(50)"/>
+            <column name="first_last_name" 	 type="varchar(50)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
