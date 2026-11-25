@@ -17,7 +17,7 @@
             <column name="person_id"            type="varchar(100)"/>
             <column name="observation" 	        type="varchar(100)"/>
             <column name="score" 	            type="int"/>
-            <column name="is_approve" 	        type="boolean"/>
+            <column name="is_approve" 	        type="BOOL"/>
         </createTable>
 
     </changeSet>

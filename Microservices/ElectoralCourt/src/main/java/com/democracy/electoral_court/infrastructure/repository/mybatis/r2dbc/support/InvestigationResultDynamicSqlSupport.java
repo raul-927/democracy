@@ -14,7 +14,7 @@ public final class InvestigationResultDynamicSqlSupport {
     public static final SqlColumn<String> personId        = INVESTIGATION_RESULT.personId;
     public static final SqlColumn<String> observation     = INVESTIGATION_RESULT.observation;
     public static final SqlColumn<String> score     = INVESTIGATION_RESULT.score;
-    public static final SqlColumn<String> isApprove     = INVESTIGATION_RESULT.isApprove;
+    public static final SqlColumn<Boolean> isApprove     = INVESTIGATION_RESULT.isApprove;
 
     public static final class InvestigationResult extends SqlTable {
         public final SqlColumn<String> investigationResultId = column("investigation_result_id", JDBCType.LONGNVARCHAR);
@@ -23,7 +23,7 @@ public final class InvestigationResultDynamicSqlSupport {
         public final SqlColumn<String> personId        = column("person_id", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> observation     = column("observation", JDBCType.LONGNVARCHAR);
         public final SqlColumn<String> score     = column("score", JDBCType.BOOLEAN);
-        public final SqlColumn<String> isApprove     = column("is_approve", JDBCType.BOOLEAN);
+        public final SqlColumn<Boolean> isApprove     = column("is_approve", JDBCType.BOOLEAN);
 
         public InvestigationResult(){
             super("INVESTIGATION_RESULT");
