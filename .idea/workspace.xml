@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9558d572-adcb-48bc-8491-a6e088eff4a7" name="Changes" comment="Se restablece ide">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/java/com/democracy/electoral_court/infrastructure/repository/mybatis/r2dbc/support/InvestigationResultDynamicSqlSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/java/com/democracy/electoral_court/infrastructure/repository/mybatis/r2dbc/support/InvestigationResultDynamicSqlSupport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables/00000000000001_initial_schema.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables/00000000000001_initial_schema.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables/00000000000001_investigation_result.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/ElectoralCourt/src/main/resources/db/changelog/tables/00000000000001_investigation_result.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/HumanResources/src/main/resources/com/democracy/hhrr/infrastructure/repository/mybatis/r2dbc/mappers/PersonMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/HumanResources/src/main/resources/com/democracy/hhrr/infrastructure/repository/mybatis/r2dbc/mappers/PersonMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/HumanResources/src/main/resources/db/master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/HumanResources/src/main/resources/db/master.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +60,7 @@
       <recent name="com.democracy.electoral_court.infrastructure.repository.mybatis.r2dbc.support" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ElectoralCourtApplication">
+  <component name="RunManager" selected="Application.HumanResourcesApplication">
     <configuration name="AccountingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.democracy.accounting.AccountingApplication" />
       <module name="accounting" />
@@ -129,8 +128,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ElectoralCourtApplication" />
         <item itemvalue="Application.HumanResourcesApplication" />
+        <item itemvalue="Application.ElectoralCourtApplication" />
         <item itemvalue="Application.AccountingApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.DiscoveryServerApplication" />
@@ -178,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1795558622721</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Se restablece ide">
+      <option name="closed" value="true" />
+      <created>1795640065941</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1795640065941</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="UnknownFeatures">
